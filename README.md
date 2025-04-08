@@ -97,6 +97,3 @@ Make sure to set up the following environment variables in your Vercel dashboard
 - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
 - `CLERK_SECRET_KEY`
 
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
