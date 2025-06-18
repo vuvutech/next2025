@@ -29,9 +29,9 @@ export default function Home() {
 
   return (
     <main className=" space-y-3 ">
-      <AnimatePresence mode="wait">
+      {/* <AnimatePresence mode="wait">
         {isLoading && <Preloader />}
-      </AnimatePresence>
+      </AnimatePresence> */}
       <HeroSection backgroundImageUrl="/images/united-nations.jpg" />
       <InstitutesIntro />
       <section

@@ -35,15 +35,15 @@ export function SignInButton() {
         <div className="flex items-center gap-0 h-7 pr-2">
           <Button
             onClick={() => router.push("/auth/sign-in")} // Redirect to the sign-in page
-            className="uppercase  bg-secondary text-secondary cursor-pointer h-full "
+            className="uppercase  bg-secondary dark:hover:bg-black text-secondary cursor-pointer h-full rounded-none "
             size="sm"
             variant="default"
           >
-            <span className="text-sm normal-case text-foreground  ">
+            <span className="text-sm normal-case text-foreground hover:text-white  ">
               {session ? "" : "LOGIN/SIGNUP"}
             </span>
           </Button>
-          <LucideArrowUpRight className="bg-primary text-secondary text-[5em] h-full" />
+          <LucideArrowUpRight className="bg-primary text-secondary text-[4em] h-full" />
         </div>
       ) : (
         <DropdownMenu>
