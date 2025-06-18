@@ -10,10 +10,10 @@ import {
 
 import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
-import StickyMenuWrapper from "@/components/ui/StickyMenuWrapper"; // Import wrapper
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import StickyMenuWrapper from "@/components/ui/StickyMenuWrapper";
 import FooterWrapper from "@/components/Footer-Wrapper";
 
 

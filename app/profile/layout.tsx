@@ -1,5 +1,5 @@
 import Jumbotron from '@/components/ui/Jumbotron';
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'sonner' ;
 
 
 

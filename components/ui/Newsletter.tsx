@@ -2,7 +2,7 @@ import { Button, Input } from "@heroui/react";
 import { LucideMailCheck } from 'lucide-react';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
+import toast from 'sonner' ;
 
 type NewsletterFormInputs = {
   firstname: string;

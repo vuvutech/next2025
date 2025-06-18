@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@heroui/button";
 import { LogOut, LucideArrowUpRight, UserIcon } from "lucide-react";
 import { client } from "@/lib/auth-client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -16,6 +15,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "../button";
 
 export function SignInButton() {
   const router = useRouter(); // Use Next.js router
@@ -34,10 +34,10 @@ export function SignInButton() {
       {!session ? (
         <div className="flex items-center gap-0 h-7 pr-2">
           <Button
-            onPress={() => router.push("/auth/sign-in")} // Redirect to the sign-in page
+            onClick={() => router.push("/auth/sign-in")} // Redirect to the sign-in page
             className="uppercase  bg-secondary text-secondary cursor-pointer h-full "
             size="sm"
-            variant="solid"
+            variant="default"
           >
             <span className="text-sm normal-case text-foreground  ">
               {session ? "" : "LOGIN/SIGNUP"}

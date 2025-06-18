@@ -4,9 +4,7 @@ import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import Jumbotron from "@/components/ui/Jumbotron";
-// import { Testimonials as TestimonialsSection } from "../../components/Testimonials"; // Unused import, considering removing if Testimonials section is not rendered directly here
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import {
   FaFacebook,
@@ -21,6 +19,7 @@ import TestimonialForm, {
   TestimonialFormData,
 } from "@/components/TestimonialForm"; // Adjust path, import interface
 import { getCurrentSession } from "../actions/functions";
+import { toast } from "sonner";
 
 // Define the type for the contact form inputs
 type ContactFormInputs = {

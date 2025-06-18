@@ -5,7 +5,7 @@ import React from "react";
 import { ArrowUpRight } from "lucide-react";
 import { useDevice } from "@/hooks/useDevice";
 import Link from "next/link";
-import { Button } from "@heroui/button";
+import { Button } from "./ui/button";
 
 interface WhyCostradProps {
   backgroundImageUrl?: string;
