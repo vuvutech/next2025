@@ -2,7 +2,7 @@ import { bebas } from '@/config/fonts';
 import { LucideMoveDown } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
-import { Divider } from "@heroui/react";
+import { Separator } from './ui/separator';
 
 type Props = {};
 
@@ -66,7 +66,8 @@ const Start = (props: Props) => {
                 Strategic <br /> Voter{' '}
               </p>
             </div>
-            <Divider className='my-4 w-2/5 bg-red-500 ' />
+            <Separator className='my-4 w-2/5 bg-red-500 ' />
+
             <div className='text-red-500 '>
               <p className='text-lg'>
                 THE KINGDOM PATTERNS SERIES &#x2014; VOLUME ONE

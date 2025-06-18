@@ -75,7 +75,7 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
               </p>
 
               <Link href={`/about`} className="flex w-full gap-2">
-                <Button className="text-sm h-8 w-fit cursor-pointer rounded-full bg-primary hover:bg-primary/90 px-10 text-foreground">
+                <Button className="text-sm h-8 w-fit cursor-pointer rounded-full bg-primary hover:bg-primary/90 px-10 text-white">
                   Get Started
                 </Button>
                

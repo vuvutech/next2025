@@ -74,7 +74,7 @@ export const Section1 = ({
                 {overview ?? "This institute currently has no overview."}
               </p>
               <div className="flex w-full gap-2">
-                <Button className="text-md h-8 w-fit cursor-pointer rounded-full bg-primary px-10 text-foreground">
+                <Button className="text-md h-8 w-fit cursor-pointer rounded-full text-white bg-primary px-10 ">
                   Get Started
                 </Button>
                 <Button
