@@ -1,0 +1,154 @@
+.introduction {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 99;
+    background-color: #141516;
+  }
+  
+  .introduction svg {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: calc(100% + 300px);
+  }
+  
+  .introduction svg path {
+    fill: #141516;
+  }
+  
+  .introduction p {
+    display: flex;
+    color: red;
+    font-size: 35px;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .introduction p span {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+
+
+.rotating {
+  animation: rotating 49s linear infinite;
+}
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+  /* HTML: <div class="loader"></div> */
+.loader {
+  width: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #000;
+  box-shadow: 0 0 0 0 #0004;
+  animation: l2 1.5s infinite linear;
+  position: relative;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 #0004;
+  animation: inherit;
+  animation-delay: -0.5s;
+}
+.loader:after {
+  animation-delay: -1s;
+}
+@keyframes l2 {
+    100% {box-shadow: 0 0 0 40px #0000}
+}
+
+
+/* HTML: <div class="loaderAnim"></div> */
+.loaderAnim {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  background:linear-gradient(90deg,#000 50%,#0000 0) right/200% 100%;
+  animation: l21 2s infinite linear;
+}
+.loaderAnim::before {
+  content :"Loading...";
+  color: #0000;
+  padding: 0 5px;
+  background: inherit;
+  background-image: linear-gradient(90deg,#fff 50%,#000 0);
+  -webkit-background-clip:text;
+          background-clip:text;
+}
+
+@keyframes l21{
+  100%{background-position: left}
+}
+
+.kenburns {
+  animation-name: ken-burns;
+  animation-duration: 40s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 0;
+}
+
+/* Desktop animation */
+@keyframes ken-burns {
+  0% {
+    background-size: 120%;
+    background-position: 50% 50%;
+  }
+  50% {
+    background-size: 110%;
+    background-position: 48% 52%;
+  }
+  100% {
+    background-size: 120%;
+    background-position: 50% 50%;
+  }
+}
+
+/* 🔒 Mobile: reduce effect or disable completely */
+@media screen and (max-width: 768px) {
+  .kenburns {
+    animation: none; /* Option 1: disable */
+    /* OR option 2: slower, smaller zoom */
+    animation-name: ken-burns-mobile;
+    animation-duration: 60s;
+  }
+
+  @keyframes ken-burns-mobile {
+    0% {
+      background-size: 105%;
+    }
+    50% {
+      background-size: 102%;
+    }
+    100% {
+      background-size: 105%;
+    }
+  }
+}

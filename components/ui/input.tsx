@@ -2,7 +2,21 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+function Input({
+  className,
+  type = "text",
+  ...props
+}: React.ComponentProps<"input">) {
+  const inputProps = { ...props };
+
+  // Prevent both value and defaultValue from being passed at once
+  if ("value" in inputProps && "defaultValue" in inputProps) {
+    delete inputProps.defaultValue; // or delete inputProps.value depending on use case
+    console.warn(
+      "Warning: <Input> received both value and defaultValue props. defaultValue has been ignored."
+    );
+  }
+
   return (
     <input
       type={type}
@@ -13,7 +27,7 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
         "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
         className
       )}
-      {...props}
+      {...inputProps}
     />
   );
 }

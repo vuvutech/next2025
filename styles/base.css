@@ -1,0 +1,182 @@
+.prominent-titles {
+  display: inline-block;
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  --tw-gradient-from: #f1dc39 var(--tw-gradient-from-position);
+  --tw-gradient-stops:
+    var(--tw-gradient-from), #c96e05 var(--tw-gradient-via-position),
+    var(--tw-gradient-to);
+  --tw-gradient-to: #8d37d8 var(--tw-gradient-to-position);
+  background-clip: text;
+  color: transparent;
+}
+
+.special-elite-text {
+  font-family: var(--font-special-elite);
+}
+.cbutton {
+  position: relative;
+  font-size: 14px;
+  font-family: inherit;
+  color: rgb(255, 255, 255);
+  width: 19em;
+  height: 3em;
+  line-height: 2em;
+  text-align: center;
+  z-index: 1;
+  text-decoration: none;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  background: linear-gradient(
+      90deg,
+      rgb(234, 179, 8),
+      rgb(244, 65, 165),
+      rgb(255, 235, 59),
+      rgb(26, 96, 138)
+    )
+    0% 0% / 300%;
+  border-radius: 30px;
+}
+.cbutton:hover {
+  animation: 8s linear 0s infinite normal none running ani;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+}
+/* .qblock {
+	color: #fafafa;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+} */
+/* 
+blockquote {
+  font-weight: 100;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  position: relative;
+  margin: 0;
+
+} */
+/* 
+blockquote:before,
+blockquote:after {
+  position: absolute;
+  color: #d4d2cb;
+  font-size: 8rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+blockquote:before {
+  content: '“';
+  left: -5rem;
+  top: -1rem;
+}
+
+blockquote:after {
+  content: '”';
+  right: -4rem;
+  bottom: -3rem;
+} */
+
+cite {
+  font-size: 2em;
+  line-height: 3;
+  text-align: left;
+}
+
+/* From Uiverse.io by faizanullah1999 */
+.primary-button {
+  font-family: var(--font-opensans);
+  /* font-family: 'Valorant', sans-serif; */
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.05rem;
+  border: 1px solid #0e1822;
+  padding: 0.8rem 2.1rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 531.28 200'%3E%3Cdefs%3E%3Cstyle%3E .shape %7B fill: %23FF4655 /* fill: %230E1822; */ %7D %3C/style%3E%3C/defs%3E%3Cg id='Layer_2' data-name='Layer 2'%3E%3Cg id='Layer_1-2' data-name='Layer 1'%3E%3Cpolygon class='shape' points='415.81 200 0 200 115.47 0 531.28 0 415.81 200' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+  background-color: var(--color-firefly);
+  background-size: 200%;
+  background-position: 200%;
+  background-repeat: no-repeat;
+  transition: 0.3s ease-in-out;
+  transition-property: background-position, border, color;
+  position: relative;
+  z-index: 1;
+}
+
+.primary-button:hover {
+  border: 1px solid var(--color-primary);
+  color: white;
+  /* background-position: 40%; */
+  background-color: var(--primary);
+}
+
+.primary-button:before {
+  content: "";
+  position: absolute;
+  background-color: #0e1822;
+  width: 0.2rem;
+  height: 0.2rem;
+  top: -1px;
+  left: -1px;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.primary-button:hover:before {
+  background-color: var(--color-purple-700);
+}
+
+.primary-button:hover:after {
+  background-color: white;
+}
+
+.primary-button:after {
+  content: "";
+  position: absolute;
+  background-color: var(--color-primary);
+  width: 0.3rem;
+  height: 0.3rem;
+  bottom: -1px;
+  right: -1px;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.button-borders {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+
+.button-borders:before {
+  content: "";
+  border: 1px solid var(--color-primary);
+  border-bottom: 0;
+  width: calc(100% + 0.5em);
+  height: 35%;
+  position: absolute;
+  top: -0.08em;
+  left: -0.3em;
+}
+.button-borders:after {
+  content: "";
+  position: absolute;
+  width: calc(100% + 0.5em);
+  height: 50%;
+  left: -0.3em;
+  bottom: -0.3em;
+  border: 1px solid var(--color-primary);
+  border-top: 0px;
+  /* opacity: 0.3; */
+  z-index: 0;
+}
+
+.shape {
+  fill: #0e1822;
+}
