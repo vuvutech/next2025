@@ -85,6 +85,9 @@ export const auth = betterAuth({
     "http://localhost:3000",
     "https://costrad.org",
     "https://scholars-endangered-gzip-powerful.trycloudflare.com",
+    `${baseUrl.origin}`,
+    "https://www.costrad.org",
+    "https://costrad.vercel.app",
   ],
 
   account: {
@@ -147,7 +150,7 @@ export const auth = betterAuth({
             teamName: data.organization.name,
             inviteLink:
               process.env.NODE_ENV === "development"
-                ? `http://localhost:3000/accept-invitation/${data.id}`
+                ? `${baseUrl}/accept-invitation/${data.id}`
                 : `${process.env.BETTER_AUTH_URL}/accept-invitation/${data.id}`,
           }),
         });

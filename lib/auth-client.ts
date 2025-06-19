@@ -11,9 +11,10 @@ import {
   emailOTPClient,
 } from "better-auth/client/plugins";
 import { toast } from "sonner";
+import { baseUrl } from "./metadata";
 
 export const client = createAuthClient({
-  baseURL: process.env.BETTER_AUTH_URL || ("http://localhost:3000" as string), // the base url of your auth server
+  baseURL: `${baseUrl}` || "http://localhost:3000",
   plugins: [
     emailOTPClient(),
     organizationClient(),

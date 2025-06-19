@@ -3,6 +3,7 @@ import { Star } from "lucide-react";
 import React from "react";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { baseUrl } from "@/lib/metadata";
 
 interface Hero7Props {
   heading?: string;
@@ -171,7 +172,7 @@ const Donate = ({
                       <div x-data="{ toggle: false }">
                         <form
                           method="POST"
-                          action="http://localhost:8000/donation"
+                          action={`${baseUrl}/donate`}
                           acceptCharset="UTF-8"
                           className="form-horizontal d-none"
                           role="form"
