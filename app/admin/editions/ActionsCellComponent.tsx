@@ -83,7 +83,7 @@ export function ActionsCellComponent({
         {/* Feature/Unfeature */}
         <DropdownMenuItem
           id={id}
-          className="text-primary-foreground cursor-pointer"
+          className="text-primary cursor-pointer"
           onClick={async () => {
             try {
               await updateEdition({ active: !active });

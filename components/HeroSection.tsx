@@ -46,7 +46,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ backgroundImageUrl ='/
                 Seemingly Impossible{" "}
               </h2>
             </div>
-            <Separator className="my-4 w-1/5 h-1 bg-accent dark:bg-chart-4" />
+            <Separator className="my-4 w-1/5 h-1 bg-accent dark:bg-white" />
             <div className="text-firefly">
               <p className="text-lg text-white ">
                 &mdash; &nbsp; Explore what COSTrAD can help you achieve.

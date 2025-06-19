@@ -31,7 +31,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
     <button
       onClick={toggleTheme}
       className={clsx(
-        "flex items-center justify-center rounded-lg px-2 py-1 transition-opacity hover:opacity-80 cursor-pointer",
+        "flex items-center justify-start rounded-lg px-2 py-1 transition-opacity hover:opacity-80 cursor-pointer",
         className
       )}
       aria-label={`Switch to ${isLight ? "dark" : "light"} mode`}

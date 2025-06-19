@@ -3,8 +3,6 @@
 import { prisma } from "@/prisma/dbConnect";
 import { GenericDataTable } from "@/components/generic-data-table";
 import { columns } from "./columns";
-
-
 import { ExtensionComponent } from "./ExtensionComponent";
 
 export default async function AdminAnnouncementsPage() {

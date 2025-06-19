@@ -58,6 +58,7 @@ export function ActionsCellComponent({
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
         <DropdownMenuSeparator />
+
         <DropdownMenuItem
           className="text-primary-foreground cursor-pointer"
           onClick={async () => {
@@ -72,7 +73,7 @@ export function ActionsCellComponent({
             }
           }}
         >
-          <span className="font-semibold">
+          <span className="font-semibold text-primary">
             {featured ? "Unfeature" : "Feature"}
           </span>
         </DropdownMenuItem>

@@ -38,7 +38,7 @@ export function NavSecondary({
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
-        <SidebarMenu className="pl-1">
+        <SidebarMenu className="cursor-pointer">
           <ThemeSwitch displayText={true} text="Theme" />
         </SidebarMenu>
       </SidebarGroupContent>
