@@ -52,6 +52,7 @@ export default async function InstituteViewPage(props: {
         <Section1
           name={institute.name}
           overview={institute.overview}
+          acronym={institute.acronym}
           defaultVerticalBannerSrc={`/images/defaultVerticalBanner/${institute.acronym}.webp`}
           edition={
             institute.editions[0]

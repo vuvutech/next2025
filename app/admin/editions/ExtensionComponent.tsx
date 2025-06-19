@@ -52,6 +52,7 @@ export function ExtensionComponent() {
     theme: "",
     seo: "",
     price: "",
+    priceViaZoom: "",
     startDate: "",
     endDate: "",
     banner: "",
@@ -80,6 +81,7 @@ export function ExtensionComponent() {
         body: JSON.stringify({
           ...form,
           price: parseFloat(form.price),
+          priceViaZoom: parseFloat(form.priceViaZoom || "0"),
           startDate: form.startDate ? new Date(form.startDate) : null,
           endDate: form.endDate ? new Date(form.endDate) : null,
         }),
@@ -98,6 +100,7 @@ export function ExtensionComponent() {
         theme: "",
         seo: "",
         price: "",
+        priceViaZoom: "",
         startDate: "",
         endDate: "",
         banner: "",
@@ -250,22 +253,26 @@ export function ExtensionComponent() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+           <div className="grid grid-cols-3 gap-4">
             <div className="grid gap-2">
               <Label>SEO</Label>
-              <Input
-                name="seo"
-                value={form.seo}
-                onChange={handleChange}
-                placeholder="eg. use comma seperated keywords"
-              />
+              <Input name="seo" value={form.seo} onChange={handleChange} />
             </div>
             <div className="grid gap-2">
-              <Label>Price (eg. 120.00)</Label>
+              <Label>Price</Label>
               <Input
                 name="price"
                 type="number"
                 value={form.price}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label>Online Price</Label>
+              <Input
+                name="priceViaZoom"
+                type="number"
+                value={form.priceViaZoom}
                 onChange={handleChange}
               />
             </div>

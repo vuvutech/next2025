@@ -215,6 +215,7 @@ model Edition {
   seo            String?
   active         Boolean   @default(true)
   price          Float
+  priceViaZoom   Float?
   createdAt      DateTime? @default(now())
   updatedAt      DateTime? @updatedAt
 

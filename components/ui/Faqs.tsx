@@ -67,10 +67,10 @@ export default function CostradFaqs() {
   ];
 
   return (
-    <Accordion type="multiple" className="w-full">
+    <Accordion type="multiple" className="w-full sm:w-3/4  mx-auto">
       {faqData.map((item) => (
         <AccordionItem key={item.key} value={item.key}>
-          <AccordionTrigger className="text-base md:text-xl  hover:no-underline">
+          <AccordionTrigger className="cursor-pointer md:text-xl  hover:no-underline">
             {item.question}
           </AccordionTrigger>
           <AccordionContent className="text-base md:text-xl py-2">

@@ -1,21 +1,18 @@
 "use client";
 
-import {
-  ArrowUpRight,
-  ChevronDown,
-  ChevronRight,
-} from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DottedDiv } from "@/components/DottedDiv";
+import BadgeLink from "@/components/BadgeLink";
 
 type Section1Props = {
   name: string;
   overview?: string | null;
+  acronym?: string | null;
   defaultVerticalBannerSrc?: string;
   edition?: {
     title?: string;
@@ -29,6 +26,7 @@ type Section1Props = {
 
 export const Section1 = ({
   name,
+  acronym = "costrad",
   overview,
   edition,
   defaultVerticalBannerSrc,
@@ -58,15 +56,13 @@ export const Section1 = ({
           <div className="grid lg:grid-cols-3">
             {/* Left Content */}
             <div className="flex md:col-span-2 w-full flex-col gap-4 px-8 py-20 md:px-10">
-              <Badge
-                variant="outline"
-                className="flex w-fit cursor-pointer items-center gap-4 rounded-full px-6 py-2 transition-all ease-in-out hover:gap-6"
-              >
-                <span className="text-sm font-medium tracking-tight text-muted-foreground">
-                  Explore Institute Details
-                </span>
-                <ChevronRight className="size-4!" />
-              </Badge>
+             <div>
+               <BadgeLink
+                href="/institutes/costrad"
+                badge={acronym?.toUpperCase() || "COSTRAD"}
+                label={edition?.theme || "Institute Overview"}
+              />
+             </div>
               <h1 className="text-2xl font-semibold tracking-tighter md:text-6xl">
                 {name}
               </h1>

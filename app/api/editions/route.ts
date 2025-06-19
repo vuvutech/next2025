@@ -49,7 +49,6 @@ export async function POST(req: Request) {
     );
   }
 }
-
 export async function PUT(req: NextRequest) {
   const user = await getCurrentUser();
   if (!user || user.role !== "admin") {
@@ -57,9 +56,7 @@ export async function PUT(req: NextRequest) {
   }
 
   const data = await req.json();
-  const { id, ...rest } = data;
-
-  console.log(data);
+  const { id, title, price, priceViaZoom, ...rest } = data;
 
   if (!id) {
     return NextResponse.json({ error: "Missing edition id" }, { status: 400 });
@@ -68,9 +65,14 @@ export async function PUT(req: NextRequest) {
   try {
     const updated = await prisma.edition.update({
       where: { id },
-      data: rest,
+      data: {
+        ...rest,
+        ...(title && { slug: slugify(title, { lower: true, strict: true }) }),
+        ...(price && { price: parseFloat(price) }),
+        ...(priceViaZoom && { priceViaZoom: parseFloat(priceViaZoom) }),
+      },
     });
-
+    revalidatePath(`${baseUrl}/admin/editions`);
     return NextResponse.json(updated);
   } catch (error: any) {
     console.error("❌ Failed to update edition:", error);

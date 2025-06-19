@@ -28,15 +28,15 @@ export default function Home() {
   // }, []);
 
   return (
-    <main className=" space-y-3 ">
+    <main className=" space-y-2 ">
       {/* <AnimatePresence mode="wait">
         {isLoading && <Preloader />}
       </AnimatePresence> */}
-      <HeroSection backgroundImageUrl="/images/united-nations.webp" />
+      <HeroSection backgroundImageUrl="/images/united-nations.jpg" />
       <InstitutesIntro />
       <section
         className=" px-2 md:p-8 max-w-8xl mx-auto text-lg md:text-[37px] 
-       md:min-h-[70dvh] font-oswald "
+       md:min-h-[60dvh] font-oswald "
       >
         We equip you with the essential tools and mindset to confidently guide
         individuals, lead organizations, and oversee complex systems with
@@ -50,8 +50,8 @@ export default function Home() {
 
       <Jumbotron
         className="object-center"
-        heroImage="center2.webp"
-        height="md:h-[650px]"
+        heroImage="center2.jpg"
+        height="md:h-[600px]"
       />
       <div className="flex flex-col justify-center">
         <VelocityScroll

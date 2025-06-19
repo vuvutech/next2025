@@ -118,15 +118,15 @@
 /* Desktop animation */
 @keyframes ken-burns {
   0% {
-    background-size: 120%;
+    background-size: 107%;
     background-position: 50% 50%;
   }
   50% {
-    background-size: 110%;
+    background-size: 102%;
     background-position: 48% 52%;
   }
   100% {
-    background-size: 120%;
+    background-size: 107%;
     background-position: 50% 50%;
   }
 }

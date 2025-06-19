@@ -11,12 +11,11 @@ interface JumbotronProps {
 }
 
 export default function Jumbotron({
-  heroImage = "center8.webp",
+  heroImage = "center8.jpg",
   height = "md:h-[450px]",
   shade = "30",
   className,
 }: JumbotronProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isMobile } = useDevice();
 
   return (

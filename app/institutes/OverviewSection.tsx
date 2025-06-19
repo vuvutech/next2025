@@ -1,4 +1,7 @@
+import SeperatorWithText from "@/components/ui/seperatorWithText";
+import { baseUrl } from "@/lib/metadata";
 import { InstituteWithEditions } from "@/types/institute";
+import Image from "next/image";
 import React from "react";
 
 export default function OverviewSection({
@@ -45,47 +48,151 @@ export default function OverviewSection({
 
         <div className="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
           <div className="rounded-2xl bg-gray-300/30 dark:bg-blue-900/10 h-auto md:h-full py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
-          <div className="text-foreground text-xl py-2 ">{institute?.editions[0] ? institute?.editions[0].title : " "}{" "}</div>
-            <div className="mx-auto max-w-xs px-8">
-              <p className="text-base font-bold text-gray-600 dark:text-gray-500">
-                Pay once &mdash; Own it forever
-              </p>
-              <p className="mt-6 flex items-baseline justify-center gap-x-2">
-                <span className="text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-                  ${institute.editions[0]?.price}
-                </span>
-                <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
-                  USD
-                </span>
-              </p>
-
-              <div className="text-center w-auto py-5">
-                <button
-                  type="button"
-                  className="cursor-pointer w-auto px-4 py-2 bg-firefly-600 text-white  leading-tight uppercase rounded shadow-md hover:bg-firefly-700 hover:shadow-lg focus:bg-firefly-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-firefly-800 active:shadow-lg   bg-lime-500 hover:bg-lime-600  transition duration-300 ease-in-out text-firefly-900 hover:text-white text-sm "
-                  data-hs-overlay="#hs-subscription-with-image"
-                >
-                   Start Application
-                </button>
-              </div>
-              <div className="flex w-full items-center justify-center text-xs md:text-lg tracking-tighter ">
-                <span className="text-[11px] sm:text-sm font-bold uppercase">
-                  {formattedStartDate.toUpperCase()}
-                  {institute.editions[0]?.endDate && (
-                    <>
-                      &nbsp;<span className="text-primary">&mdash;</span>
-                      &nbsp;
-                      {formattedEndDate.toUpperCase()}
-                    </>
-                  )}
-                </span>
-              </div>
-
-              <p className="mt-6 text-xs leading-5  dark:text-gray-400">
-                Gain knowledge that lasts a lifetime. Invoices and receipts
-                available for easy company reimbursement.
-              </p>
+            {/* edition institute logo */}
+            <div className="flex justify-center">
+              <Image
+                src={`/${institute.logo}` || "/images/logos/costrad.webp"}
+                alt={institute.name}
+                width={128} // 32 * 4 (Tailwind's `h-32` is 128px)
+                height={128}
+                className="h-20 w-20 rounded-full object-cover"
+              />
             </div>
+            <div className="text-foreground text-xl py-2 ">
+              {institute?.editions[0] ? institute?.editions[0].title : " "}{" "}
+            </div>
+
+            {institute.acronym?.toLowerCase() === "costrad" ? (
+              <div className="mx-auto max-w-xs px-8">
+                <p className="text-base font-bold text-gray-600 dark:text-gray-500">
+                  Pay once &mdash; Own it forever
+                </p>
+
+                <div>
+                  <div className="mt-6 flex items-baseline justify-center gap-x-2">
+                    <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+                      ${institute.editions[0]?.price}
+                    </span>
+                    <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
+                      USD
+                    </span>
+                  </div>
+                  <SeperatorWithText seperatorText={"In Person"} />
+                </div>
+
+                <div>
+                  {" "}
+                  <div className="mt-6 flex items-baseline justify-center gap-x-2">
+                    <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+                      ${institute.editions[0]?.priceViaZoom}
+                    </span>
+                    <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
+                      USD
+                    </span>
+                  </div>
+                  <SeperatorWithText seperatorText={"Via Zoom"} />
+                </div>
+
+                <div>
+                  <div className="mt-6 flex items-baseline justify-center gap-x-2">
+                    <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+                      $500.00
+                    </span>
+                    <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
+                      USD
+                    </span>
+                  </div>
+                  <SeperatorWithText seperatorText={"Per Week"} />
+                </div>
+                <div className="text-center w-auto py-5">
+                  <button
+                    type="button"
+                    className="cursor-pointer w-auto px-4 py-2 bg-firefly-600 text-white leading-tight uppercase rounded shadow-md hover:bg-firefly-700 hover:shadow-lg focus:bg-firefly-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-firefly-800 active:shadow-lg bg-lime-500 hover:bg-lime-600 transition duration-300 ease-in-out text-firefly-900 hover:text-white text-sm"
+                    data-hs-overlay="#hs-subscription-with-image"
+                  >
+                    Start Application
+                  </button>
+                </div>
+
+                <div className="flex w-full items-center justify-center text-xs md:text-lg tracking-tighter">
+                  <span className="text-[11px] sm:text-sm font-bold uppercase">
+                    {formattedStartDate.toUpperCase()}
+                    {institute.editions[0]?.endDate && (
+                      <>
+                        &nbsp;<span className="text-primary">&mdash;</span>
+                        &nbsp;
+                        {formattedEndDate.toUpperCase()}
+                      </>
+                    )}
+                  </span>
+                </div>
+
+                <p className="mt-6 text-xs leading-5 dark:text-gray-400">
+                  Gain knowledge that lasts a lifetime. Invoices and receipts
+                  available for easy company reimbursement.
+                </p>
+              </div>
+            ) : (
+              <div className="mx-auto max-w-xs px-8">
+                <p className="text-base font-bold text-gray-600 dark:text-gray-500">
+                  Pay once &mdash; Own it forever
+                </p>
+
+                <p className="mt-6 flex items-baseline justify-center gap-x-2">
+                  <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+                    ${institute.editions[0]?.price}
+                  </span>
+                  <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
+                    USD
+                  </span>
+                </p>
+                <SeperatorWithText seperatorText={"In Person"} />
+
+              {/* display priceViaZoom if it is not null */}
+                {institute.editions[0]?.priceViaZoom && (
+                  <div>
+                    <p className="mt-6 flex items-baseline justify-center gap-x-2">
+                      <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+                        ${institute.editions[0]?.priceViaZoom}
+                      </span>
+                      <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
+                        USD
+                      </span>
+                    </p>
+                    <SeperatorWithText seperatorText={"Via Zoom"} />
+                  </div>
+                )}
+               
+
+                <div className="text-center w-auto py-5">
+                  <button
+                    type="button"
+                    className="cursor-pointer w-auto px-4 py-2 bg-firefly-600 text-white leading-tight uppercase rounded shadow-md hover:bg-firefly-700 hover:shadow-lg focus:bg-firefly-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-firefly-800 active:shadow-lg bg-lime-500 hover:bg-lime-600 transition duration-300 ease-in-out text-firefly-900 hover:text-white text-sm"
+                    data-hs-overlay="#hs-subscription-with-image"
+                  >
+                    Start Application
+                  </button>
+                </div>
+
+                <div className="flex w-full items-center justify-center text-xs md:text-lg tracking-tighter">
+                  <span className="text-[11px] sm:text-sm font-bold uppercase">
+                    {formattedStartDate.toUpperCase()}
+                    {institute.editions[0]?.endDate && (
+                      <>
+                        &nbsp;<span className="text-primary">&mdash;</span>
+                        &nbsp;
+                        {formattedEndDate.toUpperCase()}
+                      </>
+                    )}
+                  </span>
+                </div>
+
+                <p className="mt-6 text-xs leading-5 dark:text-gray-400">
+                  Gain knowledge that lasts a lifetime. Invoices and receipts
+                  available for easy company reimbursement.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

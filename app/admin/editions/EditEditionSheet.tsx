@@ -34,22 +34,24 @@ export function EditEditionSheet({ edition }: { edition: any }) {
     []
   );
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({
-    instituteId: edition.instituteId,
-    title: edition.title,
-    theme: edition.theme || "",
-    overview: edition.overview || "",
-    seo: edition.seo || "",
-    price: edition.price.toString(),
-    startDate: edition.startDate
+  const [form, setForm] = useState(() => ({
+    instituteId: edition?.instituteId ?? "",
+    title: edition?.title ?? "",
+    theme: edition?.theme ?? "",
+    overview: edition?.overview ?? "",
+    seo: edition?.seo ?? "",
+    price: (edition?.price ?? "").toString(),
+    priceViaZoom:
+      edition?.priceViaZoom != null ? edition.priceViaZoom.toString() : "",
+    startDate: edition?.startDate
       ? new Date(edition.startDate).toISOString().split("T")[0]
       : "",
-    endDate: edition.endDate
+    endDate: edition?.endDate
       ? new Date(edition.endDate).toISOString().split("T")[0]
       : "",
-    banner: edition.banner || "",
-    verticalBanner: edition.verticalBanner || "",
-  });
+    banner: edition?.banner ?? "",
+    verticalBanner: edition?.verticalBanner ?? "",
+  }));
 
   useEffect(() => {
     fetch("/api/institutes")
@@ -61,7 +63,6 @@ export function EditEditionSheet({ edition }: { edition: any }) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
-
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -73,7 +74,8 @@ export function EditEditionSheet({ edition }: { edition: any }) {
         body: JSON.stringify({
           id: edition.id,
           ...form,
-          price: parseFloat(form.price),
+          price: parseFloat(form.price) || 0, // Add fallback to prevent NaN
+          priceViaZoom: parseFloat(form.priceViaZoom) || 0,
           startDate: new Date(form.startDate),
           endDate: new Date(form.endDate),
         }),
@@ -173,7 +175,7 @@ export function EditEditionSheet({ edition }: { edition: any }) {
             ))}
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <div className="grid gap-2">
               <Label>SEO</Label>
               <Input name="seo" value={form.seo} onChange={handleChange} />
@@ -184,6 +186,15 @@ export function EditEditionSheet({ edition }: { edition: any }) {
                 name="price"
                 type="number"
                 value={form.price}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label>(Online) Price</Label>
+              <Input
+                name="priceViaZoom"
+                type="number"
+                value={form.priceViaZoom}
                 onChange={handleChange}
               />
             </div>
