@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
-import type { auth } from "@/lib/auth";
 
-type Session = typeof auth.$Infer.Session;
-// 1. Specify protected and public routes
-const protectedRoutes = ["/dashboard","/admin"];
+const protectedRoutes = ["/dashboard", "/admin"];
 const publicRoutes = [
   "/auth/sign-in",
   "/auth/sign-up",
@@ -17,42 +14,36 @@ const publicRoutes = [
 const publicButProtected = ["/auth/emailVerification"];
 
 export async function middleware(request: NextRequest) {
-  // 2. Check if the current route is protected or public
   const path = request.nextUrl.pathname;
+
+  // Handle CORS for API routes
+  if (path.startsWith('/api')) {
+    if (request.method === 'OPTIONS') {
+      // Handle preflight request
+      const response = new NextResponse(null, { status: 200 });
+      response.headers.set('Access-Control-Allow-Origin', 'https://www.costrad.org');
+      response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+      response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      return response;
+    } else {
+      // Add CORS header to regular API responses
+      const response = NextResponse.next();
+      response.headers.set('Access-Control-Allow-Origin', 'https://www.costrad.org');
+      return response;
+    }
+  }
+
+  // Existing route protection logic
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
-  const isPublicButProtected = publicButProtected.includes(path);
+  // const isPublicButProtected = publicButProtected.includes(path);
 
   const cookies = getSessionCookie(request);
 
-if (isProtectedRoute && !cookies) {
-  const callbackUrl = encodeURIComponent(request.nextUrl.pathname);
-  return NextResponse.redirect(new URL(`/auth/sign-in?callbackUrl=${callbackUrl}`, request.url));
-}
+  if (isProtectedRoute && !cookies) {
+    const callbackUrl = encodeURIComponent(request.nextUrl.pathname);
+    return NextResponse.redirect(new URL(`/auth/sign-in?callbackUrl=${callbackUrl}`, request.url));
+  }
 
-  
-  // if (isPublicButProtected && !cookies) {
-  //   return NextResponse.redirect(new URL("/auth/sign-in", request.url));
-  // }
-
-  // if (request.nextUrl.pathname.startsWith('/sign-in')) {
-  //   return NextResponse.rewrite(new URL('/auth/sign-in', request.url))
-  // }
-  
-
-  // const { data: session } = await betterFetch<Session>(
-  //   "/api/auth/get-session",
-  //   {
-  //     baseURL: request.nextUrl.origin,
-  //     headers: {
-  //       cookie: request.headers.get("cookie") || "", // Forward the cookies from the request
-  //     },
-  //   }
-  // );
-  // if (session && session.user) {
-  //   console.log("SESSION DATA: ", session.user.emailVerified);
-  // } else {
-  //   console.log("No session data available.");
-  // }
   return NextResponse.next();
 }

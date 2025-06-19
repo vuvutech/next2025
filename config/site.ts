@@ -30,11 +30,6 @@ export const siteConfig = {
       number: "04",
     },
     {
-      label: "Contact",
-      href: "/contact",
-      number: "05",
-    },
-    {
       label: "Donate",
       href: "/donate",
       number: "06",

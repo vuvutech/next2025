@@ -16,7 +16,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ backgroundImageUrl ='/
   return (
     <section className={`${bebas.className} md:min-h-dvh h-screen grid grid-cols-1 z-0 `}>     
 
-      <div className="bg-red-700 min-h-dvh relative p-4 md:p-6 order-1">
+      <div className="bg-background min-h-dvh relative p-4 md:p-6 order-1">
         <div
           className={clsx("absolute inset-0 z-0", {
             kenburns: !isMobile,

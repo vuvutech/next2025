@@ -102,9 +102,9 @@ export default function Component() {
                       <SheetClose asChild>
                         <button
                           onClick={() => handleLinkClick(item.href)}
-                          className="group relative text-3xl font-light sm:text-4xl transition-all duration-300 cursor-pointer "
+                          className="group relative text-2xl font-light sm:text-4xl transition-all duration-300 cursor-pointer "
                         >
-                          {item.label}
+                          <span>{item.label}</span>
                           <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-purple-600 transition-all duration-300 group-hover:w-full" />
                         </button>
                       </SheetClose>

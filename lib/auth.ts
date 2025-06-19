@@ -62,7 +62,7 @@ export const auth = betterAuth({
     errorURL: "/auth/error",
   },
 
-    baseURL: "https://www.costrad.org",
+    baseURL: baseUrl.toString(),
 
   emailVerification: {
     autoSignInAfterVerification: true,
