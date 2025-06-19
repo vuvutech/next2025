@@ -17,7 +17,7 @@ const Start = (props: Props) => {
 
         <div className='flex items-center justify-center max-w-4xl container mx-auto relative'>
           <Image
-            src={'/images/globe.png'}
+            src={'/images/globe.webp'}
             priority
             alt='alt'
             width={400}
@@ -46,7 +46,7 @@ const Start = (props: Props) => {
         <div
           className='absolute inset-0 z-0'
           style={{
-            backgroundImage: 'url("/images/abubako.jpg")',
+            backgroundImage: 'url("/images/abubako.webp")',
             filter: 'contrast(118%) brightness(124%) saturate(2)',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',

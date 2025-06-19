@@ -10,7 +10,7 @@ interface HeroSectionProps {
   backgroundImageUrl?: string;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ backgroundImageUrl ='/images/united-nations.jpg' }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ backgroundImageUrl ='/images/united-nations.webp' }) => {
   const { isMobile } = useDevice();
 
   return (

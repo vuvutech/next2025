@@ -30,18 +30,18 @@ export default function OurStory() {
               </div>
               <div className="flex flex-col items-center justify-center gap-6 md:flex-row">
                 <img
-                  src="/images/our-story/our-story1.jpg"
+                  src="/images/our-story/our-story1.webp"
                   alt="about 1"
                   className="aspect-[0.7] w-full rounded-lg object-cover md:w-1/2"
                 />
                 <div className="flex w-full flex-col items-center justify-center gap-6 md:w-1/2">
                   <img
-                    src="/images/our-story/our-story2.jpg"
+                    src="/images/our-story/our-story2.webp"
                     alt="about 2"
                     className="aspect-[1.1] rounded-lg object-cover"
                   />
                   <img
-                    src="/images/our-story/our-story3.jpg"
+                    src="/images/our-story/our-story3.webp"
                     alt="about 3"
                     className="aspect-[0.7] rounded-lg object-cover"
                   />
@@ -51,18 +51,18 @@ export default function OurStory() {
             <div className="flex w-full flex-col items-center justify-center gap-12 pt-12 lg:w-1/2 lg:pt-48">
               <div className="flex flex-col items-center justify-center gap-6 md:flex-row">
                 <img
-                  src="/images/our-story/our-story4.jpg"
+                  src="/images/our-story/our-story4.webp"
                   alt="about 4"
                   className="aspect-[0.9] w-full rounded-lg object-cover md:w-1/2"
                 />
                 <div className="flex w-full flex-col items-center justify-center gap-6 md:w-1/2">
                   <img
-                    src="/images/our-story/our-story5.jpg"
+                    src="/images/our-story/our-story5.webp"
                     alt="about 5"
                     className="aspect-[0.8] rounded-lg object-cover"
                   />
                   <img
-                    src="/images/our-story/our-story6.jpg"
+                    src="/images/our-story/our-story6.webp"
                     alt="about 6"
                     className="aspect-[0.9] rounded-lg object-cover"
                   />

@@ -9,7 +9,7 @@ const AboutSectionFour = (props: Props) => {
         <div
           className="relative overflow-hidden rounded-2xl bg-cover z-10"
           style={{
-            backgroundImage: "url('images/lecture_in_progress2.jpg')",
+            backgroundImage: "url('images/lecture_in_progress2.webp')",
           }}
         >
           <div className="absolute inset-0 w-full h-full bg-gray-950 opacity-25 dark:opacity-40 z-20" />
@@ -34,7 +34,7 @@ const AboutSectionFour = (props: Props) => {
                   >
                     <img
                       className="w-12 md:w-20"
-                      src="/images/logos/fdi.png"
+                      src="/images/logos/fdi.webp"
                       alt="Family Development Institute"
                     />
                   </a>
@@ -47,7 +47,7 @@ const AboutSectionFour = (props: Props) => {
                   >
                     <img
                       className="w-12 md:w-20"
-                      src="/images/logos/mti.png"
+                      src="/images/logos/mti.webp"
                       alt="Mindset Transformation Institute"
                     />
                   </a>
@@ -60,7 +60,7 @@ const AboutSectionFour = (props: Props) => {
                   >
                     <img
                       className="w-12 md:w-20"
-                      src="/images/logos/igpp.png"
+                      src="/images/logos/igpp.webp"
                       alt="Institute of Governance & Public Policy"
                     />
                   </a>
@@ -73,7 +73,7 @@ const AboutSectionFour = (props: Props) => {
                   >
                     <img
                       className="w-12 md:w-20"
-                      src="/images/logos/iea.png"
+                      src="/images/logos/iea.webp"
                       alt="Institute of Economic Affairs"
                     />
                   </a>
@@ -86,7 +86,7 @@ const AboutSectionFour = (props: Props) => {
                   >
                     <img
                       className="w-12 md:w-20"
-                      src="/images/logos/costrad.png"
+                      src="/images/logos/costrad.webp"
                       alt="College of Sustainable Transformation & Development"
                     />
                   </a>
@@ -99,7 +99,7 @@ const AboutSectionFour = (props: Props) => {
                   >
                     <img
                       className="w-12 md:w-20"
-                      src="/images/logos/etadi.png"
+                      src="/images/logos/etadi.webp"
                       alt="Education, Training & Development Institute"
                     />
                   </a>
@@ -112,7 +112,7 @@ const AboutSectionFour = (props: Props) => {
                   >
                     <img
                       className="w-12 md:w-20"
-                      src="/images/logos/first.png"
+                      src="/images/logos/first.webp"
                       alt="Futuristic Institute of Revolutionary Science & Technology"
                     />
                   </a>
@@ -125,7 +125,7 @@ const AboutSectionFour = (props: Props) => {
                   >
                     <img
                       className="w-12 md:w-20"
-                      src="/images/logos/moci.png"
+                      src="/images/logos/moci.webp"
                       alt="Media of Communication Institute"
                     />
                   </a>
@@ -138,7 +138,7 @@ const AboutSectionFour = (props: Props) => {
                   >
                     <img
                       className="w-12 md:w-20"
-                      src="/images/logos/ioasc.png"
+                      src="/images/logos/ioasc.webp"
                       alt="Institute of Arts, Sports and Cultural Development"
                     />
                   </a>

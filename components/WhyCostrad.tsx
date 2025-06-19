@@ -12,7 +12,7 @@ interface WhyCostradProps {
 }
 
 export const WhyCostrad: React.FC<WhyCostradProps> = ({
-  backgroundImageUrl = "/images/united-nations.jpg",
+  backgroundImageUrl = "/images/united-nations.webp",
 }) => {
   const { isMobile } = useDevice();
 
@@ -25,7 +25,7 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
               <div className="overflow-hidden aspect-w-3 aspect-h-4 rounded-2xl">
                 <Image
                   className="object-cover object-top origin-top scale-150 "
-                  src="/images/leader2.jpg"
+                  src="/images/leader2.webp"
                   alt=""
                   width={400}
                   height={533}
@@ -36,7 +36,7 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
                 <div className="h-full overflow-hidden aspect-w-3 aspect-h-4 rounded-2xl">
                   <Image
                     className="object-cover object-top origin-top scale-110"
-                    src="/images/steps.jpg"
+                    src="/images/steps.webp"
                     alt=""
                     width={400}
                     height={533}
@@ -47,7 +47,7 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
               <div className="absolute -translate-x-1/2 left-[50%] hidden  ">
                 <Image
                   className="w-32 h-32 rotating"
-                  src="/images/round-text-costrad.png"
+                  src="/images/round-text-costrad.webp"
                   alt=""
                   width={128}
                   height={128}

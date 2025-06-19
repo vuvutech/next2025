@@ -111,7 +111,7 @@ const GettingStarted = ({
                 <div className="mt-6 block border bg-muted/50 px-4 py-6 lg:hidden">
                   <div className="aspect-video">
                     <img
-                      src="/images/united-nations2.jpg"
+                      src="/images/united-nations2.webp"
                       alt="placeholder"
                       className="h-full w-full rounded-md border object-cover shadow"
                     />
@@ -150,7 +150,7 @@ const GettingStarted = ({
                 <div className="mt-6 block border bg-muted/50 px-4 py-6 lg:hidden">
                   <div className="aspect-video">
                     <img
-                      src="/images/united-nations2.jpg"
+                      src="/images/united-nations2.webp"
                       alt="placeholder"
                       className="h-full w-full rounded-md border object-cover shadow"
                     />
@@ -189,7 +189,7 @@ const GettingStarted = ({
                 <div className="mt-6 block border bg-muted/50 px-4 py-6 lg:hidden">
                   <div className="aspect-video">
                     <img
-                      src="/images/united-nations2.jpg"
+                      src="/images/united-nations2.webp"
                       alt="placeholder"
                       className="h-full w-full rounded-md border object-cover shadow"
                     />
@@ -248,7 +248,7 @@ const GettingStarted = ({
                 style={{ animationDuration: "0s" }}
               >
                 <img
-                      src="/images/united-nations2.jpg"
+                      src="/images/united-nations2.webp"
                   alt="placeholder"
                   className="h-full w-full rounded-3xl border object-cover shadow"
                 />

@@ -32,11 +32,11 @@ export default function Home() {
       {/* <AnimatePresence mode="wait">
         {isLoading && <Preloader />}
       </AnimatePresence> */}
-      <HeroSection backgroundImageUrl="/images/united-nations.jpg" />
+      <HeroSection backgroundImageUrl="/images/united-nations.webp" />
       <InstitutesIntro />
       <section
         className=" px-2 md:p-8 max-w-8xl mx-auto text-lg md:text-[37px] 
-       md:min-h-[70dvh]"
+       md:min-h-[70dvh] font-oswald "
       >
         We equip you with the essential tools and mindset to confidently guide
         individuals, lead organizations, and oversee complex systems with
@@ -50,7 +50,7 @@ export default function Home() {
 
       <Jumbotron
         className="object-center"
-        heroImage="center2.jpg"
+        heroImage="center2.webp"
         height="md:h-[650px]"
       />
       <div className="flex flex-col justify-center">

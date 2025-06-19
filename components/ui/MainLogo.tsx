@@ -19,7 +19,7 @@ const MainLogo = ({
       <Link href="/" className="!opacity-100">
         <div className={`relative rounded-full overflow-hidden ${logoSize}`}>
           <Image
-            src="/images/costrad.png"
+            src="/images/costrad.webp"
             alt="COSTrAD"
             fill
             className="object-cover"

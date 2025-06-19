@@ -34,8 +34,8 @@ export default function InstituteCardWithImage({
   name = `Family Development Institutte - (FDI)`,
   slug,
   overview = defaultOverview,
-  banner = "/images/culture.jpg",
-  logo = "/images/logos/fdi.png",
+  banner = "/images/culture.webp",
+  logo = "/images/logos/fdi.webp",
   editionTitle = `Family Development Institutte - (FDI)`,
   editionDates,
 }: InstituteCardProps) {

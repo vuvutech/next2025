@@ -23,7 +23,7 @@ export default function SignInLayout({
                 <LucideHome className='text-current' />
             </Link>
             <div className="sm:flex sm:col-span-2 box-border m-2  justify-center items-center hidden relative">
-                <Image priority src={'/images/wallpaper.jpg'} alt="alt" width={1000} height={1000}
+                <Image priority src={'/images/wallpaper.webp'} alt="alt" width={1000} height={1000}
                     className="inset-0 absolute "
                     style={
                         {

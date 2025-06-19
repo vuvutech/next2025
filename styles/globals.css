@@ -16,7 +16,7 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: var(--font-oswald), sans-serif;
+    /* font-family: var(--font-oswald), sans-serif; */
     font-size: medium;
   }
 
@@ -131,7 +131,7 @@
 }
 :root {
   --font-opensans: "Open Sans", sans-serif;
-  --radius: 0.625rem;
+  --radius: 0rem;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);

@@ -7,87 +7,62 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ChevronDown } from "lucide-react";
-import Link from "next/link";
 
-export default function FaqsComponent() {
+export default function CostradFaqs() {
   const faqData = [
     {
       key: "1",
-      question: "What is the main purpose of this book?",
+      question: "What is the mission of COSTrAD?",
       answer:
-        "The main purpose of this book is to educate and empower citizens, particularly Christians, on the importance of their votes in shaping political leadership and governance.",
+        "COSTrAD aims to raise and develop generations of transformational leaders who are equipped to bring systemic and sustainable change across every sphere of society.",
     },
     {
       key: "2",
-      question: "Who is the author of the book?",
+      question: "What makes COSTrAD different from traditional higher education institutions?",
       answer:
-        "Dr. Abu Bako, an Economist by profession and a Founding President of the Logos-Rhema Foundation for Leadership Resource Development, authored this book.",
+        "COSTrAD uses a modular, multi-disciplinary curriculum designed for real-world impact, emphasizing leadership, applied transformation, and sustainability over traditional theory-heavy models.",
     },
     {
       key: "3",
-      question: "What does Dr. Abu Bako recommend readers to do with these books?",
+      question: "What are the eight spheres of influence COSTrAD focuses on?",
       answer:
-        "Dr. Abu Bako recommends that these books be used as tools to sensitize citizens on the power of their vote and to become politically active Christians guided by the truth of God's Word.",
+        "The eight spheres include government, education, economy, media, arts, family, religion, and science—areas viewed as essential for national transformation.",
     },
     {
       key: "4",
-      question: "How can the book help voters make informed decisions?",
+      question: "Who can benefit from enrolling in COSTrAD programs?",
       answer:
-        "The book provides insights into understanding the impact of one's vote, the role of political candidates, and how voting impacts the nation at large.",
+        "Aspiring and current leaders, educators, policymakers, faith leaders, entrepreneurs, and anyone passionate about societal transformation will benefit from the practical, purpose-driven training.",
     },
     {
       key: "5",
-      question: "What are some of the key themes covered in the book?",
+      question: "What skills does COSTrAD emphasize for its transformational leaders?",
       answer:
-        "Key themes include the importance of good stewardship, the power of the vote, and becoming politically active Christians.",
+        "Key skills include strategic communication, ethical decision-making, systems thinking, innovation, and the ability to lead people and manage complex systems.",
     },
     {
       key: "6",
-      question: "How does Dr. Abu Bako address the challenges faced by nations?",
+      question: "How does COSTrAD support sustainable national development?",
       answer:
-        "Dr. Abu Bako discusses the need to decentralize institutions, especially those of higher learning, to ensure more localized and effective governance.",
+        "By equipping leaders to build strong institutions, transform belief systems, and influence critical sectors like education, economy, and governance.",
     },
     {
       key: "7",
-      question: "What specific regions or countries is this book aimed at?",
+      question: "Is COSTrAD affiliated with any religious or faith-based principles?",
       answer:
-        "While not explicitly stated, the content suggests that the book is relevant for any region facing dissatisfaction with political leadership and seeking reform.",
+        "Yes, while COSTrAD is open to all, it is rooted in Kingdom values and integrates spiritual principles as part of its leadership and development framework.",
     },
     {
       key: "8",
-      question: "How can readers access the full text of the book?",
-      answer: (
-        <>
-          Readers can purchase or download the book from various online platforms such as Amazon, Google Books, or directly from the publisher's{" "}
-          <Link href="https://www.costrad.org/the-book" className="text-red-500 font-bold underline">
-            website
-          </Link>.
-        </>
-      ),
+      question: "How flexible are COSTrAD’s learning programs?",
+      answer:
+        "COSTrAD offers flexible, modular formats that allow students to integrate their learning with real-life responsibilities, enabling application while studying.",
     },
     {
       key: "9",
-      question: "Are there any specific tools or resources included in the book?",
+      question: "How do I apply to COSTrAD?",
       answer:
-        "The book includes valuable insights and practical guides on becoming a politically active Christian and understanding one’s role in governance.",
-    },
-    {
-      key: "10",
-      question: "How does Dr. Abu Bako believe decentralization can improve governance?",
-      answer:
-        "Dr. Abu Bako believes that by decentralizing institutions, especially those of higher learning, it can lead to more localized and effective governance tailored to specific regions' needs.",
-    },
-    {
-      key: "11",
-      question: "What are some challenges faced by nations discussed in the book?",
-      answer:
-        "The book discusses challenges such as frequent famines or flooding and food security, highlighting how these issues affect governance and voter behavior.",
-    },
-    {
-      key: "12",
-      question: "How can readers provide feedback on the book?",
-      answer:
-        "Readers can provide feedback through the publisher’s website, social media channels, or by contacting Dr. Abu Bako directly via email or his institutional affiliations.",
+        "Interested individuals can visit the official COSTrAD website to explore current programs, modules, and application instructions.",
     },
   ];
 
@@ -95,10 +70,10 @@ export default function FaqsComponent() {
     <Accordion type="multiple" className="w-full">
       {faqData.map((item) => (
         <AccordionItem key={item.key} value={item.key}>
-          <AccordionTrigger className="text-2xl hover:no-underline">
+          <AccordionTrigger className="text-base md:text-xl  hover:no-underline">
             {item.question}
           </AccordionTrigger>
-          <AccordionContent className="text-base py-2">
+          <AccordionContent className="text-base md:text-xl py-2">
             {item.answer}
           </AccordionContent>
         </AccordionItem>

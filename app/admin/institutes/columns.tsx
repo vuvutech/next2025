@@ -74,7 +74,7 @@ export const columns: ColumnDef<Institute>[] = [
     accessorFn: (row) => row.logo || "No Logo",
     cell: ({ row }) => (
       <Image
-        src={`/${row.original.logo}` || "/images/avatar.png"}
+        src={`/${row.original.logo}` || "/images/avatar.webp"}
         alt={row.original.name || "Institute logo"}
         width={80}
         height={80}

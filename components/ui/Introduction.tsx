@@ -15,7 +15,7 @@ const Introduction = (props: Props) => {
         <div className={' text-gray-500 text-3xl uppercase font-light'}>An Overview</div>
         <div className='w-1/3 text-red-500'>&#8212;</div>
         <div className={`${bebas.className} pb-4 md:leading-[3.7rem] `}>The <br /> Strategic <br /> Voter</div>{' '}
-        <Image src={'/images/favicon.png'} width={250} height={250} alt='COSTrAD' className='rounded-3xl md:pr-4' />
+        <Image src={'/images/favicon.webp'} width={250} height={250} alt='COSTrAD' className='rounded-3xl md:pr-4' />
       </div>
       <div className='md:col-span-2 md:text-xl space-y-2  '>
         <p>

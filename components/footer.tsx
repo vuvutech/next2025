@@ -7,22 +7,20 @@ const footerLinks = [
 	{
 		title: "Quick Links",
 		links: [
-			{ label: "About COSTrAD", href: "/about" },
 			{ label: "Getting Started", href: "/getting-started" },
+			{ label: "About COSTrAD", href: "/about" },
+			{ label: "Frequently Asked Questions", href: "/faqs" },
 			{ label: "Our Story", href: "/our-story" },
 			{ label: "Press", href: "/press" },
-			{ label: "Careers", href: "/careers" },
-			{ label: "Help centre", href: "/help" },
-			{ label: "Reviews", href: "/reviews" },
 		],
 	},
 	{
 		title: "My COSTRAD",
 		links: [
 			{ label: "My Dashboard", href: "/dashboard" },
-
+			{ label: "Reviews", href: "/reviews" },
+			{ label: "Help centre", href: "/help" },
 			{ label: "Getting Started", href: "/getting-started" },
-			{ label: "Frequently Asked Questions", href: "/faqs" },
 			{ label: "How to Donate", href: "/donate" },
 		],
 	},
@@ -105,7 +103,7 @@ export default function Footer() {
 								{section.links.map(({ label, href }) => (
 									<li key={label}>
 										<Link
-											href={`${baseUrl}/${href}`}
+											href={`${baseUrl}${href}`}
 											className='hover:text-primary transition'
 										>
 											{label}

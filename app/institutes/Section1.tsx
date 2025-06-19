@@ -48,7 +48,7 @@ export const Section1 = ({
       }).format(new Date(edition.endDate))
     : "";
 
-  const verticalBannerSrc = defaultVerticalBannerSrc ?? "/images/banner.jpg";
+  const verticalBannerSrc = defaultVerticalBannerSrc ?? "/images/banner.webp";
   const editionTitle = edition?.title || "Upcoming Edition";
 
   return (

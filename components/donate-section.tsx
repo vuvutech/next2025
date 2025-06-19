@@ -119,7 +119,7 @@ const Donate = ({
             <div className="py-5  w-full  ">
               <div className="cursor-pointer" data-hs-overlay="#donate">
                 <img
-                  src="/images/all-cards.png"
+                  src="/images/all-cards.webp"
                   alt="Donate with Paypal or Credit Card"
                   className="w-auto rounded-md"
                 />
@@ -408,7 +408,7 @@ const Donate = ({
           <div
             className="min-h-[35vh] bg-center bg-cover bg-no-repeat relative rounded-xl md:min-h-[75vh]"
             style={{
-              backgroundImage: "url('/images/donate2.jpg')",
+              backgroundImage: "url('/images/donate2.webp')",
             }}
           >
             <div className="md:absolute bottom-0 left-0 right-0 md:max-w-4xl text-center mx-auto p-6 md:left-auto md:text-left md:mx-0">
@@ -468,7 +468,7 @@ const Donate = ({
             <div className="hidden md:block md:col-span-3">
               <img
                 className="aspect-video h-96 rounded-2xl"
-                src="/images/cheque_.jpg"
+                src="/images/cheque_.webp"
                 alt="Image Description"
               />
             </div>

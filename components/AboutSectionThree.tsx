@@ -11,7 +11,7 @@ const AboutSectionThree = (props: Props) => {
         <div className="grid md:grid-cols-3  md:gap-8 ">
           <Image
             className="rounded-2xl h-dvh md:h-[90vh] md:col-span-2"
-            src="/images/quarterglobe.jpg"
+            src="/images/quarterglobe.webp"
             alt="Costrad on leadership"
             width={800}
             height={600}

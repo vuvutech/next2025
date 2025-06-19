@@ -32,7 +32,7 @@ export function InstituteInfo({
     ? institute.logo.startsWith("/")
       ? institute.logo
       : `/${institute.logo}`
-    : "/images/costrad.png";
+    : "/images/costrad.webp";
 
   const altText = institute?.name || "Unknown";
 

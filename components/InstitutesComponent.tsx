@@ -68,8 +68,8 @@ export default function InstitutesComponent({ initialInstitutes }: InstitutesCom
             name={institute.name}
             slug={institute.slug}
             overview={institute.overview}
-            banner={institute.banner ?? '/images/default-banner.jpg'}
-            logo={`/images/logos/${institute.acronym}.png`}
+            banner={institute.banner ?? '/images/default-banner.webp'}
+            logo={`/images/logos/${institute.acronym}.webp`}
             editionTitle={edition?.title || 'No Edition Available'}
             editionDates={
               edition?.startDate && edition?.endDate

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: "/images/costrad.png",
+    icon: "/images/costrad.webp",
   },
   publisher: "Dr. Abu Bako",
   robots: "index, follow",

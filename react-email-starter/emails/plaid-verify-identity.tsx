@@ -26,7 +26,7 @@ export const PlaidVerifyIdentityEmail = ({
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`${baseUrl}/static/plaid-logo.png`}
+          src={`${baseUrl}/static/plaid-logo.webp`}
           width="212"
           height="88"
           alt="Plaid"

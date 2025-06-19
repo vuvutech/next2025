@@ -40,7 +40,7 @@ const data = {
   user: {
     name: "costrad",
     email: "info@costrad.org",
-    avatar: "/images/avatar.png",
+    avatar: "/images/avatar.webp",
   },
   navMain: [
     {
@@ -213,7 +213,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           user={{
             name: user.name ?? "",
             email: user.email ?? "",
-            avatar: user.image ?? "/avatars/avatar.png",
+            avatar: user.image ?? "/avatars/avatar.webp",
           }}
         />
       ) : (

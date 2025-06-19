@@ -10,7 +10,7 @@ const AboutSectionTwo = (props: Props) => {
         <div
           className="relative overflow-hidden rounded-2xl bg-cover h-[80dvh] "
           style={{
-            backgroundImage: "url('/images/lecture_in_progress.jpg')",
+            backgroundImage: "url('/images/lecture_in_progress.webp')",
           }}
         >
           <div className="flex flex-col h-full justify-center md:p-8 mx-auto p-2 py-8 relative shadow-2xl z-10 ">

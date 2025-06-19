@@ -7,8 +7,8 @@ export function createMetadata(override: Metadata): Metadata {
 		openGraph: {
 			title: override.title ?? undefined,
 			description: override.description ?? undefined,
-			url: "https://demo.better-auth.com",
-			images: "https://demo.better-auth.com/og.png",
+			url: "https://www.costrad.org",
+			images: "https://www.costrad.org/og.webp",
 			siteName: siteConfig.name as string,
 			...override.openGraph,
 		},
@@ -17,7 +17,7 @@ export function createMetadata(override: Metadata): Metadata {
 			creator: "@africanpride",
 			title: override.title ?? undefined,
 			description: override.description ?? undefined,
-			images: "https://demo.better-auth.com/og.png",
+			images: "https://www.costrad.org/og.webp",
 			...override.twitter,
 		},
 	};
