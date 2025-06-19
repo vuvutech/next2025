@@ -62,7 +62,7 @@ export const auth = betterAuth({
     errorURL: "/auth/error",
   },
 
-  baseUrl: baseUrl,
+    baseURL: "https://www.costrad.org",
 
   emailVerification: {
     autoSignInAfterVerification: true,
@@ -82,12 +82,9 @@ export const auth = betterAuth({
     duration: 60,
   },
   trustedOrigins: [
-    "http://localhost:3000",
-    "https://costrad.org",
-    "https://scholars-endangered-gzip-powerful.trycloudflare.com",
-    `${baseUrl.origin}`,
     "https://www.costrad.org",
-    "https://costrad.vercel.app",
+    "https://costrad.org",
+    "http://localhost:3000",
   ],
 
   account: {
