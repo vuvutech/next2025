@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/dbConnect";
 import { revalidatePath } from "next/cache";
 import { getCurrentUser } from "@/app/actions/functions";
+import { baseUrl } from "@/lib/metadata";
 
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
 
@@ -103,8 +104,8 @@ export async function PUT(req: NextRequest) {
     });
 
     // 🔄 Revalidate both public and admin edit pages
-    revalidatePath(`/institutes/${slug}`);
-    revalidatePath(`/admin/institutes/${slug}/edit`);
+    revalidatePath(`${baseUrl}/institutes/${slug}`);
+    revalidatePath(`${baseUrl}/admin/institutes/${slug}/edit`);
 
     return NextResponse.json(updated);
   } catch (error) {

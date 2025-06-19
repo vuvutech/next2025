@@ -37,9 +37,9 @@ export async function POST(request: Request) {
 
     // Configure email
     const mailOptions = {
-      from: `"COSTrAD Contact Form." <abakoconsult@gmail.com>`,
+      from: `"COSTrAD Contact Form." <costrad.project@gmail.com>`,
       replyTo: formData.email,
-      to: `"COSTrAD." <abakoconsult@gmail.com>`,
+      to: `"COSTrAD." <costrad.project@gmail.com>`,
       subject: `New Contact Form Submission from ${formData.name}`,
       text: `
         Name: ${formData.name}

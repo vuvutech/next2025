@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/dbConnect";
 import { revalidatePath } from "next/cache";
+import { baseUrl } from "@/lib/metadata";
 
 export async function GET(request: NextRequest, props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
@@ -81,7 +82,7 @@ export async function PUT(request: NextRequest, props: { params: Promise<{ slugO
       data,
     });
 
-    revalidatePath(`/admin/institutes/${existing.slug}/edit`);
+    revalidatePath(`${baseUrl}/admin/institutes/${existing.slug}/edit`);
 
     return NextResponse.json(updatedInstitute);
   } catch (error: any) {

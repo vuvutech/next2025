@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/dbConnect";
 import { getCurrentUser } from "@/app/actions/functions";
 import { revalidatePath } from "next/cache";
+import { baseUrl } from "@/lib/metadata";
 
 // GET all testimonials (admin only)
 export async function GET(req: NextRequest) {
@@ -89,7 +90,7 @@ export async function PUT(req: NextRequest) {
         featured: featured ?? undefined,
       },
     });
-        revalidatePath('/admin/testimonials');
+        revalidatePath(`${baseUrl}/admin/testimonials`);
 
     return NextResponse.json(updated);
   }
