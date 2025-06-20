@@ -11,7 +11,6 @@ export async function GET(request: Request) {
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-console.log("Fetching user role for user ID.....................:", session.user.id); // Debug log
   try {
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },

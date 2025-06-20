@@ -27,6 +27,7 @@ import {
 import { cn } from "@/lib/utils";
 import { getBaseUrl } from "@/config/site";
 import { IconEdit } from "@tabler/icons-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export function EditEditionSheet({ edition }: { edition: any }) {
   const router = useRouter();
@@ -34,6 +35,7 @@ export function EditEditionSheet({ edition }: { edition: any }) {
     []
   );
   const [loading, setLoading] = useState(false);
+
   const [form, setForm] = useState(() => ({
     instituteId: edition?.instituteId ?? "",
     title: edition?.title ?? "",
@@ -43,6 +45,8 @@ export function EditEditionSheet({ edition }: { edition: any }) {
     price: (edition?.price ?? "").toString(),
     priceViaZoom:
       edition?.priceViaZoom != null ? edition.priceViaZoom.toString() : "",
+    inPersonDelivery: edition?.inPersonDelivery ?? false,
+    onlineDelivery: edition?.onlineDelivery ?? false,
     startDate: edition?.startDate
       ? new Date(edition.startDate).toISOString().split("T")[0]
       : "",
@@ -63,6 +67,7 @@ export function EditEditionSheet({ edition }: { edition: any }) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
+
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -74,10 +79,10 @@ export function EditEditionSheet({ edition }: { edition: any }) {
         body: JSON.stringify({
           id: edition.id,
           ...form,
-          price: parseFloat(form.price) || 0, // Add fallback to prevent NaN
+          price: parseFloat(form.price) || 0,
           priceViaZoom: parseFloat(form.priceViaZoom) || 0,
-          startDate: new Date(form.startDate),
-          endDate: new Date(form.endDate),
+          startDate: form.startDate ? new Date(form.startDate) : null,
+          endDate: form.endDate ? new Date(form.endDate) : null,
         }),
       });
 
@@ -97,11 +102,7 @@ export function EditEditionSheet({ edition }: { edition: any }) {
 
   return (
     <Sheet>
-      <SheetTrigger
-        className=" cursor-pointer 
-      inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-9 px-4 py-2 has-[>svg]:px-3
-      "
-      >
+      <SheetTrigger className="cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-9 px-4 py-2">
         <IconEdit />
       </SheetTrigger>
       <SheetContent className="p-4 overflow-y-scroll sm:max-w-xl">
@@ -110,9 +111,40 @@ export function EditEditionSheet({ edition }: { edition: any }) {
         </SheetHeader>
 
         <form onSubmit={handleUpdate} className="grid gap-4 py-2">
+          <div className="grid grid-cols-2 gap-2 py-3">
+            <div className="flex items-center gap-3">
+              <Checkbox
+                id="inPersonDelivery"
+                checked={form.inPersonDelivery}
+                onCheckedChange={(checked) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    inPersonDelivery: Boolean(checked),
+                  }))
+                }
+              />
+              <Label htmlFor="inPersonDelivery">In-Person Delivery</Label>
+            </div>
+            <div className="flex items-center gap-3">
+              <Checkbox
+                id="onlineDelivery"
+                checked={form.onlineDelivery}
+                onCheckedChange={(checked) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    onlineDelivery: Boolean(checked),
+                  }))
+                }
+              />
+              <Label htmlFor="onlineDelivery">
+                Online Delivery (ZOOM...etc)
+              </Label>
+            </div>
+          </div>
+
           <InstituteCombobox
             institutes={institutes}
-            selectedId={form.instituteId} // ✅ Pre-select based on edition.instituteId
+            selectedId={form.instituteId}
             onSelect={(id) => setForm((prev) => ({ ...prev, instituteId: id }))}
           />
 
@@ -190,7 +222,7 @@ export function EditEditionSheet({ edition }: { edition: any }) {
               />
             </div>
             <div className="grid gap-2">
-              <Label>(Online) Price</Label>
+              <Label>Online Price</Label>
               <Input
                 name="priceViaZoom"
                 type="number"
@@ -206,7 +238,9 @@ export function EditEditionSheet({ edition }: { edition: any }) {
           />
           <UploadImage
             label="Vertical Banner"
-            onUpload={(url) => setForm((f) => ({ ...f, verticalBanner: url }))}
+            onUpload={(url) =>
+              setForm((f) => ({ ...f, verticalBanner: url }))
+            }
           />
 
           <Button type="submit" disabled={loading}>

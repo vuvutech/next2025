@@ -52,6 +52,8 @@ export function ExtensionComponent() {
     overview: "",
     theme: "",
     seo: "",
+    inPersonDelivery: false,
+    onlineDelivery: false,
     price: "",
     priceViaZoom: "",
     startDate: "",
@@ -106,6 +108,8 @@ export function ExtensionComponent() {
         overview: "",
         theme: "",
         seo: "",
+        inPersonDelivery: false,
+        onlineDelivery: false,
         price: "",
         priceViaZoom: "",
         startDate: "",
@@ -115,13 +119,9 @@ export function ExtensionComponent() {
       });
       router.refresh();
     } catch (err) {
-      if (err && typeof err === "object" && "message" in err) {
-        toast.error(
-          (err as { message: string }).message || "Something went wrong."
-        );
-      } else {
-        toast.error("Something went wrong.");
-      }
+      toast.error(
+        (err as { message?: string })?.message || "Something went wrong."
+      );
     } finally {
       setLoading(false);
     }
@@ -130,10 +130,7 @@ export function ExtensionComponent() {
   return (
     <Sheet>
       <SheetTrigger>
-        <div
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-9 px-4 py-2 has-[>svg]:px-3 ml-auto
-        cursor-pointer"
-        >
+        <div className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-9 px-4 py-2 has-[>svg]:px-3 ml-auto cursor-pointer">
           Add Edition
         </div>
       </SheetTrigger>
@@ -145,22 +142,41 @@ export function ExtensionComponent() {
         <form onSubmit={handleSubmit} className="grid gap-4 py-2">
           <div className="grid grid-cols-2 gap-2 py-3">
             <div className="flex items-center gap-3">
-              <Checkbox id="terms" />
-              <Label htmlFor="terms">In-Person Delivery</Label>
+              <Checkbox
+                id="inPersonDelivery"
+                checked={form.inPersonDelivery}
+                onCheckedChange={(checked) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    inPersonDelivery: Boolean(checked),
+                  }))
+                }
+              />
+              <Label htmlFor="inPersonDelivery">In-Person Delivery</Label>
             </div>
             <div className="flex items-center gap-3">
-              <Checkbox id="terms" />
-              <Label htmlFor="terms">Online Delivery (ZOOM..etc)</Label>
+              <Checkbox
+                id="onlineDelivery"
+                checked={form.onlineDelivery}
+                onCheckedChange={(checked) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    onlineDelivery: Boolean(checked),
+                  }))
+                }
+              />
+              <Label htmlFor="onlineDelivery">
+                Online Delivery (ZOOM...etc)
+              </Label>
             </div>
           </div>
 
           <div className="grid gap-2">
-            {/* <Label>Institute</Label> */}
             <InstituteCombobox
               institutes={institutes}
               onSelect={(id) => {
                 setSelectedInstituteId(id);
-                setForm((prev) => ({ ...prev, instituteId: id })); // ✅ update the form
+                setForm((prev) => ({ ...prev, instituteId: id }));
               }}
             />
           </div>
@@ -177,12 +193,7 @@ export function ExtensionComponent() {
             </div>
             <div className="grid gap-2">
               <Label>Theme</Label>
-              <Input
-                name="theme"
-                value={form.theme}
-                onChange={handleChange}
-                placeholder="eg. "
-              />
+              <Input name="theme" value={form.theme} onChange={handleChange} />
             </div>
           </div>
 
@@ -215,7 +226,6 @@ export function ExtensionComponent() {
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0">
                   <Calendar
-                    buttonVariant={"outline"}
                     mode="single"
                     selected={
                       form.startDate ? new Date(form.startDate) : undefined
@@ -264,7 +274,7 @@ export function ExtensionComponent() {
                     initialFocus
                     captionLayout="dropdown"
                     fromYear={new Date().getFullYear()}
-                    toYear={2045} // ⬅️ future year range
+                    toYear={2045}
                   />
                 </PopoverContent>
               </Popover>
@@ -297,21 +307,16 @@ export function ExtensionComponent() {
           </div>
 
           <div className="grid gap-2">
-            <div>
-              <UploadImage
-                label="Banner"
-                onUpload={(url) => setForm((f) => ({ ...f, banner: url }))}
-              />
-            </div>
-
-            <div>
-              <UploadImage
-                label="Vertical Banner"
-                onUpload={(url) =>
-                  setForm((f) => ({ ...f, verticalBanner: url }))
-                }
-              />
-            </div>
+            <UploadImage
+              label="Banner"
+              onUpload={(url) => setForm((f) => ({ ...f, banner: url }))}
+            />
+            <UploadImage
+              label="Vertical Banner"
+              onUpload={(url) =>
+                setForm((f) => ({ ...f, verticalBanner: url }))
+              }
+            />
           </div>
 
           <Button type="submit" disabled={loading}>

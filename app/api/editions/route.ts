@@ -47,6 +47,7 @@ export async function POST(req: Request) {
     );
   }
 }
+
 export async function PUT(req: NextRequest) {
   const user = await getCurrentUser();
   if (!user || user.role !== "admin") {
@@ -54,10 +55,20 @@ export async function PUT(req: NextRequest) {
   }
 
   const data = await req.json();
-  const { id, title, price, priceViaZoom, ...rest } = data;
+  const {
+    id,
+    title,
+    price,
+    priceViaZoom,
+    instituteId, // ✅ Extract this separately
+    ...rest
+  } = data;
 
-  if (!id) {
-    return NextResponse.json({ error: "Missing edition id" }, { status: 400 });
+  if (!id || !instituteId) {
+    return NextResponse.json(
+      { error: "Missing required fields" },
+      { status: 400 }
+    );
   }
 
   try {
@@ -65,11 +76,20 @@ export async function PUT(req: NextRequest) {
       where: { id },
       data: {
         ...rest,
-        ...(title && { slug: slugify(title, { lower: true, strict: true }) }),
-        ...(price && { price: parseFloat(price) }),
-        ...(priceViaZoom && { priceViaZoom: parseFloat(priceViaZoom) }),
+        institute: {
+          connect: { id: instituteId },
+        },
+        ...(title && {
+          title,
+          slug: slugify(title, { lower: true, strict: true }),
+        }),
+        ...(price !== undefined && { price: parseFloat(price) }),
+        ...(priceViaZoom !== undefined && {
+          priceViaZoom: parseFloat(priceViaZoom),
+        }),
       },
     });
+
     revalidatePath(`${baseUrl}/admin/editions`);
     return NextResponse.json(updated);
   } catch (error: any) {
