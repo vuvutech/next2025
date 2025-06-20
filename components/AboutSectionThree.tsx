@@ -1,9 +1,8 @@
 import React from "react";
 import Image from "next/image";
 
-type Props = {};
 
-const AboutSectionThree = (props: Props) => {
+const AboutSectionThree = () => {
   return (
     <div className="py-8">
       <section className="max-w-8xl w-full py-10 md:px-8 md:py-10 mx-auto  dark:bg-firefly-900">

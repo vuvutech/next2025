@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { LogOut, LucideArrowUpRight, UserIcon } from "lucide-react";
 import { client } from "@/lib/auth-client";
@@ -19,12 +18,10 @@ import { Button } from "../button";
 
 export function SignInButton() {
   const router = useRouter(); // Use Next.js router
-  const [isSignOut, setIsSignOut] = useState<boolean>(false);
+  // const [isSignOut, setIsSignOut] = useState<boolean>(false);
 
   const {
-    data: session,
-    isPending, //loading state
-    error, //error object
+    data: session, //error object
   } = client.useSession();
 
   // console.log("Session Data:", session);
@@ -43,7 +40,7 @@ export function SignInButton() {
               {session ? "" : "LOGIN/SIGNUP"}
             </span>
           </Button>
-          <LucideArrowUpRight className="bg-primary text-secondary text-[4em] h-full" />
+          <LucideArrowUpRight className="bg-primary text-secondary aspect-square text-[3em] h-7 w-7" />
         </div>
       ) : (
         <DropdownMenu>

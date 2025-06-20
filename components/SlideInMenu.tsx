@@ -96,15 +96,15 @@ export default function Component() {
                       className="group relative flex items-start justify-center"
                       variants={itemVariants}
                     >
-                      <span className="absolute -left-8 text-xs text-firefly">
+                      <span className="absolute -left-8 text-xs text-primary">
                         {item.number}
                       </span>
                       <SheetClose asChild>
                         <button
                           onClick={() => handleLinkClick(item.href)}
-                          className="group relative text-2xl font-light sm:text-4xl transition-all duration-300 cursor-pointer "
+                          className="group relative text-xl font-bold sm:text-4xl transition-all duration-300 cursor-pointer "
                         >
-                          <span>{item.label}</span>
+                          <span className="uppercase">{item.label}</span>
                           <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-purple-600 transition-all duration-300 group-hover:w-full" />
                         </button>
                       </SheetClose>

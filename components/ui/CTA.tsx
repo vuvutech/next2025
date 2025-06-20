@@ -5,13 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { Button } from "./button";
 
-type Props = {};
 
-const CTA = (props: Props) => {
+const CTA = () => {
 	return (
 		<section className='p-4 sm:p-16'>
 			<div className='container'>
-				<div className='grid grid-cols-3 md:h-[50dvh]  w-full flex-col gap-16 overflow-hidden rounded-xl bg-accent p-8 md:rounded-xl lg:flex-row lg:items-center lg:p-16'>
+				<div className='grid grid-cols-3 md:h-[50dvh]  w-full flex-col gap-16 overflow-hidden rounded-xl bg-accent p-4 sm:p-8 md:rounded-xl lg:flex-row lg:items-center lg:p-16'>
 					<div className='col-span-full md:col-span-2 '>
 						<h1 className='mb-3 text-3xl sm:text-5xl  md:mb-4 md:text-4xl lg:mb-6'>
 							Stay Ahead of the Curve

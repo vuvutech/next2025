@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import MainLogo from "@/components/ui/MainLogo";
 import { WebMenu } from "@/components/ui/WebMenu";
@@ -15,9 +14,8 @@ import { ScrollProgress } from "@/components/magicui/scroll-progress";
 
 export default function StickyMenu() {
   const [isFixed, setIsFixed] = useState(false);
-  const pathname = usePathname();
 
-  const { data: session, isPending } = client.useSession();
+  const { isPending } = client.useSession();
   const { isMobile, isDesktop } = useDevice();
 
   useEffect(() => {

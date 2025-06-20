@@ -1,9 +1,8 @@
 import Link from "next/link";
 import React from "react";
 
-type Props = {};
 
-const AboutSectionOne = (props: Props) => {
+const AboutSectionOne = () => {
   return (
     <div  className="py-8 pb-4">
       <section>

@@ -19,10 +19,10 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
   return (
     <section className="max-w-auto  mx-auto h-auto  text-lg md:text-3xl  ">
       <div className="  md:py-8 py-4 ">
-        <div className="px-4 mx-auto max-w-8xl sm:px-6 lg:px-8">
+        <div className="px-2 mx-auto max-w-8xl sm:px-6 lg:px-8">
           <div className="grid items-stretch gap-y-10 md:grid-cols-2 md:gap-x-6">
-            <div className="relative grid grid-cols-2 gap-4 mt-10 md:mt-0 py-12 h-auto">
-              <div className="overflow-hidden aspect-w-3 aspect-h-4 rounded-2xl">
+            <div className="relative grid grid-cols-2 gap-2 mt-10 md:mt-0 py-12 h-auto">
+              <div className="overflow-hidden aspect-w-3 aspect-h-4 rounded-none md:rounded-2xl">
                 <Image
                   className="object-cover object-top origin-top scale-150 "
                   src="/images/leader2.webp"
@@ -33,7 +33,7 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
               </div>
 
               <div className="relative">
-                <div className="h-full overflow-hidden aspect-w-3 aspect-h-4 rounded-2xl">
+                <div className="h-full overflow-hidden aspect-w-3 aspect-h-4 rounded-none md:rounded-2xl">
                   <Image
                     className="object-cover object-top origin-top scale-110"
                     src="/images/steps.webp"

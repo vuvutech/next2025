@@ -1,52 +1,66 @@
 import React from "react";
-import { Button } from "./ui/button";
+import Image from "next/image";
+import Link from "next/link";
 
-type Props = {};
-
-const AboutSectionTwo = (props: Props) => {
+const AboutSectionTwo = ({
+  backgroundImage = "/images/lecture_in_progress.webp",
+  title = "Investing in the leadership that transforms nations",
+  subtitle = "Seeing the invisible, hearing the inaudible, touching the intangible, perceiving the imperceptible and doing the seemingly impossible.",
+  primaryButtonText = "Get started",
+  primaryButtonHref = "#",
+  secondaryButtonText = "Our Institutes",
+  secondaryButtonHref = "institutes",
+}) => {
   return (
-    <div className="py-8">
-      <section className="max-w-8xl  mx-auto min-h-[80dvh] h-auto">
-        <div
-          className="relative overflow-hidden rounded-2xl bg-cover h-[80dvh] "
-          style={{
-            backgroundImage: "url('/images/lecture_in_progress.webp')",
-          }}
-        >
-          <div className="flex flex-col h-full justify-center md:p-8 mx-auto p-2 py-8 relative shadow-2xl z-10 ">
-            <div className="py-10">
-              <div className="text-center mx-auto ">
-                <span className="inline-block text-lg font-medium text-primary uppercase ">
-                  COSTrAD: Our Transformational Vision
-                </span>
-
-                {/* Title */}
-                <div className="mt-5 max-w-4xl mx-auto">
-                  <p className="block  text-white text-xl md:text-3xl font-['anton'] font-thin  uppercase">
-                    Seeing the invisible, hearing the inaudible, touching the
-                    intangible, perceiving the imperceptible and doing the
-                    seemingly impossible.
-                  </p>
-                </div>
-                {/* End Title */}
-
-                {/* Buttons */}
-                <div className="mt-8 flex items-center  gap-2 w-full  sm:justify-center ">
-                  <Button
-                    variant={"outline"}
-                    className="text-sm h-8 w-fit cursor-pointer uppercase rounded-none bg-primary hover:bg-primary/90 px-10 text-foreground"
-                  >
-                    Our Institutes
-                  </Button>
-                 
-                </div>
-                {/* End Buttons */}
-              </div>
-            </div>
-          </div>
+    <section className="relative ">
+      <Image
+        src={backgroundImage}
+        alt="Background image"
+        fill
+        className="object-cover rounded-3xl"
+        priority
+      />
+      <div className="absolute inset-0 bg-gray-500 opacity-5 rounded-3xl"></div>
+      <div className="relative z-10 px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
+        <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+          {title}
+        </h1>
+        <p className="mb-8 text-lg font-normal shadow text-secondary lg:text-xl sm:px-16 lg:px-48">
+          {subtitle}
+        </p>
+        <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+          
+          <Link
+            href={primaryButtonHref}
+            className="inline-flex justify-center items-center py-1 px-5 text-base font-medium text-center text-white rounded-full
+             bg-primary hover:bg-primary/90 focus:ring-4 focus:ring-primary/50"
+          >
+            {primaryButtonText}
+            <svg
+              className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 10"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M1 5h12m0 0L9 1m4 4L9 9"
+              />
+            </svg>
+          </Link>
+          <Link
+            href={secondaryButtonHref}
+            className="inline-flex justify-center hover:text-gray-900 items-center py-1 px-5 sm:ms-4 text-base font-medium text-center text-white  border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400 rounded-full"
+          >
+            {secondaryButtonText}
+          </Link>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
