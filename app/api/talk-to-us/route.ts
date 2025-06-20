@@ -5,7 +5,6 @@ const nodemailer = require('nodemailer');
 export async function POST(request: Request) {
   try {
     const formData = await request.json();
-    console.log(formData);
 
     // return NextResponse.json({status: 200});
 

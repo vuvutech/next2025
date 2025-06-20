@@ -102,6 +102,6 @@ export const InviteUserEmail = ({
 };
 
 export function reactInvitationEmail(props: BetterAuthInviteUserEmailProps) {
-	console.log(props);
+	
 	return <InviteUserEmail {...props} />;
 }

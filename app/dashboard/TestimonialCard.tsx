@@ -131,7 +131,6 @@ export default function TestimonialCard(props: { session: Session | null }) {
         const session = await getCurrentSession();
 
         setCurrentUserSession(session);
-        console.log("User session data:", session);
       } catch (error) {
         console.error("Failed to fetch user session:", error);
         setCurrentUserSession(null); // Clear session on error
