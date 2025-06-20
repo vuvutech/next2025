@@ -14,28 +14,28 @@ import { InstituteInfo } from "./InstituteEditionImage";
 import { EditEditionSheet } from "./EditEditionSheet";
 
 export const columns: ColumnDef<any>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: true,
-    enableHiding: false,
-  },
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  //   enableSorting: true,
+  //   enableHiding: false,
+  // },
   {
     header: "Institute",
     accessorFn: (row) => row.instituteId || "Unknown",
@@ -50,75 +50,110 @@ export const columns: ColumnDef<any>[] = [
           {row.original.overview}
         </p>
         <h5 className="font-bebas flex items-center ">
-          &mdash;&nbsp;   <InstituteInfo id={row.original.instituteId} mode="text" />
-
+          &mdash;&nbsp;{" "}
+          <InstituteInfo id={row.original.instituteId} mode="text" />
         </h5>
       </div>
     ),
   },
   {
-    header: "Price",
-    accessorKey: "price",
+    header: "Delivery Mode",
     cell: ({ row }) => (
-      <div className="space-y-2">
-        <p className="whitespace-normal line-clamp-4  text-sm max-w-[450px]">
-          {row.original.price}
-        </p>
+      <div className="grid gap-2">
+        <div>
+          {row.original.inPersonDelivery && (
+            <Badge
+              variant="secondary"
+              className="bg-firefly text-white dark:bg-firefly/70 rounded-full"
+            >
+              <BadgeCheckIcon />
+              In-Person
+            </Badge>
+          )}
+        </div>
+        <div>
+          {" "}
+          {row.original.onlineDelivery && (
+            <Badge variant="default" className="rounded-full">
+              <BadgeCheckIcon />
+              Online
+            </Badge>
+          )}
+        </div>
       </div>
     ),
   },
   {
-    header: "Start Date",
-    accessorKey: "startDate",
+    header: "Details",
+    accessorKey: "details",
     cell: ({ row }) => {
-      const dateValue = row.original.startDate;
-      if (dateValue) {
-        const date = new Date(dateValue);
-        if (!isNaN(date.getTime())) {
-          return format(date, "PPP");
-        }
-      }
-      return "N/A";
-    },
-  },
-  {
-    header: "End Date",
-    accessorKey: "endDate",
-    cell: ({ row }) => {
-      const dateValue = row.original.endDate;
-      if (dateValue) {
-        const date = new Date(dateValue);
-        if (!isNaN(date.getTime())) {
-          return format(date, "PPP");
-        }
-      }
-      return "N/A";
+      // format number to US dollar
+      let USDollar = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
+      return (
+        <div className="flex w-full flex-col gap-2">
+          <div className="bg-muted after:bg-primary/70 relative rounded-md p-2 pl-6 text-sm after:absolute after:inset-y-2 after:left-2 after:w-1 after:rounded-full">
+            <div className="font-medium">Start Date</div>
+            <div className="text-muted-foreground text-xs">
+              {row.original.startDate
+                ? format(new Date(row.original.startDate), "PPP")
+                : "N/A"}
+            </div>
+          </div>
+          <div className="bg-muted after:bg-primary/70 relative rounded-md p-2 pl-6 text-sm after:absolute after:inset-y-2 after:left-2 after:w-1 after:rounded-full">
+            <div className="font-medium">End Date</div>
+            <div className="text-muted-foreground text-xs">
+              {row.original.endDate
+                ? format(new Date(row.original.endDate), "PPP")
+                : "N/A"}
+            </div>
+          </div>
+          <div className="bg-muted after:bg-primary/70 relative rounded-md p-2 pl-6 text-sm after:absolute after:inset-y-2 after:left-2 after:w-1 after:rounded-full">
+            <div className="font-medium">Donation Amount</div>
+            <div className="text-muted-foreground text-xs grid grid-cols-2 gap-2">
+              <div className="text-firefly">
+                $
+                {row.original.price
+                  ? USDollar.format(row.original.price)
+                  : "N/A"}
+              </div>
+              <div className="text-primary">
+                $
+                {row.original.price
+                  ? USDollar.format(row.original.priceViaZoom)
+                  : "N/A"}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
     },
   },
 
-  {
-    header: "Action Details",
-    cell: ({ row }) => (
-      <div className="flex gap-2">
-        {row.original.active && (
-          <Badge
-            variant="secondary"
-            className="bg-green-500 text-white dark:bg-green-600"
-          >
-            <BadgeCheckIcon />
-            Active
-          </Badge>
-        )}
-      </div>
-    ),
-  },
+  // {
+  //   header: "Action Details",
+  //   cell: ({ row }) => (
+  //     <div className="flex gap-2">
+  //       {row.original.active && (
+  //         <Badge
+  //           variant="secondary"
+  //           className="bg-green-500 text-white dark:bg-green-600"
+  //         >
+  //           <BadgeCheckIcon />
+  //           Active
+  //         </Badge>
+  //       )}
+  //     </div>
+  //   ),
+  // },
   {
     id: "edit",
     enableHiding: false,
     cell: ({ row }) => {
       const edition = row.original;
-      return <EditEditionSheet edition={row.original} />
-;
+      return <EditEditionSheet edition={row.original} />;
     },
   },
   {

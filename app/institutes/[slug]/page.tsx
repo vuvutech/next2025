@@ -46,6 +46,8 @@ export default async function InstituteViewPage(props: {
 
   if (!institute) return notFound();
 
+  const edition = institute.editions[0];
+
   return (
     <div className="overflow-hidden">
       <div className="relative overflow-hidden pb-5">
@@ -55,19 +57,19 @@ export default async function InstituteViewPage(props: {
           acronym={institute.acronym}
           defaultVerticalBannerSrc={`/images/defaultVerticalBanner/${institute.acronym}.webp`}
           edition={
-            institute.editions[0]
+            edition
               ? {
-                  title: institute.editions[0].title,
-                  startDate: institute.editions[0].startDate ?? undefined,
-                  endDate: institute.editions[0].endDate ?? undefined,
-                  banner: institute.editions[0].banner ?? undefined,
-                  theme: institute.editions[0].theme ?? undefined,
+                  title: edition.title,
+                  startDate: edition.startDate ?? undefined,
+                  endDate: edition.endDate ?? undefined,
+                  banner: edition.banner ?? undefined,
+                  theme: edition.theme ?? undefined,
                 }
               : undefined
           }
         />
       </div>
-      <OverviewSection  institute={institute} />
+      <OverviewSection edition={edition} institute={institute} />
       <WorldMap />
     </div>
   );

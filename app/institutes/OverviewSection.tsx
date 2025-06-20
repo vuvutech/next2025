@@ -3,25 +3,28 @@ import { baseUrl } from "@/lib/metadata";
 import { InstituteWithEditions } from "@/types/institute";
 import Image from "next/image";
 import React from "react";
+import { Edition } from "@prisma/client";
 
 export default function OverviewSection({
   institute,
+  edition,
 }: {
   institute: InstituteWithEditions;
+  edition: Edition | null;
 }) {
-  const formattedStartDate = institute.editions[0]?.startDate
+  const formattedStartDate = edition?.startDate
     ? new Intl.DateTimeFormat("en-US", {
         month: "long",
         day: "numeric",
         year: "numeric",
-      }).format(new Date(institute.editions[0]?.startDate))
+      }).format(new Date(edition?.startDate))
     : "Coming Soon";
-  const formattedEndDate = institute.editions[0]?.endDate
+  const formattedEndDate = edition?.endDate
     ? new Intl.DateTimeFormat("en-US", {
         month: "long",
         day: "numeric",
         year: "numeric",
-      }).format(new Date(institute.editions[0]?.endDate))
+      }).format(new Date(edition?.endDate))
     : "";
   return (
     <section id="about-section" className="max-w-8xl sm:px-2   mx-auto h-auto">
@@ -49,7 +52,7 @@ export default function OverviewSection({
         <div className="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
           <div className="rounded-2xl bg-gray-300/30 dark:bg-blue-900/10 h-auto md:h-full py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
             {/* edition institute logo */}
-            <div className="flex justify-center">
+            <div className="flex justify-center py-3">
               <Image
                 src={`/${institute.logo}` || "/images/logos/costrad.webp"}
                 alt={institute.name}
@@ -134,26 +137,31 @@ export default function OverviewSection({
               </div>
             ) : (
               <div className="mx-auto max-w-xs px-8">
-                <p className="text-base font-bold text-gray-600 dark:text-gray-500">
+                {/* <p className="text-base font-bold text-gray-600 dark:text-gray-500">
                   Pay once &mdash; Own it forever
-                </p>
+                </p> */}
 
-                <p className="mt-6 flex items-baseline justify-center gap-x-2">
-                  <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-                    ${institute.editions[0]?.price}
-                  </span>
-                  <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
-                    USD
-                  </span>
-                </p>
-                <SeperatorWithText seperatorText={"In Person"} />
-
-              {/* display priceViaZoom if it is not null */}
-                {institute.editions[0]?.priceViaZoom && (
+                {/* display only if inPersonDelivery is true and price is not null */}
+                {edition?.inPersonDelivery && edition?.price && (
                   <div>
                     <p className="mt-6 flex items-baseline justify-center gap-x-2">
                       <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-                        ${institute.editions[0]?.priceViaZoom}
+                        ${edition?.price}
+                      </span>
+                      <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
+                        USD
+                      </span>
+                    </p>
+                    <SeperatorWithText seperatorText={"In Person"} />
+                  </div>
+                )}
+
+                {/* display priceViaZoom only if onlineDelivery is true and priceViaZoom is not null */}
+                {edition?.onlineDelivery && edition?.priceViaZoom && (
+                  <div>
+                    <p className="mt-6 flex items-baseline justify-center gap-x-2">
+                      <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+                        ${edition?.priceViaZoom}
                       </span>
                       <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
                         USD
@@ -162,7 +170,6 @@ export default function OverviewSection({
                     <SeperatorWithText seperatorText={"Via Zoom"} />
                   </div>
                 )}
-               
 
                 <div className="text-center w-auto py-5">
                   <button
