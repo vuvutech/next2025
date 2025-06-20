@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
+import { Checkbox } from "@/components/ui/checkbox";
 
 type Institute = {
   id: string;
@@ -68,7 +69,13 @@ export function ExtensionComponent() {
     e.preventDefault();
     setLoading(true);
 
-    if (!form.instituteId || !form.title || !form.startDate || !form.endDate || !form.price) {
+    if (
+      !form.instituteId ||
+      !form.title ||
+      !form.startDate ||
+      !form.endDate ||
+      !form.price
+    ) {
       toast.error("Please fill all required fields.");
       setLoading(false);
       return;
@@ -136,6 +143,17 @@ export function ExtensionComponent() {
         </SheetHeader>
 
         <form onSubmit={handleSubmit} className="grid gap-4 py-2">
+          <div className="grid grid-cols-2 gap-2 py-3">
+            <div className="flex items-center gap-3">
+              <Checkbox id="terms" />
+              <Label htmlFor="terms">In-Person Delivery</Label>
+            </div>
+            <div className="flex items-center gap-3">
+              <Checkbox id="terms" />
+              <Label htmlFor="terms">Online Delivery (ZOOM..etc)</Label>
+            </div>
+          </div>
+
           <div className="grid gap-2">
             {/* <Label>Institute</Label> */}
             <InstituteCombobox
@@ -253,7 +271,7 @@ export function ExtensionComponent() {
             </div>
           </div>
 
-           <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <div className="grid gap-2">
               <Label>SEO</Label>
               <Input name="seo" value={form.seo} onChange={handleChange} />
