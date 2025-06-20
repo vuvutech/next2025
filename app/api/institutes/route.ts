@@ -14,7 +14,6 @@ function checkAuth(req: NextRequest) {
   }
   const token = authHeader.split(" ")[1];
   if (token !== AUTH_TOKEN) {
-    console.log("Failed with auth token");
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
   return null;
@@ -25,7 +24,6 @@ export async function GET(req: NextRequest) {
   // const authResult = checkAuth(req);
   // if (authResult) return authResult;
 
-  console.log("Getting institutes ....");
   try {
     const institutes = await prisma.institute.findMany({
       orderBy: {

@@ -10,6 +10,8 @@ import {
   oidcProvider,
   emailOTP,
 } from "better-auth/plugins";
+import { createAuthClient } from "better-auth/client";
+import { adminClient } from "better-auth/client/plugins";
 import { reactInvitationEmail } from "./email/invitation";
 import { reactResetPasswordEmail } from "./email/rest-password";
 import { resend } from "./email/resend";
@@ -19,7 +21,6 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "@/prisma/dbConnect";
 
 const from = process.env.BETTER_AUTH_EMAIL || "notifications@costrad.org";
-
 
 export const auth = betterAuth({
   appName: "College of Sustainable Transformation and Development",
@@ -60,7 +61,7 @@ export const auth = betterAuth({
     errorURL: "/auth/error",
   },
 
-    baseURL: baseUrl.toString(),
+  baseURL: baseUrl.toString(),
 
   emailVerification: {
     autoSignInAfterVerification: true,
@@ -119,6 +120,16 @@ export const auth = betterAuth({
     },
   },
   plugins: [
+    adminClient(),
+    admin({
+      defaultRole: "user",
+      adminRoles: ["admin", "superadmin"],
+      adminPaths: ["/admin", "/settings"],
+      defaultBanReason: "Spamming",
+      impersonationSessionDuration: 60 * 60 * 24, // 1 day
+      defaultBanExpiresIn: 60 * 60 * 24, // 1 day
+      bannedUserMessage: "Custom banned user message",
+    }),
     emailOTP({
       async sendVerificationOTP({ email, otp, type = "sign-in" }) {
         await resend.emails.send({

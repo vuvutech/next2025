@@ -1,27 +1,33 @@
-// middleware.ts
 import { NextRequest, NextResponse } from "next/server";
+import { getSessionCookie } from "better-auth/cookies";
 import { betterFetch } from "@better-fetch/fetch";
-import { auth } from "./lib/auth";
-
-type Session = typeof auth.$Infer.Session;
 
 export async function middleware(request: NextRequest) {
-  const { data: userSession } = await betterFetch<Session>(
-    "/api/auth/get-session",
-    {
-      baseURL: request.nextUrl.origin,
-      headers: { cookie: request.headers.get("cookie") || "" },
-      params: { disableCookieCache: "true" }
-    }
-  );
-  if (!userSession?.user?.role || userSession.user.role !== "admin") {
-    return NextResponse.redirect(new URL("/", request.url));
+  const sessionCookie = getSessionCookie(request);
+
+  if (!sessionCookie) {
+    const url = new URL("/auth/sign-in", request.url);
+    url.searchParams.set("callbackUrl", request.nextUrl.pathname);
+    return NextResponse.redirect(url);
   }
 
-  // Authorized — proceed
+  const pathname = request.nextUrl.pathname;
+
+  if (pathname.startsWith("/admin")) {
+
+    const { data, error } = await betterFetch<{ role: string }>("/api/userRole/", {
+      baseURL: request.nextUrl.origin,
+      headers: { cookie: request.headers.get("cookie") || "" },
+    });
+
+    if (error || !data || data.role !== "admin") {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/admin/:path*"], // only run on admin routes
+  matcher: ["/admin/:path*", "/dashboard", "/dashboard/:path*"],
 };

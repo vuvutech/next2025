@@ -12,7 +12,6 @@ export async function GET(request: NextRequest, props: { params: Promise<{ slug:
       { status: 400 }
     );
 
-  console.log("🔍 Fetching institute with ID:", slug);
 
   try {
     const institute = await prisma.institute.findUnique({
@@ -36,7 +35,6 @@ export async function GET(request: NextRequest, props: { params: Promise<{ slug:
 
 export async function PUT(request: NextRequest, props: { params: Promise<{ slugOrId: string }> }) {
   const params = await props.params;
-  console.log("🔥 PUT request received");
 
   const identifier = params.slugOrId;
   const json = await request.json();
@@ -61,7 +59,6 @@ export async function PUT(request: NextRequest, props: { params: Promise<{ slugO
     }
   }
 
-  console.log("📦 Sanitized update payload:", data);
 
   try {
     const existing = await prisma.institute.findFirst({

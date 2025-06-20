@@ -27,27 +27,35 @@ export default async function DashboardPage() {
       console.log(e);
       throw redirect("/auth/sign-in");
     });
-   
-        
-          
+
   return (
     <div className=" mx-auto p-4 m-4">
-      <Tabs defaultValue="" className="">
+      <Tabs defaultValue="account" className="">
         <TabsList>
-          <TabsTrigger id="profile" value="profile">Profile Display</TabsTrigger>
-          <TabsTrigger id="account" value="account">Account</TabsTrigger>
-          <TabsTrigger id="preferences" value="preferences">Preferences</TabsTrigger>
-          <TabsTrigger id="billing" value="billing">Billing</TabsTrigger>
-          <TabsTrigger id="testimonials" value="testimonials">My Testimonials</TabsTrigger>
+          <TabsTrigger id="account" value="account">
+            Account
+          </TabsTrigger>
+          <TabsTrigger id="profile" value="profile">
+            Profile Display
+          </TabsTrigger>
+          <TabsTrigger id="preferences" value="preferences">
+            Preferences
+          </TabsTrigger>
+          <TabsTrigger id="billing" value="billing">
+            Billing
+          </TabsTrigger>
+          <TabsTrigger id="testimonials" value="testimonials">
+            My Testimonials
+          </TabsTrigger>
         </TabsList>
-        <TabsContent value="profile">
-          <ProfileSection session={session!} />
-        </TabsContent>
         <TabsContent value="account">
           <UserCard
             session={JSON.parse(JSON.stringify(session))}
             activeSessions={JSON.parse(JSON.stringify(activeSessions))}
           />
+        </TabsContent>
+        <TabsContent value="profile">
+          <ProfileSection session={session!} />
         </TabsContent>
         <TabsContent value="preferences">
           <PreferencesSection />
@@ -56,7 +64,7 @@ export default async function DashboardPage() {
           <BillingSection />
         </TabsContent>
         <TabsContent id="testimonials" value="testimonials">
-         <TestimonialCard session={null}  />
+          <TestimonialCard session={null} />
         </TabsContent>
       </Tabs>
     </div>

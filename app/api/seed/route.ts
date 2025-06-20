@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { seedCollection } from "@/lib/seedCollection";
 
 export async function GET(req: NextRequest) {
-  console.log("SEEDING ......");
+ 
   const AUTH_TOKEN = process.env.AUTH_TOKEN;
   const authHeader = req.headers.get("authorization");
 

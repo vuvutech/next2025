@@ -9,7 +9,6 @@ import { baseUrl } from "@/lib/metadata";
 export const getInstitutes = async () => {
   try {
     const url = `${baseUrl}/api/institutes`;
-    console.log("Fetching institutes from:", url); // Debug log
     const res = await fetch(url, {
       cache: "force-cache",
       next: { revalidate: 720 }, // 12 minutes
@@ -39,11 +38,24 @@ export async function getInstituteBySlug(slug: string) {
   }
 }
 
+export async function getUserRole() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session || !session.user) {
+    return null; 
+    
+  }
+
+  return session.user.role;
+}
+
+
 export async function getCurrentUser(req?: NextRequest) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  // console.log("Current user session:", session?.user.role); // Debug log
   return session?.user ?? null;
 }
 

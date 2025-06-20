@@ -83,7 +83,7 @@ export default function BillingSection() {
                       $49
                     </p>
                     <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                      per month
+                      per Institute
                     </p>
                   </div>
                   <Button className="bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200">

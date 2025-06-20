@@ -7,7 +7,6 @@ import { baseUrl } from "@/lib/metadata";
 import slugify from "slugify";
 
 export async function GET() {
-  console.log("Getting editions ....");
   try {
     const editions = await prisma.edition.findMany({
       include: {
@@ -31,7 +30,6 @@ export async function POST(req: Request) {
   try {
     const data = await req.json();
 
-    console.log(data);
     const edition = await prisma.edition.create({
       data: {
         ...data,
@@ -95,7 +93,6 @@ export async function DELETE(req: NextRequest) {
   }
   try {
     const { id } = await req.json();
-    console.log("DELETING EDITION WITH ID", id);
     if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
     await prisma.edition.delete({ where: { id } });
     revalidatePath(`${baseUrl}/admin/editions`);

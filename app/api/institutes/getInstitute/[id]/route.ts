@@ -9,7 +9,6 @@ export async function GET(request: NextRequest, props: { params: Promise<{ id: s
   const id = params.id?.trim();
   if (!id) return NextResponse.json({ error: "Missing institute ID" }, { status: 400 });
 
-  console.log("🔍 Fetching institute with ID:", id);
 
   try {
     const institute = await prisma.institute.findUnique({
@@ -36,7 +35,6 @@ export async function PUT(request: NextRequest, props: { params: Promise<{ id: s
     );
   }
 
-  console.log("🔥 PUT request for institute ID:", id);
 
   const json = await request.json();
 
@@ -60,7 +58,6 @@ export async function PUT(request: NextRequest, props: { params: Promise<{ id: s
     }
   }
 
-  console.log("📦 Sanitized update payload:", data);
 
   try {
     const existing = await prisma.institute.findUnique({
