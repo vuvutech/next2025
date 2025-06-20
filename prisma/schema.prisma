@@ -214,8 +214,8 @@ model Edition {
   endDate          DateTime?
   seo              String?
   active           Boolean   @default(true)
-  inPersonDelivery Boolean   @default(true)
-  onlineDelivery   Boolean   @default(true)
+  inPersonDelivery Boolean?  @default(false)
+  onlineDelivery   Boolean?  @default(true)
   price            Float
   priceViaZoom     Float?
   createdAt        DateTime? @default(now())
