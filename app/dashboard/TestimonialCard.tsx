@@ -126,20 +126,20 @@ export default function TestimonialCard(props: { session: Session | null }) {
   // Fetch user session on component mount
   useEffect(() => {
     async function getUserSession() {
-      if (typeof window !== "undefined") {
-        // Ensure this runs only on the client
-        try {
-          // Use the correct type for betterFetch response
-          const session = await getCurrentSession();
+      try {
+        // Use the correct type for betterFetch response
+        const session = await getCurrentSession();
 
-          setCurrentUserSession(session);
-          console.log("User session data:", session);
-        } catch (error) {
-          console.error("Failed to fetch user session:", error);
-          setCurrentUserSession(null); // Clear session on error
-        }
+        setCurrentUserSession(session);
+        console.log("User session data:", session);
+      } catch (error) {
+        console.error("Failed to fetch user session:", error);
+        setCurrentUserSession(null); // Clear session on error
       }
     }
+    //   if (typeof window !== "undefined") {
+    //     // Ensure this runs only on the client
+    // }
     getUserSession();
   }, []); // Empty dependency array means this runs once on mount
 

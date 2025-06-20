@@ -32,7 +32,7 @@ export default async function DashboardPage() {
           
   return (
     <div className=" mx-auto p-4 m-4">
-      <Tabs defaultValue="profile" className="">
+      <Tabs defaultValue="" className="">
         <TabsList>
           <TabsTrigger id="profile" value="profile">Profile Display</TabsTrigger>
           <TabsTrigger id="account" value="account">Account</TabsTrigger>

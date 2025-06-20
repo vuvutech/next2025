@@ -19,8 +19,6 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "@/prisma/dbConnect";
 
 const from = process.env.BETTER_AUTH_EMAIL || "notifications@costrad.org";
-const to = process.env.TEST_EMAIL || "";
-
 
 
 export const auth = betterAuth({
