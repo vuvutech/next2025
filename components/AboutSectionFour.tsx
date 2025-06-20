@@ -1,8 +1,12 @@
+"use client"
 import React from "react";
 import Image from "next/image"; // Import Image component
 import Link from "next/link"; // Optional: Import Link if using Next.js routing
+import { useRouter } from "next/navigation";
+
 
 const AboutSectionFour = () => {
+  const router = useRouter();
   return (
     <div className="py-8">
       <section className="max-w-8xl p-4 md:px-8 mx-auto h-auto">
@@ -109,7 +113,12 @@ const AboutSectionFour = () => {
                 ))}
               </div>
               <div className="mx-auto text-center max-w-2xl pt-5">
-                <div className="mt-3 inline-flex group items-center text-foreground hover:shadow-sm relative overflow-hidden rounded-full p-[2px]">
+                <div
+                  onClick={() => {
+                    router.push("/institutes");
+                  }}
+                  className="mt-3 inline-flex group items-center text-foreground hover:shadow-sm relative overflow-hidden rounded-full p-[2px]"
+                >
                   <span className="absolute inset-[-1000%] bg-[conic-gradient(from_90deg_at_50%_50%,#338EF7_0%,#F54180_50%,#338EF7_100%)]" />
                   <div className="inline-flex px-5 h-full w-full cursor-pointer items-center justify-center rounded-full bg-background transition-background p-2.5 text-xs font-medium hover:font-semibold text-foreground backdrop-blur-3xl">
                     <span className="text-xl">Explore Our Institutes</span>

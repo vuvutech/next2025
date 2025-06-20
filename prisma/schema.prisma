@@ -198,26 +198,28 @@ model Institute {
 }
 
 model Edition {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  instituteId    String    @db.ObjectId
-  institute      Institute @relation(fields: [instituteId], references: [id], onDelete: Cascade)
-  title          String
-  slug           String    @unique
-  theme          String?
-  acronym        String?
-  overview       String?
-  about          String?
-  introduction   String?
-  banner         String?
-  verticalBanner String?
-  startDate      DateTime?
-  endDate        DateTime?
-  seo            String?
-  active         Boolean   @default(true)
-  price          Float
-  priceViaZoom   Float?
-  createdAt      DateTime? @default(now())
-  updatedAt      DateTime? @updatedAt
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  instituteId      String    @db.ObjectId
+  institute        Institute @relation(fields: [instituteId], references: [id], onDelete: Cascade)
+  title            String
+  slug             String    @unique
+  theme            String?
+  acronym          String?
+  overview         String?
+  about            String?
+  introduction     String?
+  banner           String?
+  verticalBanner   String?
+  startDate        DateTime?
+  endDate          DateTime?
+  seo              String?
+  active           Boolean   @default(true)
+  inPersonDelivery Boolean   @default(true)
+  onlineDelivery   Boolean   @default(true)
+  price            Float
+  priceViaZoom     Float?
+  createdAt        DateTime? @default(now())
+  updatedAt        DateTime? @updatedAt
 
   @@map("edition")
 }
