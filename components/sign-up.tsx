@@ -154,7 +154,6 @@ export function SignUpComponent() {
             className="w-full cursor-pointer text-background bg-foreground "
             disabled={loading}
             onClick={async () => {
-              console.log("SUBMITTING APPLICATION");
               setLoading(true);
 
               const signUpPromise = signUp

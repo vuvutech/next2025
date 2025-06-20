@@ -146,7 +146,6 @@ export default function ContactPage() {
       // }
 
       const result = await response.json();
-      // console.log('Testimonial submitted successfully:', result);
       toast.success(
         "Testimonial submitted successfully! It will be reviewed before being featured."
       );
@@ -172,7 +171,6 @@ export default function ContactPage() {
           const session = await getCurrentSession();
 
           setCurrentUserSession(session);
-          console.log("User session data:", session);
         } catch (error) {
           console.error("Failed to fetch user session:", error);
           setCurrentUserSession(null); // Clear session on error

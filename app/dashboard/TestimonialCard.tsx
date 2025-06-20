@@ -105,7 +105,6 @@ export default function TestimonialCard(props: { session: Session | null }) {
       }
 
       const result = await response.json();
-      // console.log('Testimonial submitted successfully:', result);
       toast.success(
         "Testimonial submitted successfully! It will be reviewed before being featured."
       );

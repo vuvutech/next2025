@@ -24,7 +24,6 @@ export function SignInButton() {
     data: session, //error object
   } = client.useSession();
 
-  // console.log("Session Data:", session);
 
   return (
     <>

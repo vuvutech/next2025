@@ -48,7 +48,6 @@ export default function SignInComponent() {
         { email, password, callbackURL: costradCallbackUrl, rememberMe },
         {
           onSuccess: () => {
-            console.log("Signed in successfully!");
           },
           onError: (ctx) => {
             if (ctx.error.status === 403) {

@@ -10,7 +10,6 @@ export function useSession() {
     async function fetchSession() {
       try {
         const currentSession = await client.getSession();
-        console.log(currentSession);
         setSession(currentSession.data?.session);
       } catch (error) {
         setSession(undefined);

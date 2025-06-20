@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
   try {
@@ -56,7 +56,6 @@ export async function POST(request: Request) {
     // Send the email
     try {
       const info = await transporter.sendMail(mailOptions);
-      console.log('Email sent:', info.response);
       return NextResponse.json(
         { message: 'Email sent successfully' },
         { status: 200 }
