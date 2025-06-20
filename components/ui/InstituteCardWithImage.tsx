@@ -75,7 +75,7 @@ export default function InstituteCardWithImage({
         </Button>
         <Link
           href={`/institutes/${slug}`}
-          className="dark:bg-gray-900 bg-gray-200 flex items-center gap-3 md:p-2 p-2 rounded-xl w-auto"
+          className="bg-muted flex items-center gap-3 md:p-2 p-2 rounded-[14px] w-auto"
         >
           <div>
             <Image
@@ -89,7 +89,7 @@ export default function InstituteCardWithImage({
           <div className="flex-1 flex justify-between items-center gap-2">
             <div>
               <p className="font-bold lg:text-sm">{editionTitle}</p>
-              <p className="text-gray-500 dark:text-white text-sm">
+              <p className="text-foreground d text-sm">
                 {editionDates}
               </p>
             </div>

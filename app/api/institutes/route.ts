@@ -29,8 +29,14 @@ export async function GET(req: NextRequest) {
       orderBy: {
         createdAt: "asc",
       },
+      // get the latest edition for each institute
       include: {
-        editions: true,
+        editions: {
+          take: 1,          
+          orderBy: {
+            startDate: "desc",
+          },
+        },
       },
     });
     return NextResponse.json(institutes);

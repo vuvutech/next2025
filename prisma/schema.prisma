@@ -216,7 +216,7 @@ model Edition {
   active           Boolean   @default(true)
   inPersonDelivery Boolean?  @default(false)
   onlineDelivery   Boolean?  @default(true)
-  price            Float
+  price            Float?
   priceViaZoom     Float?
   createdAt        DateTime? @default(now())
   updatedAt        DateTime? @updatedAt

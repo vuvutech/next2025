@@ -7,11 +7,12 @@ import { auth } from "@/lib/auth";
 import { baseUrl } from "@/lib/metadata";
 
 export const getInstitutes = async () => {
+  //  get institutes in descending order by startDate
   try {
     const url = `${baseUrl}/api/institutes`;
     const res = await fetch(url, {
       cache: "force-cache",
-      next: { revalidate: 720 }, // 12 minutes
+      next: { revalidate: 300 }, // 12 minutes
     });
 
     if (!res.ok) {

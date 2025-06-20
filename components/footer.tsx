@@ -7,9 +7,9 @@ const footerLinks = [
     links: [
       { label: "Getting Started", href: "getting-started" },
       { label: "About COSTrAD", href: "about" },
-      { label: "Frequently Asked Questions", href: "faqs" },
-      { label: "Our Story", href: "our-story" },
+      // { label: "Our Story", href: "our-story" },
       { label: "Press", href: "press" },
+      { label: "How to Donate", href: "donate" },
     ],
   },
   {
@@ -17,9 +17,8 @@ const footerLinks = [
     links: [
       { label: "My Dashboard", href: "dashboard" },
       { label: "Reviews", href: "reviews" },
-      { label: "Help centre", href: "help" },
-      { label: "Getting Started", href: "getting-started" },
-      { label: "How to Donate", href: "donate" },
+      { label: "Help centre", href: "help-and-support" },
+      { label: "Frequently Asked Questions", href: "faqs" },
     ],
   },
   {

@@ -71,13 +71,7 @@ export function ExtensionComponent() {
     e.preventDefault();
     setLoading(true);
 
-    if (
-      !form.instituteId ||
-      !form.title ||
-      !form.startDate ||
-      !form.endDate ||
-      !form.price
-    ) {
+    if (!form.instituteId || !form.title || !form.startDate || !form.endDate) {
       toast.error("Please fill all required fields.");
       setLoading(false);
       return;
@@ -239,6 +233,7 @@ export function ExtensionComponent() {
                     initialFocus
                     captionLayout="dropdown"
                     fromYear={new Date().getFullYear()}
+                    toYear={2045}
                   />
                 </PopoverContent>
               </Popover>
