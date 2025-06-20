@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import { baseUrl } from "@/lib/metadata";
 
 const footerLinks = [
   {
@@ -91,7 +90,7 @@ export default function Footer() {
                 {section.links.map(({ label, href }) => (
                   <li key={label}>
                     <Link
-                      href={`${baseUrl}${href}`}
+                      href={`/${href}`}
                       className="hover:text-primary transition"
                     >
                       {label}
@@ -173,7 +172,7 @@ export default function Footer() {
           {legalLinks.map((link) => (
             <Link
               key={link.label}
-              href={`${baseUrl}/${link.href}`}
+              href={`/${link.href}`}
               className="hover:text-primary transition"
             >
               {link.label}

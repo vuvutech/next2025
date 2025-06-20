@@ -3,9 +3,9 @@ export default function DMCA() {
   // Changed function name to DMCA for clarity
   return (
     <>
-      <section className="max-w-8xl p-4 md:px-8   mx-auto h-auto">
+      <section className="max-w-8xl p-2 md:px-8   mx-auto h-auto">
         <div className=" min-h-[600px] mx-auto  space-y-5">
-          <div className=" text-left w-full  p-4 md:p-8  sm:rounded-lg prose-img:rounded-xl max-w-max  prose dark:prose-invert ">
+          <div className=" text-left w-full  md:p-8  sm:rounded-lg prose-img:rounded-xl max-w-max  prose dark:prose-invert ">
             <h1 className="text-3xl md:text-4xl ">DMCA Policy</h1>
             <div className="post-body post-content space-y-4">
               {/* ADDED LAST UPDATED DATE HERE */}
