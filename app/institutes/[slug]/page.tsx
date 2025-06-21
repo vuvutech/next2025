@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Section1 } from "../Section1";
 import WorldMap from "@/components/WorldMap";
 import OverviewSection from "@/app/institutes/OverviewSection";
+import Jumbotron from "@/components/ui/Jumbotron";
 
 // Static paths for SSG
 export async function generateStaticParams() {
@@ -50,6 +51,10 @@ export default async function InstituteViewPage(props: {
 
   return (
     <div className="overflow-hidden">
+      <Jumbotron heroImage={edition?.banner ? edition.banner : "/images/dome.jpg"} />
+      <h1 className="text-3xl font-bold text-center text-white">
+        {institute.name}
+      </h1>
       <div className="relative overflow-hidden pb-5">
         <Section1
           name={institute.name}

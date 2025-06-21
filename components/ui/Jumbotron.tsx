@@ -1,7 +1,6 @@
 "use client";
 
 import { useDevice } from "@/hooks/useDevice";
-import { useState } from "react";
 
 interface JumbotronProps {
   heroImage?: string;
@@ -11,9 +10,9 @@ interface JumbotronProps {
 }
 
 export default function Jumbotron({
-  heroImage = "center8.jpg",
-  height = "md:h-[450px]",
-  shade = "30",
+  heroImage = "/images/center8.jpg",
+  height = "md:h-[400px]",
+  shade = "5",
   className,
 }: JumbotronProps) {
   const { isMobile } = useDevice();
@@ -26,7 +25,7 @@ export default function Jumbotron({
           <div
             className={`${!isMobile ? "kenburns" : ""} ${className} absolute inset-0`}
             style={{
-              backgroundImage: `url(/images/${heroImage})`,
+              backgroundImage: `url(${heroImage})`,
               backgroundPosition: "center center",
               backgroundSize: "cover",
             }}

@@ -56,7 +56,7 @@ export default function Home() {
 
       <Jumbotron
         className="object-center"
-        heroImage="center2.jpg"
+        heroImage="/images/center2.jpg"
         height="md:h-[600px]"
       />
       <div className="flex flex-col justify-center">

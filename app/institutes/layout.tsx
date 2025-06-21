@@ -1,22 +1,11 @@
-import Jumbotron from '@/components/ui/Jumbotron';
-import { Toaster } from 'sonner' ;
+import { Toaster } from "sonner";
 
-
-
-
-export default function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-       <div className='block p-2'>
-              <Toaster />
-              <Jumbotron />
-            <div>
-                {children}
-            </div>
-          </div>
+    <div className="block p-2">
+      <Toaster />
 
+      <div>{children}</div>
+    </div>
   );
 }

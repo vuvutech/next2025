@@ -28,6 +28,7 @@ import { cn } from "@/lib/utils";
 import { getBaseUrl } from "@/config/site";
 import { IconEdit } from "@tabler/icons-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import Image from "next/image";
 
 export function EditEditionSheet({ edition }: { edition: any }) {
   const router = useRouter();
@@ -141,13 +142,11 @@ export function EditEditionSheet({ edition }: { edition: any }) {
               </Label>
             </div>
           </div>
-
           <InstituteCombobox
             institutes={institutes}
             selectedId={form.instituteId}
             onSelect={(id) => setForm((prev) => ({ ...prev, instituteId: id }))}
           />
-
           <div className="grid grid-cols-2 gap-4">
             <div className="grid gap-2">
               <Label>Title</Label>
@@ -158,7 +157,6 @@ export function EditEditionSheet({ edition }: { edition: any }) {
               <Input name="theme" value={form.theme} onChange={handleChange} />
             </div>
           </div>
-
           <div className="grid gap-2">
             <Label>Overview</Label>
             <Textarea
@@ -167,7 +165,6 @@ export function EditEditionSheet({ edition }: { edition: any }) {
               onChange={handleChange}
             />
           </div>
-
           <div className="grid grid-cols-2 gap-4">
             {(["startDate", "endDate"] as const).map((key) => (
               <div className="grid gap-2" key={key}>
@@ -206,7 +203,6 @@ export function EditEditionSheet({ edition }: { edition: any }) {
               </div>
             ))}
           </div>
-
           <div className="grid grid-cols-3 gap-4">
             <div className="grid gap-2">
               <Label>SEO</Label>
@@ -230,19 +226,45 @@ export function EditEditionSheet({ edition }: { edition: any }) {
                 onChange={handleChange}
               />
             </div>
+           
           </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <UploadImage
+                label="Banner"
+                onUpload={(url) => setForm((f) => ({ ...f, banner: url }))}
+              />
+              {form.banner && (
+                <Image
+                  src={form.banner}
+                  alt="Banner preview"
+                  className="w-full h-auto"
+                  width={200}
+                  height={100}
+                  style={{ width: "100%", height: "auto" }}
+                />
+              )}
+            </div>
 
-          <UploadImage
-            label="Banner"
-            onUpload={(url) => setForm((f) => ({ ...f, banner: url }))}
-          />
-          <UploadImage
-            label="Vertical Banner"
-            onUpload={(url) =>
-              setForm((f) => ({ ...f, verticalBanner: url }))
-            }
-          />
-
+            <div>
+              <UploadImage
+                label="Vertical Banner"
+                onUpload={(url) =>
+                  setForm((f) => ({ ...f, verticalBanner: url }))
+                }
+              />
+              {form.verticalBanner && (
+                <Image
+                  src={form.verticalBanner}
+                  alt="Vertical Banner preview"
+                  className="w-full h-auto"
+                  width={200}
+                  height={100}
+                  style={{ width: "100%", height: "auto" }}
+                />
+              )}
+            </div>
+          </div>
           <Button type="submit" disabled={loading}>
             {loading ? "Saving..." : "Update Edition"}
           </Button>

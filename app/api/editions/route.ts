@@ -70,7 +70,7 @@ export async function PUT(req: NextRequest) {
       { status: 400 }
     );
   }
-
+  console.log("Data received for update:", data);
   try {
     const updated = await prisma.edition.update({
       where: { id },
@@ -89,7 +89,7 @@ export async function PUT(req: NextRequest) {
         }),
       },
     });
-
+    console.log("Updated edition:", updated);
     revalidatePath(`${baseUrl}/admin/editions`);
     return NextResponse.json(updated);
   } catch (error: any) {

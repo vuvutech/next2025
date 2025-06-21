@@ -268,7 +268,7 @@ export default function ContactPage() {
           <div className="mt-12">
             <Jumbotron
               className=""
-              heroImage="map.webp"
+              heroImage="/images/flags2.jpg"
               height="md:h-[550px] h-dvh rounded-2xl"
             />
           </div>

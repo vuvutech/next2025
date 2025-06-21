@@ -12,7 +12,7 @@ export default function Layout({
   return (
        <div className='block p-2'>
               <Toaster />
-              <Jumbotron />
+              <Jumbotron heroImage='/images/contact.jpg' />
            <div className='md:p-4 pt-4 max-w-8xl mx-auto space-y-4'>
                 {children}
             </div>
