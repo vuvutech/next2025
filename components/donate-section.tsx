@@ -1,9 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { Star } from "lucide-react";
 import React from "react";
-
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { baseUrl } from "@/lib/metadata";
+import Image from "next/image";
 
 interface Hero7Props {
   heading?: string;
@@ -61,9 +58,11 @@ const Donate = ({
             {/* Buttons */}
             <div className="py-5  w-full  ">
               <div className="cursor-pointer" data-hs-overlay="#donate">
-                <img
-                  src="/images/all-cards.webp"
+                <Image
+                  src="/images/all-cards.png"
                   alt="Donate with Paypal or Credit Card"
+                  width={400}
+                  height={100}
                   className="w-auto rounded-md"
                 />
               </div>
@@ -144,10 +143,13 @@ const Donate = ({
           {/* Grid */}
           <div className="md:grid md:grid-cols-8 md:gap-8 md:items-center place-items-center">
             <div className="hidden md:block md:col-span-3">
-              <img
-                className="aspect-video h-96 rounded-2xl"
+
+              <Image
+                className="h-[60dvh] rounded-2xl"
                 src="/images/cheque_.webp"
                 alt="Image Description"
+                width={800}
+                height={800}    
               />
             </div>
             {/* End Col */}
