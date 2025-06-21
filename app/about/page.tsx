@@ -10,7 +10,7 @@ export default function AboutPage() {
       <AboutSectionOne />
     
       <AboutSectionTwo />
-      <section className="md:py-8 md:px-12 max-w-5xl mx-auto text-lg md:text-4xl md:text-center  ">
+      <section id="mission" className="md:py-8 md:px-12 max-w-5xl mx-auto text-lg md:text-4xl md:text-center  ">
         Our Mission is to raise and develop generations of{" "}
         <span className="text-chart-2 ">transformational leaders</span>,
         equipped to bring systemic and sustainable change, to every sphere of

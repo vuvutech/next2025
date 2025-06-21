@@ -6,12 +6,7 @@ import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Jumbotron from "@/components/ui/Jumbotron";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import {
-  FaFacebook,
-  FaXTwitter,
-  FaWhatsapp,
-  FaTiktok,
-} from "react-icons/fa6";
+import { FaFacebook, FaXTwitter, FaWhatsapp, FaTiktok } from "react-icons/fa6";
 
 // Import the Shadcn-based modal and form
 import GenericShadcnFormModal from "@/components/GenericShadcnFormModal"; // Adjust path
@@ -20,6 +15,7 @@ import TestimonialForm, {
 } from "@/components/TestimonialForm"; // Adjust path, import interface
 import { getCurrentSession } from "../actions/functions";
 import { toast } from "sonner";
+import BadgeLink from "@/components/BadgeLink";
 
 // Define the type for the contact form inputs
 type ContactFormInputs = {
@@ -190,14 +186,17 @@ export default function ContactPage() {
   return (
     <div className="py-8 space-y-8">
       <section className="container">
-        <div className="container">
+       
+        <div>
           <div className="max-w-3xl space-y-3">
-            <h5 className="text-firefly">
-              Contact us
-            </h5>
-            <h1>
-              Get in touch with us today to learn more
-            </h1>
+            <div>
+              <BadgeLink
+                href="#testimonials"
+                badge={"Contact us"}
+                label={"Let’s Talk — Reach Out"}
+              />
+            </div>
+            <h1 className="text-3xl  lg:text-5xl">Get in touch with us today to learn more</h1>
             <p className="">
               We'd love to hear from you! Reach out to our team today to
               discover more about <span className="font-">COSTrAD</span>, ask
@@ -206,7 +205,7 @@ export default function ContactPage() {
               with you.
             </p>
           </div>
-          <div className="mt-4 grid gap-4 md:mt-20 md:grid-cols-3 md:gap-8">
+          <div id="testimonials" className="mt-4 grid gap-4 md:mt-20 md:grid-cols-3 md:gap-8">
             {/* Testimonials Section */}
             <div className="flex flex-col justify-between gap-6 rounded-lg border p-6">
               <div>

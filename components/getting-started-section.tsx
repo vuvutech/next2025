@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-
+import Image from "next/image";
+import BadgeLink from "./BadgeLink";
 
 interface Hero7Props {
   heading?: string;
@@ -54,19 +55,26 @@ const GettingStarted = ({
   },
 }: Hero7Props) => {
   return (
-    <section className="py-32 __web-inspector-hide-shortcut__">
-      <div className="lg:container">
-        <div className="mb-16 max-w-xl px-8 lg:px-0">
-          <span
-            data-slot="badge"
-            className="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground"
-          >
-            Start Your COSTrAD Journey in One Easy Flow
-          </span>
-          <h2 className="mt-6 mb-3 text-2xl font-medium text-balance md:text-4xl">
-            Build your custom workflow in no time
-          </h2>
-          <p>Deploy a fully optimized system and upgrade your current setup.</p>
+    <section className="py-32">
+      <div className="lg:container space-y-3">
+        <div className="max-w-3xl space-y-3 pb-12">
+          <div>
+            <BadgeLink
+              href="#"
+              badge={"Speed"}
+              label={"Start Your Journey with COSTrAD"}
+            />
+          </div>
+          <h1 className="text-3xl  lg:text-5xl">
+            Get in touch with us today to learn more
+          </h1>
+          <p className="">
+            Ready to take the next step toward transformational leadership?
+            Getting started with COSTrAD is simple, intentional, and designed to
+            ensure the best experience for every student. To begin your journey,
+            create your account, complete your profile, choose from one of our
+            specialized institutes, and await approval.
+          </p>
         </div>
         <div>
           <div dir="ltr" data-orientation="horizontal">
@@ -100,11 +108,13 @@ const GettingStarted = ({
                   </div>
                   <div>
                     <h3 className="mb-1 font-medium lg:mt-4">
-                      Set up your data collection
+                      Step 1: Create Your Account
                     </h3>
                     <p className="text-sm">
-                      Configure your input sources and streamline data
-                      management.
+                      Sign up to access COSTrAD’s leadership platform. It’s your
+                      first step toward a transformative learning journey. Use a
+                      valid email to register and unlock courses, resources, and
+                      your spot in the community.
                     </p>
                   </div>
                 </div>
@@ -139,11 +149,12 @@ const GettingStarted = ({
                   </div>
                   <div>
                     <h3 className="mb-1 font-medium lg:mt-4">
-                      Generate custom reports
+                      Step 2: Complete Your Profile
                     </h3>
                     <p className="text-sm">
-                      Easily create and share detailed analytics reports across
-                      teams.
+                      Fill out your profile with current and accurate
+                      information. This helps us match you with the right
+                      institute and improves your approval chances.
                     </p>
                   </div>
                 </div>
@@ -178,11 +189,12 @@ const GettingStarted = ({
                   </div>
                   <div>
                     <h3 className="mb-1 font-medium lg:mt-4">
-                      Automate your processes
+                      Step 3: Choose an Institute
                     </h3>
                     <p className="text-sm">
-                      Set up automated workflows for handling and processing
-                      data effortlessly.
+                      Browse our specialized institutes in leadership,
+                      governance, and transformation. Pick one that fits your
+                      goals — spots fill up fast, so choose early.
                     </p>
                   </div>
                 </div>
@@ -217,11 +229,12 @@ const GettingStarted = ({
                   </div>
                   <div>
                     <h3 className="mb-1 font-medium lg:mt-4">
-                      Share insights with stakeholders
+                      Step 4: Get Approved
                     </h3>
                     <p className="text-sm">
-                      Provide transparent reporting with your custom-built
-                      dashboard.
+                      Your application will be reviewed after submission. If
+                      approved, you’ll receive onboarding details and can begin
+                      your COSTrAD journey.
                     </p>
                   </div>
                 </div>
@@ -247,10 +260,13 @@ const GettingStarted = ({
                 className="aspect-video"
                 style={{ animationDuration: "0s" }}
               >
-                <img
-                      src="/images/united-nations2.webp"
+                <Image
+                  priority
+                  src="/images/steps2.jpg"
                   alt="placeholder"
                   className="h-full w-full rounded-3xl border object-cover shadow"
+                  width={1920}
+                  height={1920}
                 />
               </div>
               <div

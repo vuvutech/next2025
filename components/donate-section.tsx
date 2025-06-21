@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Image from "next/image";
+import BadgeLink from "./BadgeLink";
 
 interface Hero7Props {
   heading?: string;
@@ -31,7 +32,14 @@ const Donate = ({
     <div className="space-y-3">
       <section className="py-8">
         <div className="container sm:text-left">
-          <div className="flex flex-col max-w-3xl md:px-8 space-y-3">
+          <div className="flex flex-col max-w-3xl md:px-8">
+            <div>
+              <BadgeLink
+                href="#begin"
+                badge={"Donation"}
+                label={"Your Gift Shapes Future Generations"}
+              />
+            </div>
             <h1 className="text-3xl  lg:text-5xl">{heading}</h1>
             <p className="text-left text-current lg:text-lg">{description}</p>
           </div>
@@ -41,7 +49,7 @@ const Donate = ({
       <section className="max-w-[85rem] mx-auto sm:px-6 lg:px-8">
         {/* Grid */}
 
-        <div className="border-gray-500/20 gap-4 grid md:border md:gap-8 md:items-center md:p-8 rounded-3xl xl:gap-20">
+        <div id="begin" className="border-gray-500/20 gap-4 grid md:border md:gap-8 md:items-center md:p-8 rounded-3xl xl:gap-20">
           <div className="sm:p-4 md:p-8 space-y-5">
             <h1 className="block text-2xl text-current sm:text-3xl lg:text-5xl lg:leading-tight ">
               <span className="">COSTrAD</span> Giving Guide
@@ -143,13 +151,12 @@ const Donate = ({
           {/* Grid */}
           <div className="md:grid md:grid-cols-8 md:gap-8 md:items-center place-items-center">
             <div className="hidden md:block md:col-span-3">
-
               <Image
                 className="h-[60dvh] rounded-2xl"
                 src="/images/cheque_.webp"
                 alt="Image Description"
                 width={800}
-                height={800}    
+                height={800}
               />
             </div>
             {/* End Col */}

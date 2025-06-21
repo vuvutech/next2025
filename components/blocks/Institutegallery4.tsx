@@ -120,7 +120,7 @@ export const InstituteGallery = ({
                 carouselApi?.scrollPrev();
               }}
               disabled={!canScrollPrev}
-              className="disabled:pointer-events-auto text-foreground "
+              className="disabled:pointer-events-auto text-muted "
             >
               <ArrowLeft className="size-5" /> 
             </Button>
@@ -131,7 +131,7 @@ export const InstituteGallery = ({
                 carouselApi?.scrollNext();
               }}
               disabled={!canScrollNext}
-              className="disabled:pointer-events-auto text-foreground"
+              className="disabled:pointer-events-auto text-muted"
             >
               <ArrowRight className="size-5" />
             </Button>

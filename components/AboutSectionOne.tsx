@@ -39,8 +39,8 @@ const AboutSectionOne = () => {
                 </svg>
               </span>
             </Link>
-            <h1 className="text-3xl sm:text-5xl md:text-4xl  ">
-              A Leadership Development <br /> Initiative
+            <h1 className="text-3xl sm:text-5xl max-w-2xl  ">
+              Cultivating Purposeful Leadership
             </h1>
             <p className="lg:text-xl m max-w-3xl text-foreground">
               The College of Sustainable Transformation and Development

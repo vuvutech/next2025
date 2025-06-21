@@ -58,12 +58,12 @@ export const Section1 = ({
             <div className="flex md:col-span-2 w-full flex-col gap-4 px-8 py-20 md:px-10">
              <div>
                <BadgeLink
-                href="/institutes/costrad"
+                href="#begin"
                 badge={acronym?.toUpperCase() || "COSTRAD"}
                 label={edition?.theme || "Institute Overview"}
               />
              </div>
-              <h1 className="text-2xl font-semibold tracking-tighter md:text-6xl">
+              <h1 className="text-3xl font-semibold tracking-tighter md:text-5xl">
                 {name}
               </h1>
               <p className="tracking-tight text-lg text-foreground ">
@@ -83,8 +83,8 @@ export const Section1 = ({
             </div>
 
             {/* Right Content */}
-            <DottedDiv className="group size-full md:cols-span-1 place-self-end p-4 ">
-              <div className="relative h-full w-full bg-muted-2/50 p-4 transition-all ease-in-out group-hover:bg-muted-2">
+            <DottedDiv  className="group size-full md:cols-span-1 place-self-end p-4 ">
+              <div id="begin" className="relative h-full w-full bg-muted-2/50 p-4 transition-all ease-in-out group-hover:bg-muted-2">
                 <Image
                   src={verticalBannerSrc}
                   alt="Edition Banner"

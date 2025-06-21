@@ -34,18 +34,25 @@ export default function Home() {
       </AnimatePresence> */}
       <HeroSection backgroundImageUrl="/images/united-nations.jpg" />
       <InstitutesIntro />
-     <section
-  className="px-2 md:p-8 max-w-8xl text-[24px] mx-auto md:text-[37px] 
+      <section
+        className="px-2 md:p-8 max-w-8xl text-[24px] mx-auto md:text-[37px] 
   md:min-h-[60dvh] font-oswald flex flex-col justify-center pb-24"
->
- <div> We equip you with the essential tools and <span className="text-firefly">mindset</span> to confidently guide
-  individuals, lead organizations, and oversee complex systems with clarity and purpose.{' '}
-  <span className="text-primary inline whitespace-nowrap">Effective leaders</span>{' '}
-  demonstrate exceptional communication abilities, sound judgment, and sharp analytical thinking.
-  They also have the capacity to uplift, energize, and mobilize those
-  around them toward a shared <span className="text-destructive">vision</span>.</div>
-</section>
-
+      >
+        <div>
+          {" "}
+          We equip you with the essential tools and{" "}
+          <span className="text-firefly">mindset</span> to confidently guide
+          individuals, lead organizations, and oversee complex systems with
+          clarity and purpose.{" "}
+          <span className="text-primary inline whitespace-nowrap">
+            Effective leaders
+          </span>{" "}
+          demonstrate exceptional communication abilities, sound judgment, and
+          sharp analytical thinking. They also have the capacity to uplift,
+          energize, and mobilize those around them toward a shared{" "}
+          <span className="text-destructive">vision</span>.
+        </div>
+      </section>
 
       <Jumbotron
         className="object-center"
