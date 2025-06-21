@@ -50,8 +50,8 @@ export const Section1 = ({
   const editionTitle = edition?.title || "Upcoming Edition";
 
   return (
-    <section className="bg-background py-16 h-auto">
-      <div className="relative container flex flex-col items-center px-0! lg:pt-8">
+    <section className="bg-background py-8 h-auto">
+      <div className="relative container flex flex-col items-center px-0! lg:pt-4">
         <DottedDiv>
           <div className="grid lg:grid-cols-3">
             {/* Left Content */}

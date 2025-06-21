@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import React from "react";
 import Image from "next/image"; // Import Image component
 import Link from "next/link"; // Optional: Import Link if using Next.js routing
 import { useRouter } from "next/navigation";
-
+import { RainbowButton } from "./magicui/rainbow-button";
 
 const AboutSectionFour = () => {
   const router = useRouter();
@@ -27,7 +27,7 @@ const AboutSectionFour = () => {
               <div className="text-center mx-auto">
                 {/* Title */}
                 <div className="mb-5 max-w-4xl mx-auto">
-                  <p className="block text-white text-xl max-w-3xl mx-auto md:text-3xl font-['anton'] font-thin uppercase">
+                  <p className="block text-white text-xl max-w-5xl mx-auto md:text-5xl font-bebas font-thin uppercase">
                     Empowering visionary leaders to drive transformative change
                     across all societal domains.
                   </p>
@@ -93,7 +93,7 @@ const AboutSectionFour = () => {
                 ].map((item, index) => (
                   <div
                     key={index}
-                    className="flex md:flex-col justify-start items-center gap-2 text-center text-white space-y-2 font-extrabold text-xs md:text-lg"
+                    className="flex md:flex-col justify-start items-center gap-2 text-center text-xs md:text-lg"
                   >
                     {/* Using Link for client-side navigation */}
                     <Link
@@ -112,19 +112,16 @@ const AboutSectionFour = () => {
                   </div>
                 ))}
               </div>
-              <div className="mx-auto text-center max-w-2xl pt-5">
-                <div
-                  onClick={() => {
-                    router.push("/institutes");
-                  }}
-                  className="mt-3 inline-flex group items-center text-foreground hover:shadow-sm relative overflow-hidden rounded-full p-[2px]"
-                >
-                  <span className="absolute inset-[-1000%] bg-[conic-gradient(from_90deg_at_50%_50%,#338EF7_0%,#F54180_50%,#338EF7_100%)]" />
-                  <div className="inline-flex px-5 h-full w-full cursor-pointer items-center justify-center rounded-full bg-background transition-background p-2.5 text-xs font-medium hover:font-semibold text-foreground backdrop-blur-3xl">
-                    <span className="text-xl">Explore Our Institutes</span>
-                  </div>
-                </div>
-              </div>
+             <div className="flex  items-center sm:justify-center py-8">
+               <RainbowButton
+                onClick={() => {
+                  router.push("/institutes");
+                }}
+                variant="outline"
+              >
+                Explore Our Institutes
+              </RainbowButton>
+             </div>
             </div>
           </div>
         </div>
