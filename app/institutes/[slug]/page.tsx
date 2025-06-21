@@ -52,7 +52,7 @@ export default async function InstituteViewPage(props: {
   return (
     <div className="overflow-hidden">
       <Jumbotron
-        heroImage={edition?.banner ? edition.banner : "/images/dome.jpg"}
+        heroImage={edition?.banner ? edition.banner : "/images/institute.jpg"}
       />
 
       <div className="relative overflow-hidden pb-5">
