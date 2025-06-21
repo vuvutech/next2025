@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useDevice } from "@/hooks/useDevice";
 
 interface JumbotronProps {
@@ -10,8 +11,8 @@ interface JumbotronProps {
 }
 
 export default function Jumbotron({
-  heroImage = "/images/center8.jpg",
-  height = "md:h-[400px]",
+  heroImage = "/images/contact.jpg",
+  height = "md:h-[450px]",
   shade = "5",
   className,
 }: JumbotronProps) {
@@ -22,13 +23,12 @@ export default function Jumbotron({
       <div className="md:min-w-[1440px] mx-auto">
         {/* Hero Section */}
         <div className={`relative w-full h-[400px] ${height} overflow-hidden`}>
-          <div
-            className={`${!isMobile ? "kenburns" : ""} ${className} absolute inset-0`}
-            style={{
-              backgroundImage: `url(${heroImage})`,
-              backgroundPosition: "center center",
-              backgroundSize: "cover",
-            }}
+          <Image
+            src={heroImage}
+            alt="Hero background"
+            fill
+            priority
+            className={`${!isMobile ? "kenburns" : ""} ${className} object-cover`}
           />
           <div className={`absolute inset-0 bg-black/${shade}`} />
         </div>
