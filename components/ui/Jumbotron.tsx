@@ -8,6 +8,7 @@ interface JumbotronProps {
   height?: string;
   shade?: string;
   className?: string;
+  coverPosition?: string;
 }
 
 export default function Jumbotron({
@@ -15,6 +16,7 @@ export default function Jumbotron({
   height = "md:h-[450px]",
   shade = "5",
   className,
+  coverPosition = "object-top",
 }: JumbotronProps) {
   const { isMobile } = useDevice();
 
@@ -28,9 +30,9 @@ export default function Jumbotron({
             alt="Hero background"
             fill
             priority
-            className={`${!isMobile ? "kenburns" : ""} ${className} object-cover`}
+            className={`${!isMobile ? "kenburns" : ""}  object-cover ${coverPosition} ${className}  `}
           />
-          <div className={`absolute inset-0 bg-black/${shade}`} />
+          {/* <div className={`absolute inset-0 bg-black/${shade}`} /> */}
         </div>
       </div>
     </header>
