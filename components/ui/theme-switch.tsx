@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { SunFilledIcon } from "@/components/ui/icons";
 import { LucideMoonStar } from "lucide-react";
@@ -20,16 +20,19 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
   size = 22,
 }) => {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   const isLight = theme === "light";
 
   return (
     <button
-      onClick={toggleTheme}
+      onClick={() => setTheme(isLight ? "dark" : "light")}
       className={clsx(
         "flex items-center justify-start rounded-lg px-2 py-1 transition-opacity hover:opacity-80 cursor-pointer",
         className
