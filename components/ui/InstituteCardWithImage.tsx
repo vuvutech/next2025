@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"; // updated path for ShadCN
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useDialog } from "@/providers/DialogProvider";
 
 export interface InstituteCardProps {
   id: string;
@@ -40,6 +41,8 @@ export default function InstituteCardWithImage({
   editionDates,
 }: InstituteCardProps) {
   const router = useRouter();
+  // dialog provider
+  const { open } = useDialog();
   return (
     <Card
       className="w-full p-0 gap-2 dark:bg-gray-950 rounded-2xl
@@ -69,8 +72,11 @@ export default function InstituteCardWithImage({
         </CardDescription>
       </CardHeader>
       <CardContent className="p-1 pt-0 space-y-2">
-        <Button className="bg-lime-600 w-full pt-7 text-background hover:text-foreground  
-        cursor-pointer hover:bg-lime-500 transition-colors p-2 rounded-lg text-center uppercase text-xs">
+        <Button
+          onClick={open}
+          className="bg-lime-600 w-full pt-7 text-background hover:text-foreground  
+        cursor-pointer hover:bg-lime-500 transition-colors p-2 rounded-lg text-center uppercase text-xs"
+        >
           Start Application
         </Button>
         <Link
@@ -89,9 +95,7 @@ export default function InstituteCardWithImage({
           <div className="flex-1 flex justify-between items-center gap-2">
             <div>
               <p className="font-bold lg:text-sm">{editionTitle}</p>
-              <p className="text-foreground d text-sm">
-                {editionDates}
-              </p>
+              <p className="text-foreground d text-sm">{editionDates}</p>
             </div>
             <div className="flex items-center">
               <svg

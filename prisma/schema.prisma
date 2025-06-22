@@ -66,6 +66,24 @@ enum ProfileStatus {
   WITHDRAWN
 }
 
+enum HighestQualification {
+  HIGH_SCHOOL
+  BACHELORS
+  MASTERS
+  DOCTORATE
+  OTHER
+}
+
+enum LanguagePreference {
+  ENGLISH
+  FRENCH
+  SPANISH
+  GERMAN
+  CHINESE
+  ARABIC
+  OTHER
+}
+
 model Profile {
   id                        String         @id @map("_id")
   gender                    Gender
@@ -87,8 +105,8 @@ model Profile {
   biography            String?
   avatar               String?
   profession           String?
-  highestQualification String?
-  languagePreference   String? // e.g., en, fr, sw
+  highestQualification HighestQualification?
+  languagePreference   LanguagePreference? // e.g., en, fr, sw
   linkedIn             String? // URL
   website              String? // Personal or professional website
   studentId            String? // Internal institution ID

@@ -1,12 +1,6 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import {
-  bebas,
-  oswald,
-  opensans,
-  anton,
-  ibmplex,
-} from "@/config/fonts";
+import { bebas, oswald, opensans, anton, ibmplex } from "@/config/fonts";
 
 import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
@@ -15,7 +9,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import StickyMenuWrapper from "@/components/ui/StickyMenuWrapper";
 import FooterWrapper from "@/components/Footer-Wrapper";
-
+import { GlobalDialog } from "@/components/GlobalDialog";
 
 export const metadata: Metadata = {
   title: {
@@ -65,9 +59,10 @@ export default function RootLayout({
           <main className="relative overflow-x-hidden">{children}</main>
           <FooterWrapper />
           <Toaster />
-        </Providers>
         <Analytics />
         <SpeedInsights />
+        <GlobalDialog />
+        </Providers>
       </body>
     </html>
   );

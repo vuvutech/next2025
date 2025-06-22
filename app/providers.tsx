@@ -3,6 +3,7 @@
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ThemeProviderProps } from "next-themes";
+import { DialogProvider } from "@/providers/DialogProvider";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -17,7 +18,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
       enableSystem
       {...themeProps}
     >
-      {children}
+      <DialogProvider>{children}</DialogProvider>
     </NextThemesProvider>
   );
 }

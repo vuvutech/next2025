@@ -1,9 +1,11 @@
+"use client";
 import SeperatorWithText from "@/components/ui/seperatorWithText";
 import { baseUrl } from "@/lib/metadata";
 import { InstituteWithEditions } from "@/types/institute";
 import Image from "next/image";
 import React from "react";
 import { Edition } from "@prisma/client";
+import { useDialog } from "@/providers/DialogProvider";
 
 export default function OverviewSection({
   institute,
@@ -12,6 +14,9 @@ export default function OverviewSection({
   institute: InstituteWithEditions;
   edition: Edition | null;
 }) {
+  // dialog provider
+  const { open } = useDialog();
+
   const formattedStartDate = edition?.startDate
     ? new Intl.DateTimeFormat("en-US", {
         month: "long",
@@ -109,6 +114,7 @@ export default function OverviewSection({
                 </div>
                 <div className="text-center w-auto py-5">
                   <button
+                    onClick={open}
                     type="button"
                     className="cursor-pointer w-auto px-4 py-2 bg-firefly-600 text-white leading-tight uppercase rounded shadow-md hover:bg-firefly-700 hover:shadow-lg focus:bg-firefly-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-firefly-800 active:shadow-lg bg-lime-500 hover:bg-lime-600 transition duration-300 ease-in-out text-firefly-900 hover:text-white text-sm"
                     data-hs-overlay="#hs-subscription-with-image"
@@ -173,6 +179,7 @@ export default function OverviewSection({
 
                 <div className="text-center w-auto py-5">
                   <button
+                    onClick={open}
                     type="button"
                     className="cursor-pointer w-auto px-4 py-2 bg-firefly-600 text-white leading-tight uppercase rounded shadow-md hover:bg-firefly-700 hover:shadow-lg focus:bg-firefly-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-firefly-800 active:shadow-lg bg-lime-500 hover:bg-lime-600 transition duration-300 ease-in-out text-firefly-900 hover:text-white text-sm"
                     data-hs-overlay="#hs-subscription-with-image"
