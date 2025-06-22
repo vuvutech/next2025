@@ -11,8 +11,8 @@ export const getInstitutes = async () => {
   try {
     const url = `${baseUrl}/api/institutes`;
     const res = await fetch(url, {
-      // cache: "force-cache",
-      // next: { revalidate: 300 }, // 12 minutes
+      cache: "force-cache",
+      next: { revalidate: 300 }, // 12 minutes
     });
 
     if (!res.ok) {
