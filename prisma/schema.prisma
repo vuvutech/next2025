@@ -29,8 +29,89 @@ model User {
   twofactors    TwoFactor[]
   testimonials  Testimonial[] // 👈 one-to-many relation
   announcements Announcement[] // 👈 one-to-many relation
+  profile       Profile?
 
   @@map("user")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum MaritalStatus {
+  SINGLE
+  MARRIED
+  DIVORCED
+  WIDOWED
+  OTHER
+}
+
+enum Religion {
+  CHRISTIANITY
+  ISLAM
+  HINDUISM
+  BUDDHISM
+  JUDAISM
+  OTHER
+  NONE
+}
+
+enum ProfileStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  WITHDRAWN
+}
+
+model Profile {
+  id                        String         @id @map("_id")
+  gender                    Gender
+  dateOfBirth               DateTime?
+  maritalStatus             MaritalStatus?
+  religion                  Religion?
+  nationality               String?
+  telephone                 String
+  mobile                    String?
+  address                   String?
+  addressLine2              String?
+  city                      String?
+  state                     String?
+  country                   String?
+  zipcode                   String?
+  emergencyContactName      String?
+  emergencyContactTelephone String?
+
+  biography            String?
+  avatar               String?
+  profession           String?
+  highestQualification String?
+  languagePreference   String? // e.g., en, fr, sw
+  linkedIn             String? // URL
+  website              String? // Personal or professional website
+  studentId            String? // Internal institution ID
+  twitter              String?
+  facebook             String?
+  instagram            String?
+  linkedin             String?
+  youtube              String?
+  github               String?
+  tiktok               String?
+  personalWebsite      String?
+  additionalLinks      String? // JSON or comma-separated links
+  tags                 String[] // ["tech", "education", "AI"]
+  interests            String[] // Custom structure for user interests
+  skills               String[] // ["JavaScript", "Python", "Data Analysis"]
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("profile")
 }
 
 model Session {

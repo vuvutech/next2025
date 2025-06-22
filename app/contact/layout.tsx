@@ -12,7 +12,7 @@ export default function Layout({
   return (
        <div className='block p-2'>
               <Toaster />
-              <Jumbotron heroImage='/images/contact.jpg' />
+              <Jumbotron className='relative py-32 sm:py-48 lg:py-60 select-none bg-gradient-to-t from-blue-100 to-blue-200' heroImage='/images/contact2.jpg' coverPosition='object-bottom' />
            <div className='md:p-4 pt-4 max-w-8xl mx-auto space-y-4'>
                 {children}
             </div>

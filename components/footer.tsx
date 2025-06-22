@@ -16,7 +16,7 @@ const footerLinks = [
     title: "My COSTRAD",
     links: [
       { label: "My Dashboard", href: "dashboard" },
-      { label: "Reviews", href: "reviews" },
+      { label: "My Reviews", href: "#" },
       { label: "Help centre", href: "help-and-support" },
       { label: "Frequently Asked Questions", href: "faqs" },
     ],
