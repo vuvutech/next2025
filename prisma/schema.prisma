@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -68,7 +69,6 @@ model User {
   banned           Boolean?
   banReason        String?
   banExpires       DateTime?
-  studentId        String? @unique // Internal institution ID
   sessions         Session[]
   accounts         Account[]
   members          Member[]
@@ -78,7 +78,10 @@ model User {
   announcements    Announcement[] // 👈 one-to-many relation
   profile          Profile?
 
+  studentId String?
+
   @@map("user")
+  @@unique([studentId])
 }
 
 model Profile {

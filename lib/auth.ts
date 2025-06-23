@@ -21,6 +21,7 @@ import { nextCookies } from "better-auth/next-js";
 import { baseUrl } from "./metadata";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "@/prisma/dbConnect";
+import { generateStudentId } from "@/app/actions/functions";
 
 const from = process.env.BETTER_AUTH_EMAIL || "notifications@costrad.org";
 
@@ -31,16 +32,36 @@ export const auth = betterAuth({
     provider: "mongodb",
   }),
 
-user: {
-		
-		additionalFields: {
-			studenId: {
-				type: "string",
-        unique: true
-			}
-		},		
-	},
-
+  user: {
+    additionalFields: {
+      studentId: {
+        type: "string",
+        unique: true,
+      },
+    },
+  },
+  databaseHooks: {
+    user: {
+      create: {
+        before: async (user) => {
+          const studentId = await generateStudentId();
+          return { data: { ...user, studentId } };
+        },
+        after: async (user) => {
+          // Optional: log it
+        },
+      },
+    },
+    session: {
+      // Session hooks
+    },
+    account: {
+      // Account hooks
+    },
+    verification: {
+      // Verification hooks
+    },
+  },
   onAPIError: {
     throw: true,
     onError: (error, ctx) => {
