@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { NextRequest } from "next/server";
 import { auth } from "@/lib/auth";
 import { baseUrl } from "@/lib/metadata";
+import { prisma } from "@/prisma/dbConnect";
 
 export const getInstitutes = async () => {
   //  get institutes in descending order by startDate
@@ -103,6 +104,25 @@ function isFieldFilled(field: string | any[] | null | undefined) {
     return field !== "";
   }
   return true;
+}
+
+export async function generateStudentId(): Promise<string> {
+  const result = await prisma.studentIdCounter.findFirst();
+  if (!result) {
+    // First ever
+    await prisma.studentIdCounter.create({
+      data: { nextNumber: 8 }, // we'll return 1 now
+    });
+    return `COSTRAD-00007`;
+  }
+
+  const current = result.nextNumber;
+  await prisma.studentIdCounter.update({
+    where: { id: result.id },
+    data: { nextNumber: current + 1 },
+  });
+
+  return `COSTRAD-${String(current).padStart(5, "0")}`;
 }
 
 export async function getInstituteBySlug(slug: string) {

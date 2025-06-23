@@ -10,8 +10,6 @@ datasource db {
 enum Gender {
   MALE
   FEMALE
-  OTHER
-  PREFER_NOT_TO_SAY
 }
 
 enum MaritalStatus {
@@ -58,9 +56,9 @@ enum LanguagePreference {
 }
 
 model User {
-  id               String    @id @map("_id")
+  id               String         @id @map("_id")
   name             String
-  email            String    @unique
+  email            String         @unique
   emailVerified    Boolean
   image            String?
   createdAt        DateTime
@@ -70,19 +68,15 @@ model User {
   banned           Boolean?
   banReason        String?
   banExpires       DateTime?
-
-  studentId         String? // Internal institution ID
-  studentIdVerified Boolean? // Indicates if the student ID has been verified
-
-  // Relations
-  sessions      Session[]
-  accounts      Account[]
-  members       Member[]
-  invitations   Invitation[]
-  twofactors    TwoFactor[]
-  testimonials  Testimonial[] // 👈 one-to-many relation
-  announcements Announcement[] // 👈 one-to-many relation
-  profile       Profile?
+  studentId        String? @unique // Internal institution ID
+  sessions         Session[]
+  accounts         Account[]
+  members          Member[]
+  invitations      Invitation[]
+  twofactors       TwoFactor[]
+  testimonials     Testimonial[] // 👈 one-to-many relation
+  announcements    Announcement[] // 👈 one-to-many relation
+  profile          Profile?
 
   @@map("user")
 }
@@ -111,7 +105,6 @@ model Profile {
   languagePreference        LanguagePreference? // e.g., en, fr, sw
   linkedIn                  String? // URL
   website                   String? // Personal or professional website
-  studentId                 String? // Internal institution ID
   twitter                   String?
   facebook                  String?
   instagram                 String?

@@ -1,4 +1,5 @@
-import { betterAuth } from "better-auth";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { APIError, betterAuth } from "better-auth";
 import {
   bearer,
   admin,
@@ -9,6 +10,7 @@ import {
   openAPI,
   oidcProvider,
   emailOTP,
+  createAuthMiddleware,
 } from "better-auth/plugins";
 import { createAuthClient } from "better-auth/client";
 import { adminClient } from "better-auth/client/plugins";
@@ -29,29 +31,15 @@ export const auth = betterAuth({
     provider: "mongodb",
   }),
 
-  // hooks: {
-  //   before: createAuthMiddleware(async (ctx) => {
-  //     if (ctx.path === "/sign-in/email") {
-  //       if (ctx.body?.email) {
-  //         const user = await prisma.user.findUnique({
-  //           where: { email: ctx.body.email },
-  //         });
-  //         if (!user) {
-  //           throw new APIError("BAD_REQUEST", {
-  //             message: "User not found",
-  //             status: 404,
-  //           });
-  //         }
-  //         if (user.emailVerified === false) {
-  //           throw new APIError("FORBIDDEN", {
-  //             message: "Email not verified",
-  //             status: 403,
-  //           });
-  //         }
-  //       }
-  //     }
-  //   }),
-  // },
+user: {
+		
+		additionalFields: {
+			studenId: {
+				type: "string",
+        unique: true
+			}
+		},		
+	},
 
   onAPIError: {
     throw: true,

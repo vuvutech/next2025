@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Image from "next/image";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,18 +23,23 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { PasswordInput } from "./ui/password-input";
-import SeperatorWithText from "./ui/seperatorWithText";
-import { signIn, signUp } from "@/lib/auth-client";
-import { Calendar } from "lucide-react";
-import { X, Loader2 } from "lucide-react";
+import { CalendarIcon, Loader2 } from "lucide-react";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@radix-ui/react-popover";
+import { Calendar } from "@/components/ui/calendar";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
+import { Textarea } from "./ui/textarea";
 
 export type RegisterLoginProps = {
   costradCallbackUrl?: string | null;
 };
 
 export interface ProfileForm {
-  gender: "MALE" | "FEMALE" | "OTHER" | "PREFER_NOT_TO_SAY";
+  gender: "MALE" | "FEMALE";
   dateOfBirth: string;
   maritalStatus?: "SINGLE" | "MARRIED" | "DIVORCED" | "WIDOWED" | "OTHER";
   religion?:
@@ -45,7 +50,7 @@ export interface ProfileForm {
     | "JUDAISM"
     | "OTHER"
     | "NONE";
-  nationality?: string;
+  nationality: string;
   telephone: string;
   mobile?: string;
   address?: string;
@@ -74,7 +79,7 @@ export interface ProfileForm {
     | "OTHER";
   linkedIn?: string;
   personalWebsite?: string;
-  studentId?: string;
+  // studentId?: string;
   twitter?: string;
   facebook?: string;
   instagram?: string;
@@ -94,12 +99,16 @@ export function ProfileForRegistration({
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    watch,
+    control,
   } = useForm<ProfileForm>();
+
+  const dateOfBirth = watch("dateOfBirth");
 
   const onSubmit = async (data: ProfileForm) => {
     setLoading(true);
@@ -118,21 +127,13 @@ export function ProfileForRegistration({
     }
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setImage(file);
-      const reader = new FileReader();
-      reader.onloadend = () => setImagePreview(reader.result as string);
-      reader.readAsDataURL(file);
-    }
-  };
-
   return (
-    <Card className="max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>Complete Profile To Register</CardTitle>
-        <CardDescription>
+    <Card className="w-full max-w-3xl mx-auto">
+      <CardHeader className="py-4">
+        <CardTitle className="text-lg uppercase">
+          Complete Profile To Register
+        </CardTitle>
+        <CardDescription className="text-lg">
           Enter your profile details—a one-time requirement for all users
           registering on the Costrad platform.
         </CardDescription>
@@ -140,51 +141,90 @@ export function ProfileForRegistration({
 
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Gender */}
-          <div>
-            <Label>Gender</Label>
-            <Select {...register("gender", { required: "Gender is required" })}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select gender" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="MALE">Male</SelectItem>
-                <SelectItem value="FEMALE">Female</SelectItem>
-                <SelectItem value="OTHER">Other</SelectItem>
-                <SelectItem value="PREFER_NOT_TO_SAY">
-                  Prefer not to say
-                </SelectItem>
-              </SelectContent>
-            </Select>
-            {errors.gender && (
-              <p className="text-red-500">{errors.gender.message}</p>
-            )}
-          </div>
-
-          {/* Date of Birth */}
-          <div>
-            <Label>Date of Birth</Label>
-            <div className="flex items-center space-x-2">
-              <Calendar className="h-5 w-5 text-muted-foreground" />
-              <Input
-                type="date"
-                {...register("dateOfBirth", { required: "Required" })}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {/* Gender */}
+            <div className="w-full">
+              <Label>Gender</Label>
+              <Controller
+                name="gender"
+                control={control}
+                rules={{ required: "Gender is required" }}
+                render={({ field }) => (
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select gender" />
+                    </SelectTrigger>
+                    <SelectContent className="w-full bg-background text-foreground">
+                      <SelectItem value="MALE">Male</SelectItem>
+                      <SelectItem value="FEMALE">Female</SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
               />
+              {errors.gender && (
+                <p className="text-red-500">{errors.gender.message}</p>
+              )}
             </div>
-            {errors.dateOfBirth && (
-              <p className="text-red-500">{errors.dateOfBirth.message}</p>
-            )}
-          </div>
 
+            {/* Date of Birth */}
+            <div>
+              <Label>Date of Birth</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      "w-full justify-start text-left font-normal",
+                      !dateOfBirth && "text-muted-foreground"
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4 " />
+                    {dateOfBirth
+                      ? format(new Date(dateOfBirth), "PPP")
+                      : "Select a date"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0 bg-background">
+                  <Calendar
+                    mode="single"
+                    selected={dateOfBirth ? new Date(dateOfBirth) : undefined}
+                    onSelect={(date) =>
+                      setValue(
+                        "dateOfBirth",
+                        date?.toISOString().split("T")[0] || "",
+                        {
+                          shouldValidate: true,
+                        }
+                      )
+                    }
+                    className="rounded-lg bg-background text-foreground border shadow-sm"
+                    initialFocus
+                    captionLayout="dropdown"
+                    fromYear={1900}
+                    toYear={new Date().getFullYear()}
+                  />
+                </PopoverContent>
+              </Popover>
+              <input
+                type="hidden"
+                {...register("dateOfBirth", {
+                  required: "Date of Birth is required",
+                })}
+              />
+              {errors.dateOfBirth && (
+                <p className="text-red-500">{errors.dateOfBirth.message}</p>
+              )}
+            </div>
+          </div>
           {/* Marital Status & Religion */}
           <div className="grid grid-cols-2 gap-2">
             <div>
               <Label>Marital Status</Label>
               <Select {...register("maritalStatus")}>
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Marital status" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="w-full bg-background text-foreground">
                   <SelectItem value="SINGLE">Single</SelectItem>
                   <SelectItem value="MARRIED">Married</SelectItem>
                   <SelectItem value="DIVORCED">Divorced</SelectItem>
@@ -196,10 +236,10 @@ export function ProfileForRegistration({
             <div>
               <Label>Religion</Label>
               <Select {...register("religion")}>
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Religion" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="w-full bg-background text-foreground">
                   <SelectItem value="CHRISTIANITY">Christianity</SelectItem>
                   <SelectItem value="ISLAM">Islam</SelectItem>
                   <SelectItem value="HINDUISM">Hinduism</SelectItem>
@@ -211,33 +251,42 @@ export function ProfileForRegistration({
               </Select>
             </div>
           </div>
-
-          {/* Contact Info */}
-          <div>
-            <Label>Telephone</Label>
-            <Input
-              {...register("telephone", { required: "Telephone is required" })}
-            />
-            {errors.telephone && (
-              <p className="text-red-500">{errors.telephone.message}</p>
-            )}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            {/* Contact Info */}
+            <div>
+              <Label>Telephone</Label>
+              <Input
+                {...register("telephone", {
+                  required: "Telephone is required",
+                })}
+              />
+              {errors.telephone && (
+                <p className="text-red-500">{errors.telephone.message}</p>
+              )}
+            </div>
+            <div>
+              <Label>Mobile (optional)</Label>
+              <Input {...register("mobile")} />
+            </div>
+            {/* Bio & Profession */}
+            <div>
+              <Label>Profession</Label>
+              <Input {...register("profession")} />
+            </div>
           </div>
-          <div>
-            <Label>Mobile (optional)</Label>
-          </div>
-          <Input {...register("mobile")} />
-
-          {/* Address */}
-          <div>
-            <Label>Address</Label>
-            <Input {...register("address")} placeholder="Street address" />
-          </div>
-          <div>
-            <Label>Address Line 2</Label>
-            <Input
-              {...register("addressLine2")}
-              placeholder="Apt, suite, etc."
-            />
+          <div className="grid sm:grid-cols-2 gap-2">
+            {/* Address */}
+            <div>
+              <Label>Address</Label>
+              <Textarea {...register("address")} placeholder="Street address" />
+            </div>
+            <div>
+              <Label>Address Line 2</Label>
+              <Textarea
+                {...register("addressLine2")}
+                placeholder="Apt, suite, etc."
+              />
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-2">
             <div>
@@ -260,24 +309,22 @@ export function ProfileForRegistration({
             </div>
           </div>
 
-          {/* Emergency Contact */}
-          <div>
-            <Label>Emergency Contact Name</Label>
-            <Input {...register("emergencyContactName")} />
-          </div>
-          <div>
-            <Label>Emergency Contact Telephone</Label>
-            <Input {...register("emergencyContactTelephone")} />
+          <div className="grid sm:grid-cols-2 gap-2">
+            {" "}
+            {/* Emergency Contact */}
+            <div>
+              <Label>Emergency Contact Name</Label>
+              <Input {...register("emergencyContactName")} />
+            </div>
+            <div>
+              <Label>Emergency Contact Telephone</Label>
+              <Input {...register("emergencyContactTelephone")} />
+            </div>
           </div>
 
-          {/* Bio & Profession */}
-          <div>
-            <Label>Profession</Label>
-            <Input {...register("profession")} />
-          </div>
           <div>
             <Label>Biography</Label>
-            <Input {...register("biography")} placeholder="Brief bio" />
+            <Textarea {...register("biography")} placeholder="Brief bio" />
           </div>
 
           {/* Qualifications */}
@@ -285,10 +332,10 @@ export function ProfileForRegistration({
             <div>
               <Label>Highest Qualification</Label>
               <Select {...register("highestQualification")}>
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Qualification" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="w-full bg-background text-foreground">
                   <SelectItem value="HIGH_SCHOOL">High School</SelectItem>
                   <SelectItem value="BACHELORS">Bachelors</SelectItem>
                   <SelectItem value="MASTERS">Masters</SelectItem>
@@ -300,10 +347,10 @@ export function ProfileForRegistration({
             <div>
               <Label>Language Preference</Label>
               <Select {...register("languagePreference")}>
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Language" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="w-full bg-background text-foreground">
                   <SelectItem value="ENGLISH">English</SelectItem>
                   <SelectItem value="FRENCH">French</SelectItem>
                   <SelectItem value="SPANISH">Spanish</SelectItem>
@@ -316,19 +363,21 @@ export function ProfileForRegistration({
             </div>
           </div>
 
-          {/* Links & IDs */}
-          <div>
-            <Label>LinkedIn URL</Label>
-            <Input {...register("linkedIn")} />
+          <div className="grid sm:grid-cols-2 gap-2">
+            {/* Links & IDs */}
+            <div>
+              <Label>LinkedIn URL</Label>
+              <Input {...register("linkedIn")} />
+            </div>
+            <div>
+              <Label>Personal Website</Label>
+              <Input {...register("personalWebsite")} />
+            </div>
           </div>
-          <div>
-            <Label>Personal Website</Label>
-            <Input {...register("personalWebsite")} />
-          </div>
-          <div>
+          {/* <div>
             <Label>Student ID</Label>
             <Input {...register("studentId")} />
-          </div>
+          </div> */}
 
           {/* Social Handles */}
           <div className="grid grid-cols-2 gap-2">
@@ -364,7 +413,7 @@ export function ProfileForRegistration({
         </form>
       </CardContent>
 
-      <CardFooter>
+      <CardFooter className="text-center w-full">
         <div className="text-center text-xs text-muted-foreground">
           By completing this form, you agree to our{" "}
           <a href="/terms" className="underline">
