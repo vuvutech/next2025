@@ -29,7 +29,7 @@ type RegisterLoginProps = {
   costradCallbackUrl?: string | null;
 };
 
-export default function RegisterLogin({
+export default function LoginForRegistration({
   costradCallbackUrl,
 }: RegisterLoginProps) {
   const [email, setEmail] = useState("");
@@ -38,12 +38,11 @@ export default function RegisterLogin({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-    const { isOpen, close } = useDialog(); // Works because DialogProvider is an ancestor
-  
+  const { isOpen, close } = useDialog(); // Works because DialogProvider is an ancestor
 
   // Fallback to URL param or "/"
   const callbackUrl =
-    costradCallbackUrl || searchParams.get("callbackUrl") || "/";
+    costradCallbackUrl || searchParams.get("callbackUrl") || "/apply";
 
   useEffect(() => {
     const storedEmail = sessionStorage.getItem("signupEmail");
@@ -97,60 +96,6 @@ export default function RegisterLogin({
           </CardDescription>
         </CardHeader>
         <CardContent className="py-5">
-          <form
-            id="emailAndPassword"
-            className="grid gap-4"
-            onSubmit={handleSubmit}
-          >
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="me@example.com"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <Link
-                  href="/auth/forget-password"
-                  className="ml-auto text-sm underline"
-                  onClick={() => {
-                    if (isOpen) close(); // Close dialog if open
-                  }}
-                >
-                  Forgot your password?
-                </Link>
-              </div>
-              <PasswordInput
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="password"
-                placeholder="Password"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <Checkbox onClick={() => setRememberMe(!rememberMe)} />
-              <Label>Remember me</Label>
-            </div>
-            <Button
-              type="submit"
-              className="w-full cursor-pointer text-background bg-foreground"
-              disabled={loading}
-            >
-              {loading ? (
-                <Loader2 size={16} className="animate-spin" />
-              ) : (
-                "Login to your account"
-              )}
-            </Button>
-          </form>
-          <SeperatorWithText seperatorText="Or" />
           <div className="grid grid-cols-2 gap-2">
             <Button
               id="google-signin"
@@ -212,17 +157,64 @@ export default function RegisterLogin({
               </svg>
             </Button>
           </div>
+          <SeperatorWithText seperatorText="Or" />
+          <form
+            id="emailAndPassword"
+            className="grid gap-4"
+            onSubmit={handleSubmit}
+          >
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="me@example.com"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
+            </div>
+            <div className="grid gap-2">
+              <div className="flex items-center">
+                <Label htmlFor="password">Password</Label>
+                <Link
+                  href="/auth/forget-password"
+                  className="ml-auto text-sm underline"
+                  onClick={() => {
+                    if (isOpen) close(); // Close dialog if open
+                  }}
+                >
+                  Forgot your password?
+                </Link>
+              </div>
+              <PasswordInput
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="password"
+                placeholder="Password"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <Checkbox onClick={() => setRememberMe(!rememberMe)} />
+              <Label>Remember me</Label>
+            </div>
+            <Button
+              type="submit"
+              className="w-full cursor-pointer text-background bg-foreground"
+              disabled={loading}
+            >
+              {loading ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                "Login to your account"
+              )}
+            </Button>
+          </form>
         </CardContent>
         <CardFooter className="flex flex-col">
-          <div className="text-center text-sm text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
-            Don't have an account? Rather{" "}
-            <Link href="/auth/sign-up" className="font-bold">
-              Register
-            </Link>
-            .
-          </div>
           <div className="text-center pt-2 text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
-            By clicking continue, you agree to our <br />
+            By clicking continue, you agree to our {" "}
             <a href="/terms">Terms of Service</a> and{" "}
             <a href="/privacy">Privacy Policy</a>.
           </div>

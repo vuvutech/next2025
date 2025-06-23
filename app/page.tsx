@@ -64,9 +64,9 @@ export default function Home() {
           className="uppercase md:text-3xl text-xs w-full mx-auto font-poppins font-thin "
           defaultVelocity={1}
         >
-          Seeing the <span className="text-purple-700">invincible</span> &mdash;
+          Seeing the <span className="text-purple-700">Invisible</span> &mdash;
           Touching the <span className="text-primary">intangible</span> &mdash;
-          Seeing the invincible &mdash; Touching the intangible &mdash;
+          Hearing the <span className="text-green-700">Inaudible</span> &mdash; Touching the intangible &mdash;
         </VelocityScroll>
       </div>
 
