@@ -73,7 +73,12 @@ export default function InstituteCardWithImage({
       </CardHeader>
       <CardContent className="p-1 pt-0 space-y-2">
         <Button
-          onClick={open}
+          onClick={()=> {
+            router.push(`/apply`);
+          }}
+          // onClick={()=> {
+          //   router.push(`/institutes/${slug}/apply`);
+          // }}
           className="bg-lime-600 w-full pt-7 text-background hover:text-foreground  
         cursor-pointer hover:bg-lime-500 transition-colors p-2 rounded-lg text-center uppercase text-xs"
         >

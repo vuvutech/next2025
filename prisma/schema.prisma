@@ -7,33 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id               String    @id @map("_id")
-  name             String
-  email            String    @unique
-  emailVerified    Boolean
-  image            String?
-  createdAt        DateTime
-  updatedAt        DateTime
-  twoFactorEnabled Boolean?
-  role             String?
-  banned           Boolean?
-  banReason        String?
-  banExpires       DateTime?
-
-  // Relations
-  sessions      Session[]
-  accounts      Account[]
-  members       Member[]
-  invitations   Invitation[]
-  twofactors    TwoFactor[]
-  testimonials  Testimonial[] // 👈 one-to-many relation
-  announcements Announcement[] // 👈 one-to-many relation
-  profile       Profile?
-
-  @@map("user")
-}
-
 enum Gender {
   MALE
   FEMALE
@@ -84,8 +57,38 @@ enum LanguagePreference {
   OTHER
 }
 
+model User {
+  id               String    @id @map("_id")
+  name             String
+  email            String    @unique
+  emailVerified    Boolean
+  image            String?
+  createdAt        DateTime
+  updatedAt        DateTime
+  twoFactorEnabled Boolean?
+  role             String?
+  banned           Boolean?
+  banReason        String?
+  banExpires       DateTime?
+
+  studentId         String? // Internal institution ID
+  studentIdVerified Boolean? // Indicates if the student ID has been verified
+
+  // Relations
+  sessions      Session[]
+  accounts      Account[]
+  members       Member[]
+  invitations   Invitation[]
+  twofactors    TwoFactor[]
+  testimonials  Testimonial[] // 👈 one-to-many relation
+  announcements Announcement[] // 👈 one-to-many relation
+  profile       Profile?
+
+  @@map("user")
+}
+
 model Profile {
-  id                        String         @id @map("_id")
+  id                        String                @id @default(auto()) @map("_id") @db.ObjectId
   gender                    Gender
   dateOfBirth               DateTime?
   maritalStatus             MaritalStatus?
@@ -101,27 +104,26 @@ model Profile {
   zipcode                   String?
   emergencyContactName      String?
   emergencyContactTelephone String?
-
-  biography            String?
-  avatar               String?
-  profession           String?
-  highestQualification HighestQualification?
-  languagePreference   LanguagePreference? // e.g., en, fr, sw
-  linkedIn             String? // URL
-  website              String? // Personal or professional website
-  studentId            String? // Internal institution ID
-  twitter              String?
-  facebook             String?
-  instagram            String?
-  linkedin             String?
-  youtube              String?
-  github               String?
-  tiktok               String?
-  personalWebsite      String?
-  additionalLinks      String? // JSON or comma-separated links
-  tags                 String[] // ["tech", "education", "AI"]
-  interests            String[] // Custom structure for user interests
-  skills               String[] // ["JavaScript", "Python", "Data Analysis"]
+  biography                 String?
+  avatar                    String?
+  profession                String?
+  highestQualification      HighestQualification?
+  languagePreference        LanguagePreference? // e.g., en, fr, sw
+  linkedIn                  String? // URL
+  website                   String? // Personal or professional website
+  studentId                 String? // Internal institution ID
+  twitter                   String?
+  facebook                  String?
+  instagram                 String?
+  linkedin                  String?
+  youtube                   String?
+  github                    String?
+  tiktok                    String?
+  personalWebsite           String?
+  additionalLinks           String? // JSON or comma-separated links
+  tags                      String[] // ["tech", "education", "AI"]
+  interests                 String[] // Custom structure for user interests
+  skills                    String[] // ["JavaScript", "Python", "Data Analysis"]
 
   userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -347,4 +349,9 @@ model Announcement {
   updatedAt DateTime @updatedAt
 
   @@map("announcement")
+}
+
+model StudentIdCounter {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  nextNumber Int    @default(1)
 }

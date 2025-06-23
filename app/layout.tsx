@@ -59,9 +59,9 @@ export default function RootLayout({
           <main className="relative overflow-x-hidden">{children}</main>
           <FooterWrapper />
           <Toaster />
-        <Analytics />
-        <SpeedInsights />
-        <GlobalDialog />
+          <Analytics />
+          <SpeedInsights />
+          <GlobalDialog />
         </Providers>
       </body>
     </html>

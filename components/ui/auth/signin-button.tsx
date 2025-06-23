@@ -15,22 +15,26 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../button";
+import { useDialog } from "@/providers/DialogProvider";
 
 export function SignInButton() {
   const router = useRouter(); // Use Next.js router
+  const { isOpen, close } = useDialog(); // Works because DialogProvider is an ancestor
   // const [isSignOut, setIsSignOut] = useState<boolean>(false);
 
   const {
     data: session, //error object
   } = client.useSession();
 
-
   return (
     <>
       {!session ? (
         <div className="flex items-center gap-0 h-7 pr-2">
           <Button
-            onClick={() => router.push("/auth/sign-in")} // Redirect to the sign-in page
+            onClick={() => {
+              router.push("/auth/sign-in");
+              // close();
+            }} // Redirect to the sign-in page
             className="uppercase  bg-secondary dark:hover:bg-black text-secondary cursor-pointer h-full rounded-none "
             size="sm"
             variant="default"

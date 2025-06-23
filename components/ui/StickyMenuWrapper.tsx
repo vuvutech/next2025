@@ -7,7 +7,7 @@ export default function StickyMenuWrapper() {
   const pathname = usePathname();
 
   // Pages where Footer should be hidden (match by prefix)
-  const hiddenPrefixes = ["/admin", "/www", "/coming-soon", "/auth"];
+  const hiddenPrefixes = ["/admin", "/www", "/coming-soon", "/auth","/apply"];
 
   const shouldHideFooter = hiddenPrefixes.some((prefix) =>
     pathname.startsWith(prefix)

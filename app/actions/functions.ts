@@ -11,8 +11,8 @@ export const getInstitutes = async () => {
   try {
     const url = `${baseUrl}/api/institutes`;
     const res = await fetch(url, {
-      cache: "force-cache",
-      next: { revalidate: 300 }, // 12 minutes
+      // cache: "force-cache",
+      // next: { revalidate: 300 }, // 12 minutes
     });
 
     if (!res.ok) {
@@ -26,6 +26,84 @@ export const getInstitutes = async () => {
     return null; // Explicitly return null
   }
 };
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function getProfilePercentage() {
+  try {
+    const response = await fetch("/api/profile");
+    if (!response.ok) {
+      throw new Error("Failed to fetch profile");
+    }
+    const profile = await response.json();
+
+    const profileFields = [
+      "gender",
+      "dateOfBirth",
+      "maritalStatus",
+      "religion",
+      "nationality",
+      "telephone",
+      "mobile",
+      "address",
+      "addressLine2",
+      "city",
+      "state",
+      "country",
+      "zipcode",
+      "emergencyContactName",
+      "emergencyContactTelephone",
+      "biography",
+      "avatar",
+      "profession",
+      "highestQualification",
+      "languagePreference",
+      "linkedIn",
+      "website",
+      "studentId",
+      "twitter",
+      "facebook",
+      "instagram",
+      "linkedin",
+      "youtube",
+      "github",
+      "tiktok",
+      "personalWebsite",
+      "additionalLinks",
+      "tags",
+      "interests",
+      "skills",
+    ];
+
+    const totalFields = profileFields.length;
+    let filledFields = 0;
+
+    profileFields.forEach((field) => {
+      const value = profile[field];
+      if (isFieldFilled(value)) {
+        filledFields++;
+      }
+    });
+
+    const percentage = (filledFields / totalFields) * 100;
+    return percentage;
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+}
+
+function isFieldFilled(field: string | any[] | null | undefined) {
+  if (field === null || field === undefined) {
+    return false;
+  }
+  if (Array.isArray(field)) {
+    return field.length > 0;
+  }
+  if (typeof field === "string") {
+    return field !== "";
+  }
+  return true;
+}
 
 export async function getInstituteBySlug(slug: string) {
   try {
@@ -45,13 +123,11 @@ export async function getUserRole() {
   });
 
   if (!session || !session.user) {
-    return null; 
-    
+    return null;
   }
 
   return session.user.role;
 }
-
 
 export async function getCurrentUser(req?: NextRequest) {
   const session = await auth.api.getSession({
