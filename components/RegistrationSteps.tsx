@@ -20,7 +20,7 @@ export default function RegistrationSteps() {
               <RegisterLogin  />
             </TabsContent>
             <TabsContent id="signup" value="signup">
-              <RegisterLogin />
+              <RegisterLogin costradCallbackUrl={"/apply"} />
             </TabsContent>
           </Tabs>
         </div>
