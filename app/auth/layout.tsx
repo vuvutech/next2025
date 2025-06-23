@@ -12,7 +12,7 @@ export default function SignInLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 w-full h-full max-h-screen  relative ">
+    <div className="grid grid-cols-1 sm:grid-cols-3 w-full h-full max-h-screen  relative overflow-x-hidden ">
       <div className="absolute top-4 right-5 z-20 ">
         <ThemeSwitch className="pt-2 pl-6" />
       </div>
@@ -40,10 +40,12 @@ export default function SignInLayout({
           <MainLogo textColor="text-white" logoSize="w-[5.7rem] h-[5.7rem]" />
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center h-full max-h-dvh    ">
-        <div className="h-full overflow-y-auto">
+      <div
+        className="flex flex-col justify-center items-center w-full m-0 p-0
+      relative h-full min-h-dvh max-h-dvh    "
+      >
+        <div className="h-full max-h-dvh w-full  overflow-y-auto">
           {children}
-          <Toaster />
         </div>
       </div>
     </div>
