@@ -216,7 +216,7 @@ export function ProfileForRegistration({
                       : "Select a date"}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 bg-background">
+                <PopoverContent className="w-auto p-0 bg-background cursor-pointer ">
                   <Calendar
                     mode="single"
                     selected={dateOfBirth ? new Date(dateOfBirth) : undefined}
