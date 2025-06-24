@@ -92,7 +92,8 @@ export interface ProfileForm {
 
 export function ProfileForRegistration({
   costradCallbackUrl,
-}: RegisterLoginProps) {
+  onProfileSaved,
+}: RegisterLoginProps & { onProfileSaved?: () => void }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl =
@@ -123,8 +124,12 @@ export function ProfileForRegistration({
         body: JSON.stringify(data),
       });
       toast.success("Profile saved!");
-      router.refresh();
-      router.push(callbackUrl);
+      toast.success("Profile saved!");
+      if (onProfileSaved) {
+        await onProfileSaved(); // Wait for parent to re-check profile
+      }
+      // router.refresh();
+      // router.push(callbackUrl);
     } catch {
       toast.error("Failed to save profile");
     } finally {

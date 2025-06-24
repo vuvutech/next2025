@@ -32,73 +32,86 @@ export default function Apply() {
   const [selectedEdition, setSelectedEdition] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-
-   useEffect(() => {
-    const checkProfile = async () => {
-      try {
-        const res = await fetch("/api/checkProfile"); // Or your actual endpoint
-        if (res.ok) {
-          const data = await res.json();
-          setHasProfile(!!data);
-        } else {
-          setHasProfile(false);
-        }
-      } catch (error) {
-        console.error("Failed to fetch profile", error);
-        toast.error("Failed to check profile status");
-      } finally {
-        setProfileLoading(false);
+  // Move checkProfile outside useEffect so it can be called anytime
+  const checkProfile = async () => {
+    setProfileLoading(true);
+    try {
+      const res = await fetch("/api/checkProfile");
+      if (res.ok) {
+        const data = await res.json();
+        setHasProfile(!!data);
+        console.debug("[DEBUG] Profile found:", data);
+      } else {
+        setHasProfile(false);
+        console.debug("[DEBUG] No profile found, status:", res.status);
       }
-    };
+    } catch (error) {
+      setHasProfile(false);
+      console.error("[DEBUG] Failed to fetch profile", error);
+      toast.error("Failed to check profile status");
+    } finally {
+      setProfileLoading(false);
+      console.debug("[DEBUG] Profile loading finished");
+    }
+  };
 
+  useEffect(() => {
     if (session?.user) {
       checkProfile();
+    } else {
+      setHasProfile(false);
+      setProfileLoading(false);
+      console.debug("[DEBUG] No user session");
     }
+    setEditionsLoading(true);
     fetch("/api/editions")
       .then((res) => res.json())
-      .then((data) => setEditions(data))
-      .finally(() => setEditionsLoading(false));
-    setEditionsLoading(true);
+      .then((data) => {
+        setEditions(data);
+        console.debug("[DEBUG] Editions loaded:", data);
+      })
+      .finally(() => {
+        setEditionsLoading(false);
+        console.debug("[DEBUG] Editions loading finished");
+      });
   }, [session?.user]);
 
-
-
-  const onRegister = () => {
+  const onRegister = async (): Promise<void> => {
     if (!selectedEdition) return;
 
     const edition = editions.find((e) => e.id === selectedEdition);
     setLoading(true);
 
-    fetch("/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ editionId: selectedEdition }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          toast.success("Registered!", {
-            duration: 4000,
-            description: `You are now registered for ${edition?.title} (${edition?.institute.name})`,
-          });
-          setTimeout(() => {
-            close();
-            router.push("/dashboard");
-          }, 1500);
-        } else {
-          toast.error("Registration Failed", {
-            description: data.message || data.error || "Something went wrong.",
-            duration: 4000,
-          });
-        }
-      })
-      .catch(() => {
-        toast.error("Network Error", {
-          description: "Please check your connection and try again.",
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ editionId: selectedEdition }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success("Registered!", {
+          duration: 4000,
+          description: `You are now registered for ${edition?.title} (${edition?.institute.name})`,
+        });
+        setTimeout(() => {
+          close();
+          router.push("/dashboard");
+        }, 1500);
+      } else {
+        toast.error("Registration Failed", {
+          description: data.message || data.error || "Something went wrong.",
           duration: 4000,
         });
-      })
-      .finally(() => setLoading(false));
+      }
+    } catch {
+      toast.error("Network Error", {
+        description: "Please check your connection and try again.",
+        duration: 4000,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const isLoading = profileLoading || editionsLoading || loading;
@@ -122,7 +135,9 @@ export default function Apply() {
         {!session?.user && <RegistrationSteps />}
       </div>
       <div>
-        {session?.user && !hasProfile && <ProfileForRegistration />}
+        {session?.user && !hasProfile && (
+          <ProfileForRegistration onProfileSaved={checkProfile} />
+        )}
       </div>
 
       {session?.user && hasProfile && (
