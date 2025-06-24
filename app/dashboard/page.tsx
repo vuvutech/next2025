@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BillingSection from "@/components/dashboard/billing-section";
 import { ProfileSection } from "@/components/dashboard/profile-section";
 import TestimonialCard from "./TestimonialCard";
+import RegistrationSection from "@/components/dashboard/registration-section";
 
 export default async function DashboardPage() {
   const [session, activeSessions, deviceSessions, organization] =
@@ -46,6 +47,9 @@ export default async function DashboardPage() {
           <TabsTrigger id="testimonials" value="testimonials">
             My Testimonials
           </TabsTrigger>
+          <TabsTrigger id="registration" value="registration">
+            My Institutes
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="account">
           <UserCard
@@ -65,6 +69,9 @@ export default async function DashboardPage() {
         <TabsContent id="testimonials" value="testimonials">
           <TestimonialCard session={null} />
         </TabsContent>
+         <TabsContent value="registration">
++          <RegistrationSection />
++        </TabsContent>
       </Tabs>
     </div>
   );
