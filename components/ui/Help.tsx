@@ -61,20 +61,11 @@ export default function HelpComponent() {
           Connect with past participants, faculty, and institute ambassadors.
         </p>
         <ul className="list-disc list-inside text-muted-foreground space-y-1">
-          <li>
-            Join our{" "}
-            <a
-              href="https://t.me/costradcommunity"
-              className="text-primary underline"
-              target="_blank"
-            >
-              Telegram Community
-            </a>
-          </li>
+         
           <li>
             Follow us on{" "}
             <a
-              href="https://twitter.com/costradafrica"
+              href="https://x.com/COSTrAD"
               className="text-primary underline"
               target="_blank"
             >
@@ -82,7 +73,7 @@ export default function HelpComponent() {
             </a>{" "}
             and{" "}
             <a
-              href="https://facebook.com/costradglobal"
+              href="https://www.facebook.com/costrad.lrf/"
               className="text-primary underline"
               target="_blank"
             >
@@ -92,11 +83,11 @@ export default function HelpComponent() {
           <li>
             Explore insights on{" "}
             <a
-              href="https://medium.com/@costrad"
+              href="https://www.instagram.com/the_global_altar_watch/"
               className="text-primary underline"
               target="_blank"
             >
-              Medium
+              Instagram
             </a>
           </li>
         </ul>

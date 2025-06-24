@@ -22,10 +22,10 @@ const AboutSectionTwo = ({
       />
       <div className="absolute inset-0 bg-gray-500 opacity-5 rounded-3xl"></div>
       <div className="relative z-10 px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
-        <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+        <h1 className="mb-4 text-4xl ont-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
           {title}
         </h1>
-        <p className="mb-8 text-lg font-normal shadow text-secondary lg:text-xl sm:px-16 lg:px-48">
+        <p className="mb-8 text-lg font-normal shadow text-white lg:text-xl sm:px-16 lg:px-48">
           {subtitle}
         </p>
         <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
