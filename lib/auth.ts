@@ -45,10 +45,16 @@ export const auth = betterAuth({
       create: {
         before: async (user) => {
           const studentId = await generateStudentId();
-          return { data: { ...user, studentId } };
+          return {
+            data: {
+              ...user,
+              studentId,
+              role: "user", 
+            },
+          };
         },
         after: async (user) => {
-          // Optional: log it
+        //  
         },
       },
     },

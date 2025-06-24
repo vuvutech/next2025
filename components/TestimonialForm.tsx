@@ -59,7 +59,7 @@ export default function TestimonialForm({ initialData = {}, onFormChange }: Test
           value={formData.content}
           onChange={handleChange}
           className="resize-y" // Allow vertical resizing
-          rows={5} // Set initial rows
+          rows={7} // Set initial rows
         />
       </div>
 

@@ -51,6 +51,7 @@ export interface ProfileForm {
     | "OTHER"
     | "NONE";
   nationality: string;
+  disabilityAssistance: boolean;
   telephone: string;
   mobile?: string;
   address?: string;
