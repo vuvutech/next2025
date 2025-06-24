@@ -66,7 +66,11 @@ export default function Home() {
         >
           Seeing the <span className="text-purple-700">Invisible</span> &mdash;
           Touching the <span className="text-primary">intangible</span> &mdash;
+<<<<<<< HEAD
           Hearing the <span className="text-chart-3">Inaudible</span> &mdash;
+=======
+          Hearing the <span className="text-green-700">Inaudible</span> &mdash; Touching the intangible &mdash;
+>>>>>>> fix-dialog
         </VelocityScroll>
       </div>
 

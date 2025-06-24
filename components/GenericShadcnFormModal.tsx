@@ -64,7 +64,7 @@ export default function GenericShadcnFormModal({
       {/* If a trigger is provided, render it. Otherwise, assume external control or no visual trigger needed. */}
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
 
-      <DialogContent className="md:max-w-3/4  mx-auto">
+      <DialogContent className="md:max-w-2/4  mx-auto">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           {description && <DialogDescription>{description}</DialogDescription>}

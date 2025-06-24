@@ -114,13 +114,13 @@ export const columns: ColumnDef<any>[] = [
             <div className="font-medium">Donation Amount</div>
             <div className="text-muted-foreground text-xs grid grid-cols-2 gap-2">
               <div className="text-firefly">
-                $
+                
                 {row.original.price
                   ? USDollar.format(row.original.price)
                   : "N/A"}
               </div>
               <div className="text-primary">
-                $
+                
                 {row.original.price
                   ? USDollar.format(row.original.priceViaZoom)
                   : "N/A"}

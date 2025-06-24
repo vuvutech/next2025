@@ -28,8 +28,8 @@ export default async function DashboardPage() {
     });
 
   return (
-    <div className=" mx-auto p-4 m-4">
-      <Tabs defaultValue="account" className="">
+    <div className=" mx-auto p-4 m-4 w-full">
+      <Tabs defaultValue="account" className="rounded-lg w-auto">
         <TabsList>
           <TabsTrigger id="account" value="account">
             Account

@@ -1,4 +1,5 @@
-import { betterAuth } from "better-auth";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { APIError, betterAuth } from "better-auth";
 import {
   bearer,
   admin,
@@ -9,6 +10,7 @@ import {
   openAPI,
   oidcProvider,
   emailOTP,
+  createAuthMiddleware,
 } from "better-auth/plugins";
 import { createAuthClient } from "better-auth/client";
 import { adminClient } from "better-auth/client/plugins";
@@ -19,6 +21,7 @@ import { nextCookies } from "better-auth/next-js";
 import { baseUrl } from "./metadata";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "@/prisma/dbConnect";
+import { generateStudentId } from "@/app/actions/functions";
 
 const from = process.env.BETTER_AUTH_EMAIL || "notifications@costrad.org";
 
@@ -29,30 +32,42 @@ export const auth = betterAuth({
     provider: "mongodb",
   }),
 
-  // hooks: {
-  //   before: createAuthMiddleware(async (ctx) => {
-  //     if (ctx.path === "/sign-in/email") {
-  //       if (ctx.body?.email) {
-  //         const user = await prisma.user.findUnique({
-  //           where: { email: ctx.body.email },
-  //         });
-  //         if (!user) {
-  //           throw new APIError("BAD_REQUEST", {
-  //             message: "User not found",
-  //             status: 404,
-  //           });
-  //         }
-  //         if (user.emailVerified === false) {
-  //           throw new APIError("FORBIDDEN", {
-  //             message: "Email not verified",
-  //             status: 403,
-  //           });
-  //         }
-  //       }
-  //     }
-  //   }),
-  // },
-
+  user: {
+    additionalFields: {
+      studentId: {
+        type: "string",
+        unique: true,
+      },
+    },
+  },
+  databaseHooks: {
+    user: {
+      create: {
+        before: async (user) => {
+          const studentId = await generateStudentId();
+          return {
+            data: {
+              ...user,
+              studentId,
+              role: "user", 
+            },
+          };
+        },
+        after: async (user) => {
+        //  
+        },
+      },
+    },
+    session: {
+      // Session hooks
+    },
+    account: {
+      // Account hooks
+    },
+    verification: {
+      // Verification hooks
+    },
+  },
   onAPIError: {
     throw: true,
     onError: (error, ctx) => {
