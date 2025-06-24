@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { ProfileForRegistration } from "@/components/profileForRegistration";
 import { toast } from "sonner";
 import { EditionSelect } from "@/components/editionSelect";
+import Loading from "../loading";
 
 interface Edition {
   id: string;
@@ -117,11 +118,7 @@ export default function Apply() {
   const isLoading = profileLoading || editionsLoading || loading;
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[300px]">
-        <span className="text-sm text-gray-500 animate-pulse">Loading...</span>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
