@@ -2,6 +2,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/dbConnect";
 import { getCurrentUser } from "@/app/actions/functions";
+import { revalidatePath } from "next/cache";
+import { baseUrl } from "@/lib/metadata";
 
 export async function GET(req: NextRequest) {
   const user = await getCurrentUser();
@@ -61,7 +63,7 @@ export async function POST(req: NextRequest) {
           data: payload,
         })
       : await prisma.profile.create({ data: payload });
-
+    revalidatePath(`/apply`);
     return NextResponse.json(profile);
   } catch (err) {
     console.error("❌ Failed to save profile:", err);

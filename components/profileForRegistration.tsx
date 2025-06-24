@@ -33,6 +33,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Textarea } from "./ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export type RegisterLoginProps = {
   costradCallbackUrl?: string | null;
@@ -51,7 +52,8 @@ export interface ProfileForm {
     | "OTHER"
     | "NONE";
   nationality: string;
-  disabilityAssistance: boolean;
+  disabilityAssistance?: boolean;
+  disabilityDescription?: string;
   telephone: string;
   mobile?: string;
   address?: string;
@@ -80,7 +82,6 @@ export interface ProfileForm {
     | "OTHER";
   linkedIn?: string;
   personalWebsite?: string;
-  // studentId?: string;
   twitter?: string;
   facebook?: string;
   instagram?: string;
@@ -107,11 +108,13 @@ export function ProfileForRegistration({
     setValue,
     watch,
     control,
-  } = useForm<ProfileForm>();
+  } = useForm<ProfileForm>({ defaultValues: { disabilityAssistance: false } });
 
   const dateOfBirth = watch("dateOfBirth");
+  const disabilityAssistance = watch("disabilityAssistance");
 
   const onSubmit = async (data: ProfileForm) => {
+    console.log(data);
     setLoading(true);
     try {
       await fetch("/api/profile", {
@@ -120,6 +123,7 @@ export function ProfileForRegistration({
         body: JSON.stringify(data),
       });
       toast.success("Profile saved!");
+      router.refresh();
       router.push(callbackUrl);
     } catch {
       toast.error("Failed to save profile");
@@ -129,7 +133,7 @@ export function ProfileForRegistration({
   };
 
   return (
-    <Card className="w-full max-w-3xl mx-auto">
+    <Card className="w-full max-w-3xl mx-auto text-foreground">
       <CardHeader className="py-4">
         <CardTitle className="text-lg uppercase">
           Complete Profile To Register
@@ -142,7 +146,29 @@ export function ProfileForRegistration({
 
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div className="text-sm text-foreground bg-muted/30 p-3 rounded-md border border-muted">
+            <strong>Privacy Notice:</strong> All information you provide,
+            especially details regarding disability assistance, will be treated
+            with the highest level of confidentiality. It will never be shared
+            with third parties and is used strictly to ensure we provide the
+            best possible support for your participation in the program.
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <div>
+              <Label>Nationality</Label>
+              <Input
+                {...register("nationality", {
+                  required: "Nationality is required",
+                })}
+              />
+              {errors.nationality && (
+                <p className="text-red-500 text-sm">
+                  {errors.nationality.message}
+                </p>
+              )}
+            </div>
+
             {/* Gender */}
             <div className="w-full">
               <Label>Gender</Label>
@@ -193,9 +219,7 @@ export function ProfileForRegistration({
                       setValue(
                         "dateOfBirth",
                         date?.toISOString().split("T")[0] || "",
-                        {
-                          shouldValidate: true,
-                        }
+                        { shouldValidate: true }
                       )
                     }
                     className="rounded-lg bg-background text-foreground border shadow-sm"
@@ -217,6 +241,7 @@ export function ProfileForRegistration({
               )}
             </div>
           </div>
+
           {/* Marital Status & Religion */}
           <div className="grid grid-cols-2 gap-2">
             <div>
@@ -252,6 +277,77 @@ export function ProfileForRegistration({
               </Select>
             </div>
           </div>
+
+          {/* Disability Assistance */}
+          <Card>
+            <CardHeader>
+              <Label className="block mb-2">
+                Do you require any form of disability assistance or
+                accommodations during the program?
+              </Label>
+            </CardHeader>
+            <CardContent>
+              <Controller
+                name="disabilityAssistance"
+                control={control}
+                rules={{
+                  validate: (v) =>
+                    v === true || v === false
+                      ? true
+                      : "Please select an option",
+                }}
+                render={({ field }) => (
+                  <RadioGroup
+                    onValueChange={(val) => field.onChange(val === "yes")}
+                    defaultValue={field.value ? "yes" : undefined}
+                    className="flex flex-col gap-2"
+                  >
+                    <div className="flex items-center gap-2">
+                      <RadioGroupItem value="yes" id="assist-yes" />
+                      <Label htmlFor="assist-yes">
+                        Yes, I require assistance
+                      </Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <RadioGroupItem value="no" id="assist-no" />
+                      <Label htmlFor="assist-no">No, I do not</Label>
+                    </div>
+                  </RadioGroup>
+                )}
+              />
+            </CardContent>
+            <CardFooter>
+              {errors.disabilityAssistance && (
+                <p className="text-red-500 text-sm">
+                  {errors.disabilityAssistance.message}
+                </p>
+              )}
+            </CardFooter>
+          </Card>
+
+          {/* Conditional Disability Description */}
+          {disabilityAssistance && (
+            <Card>
+              <CardHeader>
+                <Label>
+                  Please describe the nature of the assistance you may need
+                </Label>
+              </CardHeader>
+              <CardContent>
+                <Textarea
+                  {...register("disabilityDescription", {
+                    required: "Description is required",
+                  })}
+                  placeholder="Describe the specific assistance or accommodation you would benefit from"
+                />
+                {errors.disabilityDescription && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.disabilityDescription.message}
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+          )}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {/* Contact Info */}
             <div>
@@ -311,7 +407,6 @@ export function ProfileForRegistration({
           </div>
 
           <div className="grid sm:grid-cols-2 gap-2">
-            {" "}
             {/* Emergency Contact */}
             <div>
               <Label>Emergency Contact Name</Label>
@@ -375,10 +470,6 @@ export function ProfileForRegistration({
               <Input {...register("personalWebsite")} />
             </div>
           </div>
-          {/* <div>
-            <Label>Student ID</Label>
-            <Input {...register("studentId")} />
-          </div> */}
 
           {/* Social Handles */}
           <div className="grid grid-cols-2 gap-2">
@@ -408,7 +499,11 @@ export function ProfileForRegistration({
             </div>
           </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button
+            type="submit"
+            className="w-full cursor-pointer"
+            disabled={loading}
+          >
             {loading ? <Loader2 className="animate-spin" /> : "Save Profile"}
           </Button>
         </form>

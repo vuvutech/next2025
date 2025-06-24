@@ -95,7 +95,8 @@ model Profile {
   mobile                    String?
   address                   String?
   addressLine2              String?
-  disabilityAssisstance     Boolean              @default(false)
+  disabilityAssistance      Boolean               @default(false)
+  disabilityDescription     String?
   city                      String?
   state                     String?
   country                   String
