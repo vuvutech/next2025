@@ -69,9 +69,9 @@ export default async function DashboardPage() {
         <TabsContent id="testimonials" value="testimonials">
           <TestimonialCard session={null} />
         </TabsContent>
-         <TabsContent value="registration">
-+          <RegistrationSection />
-+        </TabsContent>
+        <TabsContent value="registration">
+          <RegistrationSection />
+        </TabsContent>
       </Tabs>
     </div>
   );

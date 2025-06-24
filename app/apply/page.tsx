@@ -97,7 +97,7 @@ export default function Apply() {
         });
         setTimeout(() => {
           close();
-          router.push("/dashboard");
+          router.push("/dashboard#registration");
         }, 1500);
       } else {
         toast.error("Registration Failed", {
