@@ -24,10 +24,10 @@ export default function Jumbotron({
     <header className="relative w-full">
       <div className="md:min-w-[1440px] mx-auto">
         {/* Hero Section */}
-        <div className={`relative w-full h-[400px] ${height} overflow-hidden`}>
+        <div className={`relative w-full h-[470px] ${height} overflow-hidden`}>
           <Image
             src={heroImage}
-            alt="Hero background"
+            alt="costrad background"
             fill
             priority
             className={`${!isMobile ? "kenburns" : ""}  object-cover ${coverPosition} ${className}  `}
