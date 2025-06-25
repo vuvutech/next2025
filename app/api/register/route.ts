@@ -54,19 +54,29 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    const formattedStartDate = edition.startDate
+      ? formatter.format(new Date(edition.startDate))
+      : "TBD";
+
+    const formattedEndDate = edition.endDate
+      ? formatter.format(new Date(edition.endDate))
+      : "TBD";
+
     // 🎉 Send confirmation email
     const html = await render(
       WelcomeToInstituteEmail({
         name: user.name,
         editionTitle: edition.title,
         instituteName: edition.institute.name,
-        startDate: edition.startDate
-          ? new Date(edition.startDate).toLocaleDateString()
-          : "TBD",
-        endDate: edition.endDate
-          ? new Date(edition.endDate).toLocaleDateString()
-          : "TBD",
-        dashboardLink: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`,
+        startDate: formattedStartDate,
+        endDate: formattedEndDate,
+        dashboardLink: `https://www.costrad.org/dashboard`,
       })
     );
 

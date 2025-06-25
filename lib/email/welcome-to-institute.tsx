@@ -38,13 +38,11 @@ export const WelcomeToInstituteEmail = ({
       <Tailwind>
         <Body className="bg-white text-black font-sans">
           <Container className="my-10 px-6 py-8 border rounded-md shadow-md max-w-xl">
-            <Heading className="text-xl mb-6 font-bold text-center">
+            {/* <Heading className="text mb-6 font-bold ">
               Welcome to {editionTitle}
-            </Heading>
+            </Heading> */}
 
-            <Text className="text-sm leading-6">
-              Dear {name},
-            </Text>
+            <Text className="text-sm leading-6">Dear {name},</Text>
 
             <Text className="text-sm leading-6">
               Thank you for registering for <strong>{editionTitle}</strong> at{" "}
@@ -53,7 +51,8 @@ export const WelcomeToInstituteEmail = ({
 
             <Text className="text-sm leading-6">
               The program begins on <strong>{startDate}</strong> and will end on{" "}
-              <strong>{endDate}</strong>. We're excited to have you onboard and look forward to a transformative experience together.
+              <strong>{endDate}</strong>. We're excited to have you onboard and
+              look forward to a transformative experience together.
             </Text>
 
             <Section className="text-center my-6">
@@ -66,8 +65,16 @@ export const WelcomeToInstituteEmail = ({
             </Section>
 
             <Text className="text-xs text-gray-600 mt-6">
-              If you have any questions or do not recognize this registration,
-              feel free to contact our support team.
+              If you have any questions or need further clarification about your
+              registration, please don't hesitate to get in touch with us. Our support team ({" "}
+              <a className="text-primary" href="mailto:correspondence@costrad.org">
+                correspondence@costrad.org, 
+              </a>{" "}
+              <a className="text-primary" href="tel:+233200201334">
+               Phone: +233200201334 (Office Hours: Mon–Fri, 9AM–4PM GMT)
+              </a>{" "} )
+              is always available and ready to assist you with any concerns or
+              inquiries you may have.
             </Text>
           </Container>
         </Body>

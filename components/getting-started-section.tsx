@@ -121,7 +121,7 @@ const GettingStarted = ({
                 <div className="mt-6 block border bg-muted/50 px-4 py-6 lg:hidden">
                   <div className="aspect-video">
                     <img
-                      src="/images/united-nations2.webp"
+                      src="/images/reviews.jpg"
                       alt="placeholder"
                       className="h-full w-full rounded-md border object-cover shadow"
                     />
