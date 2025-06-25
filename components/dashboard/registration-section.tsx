@@ -3,6 +3,8 @@ import { prisma } from "@/prisma/dbConnect";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Clock, CalendarDays, CheckCircle } from "lucide-react";
+import { Card, CardContent } from "../ui/card";
+import Link from "next/link";
 
 const getBadge = (status: string) => {
   switch (status) {
@@ -32,7 +34,6 @@ const getBadge = (status: string) => {
   }
 };
 
-
 export default async function RegistrationSection() {
   const user = await getCurrentUser();
   if (!user) {
@@ -49,7 +50,13 @@ export default async function RegistrationSection() {
   });
 
   if (!rawRegistrations.length) {
-    return <p>You haven’t registered for any edition yet.</p>;
+    return (
+      <Card>
+        <CardContent>
+          <p>You haven’t registered for any Institute Edition yet. Register at <Link className="text-primary" href="/institutes">Institutes</Link></p>
+        </CardContent>
+      </Card>
+    );
   }
 
   const today = new Date();
@@ -73,7 +80,10 @@ export default async function RegistrationSection() {
   const registrations = registrationsWithStatus.sort((a, b) => {
     const statusDiff = statusPriority[a.status] - statusPriority[b.status];
     if (statusDiff !== 0) return statusDiff;
-    return new Date(b.edition.startDate ?? 0).getTime() - new Date(a.edition.startDate ?? 0).getTime();
+    return (
+      new Date(b.edition.startDate ?? 0).getTime() -
+      new Date(a.edition.startDate ?? 0).getTime()
+    );
   });
 
   const getCountdown = (startDate?: Date | null) => {
@@ -101,8 +111,11 @@ export default async function RegistrationSection() {
       {registrations.map((reg) => {
         const edition = reg.edition;
         const institute = edition.institute;
-        const logoSrc = institute.logo ? `/${institute.logo}` : "/images/costrad.png";
-        const countdown = reg.status === "upcoming" ? getCountdown(edition.startDate) : null;
+        const logoSrc = institute.logo
+          ? `/${institute.logo}`
+          : "/images/costrad.png";
+        const countdown =
+          reg.status === "upcoming" ? getCountdown(edition.startDate) : null;
 
         return (
           <div
@@ -132,7 +145,9 @@ export default async function RegistrationSection() {
                 {edition.endDate?.toLocaleDateString()}
               </p>
               {countdown && (
-                <p className="text-xs mt-1 text-blue-600 font-semibold">{countdown}</p>
+                <p className="text-xs mt-1 text-blue-600 font-semibold">
+                  {countdown}
+                </p>
               )}
             </div>
           </div>

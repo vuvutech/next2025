@@ -1,17 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/dbConnect";
 import { getCurrentUser } from "@/app/actions/functions";
+import { render } from "@react-email/render";
+import { WelcomeToInstituteEmail } from "@/lib/email/welcome-to-institute";
+import { sendMail } from "@/lib/nodemailer-mail";
 
 export async function POST(req: NextRequest) {
   const user = await getCurrentUser();
-
 
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const { editionId } = await req.json();
-  console.log("EDITION ID: ", editionId);
 
   if (!editionId) {
     return NextResponse.json(
@@ -23,6 +24,7 @@ export async function POST(req: NextRequest) {
   try {
     const edition = await prisma.edition.findUnique({
       where: { id: editionId },
+      include: { institute: true },
     });
 
     if (!edition) {
@@ -50,6 +52,28 @@ export async function POST(req: NextRequest) {
         userId: user.id,
         editionId: editionId,
       },
+    });
+
+    // 🎉 Send confirmation email
+    const html = await render(
+      WelcomeToInstituteEmail({
+        name: user.name,
+        editionTitle: edition.title,
+        instituteName: edition.institute.name,
+        startDate: edition.startDate
+          ? new Date(edition.startDate).toLocaleDateString()
+          : "TBD",
+        endDate: edition.endDate
+          ? new Date(edition.endDate).toLocaleDateString()
+          : "TBD",
+        dashboardLink: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`,
+      })
+    );
+
+    await sendMail({
+      to: user.email,
+      subject: `Welcome to ${edition.title}`,
+      html,
     });
 
     return NextResponse.json({ success: true, registration });
