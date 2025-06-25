@@ -107,7 +107,7 @@ export default async function RegistrationSection() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
       {registrations.map((reg) => {
         const edition = reg.edition;
         const institute = edition.institute;

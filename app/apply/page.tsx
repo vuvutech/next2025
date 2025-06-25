@@ -26,7 +26,7 @@ export default function Apply() {
   const { close } = useDialog();
   const { data: session } = useSession();
 
-  const [hasProfile, setHasProfile] = useState(false);
+  const [hasProfile, setHasProfile] = useState<boolean>(false);
   const [profileLoading, setProfileLoading] = useState(true);
   const [editions, setEditions] = useState<Edition[]>([]);
   const [editionsLoading, setEditionsLoading] = useState(true);

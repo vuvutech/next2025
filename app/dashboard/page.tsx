@@ -8,6 +8,7 @@ import BillingSection from "@/components/dashboard/billing-section";
 import { ProfileSection } from "@/components/dashboard/profile-section";
 import TestimonialCard from "./TestimonialCard";
 import RegistrationSection from "@/components/dashboard/registration-section";
+import EditableProfileForm from "@/components/EditableProfileForm";
 
 export default async function DashboardPage() {
   const [session, activeSessions, deviceSessions, organization] =
@@ -30,7 +31,7 @@ export default async function DashboardPage() {
 
   return (
     <div className=" mx-auto p-4 m-4 w-full">
-      <Tabs defaultValue="account" className="rounded-lg w-auto">
+      <Tabs defaultValue="account" className="rounded-lg w-full">
         <TabsList>
           <TabsTrigger id="account" value="account">
             Account
@@ -41,9 +42,9 @@ export default async function DashboardPage() {
           <TabsTrigger id="preferences" value="preferences">
             Preferences
           </TabsTrigger>
-          <TabsTrigger id="billing" value="billing">
-            Billing
-          </TabsTrigger>
+          {/* <TabsTrigger id="billing" value="billing">
+            Billing & Invoices
+          </TabsTrigger> */}
           <TabsTrigger id="testimonials" value="testimonials">
             My Testimonials
           </TabsTrigger>
@@ -58,14 +59,15 @@ export default async function DashboardPage() {
           />
         </TabsContent>
         <TabsContent value="profile">
-          <ProfileSection session={session!} />
+          {/* <ProfileSection session={session!} /> */}
+          <EditableProfileForm />
         </TabsContent>
         <TabsContent value="preferences">
           <PreferencesSection />
         </TabsContent>
-        <TabsContent id="billing" value="billing">
+        {/* <TabsContent id="billing" value="billing">
           <BillingSection />
-        </TabsContent>
+        </TabsContent> */}
         <TabsContent id="testimonials" value="testimonials">
           <TestimonialCard session={null} />
         </TabsContent>

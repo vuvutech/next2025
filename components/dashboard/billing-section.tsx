@@ -65,7 +65,7 @@ export default function BillingSection() {
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="text-zinc-900 dark:text-zinc-100">
-                      Current Plan
+                      Current Bill
                     </CardTitle>
                     <CardDescription className="text-zinc-500 dark:text-zinc-400">
                       You are currently on the Pro plan.
