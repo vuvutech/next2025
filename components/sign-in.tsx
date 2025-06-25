@@ -82,16 +82,18 @@ export default function SignInComponent() {
 
   return (
     <Card className=" rounded-none bg-transparent max-w-md border-none shadow-none ">
-      <CardHeader>
-        <CardTitle className="text-lg md:text-xl">COSTrAD Sign In</CardTitle>
+      <CardHeader className="pt-4">
+        {/* <CardTitle className=" md:text-xl">COSTrAD Sign In</CardTitle> */}
         <CardDescription className="text-xs md:text-sm">
+          <span className="font-bold">COSTrAD Sign-in</span>
+          <br />
           Enter your email below to login to your account
         </CardDescription>
       </CardHeader>
-      <CardContent className="py-5">
+      <CardContent className="py-2">
         <form
           id="emailAndPassword"
-          className="grid gap-4"
+          className="grid gap-2"
           onSubmit={handleSubmit}
         >
           <div className="grid gap-2">
@@ -204,7 +206,7 @@ export default function SignInComponent() {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col">
-        <div className="text-balance text-center text-sm text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
+        <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
           Don't have an account? Rather{" "}
           <Link href="/auth/sign-up" className="font-bold">
             Register

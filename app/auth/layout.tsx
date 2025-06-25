@@ -44,7 +44,7 @@ export default function SignInLayout({
         className="flex flex-col justify-center items-center w-full m-0 p-0
       relative h-full min-h-dvh max-h-dvh    "
       >
-        <div className="h-full max-h-dvh w-full flex flex-col justify-center overflow-y-auto">
+        <div className="h-full max-h-dvh w-full  flex flex-col justify-center overflow-y-scroll">
           {children}
         </div>
       </div>

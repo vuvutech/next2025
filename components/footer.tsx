@@ -1,79 +1,17 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import { ReactNode } from "react";
+import { useDialog } from "@/providers/DialogProvider";
 
 type FooterLink = {
   label: string;
-  href: string | ReactNode;
+  href?: string;
+  onClick?: () => void;
 };
 
 type FooterSection = {
   title: string;
   links: FooterLink[];
 };
-
-export const footerLinks: FooterSection[] = [
-  {
-    title: "Quick Links",
-    links: [
-      { label: "Getting Started", href: "getting-started" },
-      { label: "About COSTrAD", href: "about" },
-      { label: "Press", href: "press" },
-      { label: "How to Donate", href: "donate" },
-    ],
-  },
-  {
-    title: "My COSTRAD",
-    links: [
-      { label: "My Dashboard", href: "dashboard" },
-      { label: "My Reviews", href: "#" },
-      { label: "Help centre", href: "help-and-support" },
-      { label: "Frequently Asked Questions", href: "faqs" },
-    ],
-  },
-  {
-    title: "Institutes",
-    links: [
-      {
-        label: "Family Development Institute (FDI)",
-        href: "institutes/family-development-institute",
-      },
-      {
-        label: "Mindset Transformation Institute (MTI)",
-        href: "institutes/mindset-transformation-institute",
-      },
-      {
-        label: "Institute of Government, Govenance and Leadership (IGPP)",
-        href: "institutes/institute-of-governance-and-public-policy",
-      },
-      {
-        label: "Institute of Economic Affairs (IEA)",
-        href: "institutes/institute-of-economic-affairs",
-      },
-      {
-        label:
-          "College of Sustainable Transformation and Development (COSTrAD)",
-        href: "institutes/college-of-sustainable-transformation-and-development",
-      },
-      {
-        label: "Education Training and Development Institute (ETADI)",
-        href: "institutes/education-training-and-development-institute",
-      },
-      {
-        label: "Futuristic Institute of Science and Technology (FIRST)",
-        href: "institutes/futuristic-institute-of-revolutionary-science-and-technology",
-      },
-      {
-        label: "Media of Communication Institute (MOCI)",
-        href: "institutes/media-of-communication-institute",
-      },
-      {
-        label: "Institute of Arts, Sports and Culture (IOASC)",
-        href: "institutes/institute-of-arts-sports-and-cultural-development",
-      },
-    ],
-  },
-];
 
 const legalLinks = [
   { label: "Privacy policy", href: "privacy" },
@@ -85,34 +23,118 @@ const legalLinks = [
 ];
 
 export default function Footer() {
+  const { open } = useDialog();
+  const footerLinks: FooterSection[] = [
+    {
+      title: "Quick Links",
+      links: [
+        { label: "Getting Started", href: "getting-started" },
+        { label: "About COSTrAD", href: "about" },
+        { label: "Press", href: "press" },
+        { label: "How to Donate", href: "donate" },
+      ],
+    },
+    {
+      title: "My COSTRAD",
+      links: [
+        { label: "My Dashboard", href: "dashboard" },
+        { label: "My Reviews", href: "#" },
+        { label: "Help centre", href: "help-and-support" },
+        { label: "Frequently Asked Questions", href: "faqs" },
+        { label: "My Testimonials", onClick: () => open("testimonial") },
+      ],
+    },
+    {
+      title: "Institutes",
+      links: [
+        {
+          label: "Family Development Institute (FDI)",
+          href: "institutes/family-development-institute",
+        },
+        {
+          label: "Mindset Transformation Institute (MTI)",
+          href: "institutes/mindset-transformation-institute",
+        },
+        {
+          label: "Institute of Government, Govenance and Leadership (IGPP)",
+          href: "institutes/institute-of-governance-and-public-policy",
+        },
+        {
+          label: "Institute of Economic Affairs (IEA)",
+          href: "institutes/institute-of-economic-affairs",
+        },
+        {
+          label:
+            "College of Sustainable Transformation and Development (COSTrAD)",
+          href: "institutes/college-of-sustainable-transformation-and-development",
+        },
+        {
+          label: "Education Training and Development Institute (ETADI)",
+          href: "institutes/education-training-and-development-institute",
+        },
+        {
+          label: "Futuristic Institute of Science and Technology (FIRST)",
+          href: "institutes/futuristic-institute-of-revolutionary-science-and-technology",
+        },
+        {
+          label: "Media of Communication Institute (MOCI)",
+          href: "institutes/media-of-communication-institute",
+        },
+        {
+          label: "Institute of Arts, Sports and Culture (IOASC)",
+          href: "institutes/institute-of-arts-sports-and-cultural-development",
+        },
+      ],
+    },
+  ];
+
   return (
-    <footer className="bg-muted-background text-foreground text-md border-foreground/20">
+    <footer className="bg-background text-foreground text-md border-foreground/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14  pt-8 border-t ">
         <div className="grid grid-cols-1  sm:grid-cols-5 gap-4 sm:gap-8 mb-10">
           {footerLinks.map((section) => (
             <div
               key={section.title}
-              className={section.title === "Institutes" ? "col-span-2" : "col-span-full sm:col-span-1 "}
+              className={
+                section.title === "Institutes"
+                  ? "col-span-2"
+                  : "col-span-full sm:col-span-1 "
+              }
             >
-              <h3 className="text-lg sm:text-xl font-bold  sm:mb-4  ">{section.title}</h3>
-              <ul className="space-y-2">
-                {section.links.map(({ label, href }) => (
-                  <li key={label}>
-                    <Link
-                      href={`/${href}`}
-                      className="hover:text-primary transition"
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                ))}
+              <h3 className="text-lg sm:text-xl font-bold  sm:mb-4  ">
+                {section.title}
+              </h3>
+              <ul className="space-y-2  pb-4">
+                {section.links.map((link: FooterLink) => {
+                  const { label, href, onClick } = link;
+                  return (
+                    <li key={label}>
+                      {onClick ? (
+                        <div
+                          onClick={onClick}
+                          className="hover:text-primary transition cursor-pointer "
+                        >
+                          {label}
+                        </div>
+                      ) : (
+                        <Link
+                          href={`/${href}`}
+                          className="hover:text-primary transition"
+                        >
+                          {label}
+                        </Link>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
 
           <div>
-            <h3 className="text-lg sm:text-xl font-bold  sm:mb-4 ">Follow us</h3>
-
+            <h3 className="text-lg sm:text-xl font-bold  sm:mb-4 ">
+              Follow us
+            </h3>
             <div className="flex gap-4">
               <Link
                 target="_blank"
@@ -206,7 +228,9 @@ export default function Footer() {
               <div className="dark:bg-muted h-2 w-2.5 rounded-full bg-sidebar-border transition-all" />
               <div className="dark:bg-muted h-2 w-2.5 rounded-full animate-pulse bg-muted-foreground transition-all" />
             </div>
-            <div className="">All Rights Reserved.</div>
+            <div  className="">
+              All Rights Reserved.
+            </div>
           </div>
 
           <p className="max-w-6xl font-light font-opensans  sm:text-center mx-auto text-[9px] md:text-[12px] uppercase  pt-4">

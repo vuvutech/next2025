@@ -48,13 +48,12 @@ export function SignUpComponent() {
   return (
     <Card className=" rounded-none bg-transparent max-w-md border-none shadow-none ">
       <CardHeader>
-        <CardTitle className="text-lg md:text-xl">COSTrAD Sign Up</CardTitle>
-        <CardDescription className="text-xs md:text-sm">
-          Enter your information to create an account
+         <CardDescription className="text-xs md:text-sm">
+          <span className="font-bold">COSTrAD Sign-up</span><br />Enter your email below to login to your account
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-4">
+        <div className="grid gap-2">
           <div className="grid grid-cols-2 gap-2">
             <div className="grid gap-2">
               <Label htmlFor="first-name">First name</Label>
@@ -300,14 +299,14 @@ export function SignUpComponent() {
         </div>
       </CardContent>
       <CardFooter className=" flex flex-col">
-        <div className="text-balance text-center text-sm text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
+        <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
           Don't have an account? Rather{" "}
           <Link href={"/auth/sign-in"} className="font-bold">
             Login
           </Link>
           .
         </div>
-        <div className="text-balance text-center pt-2 text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
+        <div className="text-balance text-center pt-1 text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
           By clicking continue, you agree to our <br />
           <a href={"/terms"}>Terms of Service</a> and{" "}
           <a href={"/privacy"}>Privacy Policy</a>.

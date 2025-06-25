@@ -325,14 +325,15 @@ model Edition {
 }
 
 model Testimonial {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  content   String
-  featured  Boolean  @default(false)
-  approved  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content               String
+  featured              Boolean  @default(false)
+  userFeaturePermission Boolean  @default(false)
+  approved              Boolean  @default(false)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
 
   @@map("testimonial")
 }

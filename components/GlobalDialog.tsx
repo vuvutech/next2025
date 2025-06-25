@@ -77,7 +77,8 @@ interface ProfileForm {
 }
 
 export function GlobalDialog() {
-  const { isOpen, close } = useDialog();
+const { activeDialog, close } = useDialog();
+const isOpen = activeDialog === "registerForEdition";
   const { data: session } = useSession();
   const [profileComplete, setProfileComplete] = useState(false);
   const [institutes, setInstitutes] = useState<string[]>([]);

@@ -24,7 +24,7 @@ export default async function DashboardPage() {
       auth.api.getFullOrganization({
         headers: await headers(),
       }),
-    ]).catch((e) => {
+    ]).catch((e: any) => {
       throw redirect("/auth/sign-in");
     });
 

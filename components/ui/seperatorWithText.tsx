@@ -6,7 +6,7 @@ type SeperatorTextProps = {
 
 const SeperatorWithText = ({ seperatorText = "Or" }: SeperatorTextProps) => {
     return (
-        <div className='relative my-3'>
+        <div className='relative my-2'>
             <div className='absolute inset-0 flex items-center'>
                 <span className='w-full border-t' />
             </div>

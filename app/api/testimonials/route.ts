@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { content } = await req.json();
+const { content, userFeaturePermission } = await req.json();
   if (!content || content.trim() === "") {
     return NextResponse.json({ error: "Content required" }, { status: 400 });
   }
@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
       data: {
         userId: user.id,
         content,
+        userFeaturePermission: userFeaturePermission
       },
     });
     return NextResponse.json(testimonial, { status: 201 }); // 201 Created for successful resource creation

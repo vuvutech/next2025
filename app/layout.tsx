@@ -10,6 +10,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import StickyMenuWrapper from "@/components/ui/StickyMenuWrapper";
 import FooterWrapper from "@/components/Footer-Wrapper";
 import { GlobalDialog } from "@/components/GlobalDialog";
+import { TestimonialDialog } from "@/components/TestimonialDialog";
 
 export const metadata: Metadata = {
   title: {
@@ -61,7 +62,8 @@ export default function RootLayout({
           <Toaster />
           <Analytics />
           <SpeedInsights />
-          <GlobalDialog />
+          {/* <GlobalDialog /> */}
+          <TestimonialDialog />
         </Providers>
       </body>
     </html>

@@ -1,11 +1,14 @@
+// providers/DialogProvider.tsx
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
 
+type DialogKey = string;
+
 type DialogContextType = {
-  isOpen: boolean;
-  open: () => void;
+  open: (key: DialogKey) => void;
   close: () => void;
+  activeDialog: DialogKey | null;
 };
 
 const DialogContext = createContext<DialogContextType | null>(null);
@@ -17,13 +20,13 @@ export function useDialog() {
 }
 
 export function DialogProvider({ children }: { children: ReactNode }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [activeDialog, setActiveDialog] = useState<DialogKey | null>(null);
 
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
+  const open = (key: DialogKey) => setActiveDialog(key);
+  const close = () => setActiveDialog(null);
 
   return (
-    <DialogContext.Provider value={{ isOpen, open, close }}>
+    <DialogContext.Provider value={{ open, close, activeDialog }}>
       {children}
     </DialogContext.Provider>
   );
