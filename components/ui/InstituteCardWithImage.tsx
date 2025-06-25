@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button"; // updated path for ShadCN
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useDialog } from "@/providers/DialogProvider";
 
 export interface InstituteCardProps {
   id: string;
@@ -42,9 +41,8 @@ export default function InstituteCardWithImage({
 }: InstituteCardProps) {
   const router = useRouter();
   // dialog provider
-  const { open } = useDialog();
   return (
-    <Card
+    <Card id={id}
       className="w-full p-0 gap-2 dark:bg-gray-950 rounded-2xl
     flex flex-col justify-between "
     >

@@ -38,7 +38,7 @@ export default function LoginForRegistration({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { isOpen, close } = useDialog(); // Works because DialogProvider is an ancestor
+  const { close } = useDialog(); // Works because DialogProvider is an ancestor
 
   // Fallback to URL param or "/"
   const callbackUrl =
@@ -87,7 +87,6 @@ export default function LoginForRegistration({
   };
 
   return (
-    <div className="w-full">
       <Card className="rounded-none bg-transparent w-full border-none shadow-none">
         <CardHeader>
           <CardTitle className="text-lg md:text-xl">COSTrAD Sign In</CardTitle>
@@ -181,7 +180,7 @@ export default function LoginForRegistration({
                   href="/auth/forget-password"
                   className="ml-auto text-sm underline"
                   onClick={() => {
-                    if (isOpen) close(); // Close dialog if open
+                    close(); // Close dialog if open
                   }}
                 >
                   Forgot your password?
@@ -220,6 +219,6 @@ export default function LoginForRegistration({
           </div>
         </CardFooter>
       </Card>
-    </div>
+
   );
 }

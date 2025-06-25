@@ -122,10 +122,10 @@ export default function Apply() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center p-4 space-y-4 relative">
+    <div className="flex flex-col justify-center items-center p-4 space-y-4 w-full relative mx-auto">
       <CloseButton
         onClick={() => router.push("/")}
-        className="absolute top-4 right-4 z-20"
+        className=" top-4 right-4 z-20"
       />
 
       <div className="flex items-center justify-between w-full">

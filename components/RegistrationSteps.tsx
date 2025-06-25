@@ -5,9 +5,9 @@ import { SignUpForRegistration } from "./SignupForRegistration";
 
 export default function RegistrationSteps() {
   return (
-    <div className=" mx-auto p-4 m-4 ">
+    <div className="container flex justify-center">
       
-      <Tabs defaultValue="signin" className="rounded-lg min-w-md">
+      <Tabs defaultValue="signin" className="rounded-lg w-full max-w-md">
         <TabsList className="w-full">
           <TabsTrigger id="signin" value="signin">
             Login to your account

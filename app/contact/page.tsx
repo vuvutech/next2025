@@ -37,8 +37,8 @@ interface UserSession {
 }
 
 export default function ContactPage() {
-    const { open } = useDialog();
-  
+  const { open } = useDialog();
+
   const [isPrivacyPolicyAccepted, setIsPrivacyPolicyAccepted] =
     useState<boolean>(false); // Renamed for clarity
   const [isTestimonialModalOpen, setIsTestimonialModalOpen] =
@@ -51,54 +51,7 @@ export default function ContactPage() {
   const [currentUserSession, setCurrentUserSession] =
     useState<UserSession | null>(null); // State to store the fetched user session
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<ContactFormInputs>();
-
-  const onSubmitContactForm: SubmitHandler<ContactFormInputs> = async (
-    data
-  ) => {
-    if (!isPrivacyPolicyAccepted) {
-      toast.error("Please agree to the privacy policy to send your message.");
-      return;
-    }
-
-    const formData = {
-      name: `${data.firstname} ${data.lastname}`,
-      email: data.email,
-      message: data.message,
-    };
-
-    await toast.promise(
-      (async () => {
-        const response = await fetch("/api/talk-to-us", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || "Failed to send message.");
-        }
-
-        const result = await response.json();
-        reset();
-        setIsPrivacyPolicyAccepted(false); // Reset checkbox state
-        return result;
-      })(),
-      {
-        loading: "Sending your message...",
-        success: "Message sent successfully! We'll get back to you soon.",
-        error: "Failed to send message. Please try again later.",
-      }
-    );
-  };
+  const { reset } = useForm<ContactFormInputs>();
 
   const handleTestimonialSubmit = async (
     event: React.MouseEvent<HTMLButtonElement>
@@ -144,7 +97,6 @@ export default function ContactPage() {
       //   throw new Error(errorData.error || "Failed to submit testimonial. Server error.");
       // }
 
-      const result = await response.json();
       toast.success(
         "Testimonial submitted successfully! It will be reviewed before being featured."
       );
@@ -189,7 +141,6 @@ export default function ContactPage() {
   return (
     <div className="py-8 space-y-8">
       <section className="container">
-       
         <div>
           <div className="max-w-3xl space-y-3">
             <div>
@@ -199,7 +150,9 @@ export default function ContactPage() {
                 label={"Let’s Talk — Reach Out"}
               />
             </div>
-            <h1 className="text-3xl  lg:text-5xl">Get in touch with us today to learn more</h1>
+            <h1 className="text-3xl  lg:text-5xl">
+              Get in touch with us today to learn more
+            </h1>
             <p className="">
               We'd love to hear from you! Reach out to our team today to
               discover more about <span className="font-">COSTrAD</span>, ask
@@ -208,7 +161,10 @@ export default function ContactPage() {
               with you.
             </p>
           </div>
-          <div id="testimonials" className="mt-4 grid gap-4 md:mt-20 md:grid-cols-3 md:gap-8">
+          <div
+            id="testimonials"
+            className="mt-4 grid gap-4 md:mt-20 md:grid-cols-3 md:gap-8"
+          >
             {/* Testimonials Section */}
             <div className="flex flex-col justify-between gap-6 rounded-lg border p-6">
               <div>
