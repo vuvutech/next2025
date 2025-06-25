@@ -84,7 +84,7 @@ export const Section1 = ({
 
             {/* Right Content */}
             <DottedDiv  className="group size-full md:cols-span-1 place-self-end p-4 ">
-              <div id="begin" className="relative h-full w-full bg-muted-2/50 p-4 transition-all ease-in-out group-hover:bg-muted-2">
+              <div id="begin" className="relative h-full min-h-svh w-full bg-muted-2/50 p-4 transition-all ease-in-out group-hover:bg-muted-2">
                 <Image
                   src={verticalBannerSrc}
                   alt="Edition Banner"

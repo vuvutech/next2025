@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
   // If user is not authenticated, return 401 Unauthorized
   if (!user) {
     return NextResponse.json(
-      { error: "Authentication required to submit a testimonial....." },
+      { error: "login/signup required to submit a testimonial....." },
       { status: 401 }
     );
   }

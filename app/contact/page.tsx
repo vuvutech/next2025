@@ -16,6 +16,7 @@ import TestimonialForm, {
 import { getCurrentSession } from "../actions/functions";
 import { toast } from "sonner";
 import BadgeLink from "@/components/BadgeLink";
+import { useDialog } from "@/providers/DialogProvider";
 
 // Define the type for the contact form inputs
 type ContactFormInputs = {
@@ -36,6 +37,8 @@ interface UserSession {
 }
 
 export default function ContactPage() {
+    const { open } = useDialog();
+  
   const [isPrivacyPolicyAccepted, setIsPrivacyPolicyAccepted] =
     useState<boolean>(false); // Renamed for clarity
   const [isTestimonialModalOpen, setIsTestimonialModalOpen] =
@@ -221,7 +224,7 @@ export default function ContactPage() {
               </div>
               <Button
                 variant="link"
-                onClick={() => setIsTestimonialModalOpen(true)}
+                onClick={() => open("testimonial")}
                 className="text-left p-0 justify-start text-primary cursor-pointer gap-x-2"
               >
                 <span>Submit Testimonial</span>

@@ -42,7 +42,6 @@ export function TestimonialDialog() {
   });
 
   const onSubmit = async (data: TestimonialForm) => {
-    console.log(data);
     try {
       const res = await fetch("/api/testimonials", {
         method: "POST",
@@ -51,19 +50,41 @@ export function TestimonialDialog() {
       });
 
       if (!res.ok) {
-        throw new Error("Failed to submit testimonial");
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Something went wrong.");
       }
 
       toast.success("Testimonial submitted!");
       reset(); // clear form
       close();
-    } catch (error) {
-      toast.error("Something went wrong.");
+    } catch (error: any) {
+      toast.error(error.message);
       console.error(error);
     }
   };
 
-  if (!session?.user) return null; // 🔒 restrict to logged-in users only
+  if (!session?.user) {
+    return (
+      <Dialog open={isOpen} onOpenChange={close}>
+        <DialogContent className="sm:max-w-[800px] sm:w-2/5 rounded-xl text-center space-y-4">
+          <DialogHeader>
+            <DialogTitle>Login Required</DialogTitle>
+            <DialogDescription>
+              Please sign in to share your testimonial with COSTrAD.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline">Close</Button>
+            </DialogClose>
+            <Button asChild>
+              <a href="/auth/sign-in">Sign In</a>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>

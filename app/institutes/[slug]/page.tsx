@@ -6,6 +6,7 @@ import { Section1 } from "../Section1";
 import WorldMap from "@/components/WorldMap";
 import OverviewSection from "@/app/institutes/OverviewSection";
 import Jumbotron from "@/components/ui/Jumbotron";
+import { WorldMapSection } from "@/components/WorldMapSection";
 
 // Static paths for SSG
 export async function generateStaticParams() {
@@ -76,6 +77,7 @@ export default async function InstituteViewPage(props: {
       </div>
       <OverviewSection edition={edition} institute={institute} />
       <WorldMap />
+      {/* <WorldMapSection /> */}
     </div>
   );
 }

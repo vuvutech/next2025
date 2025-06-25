@@ -15,12 +15,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../button";
-import { useDialog } from "@/providers/DialogProvider";
 
 export function SignInButton() {
   const router = useRouter(); // Use Next.js router
-  const { isOpen, close } = useDialog(); // Works because DialogProvider is an ancestor
-  // const [isSignOut, setIsSignOut] = useState<boolean>(false);
 
   const {
     data: session, //error object

@@ -17,7 +17,7 @@ export default function OverviewSection({
   edition: Edition | null;
 }) {
   // dialog provider
-  const { open } = useDialog();
+  // const { open } = useDialog();
     const router = useRouter();
   
 

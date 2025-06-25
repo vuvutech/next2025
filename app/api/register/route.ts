@@ -82,6 +82,7 @@ export async function POST(req: NextRequest) {
 
     await sendMail({
       to: user.email,
+      cc: "correspondence@costrad.org",
       subject: `Welcome to ${edition.title}`,
       html,
     });

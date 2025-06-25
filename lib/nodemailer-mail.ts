@@ -5,10 +5,12 @@ export async function sendMail({
   to,
   subject,
   html,
+  cc
 }: {
   to: string;
   subject: string;
   html: string;
+  cc?: string;
 }) {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST!,
@@ -25,5 +27,6 @@ export async function sendMail({
     to,
     subject,
     html,
+    cc
   });
 }
