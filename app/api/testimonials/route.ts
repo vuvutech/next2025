@@ -19,7 +19,6 @@ export async function GET(req: NextRequest) {
     orderBy: { createdAt: "desc" },
   });
 
-
   return NextResponse.json(testimonials);
 }
 
@@ -35,7 +34,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-const { content, userFeaturePermission } = await req.json();
+  const { content, userFeaturePermission } = await req.json();
   if (!content || content.trim() === "") {
     return NextResponse.json({ error: "Content required" }, { status: 400 });
   }
@@ -45,7 +44,7 @@ const { content, userFeaturePermission } = await req.json();
       data: {
         userId: user.id,
         content,
-        userFeaturePermission: userFeaturePermission
+        userFeaturePermission: userFeaturePermission,
       },
     });
     return NextResponse.json(testimonial, { status: 201 }); // 201 Created for successful resource creation
@@ -79,7 +78,10 @@ export async function PUT(req: NextRequest) {
   });
 
   if (!testimonialToUpdate) {
-    return NextResponse.json({ error: "Testimonial not found" }, { status: 404 });
+    return NextResponse.json(
+      { error: "Testimonial not found" },
+      { status: 404 }
+    );
   }
 
   if (user.role === "ADMIN") {
@@ -90,11 +92,10 @@ export async function PUT(req: NextRequest) {
         featured: featured ?? undefined,
       },
     });
-        revalidatePath(`${baseUrl}/admin/testimonials`);
+    revalidatePath(`${baseUrl}/admin/testimonials`);
 
     return NextResponse.json(updated);
   }
-
 }
 
 export async function DELETE(req: NextRequest) {
@@ -128,6 +129,8 @@ export async function DELETE(req: NextRequest) {
   // Allow deletion if user is an admin OR if the user is the owner of the testimonial
   if (user.role === "ADMIN" || testimonialToDelete.userId === user.id) {
     await prisma.testimonial.delete({ where: { id } });
+    revalidatePath(`${baseUrl}/admin/testimonials`);
+
     return NextResponse.json({ success: true });
   } else {
     // If not an admin and not the owner

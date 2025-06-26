@@ -11,6 +11,7 @@ import { BadgeCheckIcon, Trash } from "lucide-react";
 import { DeleteConfirmationDialog } from "@/components/delete-confirmation-dialog";
 import { Button } from "@/components/ui/button";
 
+
 export const columns: ColumnDef<any>[] = [
   {
     id: "select",
@@ -120,6 +121,7 @@ export const columns: ColumnDef<any>[] = [
           throw new Error(result.error || "Failed to delete");
         }
       };
+
       return (
         <div className="flex items-center gap-2">
           <DeleteConfirmationDialog

@@ -33,6 +33,9 @@ interface UserSession {
   };
 }
 
+export const dynamic = 'force-dynamic';
+
+
 export default function TestimonialCard(props: { session: Session | null }) {
   const router = useRouter();
   const { data } = useSession();
