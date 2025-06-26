@@ -152,11 +152,10 @@ export function ProfileForRegistration({
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="text-sm text-foreground bg-muted/30 p-3 rounded-md border border-muted">
-            <strong>Privacy Notice:</strong> All information you provide,
-            especially details regarding disability assistance, will be treated
+            <strong>Privacy Notice:</strong> All information you provide will be treated
             with the highest level of confidentiality. It will never be shared
             with third parties and is used strictly to ensure we provide the
-            best possible support for your participation in the program.
+            best possible support for your participation in our programs.
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
