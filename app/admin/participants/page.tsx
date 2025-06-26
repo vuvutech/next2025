@@ -2,6 +2,8 @@ import { DataTable } from "@/components/data-table";
 
 import data from "./institute_mongo.json";
 
+export const dynamic = "force-dynamic";
+
 export default function Page() {
   return (
     <div className="px-4 space-y-4">

@@ -3,21 +3,10 @@
 import { prisma } from "@/prisma/dbConnect";
 import { GenericDataTable } from "@/components/generic-data-table";
 import { columns } from "./columns";
-import { Button } from "@/components/ui/button";
-import { IconCirclePlus } from "@tabler/icons-react";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { ExtensionComponent } from "./ExtensionComponent";
+
+export const dynamic = "force-dynamic";
+
 
 export default async function AdminTestimonialsPage() {
   const testimonials = await prisma.testimonial.findMany({

@@ -5,6 +5,8 @@ import { GenericDataTable } from "@/components/generic-data-table";
 import { columns } from "./columns";
 import { ExtensionComponent } from "./ExtensionComponent";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminInstitutesPage() {
   const institutes = await prisma.institute.findMany({
     // Add your include fields here, for example:
