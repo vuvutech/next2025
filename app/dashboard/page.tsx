@@ -4,12 +4,12 @@ import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { PreferencesSection } from "@/components/dashboard/preference-section";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import BillingSection from "@/components/dashboard/billing-section";
-import { ProfileSection } from "@/components/dashboard/profile-section";
 import TestimonialCard from "./TestimonialCard";
 import RegistrationSection from "@/components/dashboard/registration-section";
 import EditableProfileForm from "@/components/EditableProfileForm";
-import { ProfileCreation } from "@/components/ProfileCreation";
+
+export const dynamic = "force-dynamic";
+
 
 export default async function DashboardPage() {
   const [session, activeSessions, deviceSessions, organization] =
