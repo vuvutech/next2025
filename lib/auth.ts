@@ -137,7 +137,7 @@ export const auth = betterAuth({
   plugins: [
     adminClient(),
     admin({
-      defaultRole: "user",
+      defaultRole: "USER",
       adminRoles: ["ADMIN", "SUPERADMIN"],
       adminPaths: ["/admin", "/settings"],
       defaultBanReason: "Spamming",
