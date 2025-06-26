@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
       headers: { cookie: request.headers.get("cookie") || "" },
     });
 
-    if (error || !data || data.role !== "admin") {
+    if (error || !data || data.role !== "ADMIN") {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }

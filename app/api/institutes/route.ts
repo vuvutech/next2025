@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
 // PUT update institute (admin only)
 export async function PUT(req: NextRequest) {
   const user = await getCurrentUser();
-  if (!user || user.role !== "admin") {
+  if (!user || user.role !== "ADMIN") {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 

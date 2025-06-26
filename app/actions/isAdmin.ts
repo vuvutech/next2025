@@ -11,5 +11,17 @@ export const isAdmin = async (email: string) => {
     where: { email },
   });
 
-  return user?.role === "admin"; // Returns the user record or null if not found.
+  return user?.role === "ADMIN"; 
+
+};
+
+export const isSuperAdmin = async (email: string) => {
+
+  // Query for the user by email only (assuming email is unique)
+  const user = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  return user?.role === "SUPERADMIN"; 
+
 };

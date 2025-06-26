@@ -10,7 +10,7 @@ import { baseUrl } from "@/lib/metadata";
 // GET all testimonials (admin only)
 export async function GET(req: NextRequest) {
   const user = await getCurrentUser();
-  if (!user || user.role !== "admin") {
+  if (!user || user.role !== "ADMIN") {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
@@ -62,7 +62,7 @@ const { content, userFeaturePermission } = await req.json();
 export async function PUT(req: NextRequest) {
   const user = await getCurrentUser();
 
-  if (!user || user.role !== "admin") {
+  if (!user || user.role !== "ADMIN") {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
@@ -82,7 +82,7 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({ error: "Testimonial not found" }, { status: 404 });
   }
 
-  if (user.role === "admin") {
+  if (user.role === "ADMIN") {
     const updated = await prisma.testimonial.update({
       where: { id },
       data: {
@@ -126,7 +126,7 @@ export async function DELETE(req: NextRequest) {
   }
 
   // Allow deletion if user is an admin OR if the user is the owner of the testimonial
-  if (user.role === "admin" || testimonialToDelete.userId === user.id) {
+  if (user.role === "ADMIN" || testimonialToDelete.userId === user.id) {
     await prisma.testimonial.delete({ where: { id } });
     return NextResponse.json({ success: true });
   } else {
