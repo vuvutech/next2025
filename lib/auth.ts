@@ -49,7 +49,7 @@ export const auth = betterAuth({
             data: {
               ...user,
               studentId,
-              role: "user", 
+              role: "USER", 
             },
           };
         },
