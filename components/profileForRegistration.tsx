@@ -161,7 +161,7 @@ export function ProfileForRegistration({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             <div>
-              <Label>Nationality</Label>
+              <Label>Nationality{" "} <span className="text-destructive text-[8px]">Required</span></Label>
               <Input
                 {...register("nationality", {
                   required: "Nationality is required",
@@ -176,7 +176,7 @@ export function ProfileForRegistration({
 
             {/* Gender */}
             <div className="w-full">
-              <Label>Gender</Label>
+              <Label>Gender{" "} <span className="text-destructive text-[8px]">Required</span></Label>
               <Controller
                 name="gender"
                 control={control}
@@ -200,7 +200,7 @@ export function ProfileForRegistration({
 
             {/* Date of Birth */}
             <div>
-              <Label>Date of Birth</Label>
+              <Label>Date of Birth{" "} <span className="text-destructive text-[8px]">Required</span></Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
@@ -250,7 +250,7 @@ export function ProfileForRegistration({
           {/* Marital Status & Religion */}
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <Label>Marital Status</Label>
+              <Label>Marital Status{" "} <span className="text-destructive text-[8px]">Required</span></Label>
               <Select {...register("maritalStatus")}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Marital status" />
@@ -265,7 +265,7 @@ export function ProfileForRegistration({
               </Select>
             </div>
             <div>
-              <Label>Religion</Label>
+              <Label>Belief System{" "} <span className="text-destructive text-[8px]">Required</span></Label>
               <Select {...register("religion")}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Religion" />
@@ -288,7 +288,7 @@ export function ProfileForRegistration({
             <CardHeader>
               <Label className="block mb-2">
                 Do you require any form of disability assistance or
-                accommodations during the program?
+                accommodations during the program? {" "} <span className="text-destructive text-[8px]">(Required)</span>
               </Label>
             </CardHeader>
             <CardContent>
@@ -356,7 +356,7 @@ export function ProfileForRegistration({
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {/* Contact Info */}
             <div>
-              <Label>Telephone</Label>
+              <Label>Telephone{" "} <span className="text-destructive text-[8px]">Required</span></Label>
               <Input
                 {...register("telephone", {
                   required: "Telephone is required",
@@ -379,7 +379,7 @@ export function ProfileForRegistration({
           <div className="grid sm:grid-cols-2 gap-2">
             {/* Address */}
             <div>
-              <Label>Address</Label>
+              <Label>Address {" "} <span className="text-destructive text-[8px]">Required</span></Label>
               <Textarea {...register("address")} placeholder="Street address" />
             </div>
             <div>
@@ -392,7 +392,7 @@ export function ProfileForRegistration({
           </div>
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <Label>City</Label>
+              <Label>City{" "} <span className="text-destructive text-[8px]">Required</span></Label>
               <Input {...register("city")} />
             </div>
             <div>
@@ -402,7 +402,7 @@ export function ProfileForRegistration({
           </div>
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <Label>Country</Label>
+              <Label>Country{" "} <span className="text-destructive text-[8px]">Required</span></Label>
               <Input {...register("country")} />
             </div>
             <div>
@@ -414,11 +414,11 @@ export function ProfileForRegistration({
           <div className="grid sm:grid-cols-2 gap-2">
             {/* Emergency Contact */}
             <div>
-              <Label>Emergency Contact Name</Label>
+              <Label>Emergency Contact Name{" "} <span className="text-destructive text-[8px]">Required</span></Label>
               <Input {...register("emergencyContactName")} />
             </div>
             <div>
-              <Label>Emergency Contact Telephone</Label>
+              <Label>Emergency Contact Telephone{" "} <span className="text-destructive text-[8px]">Required</span></Label>
               <Input {...register("emergencyContactTelephone")} />
             </div>
           </div>

@@ -39,6 +39,11 @@ export const siteConfig = {
       href: "/contact",
       number: "07",
     },
+    {
+      label: "Apply",
+      href: "/apply",
+      number: "08",
+    },
   ],
   navMenuItems: [
     {
@@ -144,5 +149,5 @@ export const getBaseUrl = () => {
     return "";
   }
   // Running on the server
-  return process.env.BASE_URL ?? "http://localhost:3000";
+  return process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
 };

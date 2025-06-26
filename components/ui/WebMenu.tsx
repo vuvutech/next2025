@@ -12,6 +12,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { ThemeSwitch } from "./theme-switch";
+import Apply from '../../app/apply/page';
 
 export const gettingStarted: {
   title: string;
@@ -74,6 +75,14 @@ export function WebMenu() {
               className={navigationMenuTriggerStyle()}
             >
               <span className="uppercase">Donate</span>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              href="/apply"
+              className={navigationMenuTriggerStyle()}
+            >
+              <span className="uppercase">Apply</span>
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>

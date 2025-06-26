@@ -234,7 +234,7 @@ export default function EditableProfileForm() {
             </div>
 
             <div className="space-y-1">
-              <Label htmlFor="religion">Religion</Label>
+              <Label htmlFor="religion">Belief System</Label>
               <Controller
                 name="religion"
                 control={control}
@@ -264,7 +264,7 @@ export default function EditableProfileForm() {
             </div>
           </div>
 
-          <div className=" grid sm:grid-cols-2 gap-2">
+          <div className=" grid sm:grid-cols-3 gap-2">
             {[
               ["nationality", "Nationality"],
               ["telephone", "Telephone"],
@@ -287,7 +287,7 @@ export default function EditableProfileForm() {
               ["github", "GitHub"],
               ["tiktok", "TikTok"],
             ].map(([name, label]) => (
-              <div className="space-y-1" key={name}>
+              <div className="space-y-3" key={name}>
                 <Label htmlFor={name}>{label}</Label>
                 <Input
                   id={name}
@@ -365,7 +365,7 @@ export default function EditableProfileForm() {
             </div>
           </div>
 
-          <div className="grid gap-2">
+          <div className="grid gap-3">
             {/* Disability Assistance */}
             <Card>
               <CardHeader>
