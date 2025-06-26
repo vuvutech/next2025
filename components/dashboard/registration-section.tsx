@@ -53,7 +53,12 @@ export default async function RegistrationSection() {
     return (
       <Card>
         <CardContent>
-          <p>You haven’t registered for any Institute Edition yet. Register at <Link className="text-primary" href="/institutes">Institutes</Link></p>
+          <p>
+            You haven’t registered for any Institute Edition yet. Register at{" "}
+            <Link className="text-primary" href="/institutes">
+              Institutes
+            </Link>
+          </p>
         </CardContent>
       </Card>
     );
@@ -120,10 +125,10 @@ export default async function RegistrationSection() {
         return (
           <div
             key={reg.id}
-            className={`p-4 rounded-xl shadow flex items-start gap-4 border-2 ${
+            className={`p-4 rounded-xl shadow flex items-start gap-4 border-0.5 ${
               reg.status === "completed"
-                ? "border-gray-300 bg-gray-50 text-gray-500"
-                : "border-green-500 bg-white text-gray-900"
+                ? " text-gray-500 border"
+                : "border-green-500 border bg-background text-gray-900"
             }`}
           >
             <Image
@@ -140,10 +145,25 @@ export default async function RegistrationSection() {
                 {getBadge(reg.status)}
               </div>
               <p className="text-sm">Institute: {institute.name}</p>
-              <p className="text-sm">
-                Dates: {edition.startDate?.toLocaleDateString()} -{" "}
-                {edition.endDate?.toLocaleDateString()}
+              <p className="text-sm text-bold text-firefly">
+                Dates:{" "}
+                {edition.startDate
+                  ? new Date(edition.startDate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : ""}{" "}
+                -{" "}
+                {edition.endDate
+                  ? new Date(edition.endDate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : ""}
               </p>
+
               {countdown && (
                 <p className="text-xs mt-1 text-blue-600 font-semibold">
                   {countdown}
