@@ -9,6 +9,7 @@ import { ProfileSection } from "@/components/dashboard/profile-section";
 import TestimonialCard from "./TestimonialCard";
 import RegistrationSection from "@/components/dashboard/registration-section";
 import EditableProfileForm from "@/components/EditableProfileForm";
+import { ProfileCreation } from "@/components/ProfileCreation";
 
 export default async function DashboardPage() {
   const [session, activeSessions, deviceSessions, organization] =
@@ -37,7 +38,7 @@ export default async function DashboardPage() {
             Account
           </TabsTrigger>
           <TabsTrigger id="profile" value="profile">
-            Profile Display
+            My Profile
           </TabsTrigger>
           <TabsTrigger id="preferences" value="preferences">
             Preferences
@@ -61,6 +62,7 @@ export default async function DashboardPage() {
         <TabsContent value="profile">
           {/* <ProfileSection session={session!} /> */}
           <EditableProfileForm />
+          {/* <ProfileCreation /> */}
         </TabsContent>
         <TabsContent value="preferences">
           <PreferencesSection />

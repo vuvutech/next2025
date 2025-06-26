@@ -84,27 +84,34 @@ export async function PUT(req: NextRequest) {
 
   try {
     const body = await req.json();
-    // Prepare the payload
-    const payload: any = {
-      ...body,
-      updatedAt: new Date(),
-    };
 
-    // Convert string → Date for any DateTime? fields
-    if (body.dateOfBirth) {
-      payload.dateOfBirth = new Date(body.dateOfBirth);
-    } else {
-      delete payload.dateOfBirth;
+    // Destructure and filter out any unsafe fields
+    const {
+      id, // 🚫 Prisma manages this
+      user: _user, // 🚫 avoid passing nested user object
+      createdAt, // 🚫 managed by Prisma
+      updatedAt, // ✅ we override this manually
+      ...rest
+    } = body;
+
+    // Convert string to Date object for dateOfBirth
+    if (rest.dateOfBirth) {
+      rest.dateOfBirth = new Date(rest.dateOfBirth);
     }
 
-    // Upsert the profile
+    const now = new Date();
+
     const profile = await prisma.profile.upsert({
       where: { userId: user.id },
-      update: payload,
+      update: {
+        ...rest,
+        updatedAt: now,
+      },
       create: {
-        ...payload,
+        ...rest,
         userId: user.id,
-        createdAt: new Date(),
+        createdAt: now,
+        updatedAt: now,
       },
     });
 

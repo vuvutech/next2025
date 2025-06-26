@@ -55,6 +55,12 @@ enum LanguagePreference {
   OTHER
 }
 
+enum Role {
+  USER
+  ADMIN
+  SUPERADMIN
+}
+
 model User {
   id               String         @id @map("_id")
   name             String
@@ -64,7 +70,7 @@ model User {
   createdAt        DateTime
   updatedAt        DateTime
   twoFactorEnabled Boolean?
-  role             String?
+  role             Role           @default(USER)
   banned           Boolean?
   banReason        String?
   banExpires       DateTime?
