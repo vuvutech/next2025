@@ -40,6 +40,7 @@ export const auth = betterAuth({
       },
     },
   },
+  
   databaseHooks: {
     user: {
       create: {
