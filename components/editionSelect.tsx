@@ -75,7 +75,7 @@ export function EditionSelect({
             ) : (
               <>
                 <Select onValueChange={onSelect}>
-                  <SelectTrigger className="w-auto h-20 px-4 py-6">
+                  <SelectTrigger className="w-full h-20 px-4 py-6">
                     <SelectValue placeholder="Select Edition" />
                   </SelectTrigger>
                   <SelectContent className="w-auto">
