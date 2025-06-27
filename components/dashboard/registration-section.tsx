@@ -144,7 +144,7 @@ export default async function RegistrationSection() {
                 <h2 className="text-lg font-bold">{edition.title}</h2>
                 {getBadge(reg.status)}
               </div>
-              <p className="text-sm">Institute: {institute.name}</p>
+              <p className="text-sm font-bold">{institute.name}</p>
               <p className="text-sm text-bold text-firefly">
                 Dates:{" "}
                 {edition.startDate
