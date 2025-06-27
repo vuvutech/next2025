@@ -1,0 +1,81 @@
+// File: app/admin/registrations/columns.tsx
+"use client";
+
+import { ColumnDef } from "@tanstack/react-table";
+import Image from "next/image";
+import { format } from "date-fns";
+import { Badge } from "@/components/ui/badge";
+import { ApproveButton } from "./ApproveButton";
+
+export const columns: ColumnDef<any>[] = [
+  {
+    accessorKey: "user.name",
+    header: "Name",
+    cell: ({ row }) => <div>{row.original.user?.name}</div>,
+  },
+  {
+    accessorKey: "user.email",
+    header: "Email",
+    cell: ({ row }) => <div>{row.original.user?.email}</div>,
+  },
+  {
+    header: "Profile Image",
+    cell: ({ row }) => (
+      <Image
+        src={row.original.user?.image || "/images/avatar.webp"}
+        alt="User Image"
+        width={40}
+        height={40}
+        className="rounded-full"
+      />
+    ),
+  },
+  {
+    header: "Institute",
+    accessorFn: (row) => row.edition?.institute?.name,
+    cell: ({ row }) => (
+      <div className="flex items-center gap-2">
+        <Image
+          src={row.original.edition?.institute?.logo || "/images/costrad.png"}
+          alt="Institute Logo"
+          width={32}
+          height={32}
+        />
+        <span>{row.original.edition?.institute?.name}</span>
+      </div>
+    ),
+  },
+  {
+    header: "Edition Year",
+    accessorFn: (row) => new Date(row.edition?.startDate).getFullYear(),
+    cell: ({ row }) => (
+      <div>{new Date(row.original.edition?.startDate).getFullYear()}</div>
+    ),
+  },
+  {
+    header: "Status",
+    cell: ({ row }) => (
+      row.original.approved ? (
+        <Badge className="bg-green-500 text-white">Approved</Badge>
+      ) : (
+        <Badge className="bg-yellow-500 text-white">Pending</Badge>
+      )
+    ),
+  },
+  {
+    id: "actions",
+    header: "Approve",
+    cell: ({ row }) => (
+      <ApproveButton
+        id={row.original.id}
+        name={row.original.user.name}
+        email={row.original.user.email}
+        approved={row.original.approved}
+        startDate={row.original.edition?.startDate}
+        endDate={row.original.edition?.endDate}
+        price={row.original.edition?.price}
+        priceViaZoom={row.original.edition?.priceViaZoom}
+      />
+    ),
+  },
+];
