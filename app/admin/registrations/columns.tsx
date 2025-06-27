@@ -9,37 +9,47 @@ import { ApproveButton } from "./ApproveButton";
 
 export const columns: ColumnDef<any>[] = [
   {
-    accessorKey: "user.name",
-    header: "Name",
-    cell: ({ row }) => <div>{row.original.user?.name}</div>,
-  },
-  {
-    accessorKey: "user.email",
-    header: "Email",
-    cell: ({ row }) => <div>{row.original.user?.email}</div>,
-  },
-  {
-    header: "Profile Image",
+    header: "User",
+    accessorFn: (row) => row.user?.name || "Unknown",
     cell: ({ row }) => (
       <Image
         src={row.original.user?.image || "/images/avatar.webp"}
-        alt="User Image"
-        width={40}
-        height={40}
+        alt={row.original.user?.name || "Unknown user"}
+        width={50}
+        height={50}
         className="rounded-full"
       />
     ),
   },
+  {
+    header: "",
+    accessorKey: "user.name",
+    cell: ({ row }) => (
+      <div>
+        <h4 className="text-current">
+          {" "}
+          {row.original.user?.name} <br />
+          &mdash; <br />
+          <span className="text-[10px] font-bold">
+            {row.original.user?.email}
+          </span>
+        </h4>
+      </div>
+    ),
+  },
+
   {
     header: "Institute",
     accessorFn: (row) => row.edition?.institute?.name,
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
         <Image
-          src={row.original.edition?.institute?.logo || "/images/costrad.png"}
+          src={
+            `/${row.original.edition?.institute?.logo}` || "/images/costrad.png"
+          }
           alt="Institute Logo"
-          width={32}
-          height={32}
+          width={50}
+          height={50}
         />
         <span>{row.original.edition?.institute?.name}</span>
       </div>
@@ -54,13 +64,12 @@ export const columns: ColumnDef<any>[] = [
   },
   {
     header: "Status",
-    cell: ({ row }) => (
+    cell: ({ row }) =>
       row.original.approved ? (
         <Badge className="bg-green-500 text-white">Approved</Badge>
       ) : (
         <Badge className="bg-yellow-500 text-white">Pending</Badge>
-      )
-    ),
+      ),
   },
   {
     id: "actions",

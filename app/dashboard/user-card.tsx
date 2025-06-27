@@ -414,7 +414,7 @@ export default function UserCard(props: {
         <CardFooter className="grid gap-2 sm:flex justify-between items-center">
           <ChangePassword />
           <Button
-            className="gap-2 z-10 w-full"
+            className="gap-2 z-10"
             variant="secondary"
             onClick={async () => {
               setIsSignOut(true);

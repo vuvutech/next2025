@@ -5,7 +5,8 @@ import { sendMail } from "@/lib/nodemailer-mail";
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, startDate, endDate, price, priceViaZoom } = await req.json();
+    const { id, name, email, startDate, endDate, price, priceViaZoom } =
+      await req.json();
 
     // Send email with payment info
     await sendMail({
@@ -24,9 +25,18 @@ export async function POST(req: NextRequest) {
       `,
     });
 
+    // ✅ Update registration as approved
+    await prisma.registration.update({
+      where: { id },
+      data: { approved: true },
+    });
+
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Email sending failed:", error);
-    return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
+    console.error("Email sending or approval failed:", error);
+    return NextResponse.json(
+      { error: "Failed to send email or approve registration" },
+      { status: 500 }
+    );
   }
 }

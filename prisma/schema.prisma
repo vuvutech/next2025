@@ -365,6 +365,7 @@ model StudentIdCounter {
 model Registration {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   userId    String
+  approved  Boolean  @default(false)
   editionId String   @db.ObjectId
   createdAt DateTime @default(now())
 

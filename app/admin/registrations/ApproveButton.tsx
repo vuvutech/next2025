@@ -33,7 +33,7 @@ export function ApproveButton({
       const res = await fetch("/api/approve-and-email-payment-details", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, startDate, endDate, price, priceViaZoom }),
+        body: JSON.stringify({ id, name, email, startDate, endDate, price, priceViaZoom }),
       });
 
       if (!res.ok) {
@@ -48,6 +48,7 @@ export function ApproveButton({
 
   return (
     <Button
+    className="cursor-pointer py-0.5 h-auto uppercase text-xs"
       size="sm"
       disabled={approved || isPending}
       onClick={handleApprove}

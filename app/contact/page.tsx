@@ -17,6 +17,7 @@ import { getCurrentSession } from "../actions/functions";
 import { toast } from "sonner";
 import BadgeLink from "@/components/BadgeLink";
 import { useDialog } from "@/providers/DialogProvider";
+import CTA from "@/components/ui/CTA";
 
 // Define the type for the contact form inputs
 type ContactFormInputs = {
@@ -300,7 +301,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
       {/* Testimonial Submission Modal */}
       <GenericShadcnFormModal
         isOpen={isTestimonialModalOpen}

@@ -54,6 +54,11 @@ const data = {
     //   icon: IconUsers,
     // },
     {
+      title: "Registrations",
+      url: "/admin/registrations",
+      icon: IconDatabase,
+    },
+    {
       title: "Institutes",
       url: "/admin/institutes",
       icon: IconListDetails,

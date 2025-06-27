@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { useDialog } from "@/providers/DialogProvider";
+import CTA from "./ui/CTA";
 
 type FooterLink = {
   label: string;
@@ -89,8 +90,10 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-background text-foreground text-md border-foreground/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14  pt-8 border-t ">
+    <div>
+      <CTA />
+      <div className="bg-background text-foreground text-md border-foreground/20">
+      <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14  pt-14 border-t ">
         <div className="grid grid-cols-1  sm:grid-cols-5 gap-4 sm:gap-8 mb-10">
           {footerLinks.map((section) => (
             <div
@@ -246,7 +249,8 @@ export default function Footer() {
             Ghana.
           </p>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
+    </div>
   );
 }

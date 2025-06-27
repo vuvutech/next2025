@@ -46,7 +46,7 @@ export const columns: ColumnDef<any>[] = [
     accessorKey: "overview",
     cell: ({ row }) => (
       <div className="space-y-2">
-        <p className="whitespace-normal line-clamp-4  text-sm max-w-[450px]">
+        <p className="whitespace-normal line-clamp-3  text-sm max-w-[450px]">
           {row.original.overview}
         </p>
         <h5 className="font-bebas flex items-center ">

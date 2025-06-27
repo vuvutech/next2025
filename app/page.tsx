@@ -71,7 +71,6 @@ export default function Home() {
       </div>
 
       <WhyCostrad />
-      <CTA />
       <Testimonials className="hidden" />
       {/* <Newsletter /> */}
     </main>

@@ -8,8 +8,8 @@ import { RainbowButton } from "./magicui/rainbow-button";
 const AboutSectionFour = () => {
   const router = useRouter();
   return (
-    <div className="py-8">
-      <section className="max-w-8xl p-4 md:px-8 mx-auto h-auto">
+    <div className="py-6">
+      <section className="max-w-8xl  mx-auto h-auto">
         <div className="relative overflow-hidden rounded-2xl z-10">
           {/* Background Image with Next.js Image */}
           <Image

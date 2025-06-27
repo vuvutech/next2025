@@ -4,8 +4,8 @@ import Image from "next/image";
 
 const AboutSectionThree = () => {
   return (
-    <div className="py-8">
-      <section className="max-w-8xl w-full py-10 md:px-8 md:py-10 mx-auto  dark:bg-firefly-900">
+    <div className="py-4">
+      <section className="max-w-8xl w-full py-4 mx-auto  dark:bg-firefly-900">
         {/* Grid */}
         <div className="grid md:grid-cols-3  md:gap-8 ">
           <Image
