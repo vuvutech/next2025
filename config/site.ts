@@ -21,7 +21,7 @@ export const siteConfig = {
     },
     {
       label: "COSTrAD",
-      href: "/costrad",
+      href: "/institutes/college-of-sustainable-transformation-and-development",
       number: "03",
     },
     {

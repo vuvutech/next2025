@@ -10,7 +10,6 @@ import EditableProfileForm from "@/components/EditableProfileForm";
 
 export const dynamic = "force-dynamic";
 
-
 export default async function DashboardPage() {
   const [session, activeSessions, deviceSessions, organization] =
     await Promise.all([
@@ -31,7 +30,7 @@ export default async function DashboardPage() {
     });
 
   return (
-    <div className=" mx-auto p-4 m-4 w-full">
+    <div className=" mx-auto p-2 sm:p-4 sm:m-4 w-full overflow-x-scroll relative">
       <Tabs defaultValue="account" className="rounded-lg w-full">
         <TabsList>
           <TabsTrigger id="account" value="account">

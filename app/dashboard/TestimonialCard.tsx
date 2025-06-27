@@ -173,7 +173,7 @@ export default function TestimonialCard(props: { session: Session | null }) {
   }, []);
 
   return (
-    <div className="space-y-6 p-4">
+    <div className="space-y-6 sm:p-4">
       <div className="flex flex-col sm:flex-row gap-4 justify-between">
         <div>
           <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">

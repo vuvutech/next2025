@@ -130,12 +130,12 @@ export default function EditableProfileForm() {
   if (loading) return <Loading />;
 
   return (
-    <Card className="w-full max-w-4xl mx-auto my-10">
-      <CardHeader>
+    <Card className="w-full max-w-4xl mx-auto my-10 ">
+      <CardHeader className="p-2">
         <CardTitle>Profile Form</CardTitle>
         <CardDescription>Complete your personal profile</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-2">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid sm:grid-cols-4 gap-4">
             <div className="space-y-1">
@@ -438,7 +438,7 @@ export default function EditableProfileForm() {
             )}
           </div>
 
-          <Button type="submit" disabled={isSubmitting}>
+          <Button className="w-full sm:w-auto" type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Updating..." : "Update Profile"}
           </Button>
         </form>

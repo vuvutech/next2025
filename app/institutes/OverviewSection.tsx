@@ -37,9 +37,10 @@ export default function OverviewSection({
     : "";
   return (
     <section id="about-section" className="max-w-8xl sm:px-2   mx-auto h-auto">
-      <div className="sm:dark:ring-gray-700 lg:flex lg:max-w-none lg:mx-0 max-w-2xl mx-auto sm:ring-1 sm:ring-gray-200 sm:rounded-3xl">
-        <div className=" sm:p-10 md:p-8 lg:flex-auto space-y-4">
-          <h1 className=" tracking-tight  ">{institute.name}</h1>
+      <div className="flex flex-col lg:flex-row lg:max-w-none lg:mx-0 max-w-2xl mx-auto sm:ring-1 sm:ring-gray-200 sm:rounded-3xl sm:dark:ring-gray-700">
+        
+        <div id="introduction" className="order-2 lg:order-1 sm:p-10 md:p-8 lg:flex-auto space-y-4 p-2">
+          <h1 className=" tracking-tight pt-20 sm:pt-5 ">{institute.name}</h1>
           <div className="mt-3 h-0.5 w-9 rounded-full bg-primary" />
           <h4 className="text-firefly">Introduction</h4>
           <div
@@ -58,7 +59,7 @@ export default function OverviewSection({
           ></ul>
         </div>
 
-        <div className="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
+        <div id="action-card" className="order-1 lg:order-2 -mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
           <div className="rounded-2xl bg-gray-300/30 dark:bg-blue-900/10 h-auto md:h-full py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
             {/* edition institute logo */}
             <div className="flex justify-center py-3">
