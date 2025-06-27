@@ -78,7 +78,7 @@ export default function OverviewSection({
             {institute.acronym?.toLowerCase() === "costrad" ? (
               <div className="mx-auto max-w-xs px-8">
                 <p className="text-base font-bold text-gray-600 dark:text-gray-500">
-                  Pay once &mdash; Own it forever
+                  Specially Subsidized by the President
                 </p>
 
                 <div>
