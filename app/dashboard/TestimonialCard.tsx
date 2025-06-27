@@ -179,8 +179,8 @@ export default function TestimonialCard(props: { session: Session | null }) {
           <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
             My Testimonials
           </h2>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
-            Customize your account settings.
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-xl">
+            Your story can inspire others. Share your COSTrAD journey and help shape a legacy of transformation, leadership, and national impact.
           </p>
         </div>
         <Button

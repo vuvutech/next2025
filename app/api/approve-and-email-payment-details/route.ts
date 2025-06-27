@@ -8,6 +8,20 @@ export async function POST(req: NextRequest) {
     const { id, name, email, startDate, endDate, price, priceViaZoom } =
       await req.json();
 
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    const formattedStartDate = startDate
+      ? formatter.format(new Date(startDate))
+      : "TBD";
+
+    const formattedEndDate = endDate
+      ? formatter.format(new Date(endDate))
+      : "TBD";
+
     // Send email with payment info
     await sendMail({
       to: email,
@@ -16,8 +30,8 @@ export async function POST(req: NextRequest) {
         <h2>Hello ${name},</h2>
         <p>Thank you for registering. Here are your payment details:</p>
         <ul>
-          <li><strong>Start Date:</strong> ${new Date(startDate).toLocaleDateString()}</li>
-          <li><strong>End Date:</strong> ${new Date(endDate).toLocaleDateString()}</li>
+          <li><strong>Start Date:</strong> ${formattedStartDate}</li>
+          <li><strong>End Date:</strong> ${formattedEndDate}</li>
           <li><strong>Price (In Person):</strong> $${price}</li>
           <li><strong>Price (Via Zoom):</strong> $${priceViaZoom}</li>
         </ul>

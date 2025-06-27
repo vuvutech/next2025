@@ -130,7 +130,7 @@ export default function EditableProfileForm() {
   if (loading) return <Loading />;
 
   return (
-    <Card className="w-full max-w-4xl mx-auto my-10 ">
+    <Card className="w-full max-w-4xl mx-auto my-10 p-2 ">
       <CardHeader className="p-2">
         <CardTitle>Profile Form</CardTitle>
         <CardDescription>Complete your personal profile</CardDescription>
