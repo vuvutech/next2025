@@ -243,7 +243,7 @@ export default function ContactPage() {
               href="#"
             >
               <div className="flex items-center justify-between gap-4">
-                <FaXTwitter className="size-5" />
+                <FaXTwitter className="size-10" />
                 <ArrowUpRight className="size-4 -translate-x-2 translate-y-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
               </div>
               <div className="mt-4">
@@ -258,7 +258,7 @@ export default function ContactPage() {
               href="#"
             >
               <div className="flex items-center justify-between gap-4">
-                <FaTiktok className="size-5" />
+                <FaTiktok className="size-10" />
                 <ArrowUpRight className="size-4 -translate-x-2 translate-y-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
               </div>
               <div className="mt-4">
@@ -273,7 +273,7 @@ export default function ContactPage() {
               href="#"
             >
               <div className="flex items-center justify-between gap-4">
-                <FaWhatsapp className="size-5" />
+                <FaWhatsapp className="size-10" />
                 <ArrowUpRight className="size-4 -translate-x-2 translate-y-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
               </div>
               <div className="mt-4">
@@ -288,7 +288,7 @@ export default function ContactPage() {
               href="#"
             >
               <div className="flex items-center justify-between gap-4">
-                <FaFacebook className="size-5" />
+                <FaFacebook className="size-10" />
                 <ArrowUpRight className="size-4 -translate-x-2 translate-y-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
               </div>
               <div className="mt-4">

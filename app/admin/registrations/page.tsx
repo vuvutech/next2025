@@ -14,7 +14,7 @@ export default async function AdminRegistrationsPage() {
 
   return (
     <div className="p-6 space-y-4">
-      <h1 className="text-2xl font-bold">User Registrations</h1>
+      <h1 className="text-2xl font-bold">Edition Registrations</h1>
       <ClientWrapper data={registrations} />
     </div>
   );
