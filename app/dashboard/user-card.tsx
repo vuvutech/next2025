@@ -81,8 +81,8 @@ export default function UserCard(props: {
       </div>
       <Card>
         <CardHeader>{/* <CardTitle>User</CardTitle> */}</CardHeader>
-        <CardContent className="grid gap-8 grid-cols-1">
-          <div className="flex items-start justify-between">
+        <CardContent className="grid gap-6 grid-cols-1">
+          <div className="grid gap-2 sm:flex items-start justify-between">
             <div className="flex items-center gap-4">
               <Avatar className="hidden h-9 w-9 sm:flex ">
                 <AvatarImage
@@ -411,10 +411,10 @@ export default function UserCard(props: {
             </div>
           </div>
         </CardContent>
-        <CardFooter className="gap-2 justify-between items-center">
+        <CardFooter className="grid gap-2 sm:flex justify-between items-center">
           <ChangePassword />
           <Button
-            className="gap-2 z-10"
+            className="gap-2 z-10 w-full"
             variant="secondary"
             onClick={async () => {
               setIsSignOut(true);

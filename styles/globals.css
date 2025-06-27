@@ -26,7 +26,8 @@
   h3,
   h4,
   h5 {
-    font-family: var(--font-opensans), sans-serif; /* Default font for headings */
+    font-family:
+      var(--font-opensans), sans-serif; /* Default font for headings */
     font-weight: 300; /* Default weight, adjust as needed */
     text-transform: uppercase; /* Uppercase for all headings */
     margin: 0; /* Reset margin for headings */
@@ -84,6 +85,7 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -134,16 +136,16 @@
   --color-color-4: var(--color-4);
   --color-color-3: var(--color-3);
   --color-color-2: var(--color-2);
-  --color-color-1: var(--color-1)
-;
+  --color-color-1: var(--color-1);
   @keyframes rainbow {
-  0% {
-    background-position: 0%;
+    0% {
+      background-position: 0%;
     }
-  100% {
-    background-position: 200%;
+    100% {
+      background-position: 200%;
     }
-  }}
+  }
+}
 :root {
   --font-opensans: "Open Sans", sans-serif;
   --radius: 0.5rem;
@@ -151,7 +153,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary:oklch(38.1% 0.176 304.987);
+  --primary: oklch(38.1% 0.176 304.987);
   --primary-foreground: oklch(94.786% 0.00413 55.525);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -181,6 +183,7 @@
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --color-1: oklch(66.2% 0.225 25.9);
+  --primary-light: oklch(60.4% 0.26 302);
   --color-2: oklch(60.4% 0.26 302);
   --color-3: oklch(69.6% 0.165 251);
   --color-4: oklch(80.2% 0.134 225);
