@@ -53,9 +53,8 @@ export const columns: ColumnDef<any>[] = [
         />
         <span>
           {row.original.edition?.institute?.name} <br />
-          &mdash; <br />
           <span className=" text-firefly text-[11px] font-bold uppercase">
-            Date:{" "}
+            {" "}
             {new Date(row.original.edition?.startDate).toLocaleDateString(
               "en-US",
               {
