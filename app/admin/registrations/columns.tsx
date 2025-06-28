@@ -51,7 +51,32 @@ export const columns: ColumnDef<any>[] = [
           width={50}
           height={50}
         />
-        <span>{row.original.edition?.institute?.name}</span>
+        <span>
+          {row.original.edition?.institute?.name} <br />
+          &mdash; <br />
+          <span className=" text-firefly text-[11px] font-bold uppercase">
+            Date:{" "}
+            {new Date(row.original.edition?.startDate).toLocaleDateString(
+              "en-US",
+              {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              }
+            )}
+          </span>{" "}
+          &mdash;{" "}
+          <span className=" text-destructive text-[11px] font-bold uppercase">
+            {new Date(row.original.edition?.endDate).toLocaleDateString(
+              "en-US",
+              {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              }
+            )}
+          </span>{" "}
+        </span>
       </div>
     ),
   },
