@@ -41,6 +41,8 @@ interface DataTableProps<TData, TValue> {
   extention?: React.ReactNode | string | null;
 }
 
+export const dynamic = "force-dynamic";
+
 export function GenericDataTable<TData, TValue>({
   columns,
   data,

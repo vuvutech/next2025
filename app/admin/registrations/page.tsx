@@ -2,6 +2,8 @@
 import { prisma } from "@/prisma/dbConnect";
 import ClientWrapper from "./ClientWrapper";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminRegistrationsPage() {
   const registrations = await prisma.registration.findMany({
     include: {
