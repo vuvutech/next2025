@@ -136,7 +136,16 @@ export async function getInstituteBySlug(slug: string) {
     return null;
   }
 }
+export async function isEmailVerified(email: string): Promise<boolean> {
+  if (!email) return false;
 
+  const user = await prisma.user.findUnique({
+    where: { email },
+    select: { emailVerified: true },
+  });
+
+  return user?.emailVerified === true;
+}
 export async function getUserRole() {
   const session = await auth.api.getSession({
     headers: await headers(),

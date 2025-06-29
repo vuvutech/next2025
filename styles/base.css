@@ -180,3 +180,10 @@ cite {
 .shape {
   fill: #0e1822;
 }
+
+
+.ng-deep ngx-turnstile iframe {
+     width:90% !important;
+     height:65px !important;
+     display:block !important;
+} 

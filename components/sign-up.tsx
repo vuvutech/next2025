@@ -12,16 +12,25 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { signIn, signUp } from "@/lib/auth-client";
 import Image from "next/image";
 import { Loader2, X } from "lucide-react";
+import { signUp } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { PasswordInput } from "./ui/password-input";
 import Link from "next/link";
-import SeperatorWithText from "./ui/seperatorWithText";
+import { baseUrl } from "@/lib/metadata";
+import { PasswordInput } from "./ui/password-input";
+import { Turnstile } from "@marsidev/react-turnstile"; // Add this if not already
 
-export function SignUpComponent() {
+type SignUpProps = {
+  costradCallbackUrl?: string | null;
+  displayFooterText?: boolean | null;
+};
+
+export function SignUpComponent({
+  costradCallbackUrl,
+  displayFooterText = true,
+}: SignUpProps) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -30,7 +39,11 @@ export function SignUpComponent() {
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const router = useRouter();
-  const [signUpResponse, setSignUpResponse] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileStatus, setTurnstileStatus] = useState("required");
+  const [error, setError] = useState<string | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -43,23 +56,23 @@ export function SignUpComponent() {
       reader.readAsDataURL(file);
     }
   };
-  const [loading, setLoading] = useState(false);
 
   return (
-    <Card className=" rounded-none bg-transparent max-w-md border-none shadow-none ">
+    <Card className="border-none">
       <CardHeader>
-         <CardDescription className="text-xs md:text-sm">
-          <span className="font-bold">COSTrAD Sign-up</span><br />Enter your email below to login to your account
+        <CardTitle className="text-lg md:text-xl">Sign Up</CardTitle>
+        <CardDescription className="text-xs md:text-sm">
+          Enter your information to create an account
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-2">
-          <div className="grid grid-cols-2 gap-2">
+        <div className="grid gap-4">
+          <div className="grid grid-cols-2 gap-4">
             <div className="grid gap-2">
               <Label htmlFor="first-name">First name</Label>
               <Input
                 id="first-name"
-                placeholder="eg. Paul"
+                placeholder="Max"
                 required
                 onChange={(e) => {
                   setFirstName(e.target.value);
@@ -71,7 +84,7 @@ export function SignUpComponent() {
               <Label htmlFor="last-name">Last name</Label>
               <Input
                 id="last-name"
-                placeholder="And-Silas"
+                placeholder="Robinson"
                 required
                 onChange={(e) => {
                   setLastName(e.target.value);
@@ -85,7 +98,7 @@ export function SignUpComponent() {
             <Input
               id="email"
               type="email"
-              placeholder="kwame@example.com"
+              placeholder="m@example.com"
               required
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -148,169 +161,135 @@ export function SignUpComponent() {
               </div>
             </div>
           </div>
+
+          <Turnstile
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+              options={{ theme: "auto", size:'flexible' }} // Customize the widget's theme (dark mode in this case)
+            onError={() => {
+              setTurnstileStatus("error");
+              setError("Security check failed. Please try again.");
+            }}
+            onExpire={() => {
+              setTurnstileStatus("expired");
+              setError("Security check expired. Please verify again.");
+            }}
+            onWidgetLoad={() => {
+              setTurnstileStatus("required");
+              setError(null);
+            }}
+            onSuccess={(token) => {
+              setTurnstileToken(token);
+              setTurnstileStatus("success");
+              console.log("Token received:", token);
+            }}
+          />
+
+          {error && (
+            <div className="text-red-500 text-sm mt-2 text-center">{error}</div>
+          )}
+
           <Button
             type="submit"
-            className="w-full cursor-pointer text-background bg-foreground "
-            disabled={loading}
+            className="w-full"
+            disabled={loading || turnstileStatus !== "success"}
             onClick={async () => {
+              setError(null);
+
+              if (!turnstileToken) {
+                toast.error("Please complete the security challenge first.");
+                setLoading(false);
+                return;
+              }
+
               setLoading(true);
 
-              const signUpPromise = signUp
-                .email({
+              try {
+                // 1. Verify Turnstile token
+                const response = await fetch("/api/verify-turnstile", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ token: turnstileToken }),
+                });
+
+                const data = await response.json();
+
+                if (!data.success) {
+                  toast.error(
+                    "Security verification failed. Please try again."
+                  );
+                  setLoading(false);
+                  return;
+                }
+
+                // 2. Proceed with sign-up if Turnstile passes
+                await signUp.email({
                   email,
                   password,
                   name: `${firstName} ${lastName}`,
                   image: image ? await convertImageToBase64(image) : "",
-                  callbackURL: "/auth/emailVerification/",
-                })
-                .then((response) => {
-                  if (response?.error) {
-                    setSignUpResponse(response.error?.statusText as string);
-                  }
+                  callbackURL: `${baseUrl}/dashboard`,
+                  fetchOptions: {
+                    onRequest: () => setLoading(true),
+                    onResponse: () => setLoading(false),
+                    onError: (ctx) => {
+                      toast.error(ctx.error.message);
+                    },
+                    onSuccess: async () => {
+                      try {
+                        const res = await fetch("/api/isEmailVerified", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ email }),
+                        });
 
-                  if (response?.data?.user?.emailVerified === false) {
-                    sessionStorage.setItem(
-                      "signupEmail",
-                      response?.data?.user?.email
-                    );
-                    setTimeout(() => {
-                      router.push("/auth/emailVerification");
-                    }, 3000);
-                    setSignUpResponse(
-                      "Email verification required. Redirecting ..."
-                    );
-                  }
+                        const { verified } = await res.json();
 
-                  if (response?.data?.user?.emailVerified === true) {
-                    router.push("/");
-                  }
-
-                  if (response?.data?.user?.id !== null) {
-                    setSignUpResponse("Sign-up successful!");
-                  }
+                        if (!verified) {
+                          router.push(
+                            `/auth/emailVerification?signupEmail=${encodeURIComponent(email)}`
+                          );
+                        } else {
+                          router.push(`${costradCallbackUrl}`);
+                        }
+                      } catch (error) {
+                        console.error("Failed to verify email:", error);
+                        toast.error("Something went wrong. Please try again.");
+                      }
+                    },
+                  },
                 });
-
-              toast.promise(signUpPromise, {
-                loading: "Signing up...",
-                success: () => {
-                  const successMessage = "Sign-up successful!";
-                  setLoading(false);
-                  return successMessage;
-                },
-                error: (error) => {
-                  setLoading(false);
-                  const errorMessage = "Sign-up failed!";
-                  setSignUpResponse(errorMessage);
-                  return errorMessage;
-                },
-              });
+              } catch (err) {
+                console.error("Error in Turnstile or sign-up flow", err);
+                toast.error("Unexpected error. Please try again.");
+                setLoading(false);
+              }
             }}
           >
             {loading ? (
               <Loader2 size={16} className="animate-spin" />
+            ) : turnstileStatus !== "success" ? (
+              "Waiting for Human/Robot Verification..."
             ) : (
               "Create an account"
             )}
           </Button>
-
-          <SeperatorWithText seperatorText="Or Signup With" />
-
-          <div className="grid grid-cols-2 gap-2">
-            <Button
-              variant="outline"
-              className=" gap-2 cursor-pointer"
-              onClick={async () => {
-                await signIn.social({
-                  provider: "google",
-                  callbackURL: "/",
-                });
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="0.98em"
-                height="1em"
-                viewBox="0 0 256 262"
-              >
-                <path
-                  fill="#4285F4"
-                  d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622l38.755 30.023l2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"
-                />
-                <path
-                  fill="#34A853"
-                  d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055c-34.523 0-63.824-22.773-74.269-54.25l-1.531.13l-40.298 31.187l-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"
-                />
-                <path
-                  fill="#FBBC05"
-                  d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82c0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602z"
-                />
-                <path
-                  fill="#EB4335"
-                  d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0C79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
-                />
-              </svg>
-            </Button>
-            <Button
-              variant="outline"
-              className="gap-2 cursor-pointer"
-              onClick={async () => {
-                const { data } = await signIn.social({
-                  provider: "microsoft",
-                  callbackURL: "/",
-                });
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1.2em"
-                height="1.2em"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="M2 3h9v9H2zm9 19H2v-9h9zM21 3v9h-9V3zm0 19h-9v-9h9z"
-                ></path>
-              </svg>
-            </Button>
-            {/* 
-							<Button
-								variant="outline"
-								className="gap-2"
-								onClick={async () => {
-									await signIn.social({
-										provider: "facebook",
-										callbackURL: "/",
-									});
-								}}
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="1.3em"
-									height="1.3em"
-									viewBox="0 0 24 24"
-								>
-									<path
-										fill="currentColor"
-										d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95"
-									></path>
-								</svg>
-							</Button> */}
-          </div>
         </div>
       </CardContent>
-      <CardFooter className=" flex flex-col">
-        <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
-          Don't have an account? Rather{" "}
-          <Link href={"/auth/sign-in"} className="font-bold">
-            Login
-          </Link>
-          .
-        </div>
-        <div className="text-balance text-center pt-1 text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
-          By clicking continue, you agree to our <br />
-          <a href={"/terms"}>Terms of Service</a> and{" "}
-          <a href={"/privacy"}>Privacy Policy</a>.
-        </div>
+      <CardFooter className=" w-full flex flex-col">
+        {displayFooterText ? (
+          <div className=" text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
+            Rather Sign In?{" "}
+            <Link href={"/auth/sign-in"} className="font-bold">
+              Sign In.{" "}
+            </Link>{" "}
+            <br />
+            By clicking continue, you agree to our{" "}
+            <Link href={"/terms"}>Terms of Service</Link> and{" "}
+            <Link href={"/privacy"}>Privacy Policy</Link>.
+          </div>
+        ) : (
+          " "
+        )}
       </CardFooter>
     </Card>
   );
@@ -324,5 +303,3 @@ async function convertImageToBase64(file: File): Promise<string> {
     reader.readAsDataURL(file);
   });
 }
-
-export const dynamic = "force-dynamic";

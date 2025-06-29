@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react";
 import { SignUpComponent } from "@/components/sign-up";
+import { useState } from "react";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");

@@ -10,25 +10,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useSession } from "@/hooks/use-session";
-import { useRouter } from "next/navigation"; // Import useRouter
-import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation"; // Added useSearchParams
+import { useEffect } from "react";
 import Link from "next/link";
 import Loading from "@/components/Loading";
 
 export default function EmailVerification() {
-  const [signupEmail, setSignupEmail] = useState<string | null>(null);
-  const { session, isLoading } = useSession(); // Get the user's session
-  const router = useRouter(); // Initialize the router
+  const searchParams = useSearchParams(); // 👈 Get query params
+  const signupEmail = searchParams.get("signupEmail"); // 👈 Extract the email
+  const { session, isLoading } = useSession();
+  const router = useRouter();
 
-  // Redirect to home if user is already signed in
-  useEffect(() => {
-    const fetchData = async () => {
-      const emailFromStorage = await sessionStorage.getItem("signupEmail");
-      setSignupEmail(emailFromStorage);
-    };
-    fetchData();
-  }, []);
-
+  // Redirect to home if already signed in
   useEffect(() => {
     if (session && session.userId) {
       router.push("/");
@@ -39,22 +32,20 @@ export default function EmailVerification() {
     return <Loading />;
   }
 
-  // if (session && session.userId) {
-  // 	return router.push("/");
-  // }
-
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
-      <Card className="w-[350px]">
+    <div className="flex p-4 flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
+      <Card className="w-auto bg-muted">
         <CardHeader>
-          <CardTitle>Verify Email to Continue ...</CardTitle>
+          <CardTitle className="text-xl">Verify Email to Continue ...</CardTitle>
           <CardDescription>
             An email has been sent to{" "}
-            <span className="font-bold text-green-500">{signupEmail}</span>.
+            <span className="font-bold text-destructive">
+              {signupEmail || "your email"}
+            </span>.
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          Visit your inbox to verify your email. If not in your inbox, kindly
+        <CardContent className="text-muted-foreground">
+          Visit your inbox to verify your email. If not in your inbox, then
           check your spam folder.
         </CardContent>
         <CardFooter>
