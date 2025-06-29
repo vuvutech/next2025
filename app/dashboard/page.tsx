@@ -30,9 +30,9 @@ export default async function DashboardPage() {
     });
 
   return (
-    <div className=" mx-auto p-2 sm:p-4 sm:m-4 w-full overflow-x-scroll sm:overflow-x-hidden relative">
+    <div className=" mx-auto p-2 sm:p-4 sm:m-4 w-full  sm:overflow-x-hidden relative">
       <Tabs defaultValue="account" className="rounded-lg w-full">
-        <TabsList>
+        <TabsList className="overflow-x-auto">
           <TabsTrigger id="account" value="account">
             Account
           </TabsTrigger>
