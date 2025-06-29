@@ -22,6 +22,8 @@ import { baseUrl } from "./metadata";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "@/prisma/dbConnect";
 import { generateStudentId } from "@/app/actions/functions";
+import { render } from "@react-email/components";
+import VerifyEmail from "./email/VerifyEmail";
 
 const from = process.env.BETTER_AUTH_EMAIL || "notifications@costrad.org";
 
@@ -80,17 +82,26 @@ export const auth = betterAuth({
   baseURL: baseUrl.toString(),
 
   emailVerification: {
-    autoSignInAfterVerification: true,
-    sendOnSignUp: true,
-    async sendVerificationEmail({ user, url }) {
-      const res = await resend.emails.send({
-        from,
-        to: user.email,
-        subject: "Verify your email address",
-        html: `<a href="${url}">Verify your email address</a>`,
-      });
-    },
+  autoSignInAfterVerification: true,
+  sendOnSignUp: true,
+  async sendVerificationEmail({ user, url }) {
+    await resend.emails.send({
+      from,
+      to: user.email,
+      subject: "Confirm your COSTrAD account",
+      react: VerifyEmail({
+        username: user.name || user.email,
+        verifyLink: url,
+      }),
+      // html: await render(
+      //   VerifyEmail({
+      //     username: user.name || user.email,
+      //     verifyLink: url,
+      //   })
+      // ),
+    });
   },
+},
   rateLimit: {
     enabled: true,
     max: 100,

@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    await seedCollection(collectionName);
+    // await seedCollection(collectionName);
     return NextResponse.json({ message: `✅ Seeding ${collectionName} complete.` });
   } catch (err: any) {
     console.error(`❌ Seeding error for ${collectionName}:`, err);
