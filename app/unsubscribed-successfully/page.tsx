@@ -3,7 +3,7 @@ import { ThemeSwitch } from "@/components/ui/theme-switch";
 import Link from "next/link";
 import React from "react";
 
-export default function Home() {
+export default function Unsubscribe() {
   return (
     <main className="flex h-screen max-h-dvh flex-col items-center justify-center p-4 relative">
       <div className="absolute top-4  right-3 ">

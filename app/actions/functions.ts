@@ -6,6 +6,8 @@ import { NextRequest } from "next/server";
 import { auth } from "@/lib/auth";
 import { baseUrl } from "@/lib/metadata";
 import { prisma } from "@/prisma/dbConnect";
+import crypto from "crypto";
+
 
 export const getInstitutes = async () => {
   //  get institutes in descending order by startDate
@@ -136,6 +138,11 @@ export async function getInstituteBySlug(slug: string) {
     return null;
   }
 }
+
+export async function generateUnsubscribeToken() {
+  return crypto.randomBytes(32).toString("hex");
+}
+
 export async function isEmailVerified(email: string): Promise<boolean> {
   if (!email) return false;
 
