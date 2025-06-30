@@ -5,8 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { Button } from "./button";
 import { Separator } from "./separator";
+import { useDialog } from "@/providers/DialogProvider";
 
 const CTA = () => {
+    const { open } = useDialog();
+  
   const [emailInput, setEmailInput] = useState("");
   const [name, setName] = useState<string | undefined>();
 
@@ -45,7 +48,10 @@ const CTA = () => {
               />
 
               <Button
-                onClick={handleClick}
+                onClick={()=>{
+                  handleClick();
+                  open('newsletter');
+                }}
                 className="bg-primary text-white hover:text-secondary 
                 shadow border border-accent-background cursor-pointer"
               >

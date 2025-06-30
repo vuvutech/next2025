@@ -83,6 +83,8 @@ model User {
   announcements    Announcement[] // 👈 one-to-many relation
   profile          Profile?
 
+  newsletterSubscribers NewsletterSubscriber[] // 👈 relation to NewsletterSubscriber
+
   studentId    String?
   Registration Registration[]
 
@@ -374,4 +376,24 @@ model Registration {
 
   @@unique([userId, editionId]) // A user can register for an edition only once
   @@map("registration")
+}
+
+model NewsletterSubscriber {
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  email            String    @unique
+  name             String?
+  userId           String?
+  user             User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  notifyPermission Boolean   @default(false)
+  verified         Boolean   @default(false)
+  unsubscribeToken String?
+  topics           String[] // was `tags`
+  subscribedAt     DateTime  @default(now())
+  unsubscribedAt   DateTime?
+  updatedAt        DateTime  @updatedAt
+  source           String?   @default("unknown")
+  ipAddress        String?
+  locale           String?
+
+  @@map("newsletter_subscriber")
 }

@@ -11,6 +11,7 @@ import StickyMenuWrapper from "@/components/ui/StickyMenuWrapper";
 import FooterWrapper from "@/components/Footer-Wrapper";
 import { GlobalDialog } from "@/components/GlobalDialog";
 import { TestimonialDialog } from "@/components/TestimonialDialog";
+import { NewsletterDialog } from "@/components/NewsletterDialog";
 
 export const metadata: Metadata = {
   title: {
@@ -64,6 +65,7 @@ export default function RootLayout({
           <SpeedInsights />
           {/* <GlobalDialog /> */}
           <TestimonialDialog />
+          <NewsletterDialog />
         </Providers>
       </body>
     </html>
