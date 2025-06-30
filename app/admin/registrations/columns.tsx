@@ -80,10 +80,10 @@ export const columns: ColumnDef<any>[] = [
     ),
   },
   {
-    header: "Edition Year",
-    accessorFn: (row) => new Date(row.edition?.startDate).getFullYear(),
+    header: "Date of Registration",
+    accessorFn: (row) => new Date(row.original.createdAt).toLocaleDateString(),
     cell: ({ row }) => (
-      <div>{new Date(row.original.edition?.startDate).getFullYear()}</div>
+      <div>{format(new Date(row.original.createdAt).toLocaleDateString(), "PPP")}</div>
     ),
   },
   {

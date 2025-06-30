@@ -12,6 +12,9 @@ export default async function AdminRegistrationsPage() {
         include: { institute: true },
       },
     },
+    orderBy: {
+      createdAt: "desc", // 👈 sorts by creation time, latest first
+    },
   });
 
   return (
