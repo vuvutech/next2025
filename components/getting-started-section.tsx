@@ -161,7 +161,7 @@ const GettingStarted = ({
                 <div className="mt-6 block border bg-muted/50 px-4 py-6 lg:hidden">
                   <div className="aspect-video">
                     <img
-                      src="/images/united-nations2.webp"
+                      src="/images/reviews.jpg"
                       alt="placeholder"
                       className="h-full w-full rounded-md border object-cover shadow"
                     />
@@ -200,8 +200,8 @@ const GettingStarted = ({
                 </div>
                 <div className="mt-6 block border bg-muted/50 px-4 py-6 lg:hidden">
                   <div className="aspect-video">
-                    <img
-                      src="/images/united-nations2.webp"
+                     <img
+                      src="/images/reviews.jpg"
                       alt="placeholder"
                       className="h-full w-full rounded-md border object-cover shadow"
                     />
@@ -241,7 +241,7 @@ const GettingStarted = ({
                 <div className="mt-6 block border bg-muted/50 px-4 py-6 lg:hidden">
                   <div className="aspect-video">
                     <img
-                      src="/images/block/placeholder-dark-1.svg"
+                      src="/images/reviews.jpg"
                       alt="placeholder"
                       className="h-full w-full rounded-md border object-cover shadow"
                     />

@@ -22,7 +22,6 @@ import { Input } from "./ui/input";
 import { Checkbox } from "./ui/checkbox";
 import { Label } from "./ui/label";
 import { Controller, useForm } from "react-hook-form";
-import { useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { Turnstile } from "@marsidev/react-turnstile"; // Add this if not already
 

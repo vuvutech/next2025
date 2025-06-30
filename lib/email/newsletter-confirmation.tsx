@@ -1,4 +1,3 @@
-// emails/newsletter-confirmation.tsx
 import {
   Body,
   Container,
@@ -8,7 +7,6 @@ import {
   Text,
   Tailwind,
 } from "@react-email/components";
-import Link from "next/link";
 
 interface NewsletterConfirmationEmailProps {
   name?: string;
@@ -39,34 +37,30 @@ export const NewsletterConfirmationEmail = ({
 
             <Text className="text-sm leading-6">
               You’ll now receive occasional updates, exclusive invitations, and
-              the latest insights from COSTrAD, delivered straight to your
-              inbox.
+              the latest insights from COSTrAD, delivered straight to your inbox.
             </Text>
+
+            <Text className="text-sm leading-6 mt-4">
+              Want to stop receiving emails? You can unsubscribe at any time by
+              clicking the link below:
+            </Text>
+
+            <a
+              href={`https://www.costrad.org/api/unsubscribe/${unsubscribeToken}`}
+              className="text-blue-600 underline"
+            >
+              Unsubscribe from this list
+            </a>
 
             <Text className="text-xs text-muted mt-6">
               If this wasn't you or you wish to unsubscribe at any time, simply
               click the unsubscribe link in any of our emails or contact us at{" "}
-              <a
-                className="text-primary"
-                href="mailto:correspondence@costrad.org"
-              >
+              <a href="mailto:correspondence@costrad.org">
                 correspondence@costrad.org
               </a>
               .
             </Text>
           </Container>
-
-          <Text className="text-sm leading-6 mt-4">
-            Want to stop receiving emails? You can unsubscribe at any time by
-            clicking the link below:
-          </Text>
-
-          <Link
-            href={`https://www.costrad.org/api/unsubscribe/${unsubscribeToken}`}
-            className="text-blue-600 underline"
-          >
-            Unsubscribe from this list
-          </Link>
         </Body>
       </Tailwind>
     </Html>

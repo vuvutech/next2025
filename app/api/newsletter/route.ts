@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
     where: { email },
     select: { id: true },
   });
+  
 
   const unsubscribeToken = await generateUnsubscribeToken();
 
