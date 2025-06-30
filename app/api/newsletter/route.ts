@@ -6,8 +6,6 @@ import { render } from "@react-email/render";
 import { sendMail } from "@/lib/nodemailer-mail"; // or your mail helper
 import { generateUnsubscribeToken } from "@/app/actions/functions";
 
-
-
 export async function POST(req: NextRequest) {
   const { name, email, notifyPermission } = await req.json();
 
@@ -22,9 +20,9 @@ export async function POST(req: NextRequest) {
     where: { email },
     select: { id: true },
   });
-  
 
   const unsubscribeToken = await generateUnsubscribeToken();
+  const confirmationToken = nanoid();
 
   try {
     const subscriber = await prisma.newsletterSubscriber.upsert({
@@ -34,6 +32,8 @@ export async function POST(req: NextRequest) {
         notifyPermission,
         subscribedAt: new Date(),
         unsubscribedAt: null,
+        confirmationToken,
+        verified: false,
       },
       create: {
         name,
@@ -41,6 +41,8 @@ export async function POST(req: NextRequest) {
         notifyPermission,
         userId: existingUser?.id,
         unsubscribeToken,
+        confirmationToken,
+        verified: false,
         source: "dialog",
       },
     });
@@ -50,7 +52,8 @@ export async function POST(req: NextRequest) {
       const html = await render(
         NewsletterConfirmationEmail({
           name,
-          unsubscribeToken
+          confirmationToken, // ✅ use this
+          unsubscribeToken, // optional (can include both)
         })
       );
 
