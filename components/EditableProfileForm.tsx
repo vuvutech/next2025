@@ -165,7 +165,7 @@ export default function EditableProfileForm() {
                   <Button
                     variant="outline"
                     className={cn(
-                      "w-full justify-start text-left font-normal",
+                      "w-full justify-start text-left font-normal py-2",
                       !dateOfBirth && "text-muted-foreground"
                     )}
                   >

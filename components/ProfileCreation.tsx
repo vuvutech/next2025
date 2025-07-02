@@ -234,7 +234,7 @@ export const ProfileCreation = () => {
                         <PopoverTrigger asChild>
                           <FormControl>
                             <Button
-                              variant="outline"
+                              variant="secondary"
                               className={cn(
                                 "w-full justify-start text-left font-normal",
                                 !field.value && "text-muted-foreg<SelectTrigger>round"
