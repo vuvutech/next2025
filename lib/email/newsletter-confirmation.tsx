@@ -51,7 +51,7 @@ export const NewsletterConfirmationEmail = ({
 
             <Text className="text-sm leading-6 mt-4">
               If you did not request this subscription, you can safely ignore this email or{" "}
-              <Link href={`https://www.costrad.org/api/unsubscribe/${unsubscribeToken}`}>
+              <Link href={`${baseUrl}api/newsletter/unsubscribe/${unsubscribeToken}`}>
                 unsubscribe here
               </Link>.
             </Text>
