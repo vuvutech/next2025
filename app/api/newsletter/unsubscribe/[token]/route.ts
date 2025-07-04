@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/dbConnect";
 import { baseUrl } from "@/lib/metadata";
 export async function GET(
-  _req: NextRequest,
-  { params }: { params: { token: string } }
+  req: NextRequest,
+  context: { params: { token: string } }
 ) {
-  const { token } = params;
+  const { token } = context.params;
 
   if (!token) {
     return NextResponse.json(
