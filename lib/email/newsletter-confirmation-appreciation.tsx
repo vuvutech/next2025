@@ -10,17 +10,16 @@ import {
 } from "@react-email/components";
 import { baseUrl } from "../metadata";
 
-interface NewsletterConfirmationEmailProps {
+interface NewsletterAppreciationEmailProps {
   name?: string;
-  confirmationToken?: string;
   unsubscribeToken?: string;
 }
 
-export const NewsletterConfirmationEmail = ({
+export const NewsletterAppreciationEmail = ({
   name,
-  confirmationToken,
-}: NewsletterConfirmationEmailProps) => {
-  const previewText = `Confirm your subscription to COSTrAD newsletters`;
+  unsubscribeToken,
+}: NewsletterAppreciationEmailProps) => {
+  const previewText = `Thank you for joining the COSTrAD Newsletter!`;
 
   return (
     <Html>
@@ -34,31 +33,37 @@ export const NewsletterConfirmationEmail = ({
             </Text>
 
             <Text className="text-sm leading-6">
-              Thank you for subscribing to the <strong>COSTrAD Newsletter</strong>!
+              <strong>Thank you for subscribing</strong> to the <strong>COSTrAD Newsletter</strong>!
             </Text>
 
             <Text className="text-sm leading-6">
-              To complete your subscription and start receiving updates, please confirm by clicking the button below:
+              We're excited to have you on board. You’ll now receive regular updates, insights, and research straight from the COSTrAD team.
             </Text>
 
-            <Link
-              href={`${baseUrl}api/newsletter/confirm/${confirmationToken}`}
-              className="text-white bg-blue-600 px-4 py-2 rounded mt-4 inline-block"
-            >
-              Confirm Subscription
-            </Link>
-
             <Text className="text-sm leading-6 mt-4">
-              If you did not request this subscription, you can safely ignore this email.
+              If at any time you have questions or feedback, we’d love to hear from you.
             </Text>
 
             <Text className="text-xs text-muted mt-6">
-              For questions, contact us at{" "}
+              Contact us at{" "}
               <Link href="mailto:correspondence@costrad.org">
                 correspondence@costrad.org
               </Link>
               .
             </Text>
+
+            {unsubscribeToken && (
+              <Text className="text-[11px] text-muted mt-4">
+                If you no longer wish to receive these emails, you can unsubscribe at any time by clicking{" "}
+                <Link
+                  href={`${baseUrl}api/newsletter/unsubscribe/${unsubscribeToken}`}
+                  className="underline"
+                >
+                  here
+                </Link>
+                .
+              </Text>
+            )}
           </Container>
         </Body>
       </Tailwind>

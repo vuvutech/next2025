@@ -3,11 +3,13 @@ import nodemailer from "nodemailer";
 
 export async function sendMail({
   to,
+  // replyTo,
   subject,
   html,
   cc
 }: {
   to: string;
+  // replyTo: string;
   subject: string;
   html: string;
   cc?: string;
@@ -24,6 +26,7 @@ export async function sendMail({
 
   await transporter.sendMail({
     from: `"COSTrAD Institute" <${process.env.SMTP_FROM}>`,
+    replyTo: `no-reply@costrad.org`,
     to,
     subject,
     html,

@@ -4,7 +4,6 @@ import { nanoid } from "nanoid"; // for generating unsubscribeToken
 import { NewsletterConfirmationEmail } from "@/lib/email/newsletter-confirmation";
 import { render } from "@react-email/render";
 import { sendMail } from "@/lib/nodemailer-mail"; // or your mail helper
-import { generateUnsubscribeToken } from "@/app/actions/functions";
 
 export async function POST(req: NextRequest) {
   const { name, email, notifyPermission } = await req.json();
@@ -21,7 +20,6 @@ export async function POST(req: NextRequest) {
     select: { id: true },
   });
 
-  const unsubscribeToken = await generateUnsubscribeToken();
   const confirmationToken = nanoid();
 
   try {
@@ -40,7 +38,6 @@ export async function POST(req: NextRequest) {
         email,
         notifyPermission,
         userId: existingUser?.id,
-        unsubscribeToken,
         confirmationToken,
         verified: false,
         source: "dialog",
@@ -52,14 +49,13 @@ export async function POST(req: NextRequest) {
       const html = await render(
         NewsletterConfirmationEmail({
           name,
-          confirmationToken, // ✅ use this
-          unsubscribeToken, // optional (can include both)
+          confirmationToken,
         })
       );
 
       await sendMail({
         to: email,
-        subject: "You're now subscribed to COSTrAD!",
+        subject: "Confirm Subscription to COSTrAD!",
         html,
       });
     }

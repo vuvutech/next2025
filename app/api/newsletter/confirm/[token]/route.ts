@@ -1,6 +1,10 @@
 import { prisma } from "@/prisma/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
-import { baseUrl } from '@/lib/metadata';
+import { baseUrl } from "@/lib/metadata";
+import { generateUnsubscribeToken } from "@/app/actions/functions";
+import { render } from "@react-email/components";
+import { NewsletterAppreciationEmail } from "@/lib/email/newsletter-confirmation-appreciation";
+import { sendMail } from "@/lib/nodemailer-mail";
 
 export async function GET(
   req: NextRequest,
@@ -20,13 +24,33 @@ export async function GET(
     return NextResponse.redirect(`${baseUrl}/confirmation-error`);
   }
 
+  const unsubscribeToken = await generateUnsubscribeToken();
+
   await prisma.newsletterSubscriber.update({
     where: { email: subscriber.email },
     data: {
       verified: true,
       confirmationToken: null,
+      unsubscribeToken: unsubscribeToken
     },
   });
+
+
+      if (subscriber) {
+        // Email confirmation
+        const html = await render(
+          NewsletterAppreciationEmail({
+            name: subscriber?.name ?? undefined,
+            unsubscribeToken: unsubscribeToken
+          })
+        );
+  
+        await sendMail({
+          to: subscriber.email,
+          subject: "You're now subscribed to COSTrAD!",
+          html,
+        });
+      }
 
   return NextResponse.redirect(`${baseUrl}/confirmed-successfully`);
 }
