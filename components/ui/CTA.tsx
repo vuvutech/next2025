@@ -19,9 +19,10 @@ const CTA = () => {
   };
 
   return (
-    <section className="p-4 sm:p-16">
+    <section className="p-2 md:p-6">
       <div className="container">
-        <div className="grid grid-cols-3 md:h-[50dvh] w-full flex-col gap-16 overflow-hidden rounded-xl bg-accent p-4 sm:p-8 md:rounded-xl lg:flex-row lg:items-center lg:p-16">
+        <div className="grid grid-cols-3 md:h-[70dvh] w-full flex-col gap-16 overflow-hidden rounded-xl bg-accent
+        dark:bg-black  p-4 sm:p-8 md:rounded-3xl lg:flex-row lg:items-center lg:p-16">
           <div className="col-span-full md:col-span-2 relative">
             <h1 className="text-xl sm:text-2xl md:mb-4 md:text-3xl lg:mb-6">
               STAY AHEAD OF THE CURVE

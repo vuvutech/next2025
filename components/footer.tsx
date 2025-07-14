@@ -90,7 +90,7 @@ export default function Footer() {
   ];
 
   return (
-    <div>
+    <>
       <CTA />
       <div className="bg-background text-foreground text-md border-foreground/20">
       <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14  pt-14 border-t ">
@@ -251,6 +251,6 @@ export default function Footer() {
         </div>
       </footer>
     </div>
-    </div>
+    </>
   );
 }
