@@ -63,6 +63,7 @@
     "lucide-react": "^0.487.0",
     "mongodb": "^6.17.0",
     "motion": "^12.18.1",
+    "motion-plus": "^1.4.1",
     "next": "15.2.4",
     "next-cloudinary": "^6.16.0",
     "next-sitemap": "^4.2.3",

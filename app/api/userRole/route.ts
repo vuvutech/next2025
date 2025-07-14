@@ -20,7 +20,7 @@ export async function GET(request: Request) {
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
-console.log("User role fetched successfully:", user.role); // Debug log
+// console.log("User role fetched successfully:", user.role); // Debug log
     return NextResponse.json({ role: user.role });
   } catch (err) {
     console.error("Error in userRole route:", err);

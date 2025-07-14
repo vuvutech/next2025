@@ -108,7 +108,7 @@ const AboutSectionFour = () => {
                         className="w-12 md:w-20"
                       />
                     </Link>
-                    <div className="uppercase">{item.label}</div>
+                    <div className="uppercase font-bold text-background">{item.label}</div>
                   </div>
                 ))}
               </div>
