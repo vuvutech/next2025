@@ -8,9 +8,9 @@ import { getCurrentUser } from "@/app/actions/functions";
 // GET all announcements (admin only)
 export async function GET(req: NextRequest) {
   const user = await getCurrentUser();
-  // if (!user || user.role !== "ADMIN") {
-  //   return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  // }
+  if (!user || user.role !== "ADMIN") {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
 
   const announcements = await prisma.announcement.findMany({
     include: { user: true },

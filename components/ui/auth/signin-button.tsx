@@ -32,11 +32,11 @@ export function SignInButton() {
               router.push("/auth/sign-in");
               // close();
             }} // Redirect to the sign-in page
-            className="uppercase  bg-secondary dark:hover:bg-black text-secondary cursor-pointer h-full rounded-none "
+            className="uppercase  bg-secondary dark:hover:bg-black hover:text-background text-secondary cursor-pointer h-full rounded-none "
             size="sm"
             variant="default"
           >
-            <span className="text-sm normal-case text-foreground hover:text-white  ">
+            <span className="text-sm normal-case text-foreground hover:text-white ">
               {session ? "" : "LOGIN/SIGNUP"}
             </span>
           </Button>
