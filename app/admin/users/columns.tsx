@@ -41,8 +41,6 @@ export const columns: ColumnDef<any>[] = [
   {
     header: "Institute",
     accessorFn: (row) => row.edition?.institute?.name,
-    enableSorting: true,
-
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
         <Image
@@ -83,8 +81,6 @@ export const columns: ColumnDef<any>[] = [
   },
   {
     header: "Date of Registration",
-    enableSorting: true,
-
     accessorFn: (row) => (row.createdAt ? new Date(row.createdAt) : null),
     cell: ({ row }) => (
       <div>

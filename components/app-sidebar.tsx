@@ -93,6 +93,11 @@ const data = {
       url: "/admin/participants",
       icon: IconUsers,
     },
+    {
+      title: "Users",
+      url: "/admin/users",
+      icon: IconReport,
+    },
   ],
   navClouds: [
     {

@@ -48,7 +48,7 @@ export function GenericDataTable<TData, TValue>({
   data,
   loading = false,
   addFiltering = false,
-  extention
+  extention,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -66,8 +66,8 @@ export function GenericDataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     // 3. Add onGlobalFilterChange handler
     onGlobalFilterChange: setGlobalFilter, // Update globalFilter state
-    getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(), // Keep if you still use column filters
     onColumnVisibilityChange: setColumnVisibility,
@@ -141,13 +141,31 @@ export function GenericDataTable<TData, TValue>({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                  <TableHead
+                    key={header.id}
+                    className="cursor-pointer select-none"
+                  >
+                    <div
+                      onClick={header.column.getToggleSortingHandler()}
+                      title={
+                        header.column.getCanSort()
+                          ? header.column.getNextSortingOrder() === "asc"
+                            ? "Sort ascending"
+                            : header.column.getNextSortingOrder() === "desc"
+                              ? "Sort descending"
+                              : "Clear sort"
+                          : undefined
+                      }
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                      {{
+                        asc: " 🔼",
+                        desc: " 🔽",
+                      }[header.column.getIsSorted() as string] ?? null}
+                    </div>
                   </TableHead>
                 ))}
               </TableRow>
@@ -201,4 +219,3 @@ export function GenericDataTable<TData, TValue>({
     </div>
   );
 }
-
