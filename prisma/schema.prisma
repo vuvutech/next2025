@@ -86,7 +86,7 @@ model User {
   newsletterSubscribers NewsletterSubscriber[] // 👈 relation to NewsletterSubscriber
 
   studentId    String?
-  Registration Registration[]
+  registration Registration[]
 
   @@unique([studentId])
   @@map("user")

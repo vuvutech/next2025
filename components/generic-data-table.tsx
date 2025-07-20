@@ -1,5 +1,3 @@
-// File: app/admin/testimonials/data-table.tsx
-
 "use client";
 
 import {
@@ -32,16 +30,18 @@ import {
 } from "./ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { Input } from "./ui/input";
+import {
+  IconSquareRoundedChevronDown,
+  IconSquareRoundedChevronUp,
+} from "@tabler/icons-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   loading?: boolean;
-  addFiltering?: boolean; // whether we want to add search or column filtering feature
+  addFiltering?: boolean;
   extention?: React.ReactNode | string | null;
 }
-
-export const dynamic = "force-dynamic";
 
 export function GenericDataTable<TData, TValue>({
   columns,
@@ -51,11 +51,8 @@ export function GenericDataTable<TData, TValue>({
   extention,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
   const [globalFilter, setGlobalFilter] = React.useState<string>("");
 
@@ -64,12 +61,11 @@ export function GenericDataTable<TData, TValue>({
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
-    // 3. Add onGlobalFilterChange handler
-    onGlobalFilterChange: setGlobalFilter, // Update globalFilter state
+    onGlobalFilterChange: setGlobalFilter,
     getPaginationRowModel: getPaginationRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(), // Keep if you still use column filters
+    getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     state: {
@@ -77,75 +73,63 @@ export function GenericDataTable<TData, TValue>({
       columnFilters,
       columnVisibility,
       rowSelection,
-      // 2. Pass globalFilter to the table state
       globalFilter,
     },
   });
-  const [formState, setFormState] = React.useState({
-    content: "",
-    featured: false,
-    approved: true,
-  });
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  // Remove formState and isSubmitting if not used, or ensure they are relevant
+  // const [formState, setFormState] = React.useState({ content: "", featured: false, approved: true });
+  // const [isSubmitting, setIsSubmitting] = React.useState(false);
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 text-xs ">
       {addFiltering ? (
         <div className="flex flex-col sm:flex-row justify-between items-center py-4">
           <div>
             <Input
-              placeholder="Filter all contents..." // More general placeholder
-              value={globalFilter ?? ""} // Controlled by globalFilter state
-              onChange={(event) => setGlobalFilter(event.target.value)} // Updates globalFilter state
+              placeholder="Filter all contents..."
+              value={globalFilter ?? ""}
+              onChange={(event) => setGlobalFilter(event.target.value)}
               className="w-auto min-w-lg"
             />
           </div>
           <div className="flex flex-row items-center gap-2">
             <div>{extention}</div>
-            <div>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="ml-auto">
-                    Columns <ChevronDown />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  {table
-                    .getAllColumns()
-                    .filter((column) => column.getCanHide())
-                    .map((column) => {
-                      return (
-                        <DropdownMenuCheckboxItem
-                          key={column.id}
-                          className="capitalize"
-                          checked={column.getIsVisible()}
-                          onCheckedChange={(value) =>
-                            column.toggleVisibility(!!value)
-                          }
-                        >
-                          {column.id}
-                        </DropdownMenuCheckboxItem>
-                      );
-                    })}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="ml-auto">
+                  Columns <ChevronDown />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {table
+                  .getAllColumns()
+                  .filter((column) => column.getCanHide())
+                  .map((column) => (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                    >
+                      {column.id}
+                    </DropdownMenuCheckboxItem>
+                  ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
-      ) : (
-        ""
-      )}
+      ) : null}
 
-      <div className="rounded-md border">
+      <div className="rounded-md border text-xs">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead
-                    key={header.id}
-                    className="cursor-pointer select-none"
-                  >
+                  <TableHead key={header.id} className="cursor-pointer select-none">
                     <div
+                      className="flex items-center gap-1"
                       onClick={header.column.getToggleSortingHandler()}
                       title={
                         header.column.getCanSort()
@@ -157,13 +141,10 @@ export function GenericDataTable<TData, TValue>({
                           : undefined
                       }
                     >
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                      {flexRender(header.column.columnDef.header, header.getContext())}
                       {{
-                        asc: " 🔼",
-                        desc: " 🔽",
+                        asc: <IconSquareRoundedChevronUp size={24} />,
+                        desc: <IconSquareRoundedChevronDown size={24} />,
                       }[header.column.getIsSorted() as string] ?? null}
                     </div>
                   </TableHead>
@@ -171,7 +152,7 @@ export function GenericDataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="text-xs">
             {loading ? (
               <TableRow>
                 <TableCell colSpan={columns.length}>Loading...</TableCell>
@@ -181,10 +162,7 @@ export function GenericDataTable<TData, TValue>({
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
                 </TableRow>

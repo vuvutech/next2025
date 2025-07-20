@@ -2,115 +2,122 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import Image from "next/image";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
-import { ApproveButton } from "./ApproveButton";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Country } from "@/components/ui/country-dropdown";
+import { LucideBadgeCheck, LucideShieldUser } from "lucide-react";
+import { ActionsCellComponent } from "./ActionsCellComponent";
 
 export const columns: ColumnDef<any>[] = [
   {
     header: "User",
-    accessorFn: (row) => row.user?.name || "Unknown",
+    accessorKey: "name",
     cell: ({ row }) => (
-      <Image
-        src={row.original.user?.image || "/images/avatar.webp"}
-        alt={row.original.user?.name || "Unknown user"}
-        width={50}
-        height={50}
-        className="rounded-full"
-      />
+      <div className="flex items-center gap-2">
+        <Avatar className="h-12 w-12 rounded-full">
+          <AvatarImage src={row.original.image} alt={row.original.name} />
+          <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+        </Avatar>
+        <div>
+          <h6 className="text-current gap-2 text-xs">
+            {row.original.name}{" "}
+            <span>
+              <Badge className="rounded-full">
+                {row.original.profile?.gender
+                  ? row.original.profile.gender === "MALE"
+                    ? "M"
+                    : "F"
+                  : "N/A"}
+              </Badge>
+            </span>
+          </h6>
+          —
+          <div className="text-[10px] font-bold uppercase">
+            {row.original.email}
+          </div>
+        </div>
+      </div>
     ),
   },
   {
-    header: "",
-    accessorKey: "user.name",
+    header: "Student ID",
+    accessorFn: (row) => row.studentId,
+    accessorKey: "Student ID",
     cell: ({ row }) => (
-      <div>
-        <h4 className="text-current">
-          {" "}
-          {row.original.user?.name} <br />
-          &mdash; <br />
-          <span className="text-[10px] font-bold">
-            {row.original.user?.email}
-          </span>
-        </h4>
+      <div className="text-xs">{row.original.studentId || "Not specified"}</div>
+    ),
+  },
+  {
+    header: "Country",
+    accessorKey: "Country",
+    accessorFn: (row) => row.profile?.country,
+    cell: ({ row }) => (
+      <div className="">
+        <div>{row.original.profile?.country || "Not specified"}</div>
+        <div className="font-bold">
+          {row.original.profile?.telephone || "Not specified"}
+        </div>
       </div>
     ),
   },
 
   {
-    header: "Institute",
-    accessorFn: (row) => row.edition?.institute?.name,
+    header: "Role",
+    accessorFn: (row) => row.role,
+    accessorKey: "Role",
     cell: ({ row }) => (
-      <div className="flex items-center gap-2">
-        <Image
-          src={
-            `/${row.original.edition?.institute?.logo}` || "/images/costrad.png"
-          }
-          alt="Institute Logo"
-          width={50}
-          height={50}
-        />
-        <span>
-          {row.original.edition?.institute?.name} <br />
-          <span className=" text-firefly text-[11px] font-bold uppercase">
+      <div className="text-[9px] uppercase">
+        {row.original.role == "ADMIN" ? (
+          <Badge variant={"destructive"} className="flex items-center gap-1">
             {" "}
-            {new Date(row.original.edition?.startDate).toLocaleDateString(
-              "en-US",
-              {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              }
-            )}
-          </span>{" "}
-          &mdash;{" "}
-          <span className=" text-destructive text-[11px] font-bold uppercase">
-            {new Date(row.original.edition?.endDate).toLocaleDateString(
-              "en-US",
-              {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              }
-            )}
-          </span>{" "}
-        </span>
+            <LucideShieldUser />
+            ADMIN
+          </Badge>
+        ) : (
+          <Badge variant={"default"} className="flex items-center gap-1">
+            {" "}
+            <LucideBadgeCheck /> USER
+          </Badge>
+        )}
       </div>
     ),
   },
   {
-    header: "Date of Registration",
+    header: "Last Updated",
+    enableSorting: true,
+
     accessorFn: (row) => (row.createdAt ? new Date(row.createdAt) : null),
     cell: ({ row }) => (
-      <div>
+      <div className="text-xs">
         {format(new Date(row.original.createdAt).toLocaleDateString(), "PPP")}
       </div>
     ),
   },
   {
-    header: "Status",
-    cell: ({ row }) =>
-      row.original.approved ? (
-        <Badge className="bg-green-500 text-white">Approved</Badge>
-      ) : (
-        <Badge className="bg-yellow-500 text-white">Pending</Badge>
-      ),
-  },
-  {
     id: "actions",
-    header: "Approve",
-    cell: ({ row }) => (
-      <ApproveButton
-        id={row.original.id}
-        name={row.original.user.name}
-        email={row.original.user.email}
-        approved={row.original.approved}
-        startDate={row.original.edition?.startDate}
-        endDate={row.original.edition?.endDate}
-        price={row.original.edition?.price}
-        priceViaZoom={row.original.edition?.priceViaZoom}
-      />
-    ),
+    enableHiding: false,
+    cell: ({ row }) => {
+      const user = row.original;
+      return (
+        // ⭐️ Render your new ActionsCell component
+        <ActionsCellComponent
+          id={user.id}
+          banned={user.banned}
+          setFormState={function (state: {
+            id?: string;
+            banned: boolean;
+          }): void {
+            throw new Error("Function not implemented.");
+          }}
+          setIsEditing={function (editing: boolean): void {
+            throw new Error("Function not implemented.");
+          }}
+          openDialog={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
+      );
+    },
   },
 ];

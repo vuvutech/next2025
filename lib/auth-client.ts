@@ -45,6 +45,7 @@ export const client = createAuthClient({
 });
 
 export const {
+  admin,
   signUp,
   signIn,
   signOut,

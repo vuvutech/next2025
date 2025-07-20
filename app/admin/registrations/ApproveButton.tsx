@@ -48,7 +48,7 @@ export function ApproveButton({
 
   return (
     <Button
-    className="cursor-pointer py-0.5 h-auto uppercase text-xs"
+    className="cursor-pointer px-1 py-0.5 h-auto uppercase text-[10px]"
       size="sm"
       disabled={approved || isPending}
       onClick={handleApprove}

@@ -96,9 +96,9 @@ export const columns: ColumnDef<any>[] = [
     header: "Status",
     cell: ({ row }) =>
       row.original.approved ? (
-        <Badge className="bg-green-500 text-white">Approved</Badge>
+        <Badge className="bg-green-500 text-background uppercase">Approved</Badge>
       ) : (
-        <Badge className="bg-yellow-500 text-white">Pending</Badge>
+        <Badge className="bg-yellow-500 text-background uppercase">Pending</Badge>
       ),
   },
   {
@@ -106,7 +106,7 @@ export const columns: ColumnDef<any>[] = [
     header: "Approve",
     cell: ({ row }) => (
       <ApproveButton
-        id={row.original.id}
+        id={row.original.id} 
         name={row.original.user.name}
         email={row.original.user.email}
         approved={row.original.approved}
