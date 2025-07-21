@@ -169,6 +169,7 @@ export async function getCurrentUser(req?: NextRequest) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+  // console.log("Current user session:", session);
   return session?.user ?? null;
 }
 

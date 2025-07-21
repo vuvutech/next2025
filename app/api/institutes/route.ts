@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
       // get the latest edition for each institute
       include: {
         editions: {
-          take: 1,          
+          take: 1,
           orderBy: {
             startDate: "desc",
           },
@@ -56,6 +56,10 @@ export async function POST(req: NextRequest) {
   const authResult = checkAuth(req);
   if (authResult) return authResult;
 
+  const user = await getCurrentUser();
+  if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
   try {
     const data = await req.json();
     const institute = await prisma.institute.create({ data });
@@ -73,7 +77,7 @@ export async function POST(req: NextRequest) {
 // PUT update institute (admin only)
 export async function PUT(req: NextRequest) {
   const user = await getCurrentUser();
-  if (!user || user.role !== "ADMIN") {
+  if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
@@ -125,6 +129,11 @@ export async function PUT(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   const authResult = checkAuth(req);
   if (authResult) return authResult;
+
+  const user = await getCurrentUser();
+  if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
 
   try {
     const { id } = await req.json();

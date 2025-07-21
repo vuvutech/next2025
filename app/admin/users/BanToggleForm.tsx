@@ -1,10 +1,12 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { toast } from "sonner"
-import { z } from "zod"
-import { useState } from "react"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+import { useState } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter
+
 
 import {
   Dialog,
@@ -13,32 +15,33 @@ import {
   DialogTitle,
   DialogFooter,
   DialogClose,
-} from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-} from "@/components/ui/form"
-import { Switch } from "@/components/ui/switch"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+} from "@/components/ui/form";
+import { Switch } from "@/components/ui/switch";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 const FormSchema = z.object({
   banned: z.boolean(),
   banReason: z.string().min(2, "Reason is required"),
-})
+});
 
 type Props = {
-  userId: string
-  initialBanned: boolean
-}
+  userId: string;
+  initialBanned: boolean;
+};
 
 export function BanToggleForm({ userId, initialBanned }: Props) {
-  const [showDialog, setShowDialog] = useState(false)
-  const [isBanning, setIsBanning] = useState(true) // To determine ban/unban mode
+  const [showDialog, setShowDialog] = useState(false);
+  const [isBanning, setIsBanning] = useState(true); // To determine ban/unban mode
+  const router = useRouter(); // Initialize router for navigation
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -46,7 +49,7 @@ export function BanToggleForm({ userId, initialBanned }: Props) {
       banned: initialBanned,
       banReason: "",
     },
-  })
+  });
 
   const handleSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
@@ -57,20 +60,21 @@ export function BanToggleForm({ userId, initialBanned }: Props) {
           banned: data.banned,
           banReason: data.banReason,
         }),
-      })
+      });
 
-      if (!res.ok) throw new Error("Failed to update user")
+      if (!res.ok) throw new Error("Failed to update user");
 
       toast.success(
         data.banned ? "User banned successfully" : "User unbanned successfully"
-      )
+      );
 
-      form.setValue("banned", data.banned)
-      setShowDialog(false)
+      form.setValue("banned", data.banned);
+      router.refresh(); // Refresh the page after successful update
+      setShowDialog(false);
     } catch (err) {
-      toast.error("An error occurred. Try again.")
+      toast.error("An error occurred. Try again.");
     }
-  }
+  };
 
   return (
     <>
@@ -86,9 +90,9 @@ export function BanToggleForm({ userId, initialBanned }: Props) {
                   <Switch
                     checked={field.value}
                     onCheckedChange={(checked) => {
-                      form.setValue("banned", checked)
-                      setIsBanning(checked)
-                      setShowDialog(true)
+                      form.setValue("banned", checked);
+                      setIsBanning(checked);
+                      setShowDialog(true);
                     }}
                   />
                 </FormControl>
@@ -117,11 +121,13 @@ export function BanToggleForm({ userId, initialBanned }: Props) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      {isBanning ? "Reason for banning" : "Reason for unbanning"}
+                      {isBanning
+                        ? "Reason for banning"
+                        : "Reason for unbanning"}
                     </FormLabel>
                     <FormControl>
                       <Textarea
-                      className="h-16"
+                        className="h-16"
                         {...field}
                         placeholder={
                           isBanning
@@ -149,5 +155,5 @@ export function BanToggleForm({ userId, initialBanned }: Props) {
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }

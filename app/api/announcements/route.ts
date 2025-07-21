@@ -8,7 +8,7 @@ import { getCurrentUser } from "@/app/actions/functions";
 // GET all announcements (admin only)
 export async function GET(req: NextRequest) {
   const user = await getCurrentUser();
-  if (!user || user.role !== "ADMIN") {
+  if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
   const user = await getCurrentUser();
 
   // If user is not authenticated, return 401 Unauthorized
-  if (!user || user.role !== "ADMIN") {
+  if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
     return NextResponse.json(
       { error: "Authentication required to submit a announcement....." },
       { status: 401 }
@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
 // PUT update announcement (admin only)
 export async function PUT(req: NextRequest) {
   const user = await getCurrentUser();
-  if (!user || user.role !== "ADMIN") {
+  if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
@@ -82,6 +82,9 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   const user = await getCurrentUser();
+ if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
+  return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+}
 
   // Extract the announcement ID from the request body
   const { id } = await req.json();
@@ -108,7 +111,7 @@ export async function DELETE(req: NextRequest) {
   }
 
   // Allow deletion if user is an admin OR if the user is the owner of the announcement
-  if (user.role === "ADMIN" || announcementToDelete.userId === user.id) {
+  if ((user.role === "ADMIN" || user.role === "SUPERADMIN") || announcementToDelete.userId === user.id) {
     await prisma.announcement.delete({ where: { id } });
     return NextResponse.json({ success: true });
   } else {

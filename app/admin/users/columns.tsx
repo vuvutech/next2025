@@ -5,34 +5,11 @@ import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  LucideBadgeCheck,
-  LucideShieldUser,
-  MoreHorizontal,
-} from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { LucideBadgeCheck, LucideShieldUser } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-} from "@radix-ui/react-dropdown-menu";
-import { BanConfirmationDialog } from "./BanConfirmationDialog";
 import { ActionsCellComponent } from "./ActionsCellComponent";
 import { BanToggleForm } from "./BanToggleForm";
+import { AdminRoleToggleForm } from "./AdminRoleToggleForm";
 
 export const columns: ColumnDef<any>[] = [
   {
@@ -141,6 +118,19 @@ export const columns: ColumnDef<any>[] = [
     },
   },
   {
+    header: "Admin Status",
+    id: "adminToggle",
+    enableSorting: false,
+    accessorFn: (row) => row.role,
+    cell: ({ row }) => (
+      <AdminRoleToggleForm
+        userId={row.original.id}
+        isAdmin={row.original.role === "ADMIN"}
+      />
+    ),
+  },
+
+  {
     enableSorting: true,
     header: "",
     id: "banned",
@@ -154,20 +144,7 @@ export const columns: ColumnDef<any>[] = [
       );
     },
   },
-  {
-    enableSorting: false,
-    header: "",
-    id: "banned",
-    accessorFn: (row) => (row.banned ? "Yes" : "No"),
-    cell: ({ row }) => {
-      return (
-        <BanToggleForm
-          userId={row.original.id}
-          initialBanned={row.original.banned}
-        />
-      );
-    },
-  },
+
   {
     header: "",
     enableSorting: false,
