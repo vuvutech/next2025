@@ -4,10 +4,11 @@ import { getCurrentUser } from "@/app/actions/functions";
 
 export async function DELETE(
   req: NextRequest,
-  context: { params: { id: string } }
 ) {
   const currentUser = await getCurrentUser();
-  const { id } = context.params;
+  const { id } = await req.json();
+
+  console.log("Deleting user with ID:", id);
 
   // Check admin privileges
   if (

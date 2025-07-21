@@ -53,10 +53,11 @@ export function BanToggleForm({ userId, initialBanned }: Props) {
 
   const handleSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
-      const res = await fetch(`/api/users/${userId}/ban`, {
+      const res = await fetch(`/api/users/ban`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          id: userId,
           banned: data.banned,
           banReason: data.banReason,
         }),

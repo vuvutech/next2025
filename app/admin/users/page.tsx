@@ -27,8 +27,6 @@ export default async function AdminUsersPage() {
     createdAt: user.createdAt.toISOString(),
   }));
 
-  console.log(serializedUsers)
-
   return (
     <div className="p-6 space-y-4">
       <h1 className="text-2xl font-bold">COSTrAD Users</h1>

@@ -18,7 +18,7 @@ export const columns: ColumnDef<any>[] = [
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
         <Avatar className="h-12 w-12 rounded-full">
-          <AvatarImage src={row.original.image} alt={row.original.name} />
+          <AvatarImage src={row.original.image || null} alt={row.original.name || null} />
           <AvatarFallback className="rounded-lg">CN</AvatarFallback>
         </Avatar>
         <div>

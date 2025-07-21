@@ -31,7 +31,7 @@ export function ActionsCellComponent({ id }: ActionsCellProps) {
 
   const handleDelete = async () => {
     try {
-      const res = await fetch(`/api/users/${id}/delete`, {
+      const res = await fetch(`/api/users/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

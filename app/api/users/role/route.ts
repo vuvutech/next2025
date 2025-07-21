@@ -5,10 +5,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/prisma/dbConnect";
 import { getCurrentUser } from "@/app/actions/functions";
 export async function PUT(
-  req: NextRequest,
-  context: { params: { id: string } | Promise<{ id: string }> }
-) {
-  const { id } = await context.params
+  req: NextRequest) {
   const user = await getCurrentUser()
 
   // Only allow ADMIN or SUPERADMIN to update role
@@ -16,7 +13,8 @@ export async function PUT(
     return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }
 
-  const { role } = await req.json()
+  const { id, role } = await req.json()
+  console.log("Updating user role:", id, role);
 
   if (role !== "ADMIN" && role !== "USER") {
     return NextResponse.json({ error: "Invalid role" }, { status: 400 })

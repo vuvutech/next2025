@@ -49,10 +49,11 @@ export function AdminRoleToggleForm({ userId, isAdmin }: Props) {
 
   const handleSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
-      const res = await fetch(`/api/users/${userId}/role`, {
+      const res = await fetch(`/api/users/role`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          id: userId,
           role: data.makeAdmin ? "ADMIN" : "USER",
         }),
       })
