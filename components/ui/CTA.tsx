@@ -15,7 +15,7 @@ const CTA = () => {
 
   const handleClick = () => {
     setName(emailInput);
-    console.log("Subscribed Email:", emailInput); // for debug or further action
+    // console.log("Subscribed Email:", emailInput); // for debug or further action
   };
 
   return (

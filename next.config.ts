@@ -25,26 +25,6 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "platform-lookaside.fbsbx.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "pbs.twimg.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.discordapp.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "media.licdn.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
         hostname: "gravatar.com",
         pathname: "/**",
       },
@@ -53,11 +33,7 @@ const nextConfig: NextConfig = {
         hostname: "www.gravatar.com",
         pathname: "/**",
       },
-      {
-        protocol: "https",
-        hostname: "avatar.iran.liara.run",
-        pathname: "/**",
-      },
+
       {
         protocol: "https",
         hostname: "images.unsplash.com", // If used elsewhere
@@ -66,7 +42,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "res.cloudinary.com", // ✅ correct
-        pathname: "/**",
+        pathname: "/dbvlk7bkr/**",
       },
     ],
   },

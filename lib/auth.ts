@@ -150,7 +150,7 @@ export const auth = betterAuth({
     adminClient(),
     admin({
       defaultRole: "USER",
-      adminRoles: ["ADMIN", "SUPERADMIN"],
+      adminRoles: ["ADMIN", "SUPERADMIN","admin","superadmin"],
       adminPaths: ["/admin", "/settings"],
       defaultBanReason: "Spamming",
       impersonationSessionDuration: 60 * 60 * 24, // 1 day

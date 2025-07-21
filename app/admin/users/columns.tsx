@@ -5,9 +5,34 @@ import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Country } from "@/components/ui/country-dropdown";
-import { LucideBadgeCheck, LucideShieldUser } from "lucide-react";
+import {
+  LucideBadgeCheck,
+  LucideShieldUser,
+  MoreHorizontal,
+} from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import { Button } from "@/components/ui/button";
+
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuItem,
+} from "@radix-ui/react-dropdown-menu";
+import { BanConfirmationDialog } from "./BanConfirmationDialog";
 import { ActionsCellComponent } from "./ActionsCellComponent";
+import { BanToggleForm } from "./BanToggleForm";
 
 export const columns: ColumnDef<any>[] = [
   {
@@ -48,6 +73,7 @@ export const columns: ColumnDef<any>[] = [
       <div className="text-xs">{row.original.studentId || "Not specified"}</div>
     ),
   },
+
   {
     header: "Country",
     accessorKey: "Country",
@@ -83,8 +109,9 @@ export const columns: ColumnDef<any>[] = [
       </div>
     ),
   },
+
   {
-    header: "Last Updated",
+    header: "Created",
     enableSorting: true,
 
     accessorFn: (row) => (row.createdAt ? new Date(row.createdAt) : null),
@@ -95,28 +122,63 @@ export const columns: ColumnDef<any>[] = [
     ),
   },
   {
-    id: "actions",
-    enableHiding: false,
+    header: "Last Updated",
+    enableSorting: true,
+    accessorFn: (row) =>
+      row.profile?.updatedAt ? new Date(row.profile.updatedAt) : null,
     cell: ({ row }) => {
-      const user = row.original;
+      const updatedAt = row.original.profile?.updatedAt;
+      if (!updatedAt) return <div className="text-xs text-muted">N/A</div>;
+
+      try {
+        return (
+          <div className="text-xs">{format(new Date(updatedAt), "PPP")}</div>
+        );
+      } catch (err) {
+        console.error("Invalid date:", updatedAt);
+        return <div className="text-xs text-destructive">Invalid date</div>;
+      }
+    },
+  },
+  {
+    enableSorting: true,
+    header: "",
+    id: "banned",
+    accessorFn: (row) => (row.banned ? "Yes" : "No"),
+    cell: ({ row }) => {
       return (
-        // ⭐️ Render your new ActionsCell component
-        <ActionsCellComponent
-          id={user.id}
-          banned={user.banned}
-          setFormState={function (state: {
-            id?: string;
-            banned: boolean;
-          }): void {
-            throw new Error("Function not implemented.");
-          }}
-          setIsEditing={function (editing: boolean): void {
-            throw new Error("Function not implemented.");
-          }}
-          openDialog={function (): void {
-            throw new Error("Function not implemented.");
-          }}
+        <BanToggleForm
+          userId={row.original.id}
+          initialBanned={row.original.banned}
         />
+      );
+    },
+  },
+  {
+    enableSorting: false,
+    header: "",
+    id: "banned",
+    accessorFn: (row) => (row.banned ? "Yes" : "No"),
+    cell: ({ row }) => {
+      return (
+        <BanToggleForm
+          userId={row.original.id}
+          initialBanned={row.original.banned}
+        />
+      );
+    },
+  },
+  {
+    header: "",
+    enableSorting: false,
+    id: "actions",
+
+    accessorFn: (row) => (row.createdAt ? new Date(row.createdAt) : null),
+    cell: ({ row }) => {
+      return (
+        <div className="flex items-center gap-2">
+          <ActionsCellComponent id={row.original.id} />
+        </div>
       );
     },
   },
