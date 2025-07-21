@@ -8,7 +8,6 @@ import { baseUrl } from "@/lib/metadata";
 import { prisma } from "@/prisma/dbConnect";
 import crypto from "crypto";
 
-
 export const getInstitutes = async () => {
   //  get institutes in descending order by startDate
   try {
@@ -165,12 +164,18 @@ export async function getUserRole() {
   return session.user.role;
 }
 
+// app/actions/functions.ts
 export async function getCurrentUser(req?: NextRequest) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  // console.log("Current user session:", session);
-  return session?.user ?? null;
+  
+  const user = session?.user ?? null;
+
+  // If user is banned, deny
+  if (user?.banned) return null;
+
+  return user;
 }
 
 export async function getCurrentSession(req?: NextRequest) {

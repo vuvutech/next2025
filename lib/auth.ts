@@ -61,9 +61,24 @@ export const auth = betterAuth({
         },
       },
     },
-    session: {
-      // Session hooks
+   session: {
+    create: {
+      before: async (session) => {
+        const bannedUser = await prisma.user.findUnique({
+          where: { id: session.userId },
+          select: { banned: true },
+        });
+
+        if (bannedUser?.banned) {
+          // Returning false prevents the session from being created
+          
+          return false;
+        }
+
+        return { data: session };
+      },
     },
+  },
     account: {
       // Account hooks
     },
@@ -117,6 +132,7 @@ export const auth = betterAuth({
     accountLinking: {
       enabled: true,
       trustedProviders: ["google", "facebook", "microsoft", "linkedin"],
+      updateAccountOnSignIn: true,
     },
   },
   emailAndPassword: {
@@ -150,12 +166,12 @@ export const auth = betterAuth({
     adminClient(),
     admin({
       defaultRole: "USER",
-      adminRoles: ["ADMIN", "SUPERADMIN","admin","superadmin"],
+      adminRoles: ["ADMIN", "SUPERADMIN"],
       adminPaths: ["/admin", "/settings"],
       defaultBanReason: "Spamming",
       impersonationSessionDuration: 60 * 60 * 24, // 1 day
-      defaultBanExpiresIn: 60 * 60 * 24, // 1 day
-      bannedUserMessage: "Custom banned user message",
+      defaultBanExpiresIn: 60 * 60 * 24 * 365, // 365 days
+      bannedUserMessage: "Account suspended For Violating Our Terms of Service",
     }),
     emailOTP({
       async sendVerificationOTP({ email, otp, type = "sign-in" }) {

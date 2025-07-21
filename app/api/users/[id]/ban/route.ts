@@ -1,8 +1,7 @@
-// app/api/users/[id]/ban/route.ts
-
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/dbConnect";
-import { getCurrentUser } from "@/app/actions/functions"; // ⬅️ adjust path if needed
+import { getCurrentUser } from "@/app/actions/functions";
+import { admin } from "@/lib/auth-client"; // ✅ Use this import
 
 export async function PUT(
   req: NextRequest,
@@ -33,6 +32,18 @@ export async function PUT(
       banExpires: banned ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) : null,
     },
   });
+
+  if (banned) {
+    try {
+      await admin.revokeUserSessions({ userId: id }); // ✅ This is what works with your setup
+    } catch (err) {
+      console.error("Failed to revoke sessions:", err);
+      return NextResponse.json(
+        { error: "User banned, but session revocation failed." },
+        { status: 500 }
+      );
+    }
+  }
 
   return NextResponse.json({ success: true, user: updated });
 }
