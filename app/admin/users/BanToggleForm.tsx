@@ -69,8 +69,8 @@ export function BanToggleForm({ userId, initialBanned }: Props) {
         data.banned ? "User banned successfully" : "User unbanned successfully"
       );
 
-      form.setValue("banned", data.banned);
       router.refresh(); // Refresh the page after successful update
+      form.setValue("banned", data.banned);
       setShowDialog(false);
     } catch (err) {
       toast.error("An error occurred. Try again.");
