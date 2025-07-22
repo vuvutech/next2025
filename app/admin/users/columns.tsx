@@ -19,7 +19,7 @@ export const columns: ColumnDef<any>[] = [
       <div className="flex items-center gap-2">
         <Avatar className="h-12 w-12 rounded-full">
           <AvatarImage src={row.original.image || null} alt={row.original.name || null} />
-          <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+          <AvatarFallback className="rounded-lg">{row.original.name.charAt(0) || "CN"}</AvatarFallback>
         </Avatar>
         <div>
           <h6 className="text-current gap-2 text-xs">

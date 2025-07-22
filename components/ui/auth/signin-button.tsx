@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { LogOut, LucideArrowUpRight, UserIcon } from "lucide-react";
+import { LogOut, LucideArrowUpRight, ShieldPlusIcon, UserIcon } from "lucide-react";
 import { client } from "@/lib/auth-client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -71,6 +71,18 @@ export function SignInButton() {
           <DropdownMenuContent className="w-60">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
+            {session?.user.role === "ADMIN" && (
+              <DropdownMenuItem
+                onSelect={() => {
+                  router.push("/admin");
+                }}
+                className="cursor-pointer"
+              >
+                <ShieldPlusIcon />
+                <span>Administration</span>
+                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+              </DropdownMenuItem>
+            )}
             <DropdownMenuGroup className="cursor-pointer">
               <DropdownMenuItem
                 onSelect={() => {
