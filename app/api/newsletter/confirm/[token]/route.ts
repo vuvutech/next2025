@@ -11,6 +11,7 @@ export async function GET(
   context: { params: Promise<{ token: string }> }
 ) {
   const token = (await context.params).token;
+  console.log("Confirmation token:", token);
 
   if (!token) {
     return NextResponse.redirect(`${baseUrl}/confirmation-error`);
@@ -20,37 +21,38 @@ export async function GET(
     where: { confirmationToken: token },
   });
 
+  console.log("Subscriber found:", subscriber);
+
   if (!subscriber) {
     return NextResponse.redirect(`${baseUrl}/confirmation-error`);
   }
 
   const unsubscribeToken = await generateUnsubscribeToken();
 
-  await prisma.newsletterSubscriber.update({
+  const completeSubscription = await prisma.newsletterSubscriber.update({
     where: { email: subscriber.email },
     data: {
       verified: true,
       confirmationToken: null,
-      unsubscribeToken: unsubscribeToken
+      unsubscribeToken: unsubscribeToken,
     },
   });
 
+  if (completeSubscription) {
+    // Email confirmation
+    const html = await render(
+      NewsletterAppreciationEmail({
+        name: subscriber?.name ?? undefined,
+        unsubscribeToken: unsubscribeToken,
+      })
+    );
 
-      if (subscriber) {
-        // Email confirmation
-        const html = await render(
-          NewsletterAppreciationEmail({
-            name: subscriber?.name ?? undefined,
-            unsubscribeToken: unsubscribeToken
-          })
-        );
-  
-        await sendMail({
-          to: subscriber.email,
-          subject: "You're now subscribed to COSTrAD!",
-          html,
-        });
-      }
+    await sendMail({
+      to: subscriber.email,
+      subject: "You're now subscribed to COSTrAD!",
+      html,
+    });
+  }
 
   return NextResponse.redirect(`${baseUrl}/confirmed-successfully`);
 }

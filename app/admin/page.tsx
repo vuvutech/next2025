@@ -1,12 +1,12 @@
 // import { ChartAreaInteractive } from "@/components/chart-area-interactive";
 import { DataTable } from "@/components/data-table";
 
-import { GaTopPagesChart } from "@/components/chart-area-interactive";
 import { ActiveUsersCard } from "@/components/analytics/ActiveUsersCard";
 import { SessionsCard } from "@/components/analytics/SessionsCard";
 import { RegisteredUsersCard } from "@/components/analytics/RegisteredUsersCard";
 import { MostPopularEditionCard } from "@/components/analytics/DashboardMetricsCards";
 import { DevicesUsage } from "@/components/analytics/DevicesUsage";
+import { GaTopPagesChartBar } from "@/components/chart-area-interactive";
 
 export default function Page() {
   return (
@@ -22,8 +22,8 @@ export default function Page() {
       <section className="px-4 lg:px-6">
         {/* <ChartAreaInteractive /> */}
 
-      
-        <GaTopPagesChart />
+      <GaTopPagesChartBar />
+        {/* <GaTopPagesChart /> */}
       </section>
       <section className="px-4 lg:px-6">
         {/* <ChartAreaInteractive /> */}

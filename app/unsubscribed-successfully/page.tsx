@@ -1,20 +1,10 @@
-import MainLogo from "@/components/ui/MainLogo";
-import { ThemeSwitch } from "@/components/ui/theme-switch";
 import Link from "next/link";
 import React from "react";
 
 export default function Unsubscribe() {
   return (
-    <main className="flex h-screen max-h-dvh flex-col items-center justify-center p-4 relative">
-      <div className="absolute top-4  right-3 ">
-        {" "}
-        <ThemeSwitch className="pt-2 pl-6" />
-      </div>
+    <main className="flex h-[70dvh] max-h-dvh flex-col items-center justify-center p-4 relative">
       <div className="grid grid-cols-1 text-center gap-4 sm:grid-cols-1 sm:gap-3 lg:grid-cols-1 lg:gap-8 space-y-2">
-        <div className="">
-          <MainLogo />
-        </div>
-        <hr className="pt-2" />
         <div className="text-center">
           <h1 className="sm:text-4xl  text-2xl font-bold text-gray-900 dark:text-white">
             You’ve been unsubscribed

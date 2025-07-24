@@ -191,7 +191,7 @@ export function NewsletterDialog() {
                 <TooltipTrigger asChild>
                   <span>
                     <Button
-                      className="w-full"
+                      className="w-full cursor-pointer"
                       type="submit"
                       disabled={
                         isSubmitting ||

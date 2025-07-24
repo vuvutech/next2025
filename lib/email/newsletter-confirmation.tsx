@@ -34,11 +34,13 @@ export const NewsletterConfirmationEmail = ({
             </Text>
 
             <Text className="text-sm leading-6">
-              Thank you for subscribing to the <strong>COSTrAD Newsletter</strong>!
+              Thank you for subscribing to the{" "}
+              <strong>COSTrAD Newsletter</strong>!
             </Text>
 
             <Text className="text-sm leading-6">
-              To complete your subscription and start receiving updates, please confirm by clicking the button below:
+              To complete your subscription and start receiving updates, please
+              confirm by clicking the button below:
             </Text>
 
             <Link
@@ -48,8 +50,13 @@ export const NewsletterConfirmationEmail = ({
               Confirm Subscription
             </Link>
 
+            <div className="text-sm leading-6 mt-4">
+              {`${baseUrl}api/newsletter/confirm/${confirmationToken}`}
+            </div>
+
             <Text className="text-sm leading-6 mt-4">
-              If you did not request this subscription, you can safely ignore this email.
+              If you did not request this subscription, you can safely ignore
+              this email.
             </Text>
 
             <Text className="text-xs text-muted mt-6">
