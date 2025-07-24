@@ -104,51 +104,21 @@
   100%{background-position: left}
 }
 
+
 .kenburns {
-  animation-name: ken-burns;
-  animation-duration: 40s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  z-index: 0;
+  animation: kenburns 60s ease-in-out infinite;
+  will-change: transform;
 }
 
-/* Desktop animation */
-@keyframes ken-burns {
+@keyframes kenburns {
   0% {
-    background-size: 107%;
-    background-position: 50% 50%;
+    transform: scale(1) translate(0%, 0%);
   }
   50% {
-    background-size: 102%;
-    background-position: 48% 52%;
+    transform: scale(1.07) translate(1%, 1%);
   }
   100% {
-    background-size: 107%;
-    background-position: 50% 50%;
+    transform: scale(1) translate(0%, 0%);
   }
 }
 
-/* 🔒 Mobile: reduce effect or disable completely */
-@media screen and (max-width: 768px) {
-  .kenburns {
-    animation: none; /* Option 1: disable */
-    /* OR option 2: slower, smaller zoom */
-    animation-name: ken-burns-mobile;
-    animation-duration: 60s;
-  }
-
-  @keyframes ken-burns-mobile {
-    0% {
-      background-size: 105%;
-    }
-    50% {
-      background-size: 102%;
-    }
-    100% {
-      background-size: 105%;
-    }
-  }
-}

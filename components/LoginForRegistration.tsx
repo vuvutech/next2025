@@ -246,7 +246,7 @@ export default function LoginForRegistration({
               onSuccess={(token) => {
                 setTurnstileToken(token);
                 setTurnstileStatus("success");
-                console.log("Token received:", token);
+                // console.log("Token received:", token);
               }}
             />
           </div>

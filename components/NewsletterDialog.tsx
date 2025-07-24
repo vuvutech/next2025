@@ -146,7 +146,7 @@ export function NewsletterDialog() {
               onSuccess={(token) => {
                 setTurnstileToken(token);
                 setTurnstileStatus("success");
-                console.log("Token received:", token);
+                // console.log("Token received:", token);
               }}
             />
           </div>
@@ -169,7 +169,7 @@ export function NewsletterDialog() {
               <p className="text-sm leading-none font-medium">
                 Subscribe to Newsletters
               </p>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-muted-foreground text-xs">
                 I agree to receive occasional newsletters, updates, and event
                 invitations from COSTrAD. I understand I can unsubscribe at any
                 time.
@@ -182,7 +182,7 @@ export function NewsletterDialog() {
           )}
           <DialogFooter className="w-full mt-4 grid sm:grid-cols-2 gap-2">
             <DialogClose asChild>
-              <Button className="w-full" variant="outline">
+              <Button onClick={close} className="w-full" variant="outline">
                 Cancel
               </Button>
             </DialogClose>

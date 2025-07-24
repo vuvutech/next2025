@@ -8,15 +8,20 @@ import SlideInMenu from "@/components/SlideInMenu";
 import { SignInButton } from "./auth/signin-button";
 import { client } from "@/lib/auth-client";
 import { Skeleton } from "./skeleton";
-import { useDevice } from "@/hooks/useDevice"; // orientation + width-aware device hook
+import { useDevice } from "@/hooks/useDevice";
 import { ScrollProgress } from "@/components/magicui/scroll-progress";
 
-
 export default function StickyMenu() {
+  const [hasMounted, setHasMounted] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
 
-  const { isPending } = client.useSession();
+  // ✅ Hooks must be called unconditionally
   const { isMobile, isDesktop } = useDevice();
+  const { isPending } = client.useSession();
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,18 +32,21 @@ export default function StickyMenu() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  if (!hasMounted) {
+    // ✅ Skip rendering but after calling hooks
+    return null;
+  }
+
   return (
     <div
       id="menu"
       className={clsx(
-        "w-full block transition-all  bg-background text-foreground z-50 shadow dark:border-b border-b-slate-300/ ",
+        "w-full block transition-all bg-background text-foreground z-50 shadow dark:border-b border-b-slate-300/",
         isFixed
           ? "fixed top-0 left-0 right-0 duration-600 z-50 py-1"
           : "relative py-1"
       )}
     >
-
-
       <div className="flex items-center justify-between px-2 py-1">
         <MainLogo />
 
@@ -67,7 +75,7 @@ export default function StickyMenu() {
         )}
 
         {isMobile && <SlideInMenu />}
-            <ScrollProgress />
+        <ScrollProgress />
       </div>
     </div>
   );

@@ -180,7 +180,7 @@ export function SignUpComponent({
             onSuccess={(token) => {
               setTurnstileToken(token);
               setTurnstileStatus("success");
-              console.log("Token received:", token);
+              // console.log("Token received:", token);
             }}
           />
 

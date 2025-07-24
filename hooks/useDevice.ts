@@ -1,11 +1,23 @@
 // hooks/useDevice.ts
-import { useMediaQuery } from 'react-responsive';
+import { useEffect, useState } from "react";
 
 export const useDevice = () => {
-  const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
-  const isMobileWidth = useMediaQuery({ maxWidth: 1100 });
-  const isMobile = isMobileWidth || isPortrait;
-  const isDesktop = !isMobile;
+  const [isMobile, setIsMobile] = useState(false);
 
-  return { isMobile, isDesktop };
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobileWidth = window.innerWidth <= 1100;
+      const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+      setIsMobile(isMobileWidth || isPortrait);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  return {
+    isMobile,
+    isDesktop: !isMobile,
+  };
 };

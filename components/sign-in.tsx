@@ -279,7 +279,7 @@ export default function SignInComponent({
               onSuccess={(token) => {
                 setTurnstileToken(token);
                 setTurnstileStatus("success");
-                console.log("Token received:", token);
+                // console.log("Token received:", token);
               }}
             />
           </div>

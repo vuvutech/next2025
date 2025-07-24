@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useDevice } from "@/hooks/useDevice";
+import clsx from "clsx";
+import { useHasMounted } from "@/hooks/useHasMounted";
 
 interface JumbotronProps {
   heroImage?: string;
@@ -14,11 +16,14 @@ interface JumbotronProps {
 export default function Jumbotron({
   heroImage = "/images/contact.jpg",
   height = "md:h-[450px]",
-  shade = "5",
+  // shade = "5",
   className,
   coverPosition = "object-top",
 }: JumbotronProps) {
   const { isMobile } = useDevice();
+  const hasMounted = useHasMounted();
+
+  const shouldAnimate = hasMounted && !isMobile;
 
   return (
     <header className="relative w-full">
@@ -27,11 +32,16 @@ export default function Jumbotron({
         <div className={`relative w-full h-[470px] ${height} overflow-hidden`}>
           <Image
             src={heroImage}
-            alt="costrad background"
+            alt="..."
             fill
-            priority
-            className={`${!isMobile ? "kenburns" : ""}  object-cover ${coverPosition} ${className}  `}
+            className={clsx(
+              "object-cover",
+              shouldAnimate && "kenburns",
+              coverPosition,
+              className
+            )}
           />
+
           {/* <div className={`absolute inset-0 bg-black/${shade}`} /> */}
         </div>
       </div>

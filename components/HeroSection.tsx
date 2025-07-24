@@ -4,6 +4,8 @@ import React from "react";
 import clsx from "clsx";
 import { bebas } from "@/config/fonts";
 import { useDevice } from "@/hooks/useDevice";
+import { useHasMounted } from "@/hooks/useHasMounted";
+
 import { Separator } from "@radix-ui/react-separator";
 import Image from "next/image";
 
@@ -13,6 +15,9 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ backgroundImageUrl = '/images/united-nations.jpg' }) => {
   const { isMobile } = useDevice();
+  const hasMounted = useHasMounted();
+
+  const shouldAnimate = hasMounted && !isMobile;
 
   return (
     <section className={`${bebas.className} md:min-h-dvh h-screen grid grid-cols-1 z-0`}>
@@ -21,9 +26,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ backgroundImageUrl = '
           src={backgroundImageUrl}
           alt="Hero background image"
           fill
-          className={clsx("z-0", {
-            kenburns: !isMobile,
-          })}
+          className={clsx("z-0", shouldAnimate && "kenburns")}
           style={{
             objectFit: "cover",
             objectPosition: "center",
@@ -48,7 +51,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ backgroundImageUrl = '
             <Separator className="my-4 w-1/5 h-1 bg-accent " />
             <div className="text-firefly">
               <p className=" text-xs sm:text-lg text-background dark:text-foreground">
-              Explore what COSTrAD can help you achieve.
+                Explore what COSTrAD can help you achieve.
               </p>
             </div>
           </div>
