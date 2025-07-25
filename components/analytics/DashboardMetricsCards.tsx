@@ -155,25 +155,28 @@ export function MostPopularEditionCard() {
   return (
     <Card className="@container/card">
       <CardHeader>
-        <CardDescription className="font-semibold text-foreground">
-          Most Popular Edition
+        <CardDescription className="font-semibold text-foreground flex items-center gap-2">
+          <div>Popular Edition</div>
+          <div>
+            {" "}
+            {data && (
+              <Badge variant="outline" className="text-green-600">
+                <IconAward className="mr-1 size-4" />
+                {data.count.toLocaleString()} registrations
+              </Badge>
+            )}
+          </div>
         </CardDescription>
-        {data && (
-          <Badge variant="outline" className="text-green-600">
-            <IconAward className="mr-1 size-4" />
-            {data.count.toLocaleString()} registrations
-          </Badge>
-        )}
       </CardHeader>
 
       <CardContent>
-          {loading ? (
-            <span className="text-muted-foreground text-base">Loading…</span>
-          ) : data ? (
-            data.title
-          ) : (
-            <span className="text-destructive">N/A</span>
-          )}
+        {loading ? (
+          <span className="text-muted-foreground text-base">Loading…</span>
+        ) : data ? (
+          data.title
+        ) : (
+          <span className="text-destructive">N/A</span>
+        )}
       </CardContent>
       <CardFooter className="flex-col items-start gap-1.5 text-sm">
         <div className="flex items-center gap-2 font-medium">
