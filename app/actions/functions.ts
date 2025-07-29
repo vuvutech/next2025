@@ -169,7 +169,7 @@ export async function getCurrentUser(req?: NextRequest) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  
+
   const user = session?.user ?? null;
 
   // If user is banned, deny
@@ -184,4 +184,27 @@ export async function getCurrentSession(req?: NextRequest) {
   });
 
   return session ?? null;
+}
+
+export async function getCurrentEditions() {
+  // get editions where the starting date is greater than today
+  try {
+    const editions = await prisma.edition.findMany({
+      include: {
+        institute: true,
+      },
+      orderBy: {
+        startDate: "asc",
+      },
+      where: {
+        startDate: {
+          gte: new Date(),
+        },
+      },
+    });
+    return editions;
+  } catch (error) {
+    console.error("Failed to fetch editions:", error);
+    return [];
+  }
 }

@@ -10,6 +10,7 @@ import { ProfileForRegistration } from "@/components/profileForRegistration";
 import { toast } from "sonner";
 import { EditionSelect } from "@/components/editionSelect";
 import Loading from "../loading";
+import { getCurrentEditions } from "../actions/functions";
 
 interface Edition {
   id: string;
@@ -65,6 +66,8 @@ export default function Apply() {
       console.debug("[DEBUG] No user session");
     }
     setEditionsLoading(true);
+    console.debug("[DEBUG] Fetching editions...");
+    console.log(getCurrentEditions)
     fetch("/api/editions")
       .then((res) => res.json())
       .then((data) => {

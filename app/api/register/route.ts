@@ -3,6 +3,7 @@ import { prisma } from "@/prisma/dbConnect";
 import { getCurrentUser } from "@/app/actions/functions";
 import { render } from "@react-email/render";
 import { WelcomeToInstituteEmail } from "@/lib/email/welcome-to-institute";
+import { AdminApprovalRequestEmail } from "@/lib/email/admin-registration-approval";
 import { sendMail } from "@/lib/nodemailer-mail";
 
 export async function POST(req: NextRequest) {
@@ -15,10 +16,7 @@ export async function POST(req: NextRequest) {
   const { editionId } = await req.json();
 
   if (!editionId) {
-    return NextResponse.json(
-      { error: "Edition ID is required" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Edition ID is required" }, { status: 400 });
   }
 
   try {
@@ -31,65 +29,81 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Edition not found" }, { status: 404 });
     }
 
-    const existing = await prisma.registration.findUnique({
+    const alreadyRegistered = await prisma.registration.findUnique({
       where: {
         userId_editionId: {
           userId: user.id,
-          editionId: editionId,
+          editionId,
         },
       },
     });
 
-    if (existing) {
-      return NextResponse.json(
-        { message: "You are already registered." },
-        { status: 200 }
-      );
+    if (alreadyRegistered) {
+      return NextResponse.json({ message: "You are already registered." }, { status: 200 });
     }
 
     const registration = await prisma.registration.create({
       data: {
         userId: user.id,
-        editionId: editionId,
+        editionId,
       },
     });
 
-    const formatter = new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    const formatDate = (date?: Date | null) =>
+      date ? new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric" }).format(new Date(date)) : "TBD";
 
-    const formattedStartDate = edition.startDate
-      ? formatter.format(new Date(edition.startDate))
-      : "TBD";
+    const formattedStartDate = formatDate(edition.startDate);
+    const formattedEndDate = formatDate(edition.endDate);
 
-    const formattedEndDate = edition.endDate
-      ? formatter.format(new Date(edition.endDate))
-      : "TBD";
+    // Email Content
+    const applicantName = user.name || "Participant";
+    const editionTitle = edition.title;
+    const instituteName = edition.institute.name;
 
-    // 🎉 Send confirmation email
-    const html = await render(
+    const welcomeEmailHtml = await render(
       WelcomeToInstituteEmail({
-        name: user.name,
-        editionTitle: edition.title,
-        instituteName: edition.institute.name,
+        name: applicantName,
+        editionTitle,
+        instituteName,
         startDate: formattedStartDate,
         endDate: formattedEndDate,
         dashboardLink: `https://www.costrad.org/dashboard`,
       })
     );
 
-    await sendMail({
-      to: user.email,
-      cc: "correspondence@costrad.org",
-      subject: `Welcome to ${edition.title}`,
-      html,
-    });
+    const adminEmailHtml = await render(
+      AdminApprovalRequestEmail({
+        adminName: "Admin",
+        applicantName,
+        editionTitle,
+        instituteName,
+        startDate: formattedStartDate,
+        endDate: formattedEndDate,
+      })
+    );
+
+    // Send Emails
+    try {
+      await Promise.all([
+        sendMail({
+          to: user.email,
+          subject: `Welcome to ${editionTitle}`,
+          html: welcomeEmailHtml,
+        }),
+        sendMail({
+          to: process.env.ADMIN_EMAIL || "notifycostrad@gmail.com",
+          subject: `New registration for ${editionTitle}`,
+          html: adminEmailHtml,
+        }),
+      ]);
+    } catch (emailError) {
+      console.error("📧 Failed to send email:", emailError);
+      // You might still want to return success depending on your UX preference.
+    }
 
     return NextResponse.json({ success: true, registration });
-  } catch (error) {
-    console.error("Registration error:", error);
+  } catch (err) {
+    console.error("❌ Registration failed:", err);
     return NextResponse.json({ error: "Failed to register" }, { status: 500 });
   }
 }
