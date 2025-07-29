@@ -198,7 +198,7 @@ export async function getCurrentEditions() {
       },
       where: {
         startDate: {
-          gte: new Date(),
+          gte: new Date(new Date().setHours(0, 0, 0, 0)), // Midnight today
         },
       },
     });

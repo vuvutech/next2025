@@ -68,7 +68,7 @@ export default function Apply() {
     setEditionsLoading(true);
     console.debug("[DEBUG] Fetching editions...");
     console.log(getCurrentEditions)
-    fetch("/api/editions")
+    fetch("/api/getCurrentEditions")
       .then((res) => res.json())
       .then((data) => {
         setEditions(data);
