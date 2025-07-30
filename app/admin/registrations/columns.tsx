@@ -6,6 +6,7 @@ import Image from "next/image";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { ApproveButton } from "./ApproveButton";
+import { ActionsCellComponent } from "./ActionsCellComponent";
 
 export const columns: ColumnDef<any>[] = [
   {
@@ -102,7 +103,7 @@ export const columns: ColumnDef<any>[] = [
       ),
   },
   {
-    id: "actions",
+    id: "details",
     header: "Approve",
     cell: ({ row }) => (
       <ApproveButton
@@ -117,4 +118,18 @@ export const columns: ColumnDef<any>[] = [
       />
     ),
   },
+  {
+      header: "",
+      enableSorting: false,
+      id: "actions",
+  
+      // accessorFn: (row) => (row.createdAt ? new Date(row.createdAt) : null),
+      cell: ({ row }) => {
+        return (
+          <div className="flex items-center gap-2">
+            <ActionsCellComponent id={row.original.user.id} />
+          </div>
+        );
+      },
+    },
 ];

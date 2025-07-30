@@ -118,7 +118,7 @@ export function ActionsCellComponent({ id }: ActionsCellProps) {
             </span>
           </DropdownMenuItem>
 
-          <DropdownMenuItem
+          {/* <DropdownMenuItem
             className=" cursor-pointer"
             onClick={() => setShowConfirmDialog(true)}
           >
@@ -126,36 +126,10 @@ export function ActionsCellComponent({ id }: ActionsCellProps) {
               <LucideTrash2 />
               Delete User
             </span>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* Delete Confirmation Dialog */}
-      <Dialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
-        <DialogContent className="sm:max-w-lg">
-          <DialogHeader>
-            <DialogTitle>Are you sure?</DialogTitle>
-          </DialogHeader>
-          <p>
-            This action cannot be undone. This will permanently delete the user.
-          </p>
-          <DialogFooter className="flex justify-end gap-2 pt-4">
-            <Button
-              variant="outline"
-              onClick={() => setShowConfirmDialog(false)}
-            >
-              Cancel
-            </Button>
-            <Button
-              className="flex items-center gap-1"
-              variant="destructive"
-              onClick={handleDelete}
-            >
-              <LucideTrash2 /> Confirm Delete
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
 
       {/* View User Dialog */}
       <Dialog open={showViewDialog} onOpenChange={setShowViewDialog}>
