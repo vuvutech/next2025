@@ -10,6 +10,7 @@ import { LucideBadgeCheck, LucideShieldUser } from "lucide-react";
 import { ActionsCellComponent } from "./ActionsCellComponent";
 import { BanToggleForm } from "./BanToggleForm";
 import { AdminRoleToggleForm } from "./AdminRoleToggleForm";
+import { getCountryCode, countryCodeToFlagEmoji } from "@/lib/countries";
 
 export const columns: ColumnDef<any>[] = [
   {
@@ -17,21 +18,56 @@ export const columns: ColumnDef<any>[] = [
     accessorKey: "name",
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
-        <Avatar className="h-12 w-12 rounded-full">
-          <AvatarImage src={row.original.image || null} alt={row.original.name || null} />
-          <AvatarFallback className="rounded-lg">{row.original.name.charAt(0) || "CN"}</AvatarFallback>
-        </Avatar>
+        <div className="relative">
+          <Avatar className="h-12 w-12">
+            <AvatarImage
+              src={row.original.image || null}
+              alt={row.original.name || null}
+            />
+            <AvatarFallback>
+              {row.original.name.charAt(0) || "CN"}
+            </AvatarFallback>
+          </Avatar>
+          {/* <span className="absolute -bottom-1 right-0">
+            {row.original.profile?.country &&
+              (() => {
+                const code = getCountryCode(row.original.profile.country);
+                return code ? (
+                  <span
+                    className=" translate-x-1/4 translate-y-1/4 text-[12px]  px-[2px]  leading-none "
+                    title={row.original.profile.country}
+                  >
+                    {countryCodeToFlagEmoji(code)}
+                  </span>
+                ) : null;
+              })()}
+          </span> */}
+        </div>
         <div>
           <h6 className="text-current gap-2 text-xs">
             {row.original.name}{" "}
             <span>
-              <Badge className="rounded-full">
+              <Badge variant={"secondary"} className="rounded-full">
                 {row.original.profile?.gender
                   ? row.original.profile.gender === "MALE"
                     ? "M"
                     : "F"
                   : "N/A"}
               </Badge>
+            </span>
+            <span>
+              {row.original.profile?.country &&
+                (() => {
+                  const code = getCountryCode(row.original.profile.country);
+                  return code ? (
+                    <span
+                      className=" translate-x-1/4 translate-y-1/4 text-[12px]  px-[2px]  leading-none "
+                      title={row.original.profile.country}
+                    >
+                      {countryCodeToFlagEmoji(code)}
+                    </span>
+                  ) : null;
+                })()}
             </span>
           </h6>
           —
@@ -40,6 +76,7 @@ export const columns: ColumnDef<any>[] = [
           </div>
         </div>
       </div>
+
     ),
   },
   {
