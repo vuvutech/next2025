@@ -103,7 +103,7 @@ export default function EditableProfileForm() {
         const data = await res.json();
         reset(data);
       } else {
-        toast.error("Failed to load profile.");
+        console.error("Failed to load profile.");
       }
       setLoading(false);
     };
