@@ -78,7 +78,7 @@ export default function Component() {
                 <MainMenu />
               </div>
             </SheetTrigger>
-            <SheetContent className="w-[300px] sm:w-[540px] p-2 sm:p-6">
+            <SheetContent className="w-[320px] sm:w-[540px] p-2 sm:p-6">
               <SheetHeader className="border-b ">
                 <SheetTitle></SheetTitle>
                 <MainLogo />
