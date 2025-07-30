@@ -114,8 +114,7 @@ export async function generateStudentId(): Promise<string> {
     await prisma.studentIdCounter.create({
       data: { nextNumber: 8 }, // we'll return 1 now
     });
-    return `COSTRAD-00007`;
-  }
+    return "COSTRAD-00007";}
 
   const current = result.nextNumber;
   await prisma.studentIdCounter.update({

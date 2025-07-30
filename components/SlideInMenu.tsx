@@ -78,7 +78,7 @@ export default function Component() {
                 <MainMenu />
               </div>
             </SheetTrigger>
-            <SheetContent className="w-[300px] sm:w-[540px] p-4 sm:p-6">
+            <SheetContent className="w-[300px] sm:w-[540px] p-2 sm:p-6">
               <SheetHeader className="border-b ">
                 <SheetTitle></SheetTitle>
                 <MainLogo />
@@ -114,7 +114,7 @@ export default function Component() {
               </div>
 
               <SheetFooter className="pt-4 border-t border-b border-accent ">
-                  <div className="p-3 pb-5 flex items-center justify-between">
+                  <div className=" pb-5 flex items-center justify-between gap-6">
                     <SignInButton />
                     <ThemeSwitch />
                   </div>

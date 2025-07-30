@@ -48,7 +48,7 @@ export function SignInButton() {
             <div className="flex items-start justify-between z-30  ">
               <div className="flex items-center  gap-x-2">
                 <div className="pr-2">
-                  <Avatar className="hidden h-9 w-9 sm:flex outline-2 outline-offset-1 outline-accent box-content ">
+                  <Avatar className=" h-10 w-10 sm:flex outline-2 outline-offset-1 outline-accent  ">
                     <AvatarImage
                       src={session?.user.image || "#"}
                       alt="Avatar"
