@@ -5,8 +5,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"; // Import useRouter
-
+import { useRouter } from "next/navigation"
 
 import {
   Dialog,
@@ -36,9 +35,10 @@ type Props = {
 }
 
 export function AdminRoleToggleForm({ userId, isAdmin }: Props) {
-  const router = useRouter() // Initialize router for navigation
+  const router = useRouter()
   const [showDialog, setShowDialog] = useState(false)
   const [isPromoting, setIsPromoting] = useState(!isAdmin)
+  const [loading, setLoading] = useState(false) // NEW: loading state
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -48,6 +48,7 @@ export function AdminRoleToggleForm({ userId, isAdmin }: Props) {
   })
 
   const handleSubmit = async (data: z.infer<typeof FormSchema>) => {
+    setLoading(true) // start loading
     try {
       const res = await fetch(`/api/users/role`, {
         method: "PUT",
@@ -63,12 +64,13 @@ export function AdminRoleToggleForm({ userId, isAdmin }: Props) {
       toast.success(
         data.makeAdmin ? "User promoted to ADMIN" : "User demoted to USER"
       )
-      router.refresh() // Refresh the page to reflect changes
-
+      router.refresh()
       form.setValue("makeAdmin", data.makeAdmin)
       setShowDialog(false)
     } catch (err) {
       toast.error("An error occurred. Try again.")
+    } finally {
+      setLoading(false) // stop loading
     }
   }
 
@@ -108,12 +110,21 @@ export function AdminRoleToggleForm({ userId, isAdmin }: Props) {
 
           <DialogFooter className="flex justify-end gap-2 mt-4">
             <DialogClose asChild>
-              <Button type="button" variant="outline">
+              <Button type="button" variant="outline" disabled={loading}>
                 Cancel
               </Button>
             </DialogClose>
-            <Button onClick={form.handleSubmit(handleSubmit)}>
-              {isPromoting ? "Confirm Promotion" : "Confirm Demotion"}
+            <Button
+              onClick={form.handleSubmit(handleSubmit)}
+              disabled={loading}
+            >
+              {loading
+                ? isPromoting
+                  ? "Promoting..."
+                  : "Demoting..."
+                : isPromoting
+                ? "Confirm Promotion"
+                : "Confirm Demotion"}
             </Button>
           </DialogFooter>
         </DialogContent>

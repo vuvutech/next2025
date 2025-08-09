@@ -7,7 +7,6 @@ import { z } from "zod";
 import { useState } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter
 
-
 import {
   Dialog,
   DialogContent,
@@ -41,6 +40,8 @@ type Props = {
 export function BanToggleForm({ userId, initialBanned }: Props) {
   const [showDialog, setShowDialog] = useState(false);
   const [isBanning, setIsBanning] = useState(true); // To determine ban/unban mode
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter(); // Initialize router for navigation
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -52,6 +53,7 @@ export function BanToggleForm({ userId, initialBanned }: Props) {
   });
 
   const handleSubmit = async (data: z.infer<typeof FormSchema>) => {
+    setLoading(true); // start loading
     try {
       const res = await fetch(`/api/users/ban`, {
         method: "PUT",
@@ -69,11 +71,13 @@ export function BanToggleForm({ userId, initialBanned }: Props) {
         data.banned ? "User banned successfully" : "User unbanned successfully"
       );
 
-      router.refresh(); // Refresh the page after successful update
+      router.refresh();
       form.setValue("banned", data.banned);
       setShowDialog(false);
     } catch (err) {
       toast.error("An error occurred. Try again.");
+    } finally {
+      setLoading(false); // stop loading
     }
   };
 
@@ -147,8 +151,14 @@ export function BanToggleForm({ userId, initialBanned }: Props) {
                     Cancel
                   </Button>
                 </DialogClose>
-                <Button type="submit">
-                  {isBanning ? "Confirm Ban" : "Confirm Unban"}
+                <Button type="submit" disabled={loading}>
+                  {loading
+                    ? isBanning
+                      ? "Banning..."
+                      : "Unbanning..."
+                    : isBanning
+                      ? "Confirm Ban"
+                      : "Confirm Unban"}
                 </Button>
               </DialogFooter>
             </form>

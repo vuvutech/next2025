@@ -31,6 +31,8 @@ export async function DELETE(req: NextRequest) {
       prisma.oauthConsent.deleteMany({ where: { userId: id } }),
       prisma.oauthApplication.deleteMany({ where: { userId: id } }),
       prisma.session.deleteMany({ where: { userId: id } }),
+      prisma.account.deleteMany({ where: { userId: id } }),
+      prisma.verification.deleteMany({ where: { id: id } }),
       prisma.registration.deleteMany({ where: { userId: id } }),
       prisma.profile.deleteMany({ where: { userId: id } }), // <— changed to deleteMany
       prisma.user.delete({ where: { id } }),

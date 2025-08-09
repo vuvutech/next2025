@@ -125,6 +125,8 @@ export const auth = betterAuth({
   trustedOrigins: [
     "https://www.costrad.org",
     "https://costrad.org",
+    "https://www.costrad.net",
+    "https://costrad.net",
     "http://localhost:3000",
   ],
 

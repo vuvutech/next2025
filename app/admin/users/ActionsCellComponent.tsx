@@ -35,8 +35,10 @@ export function ActionsCellComponent({ id }: ActionsCellProps) {
   const [showViewDialog, setShowViewDialog] = useState(false);
   const [userDetails, setUserDetails] = useState<any>(null);
   const [loadingUser, setLoadingUser] = useState(false);
+  const [deleting, setDeleting] = useState(false); // NEW
 
   const handleDelete = async () => {
+    setDeleting(true); // start loading
     try {
       const res = await fetch(`/api/users/delete`, {
         method: "DELETE",
@@ -58,10 +60,10 @@ export function ActionsCellComponent({ id }: ActionsCellProps) {
       toast.error("Failed to delete user");
       console.error(error);
     } finally {
+      setDeleting(false); // stop loading
       setShowConfirmDialog(false);
     }
   };
-
   const handleViewUser = async () => {
     if (!id) return;
     setLoadingUser(true);
@@ -143,8 +145,15 @@ export function ActionsCellComponent({ id }: ActionsCellProps) {
               className="flex items-center gap-1"
               variant="destructive"
               onClick={handleDelete}
+              disabled={deleting} // disable while deleting
             >
-              <LucideTrash2 /> Confirm Delete
+              {deleting ? (
+                "Deleting User..."
+              ) : (
+                <>
+                  <LucideTrash2 /> Confirm Delete
+                </>
+              )}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -198,11 +207,8 @@ export function ActionsCellComponent({ id }: ActionsCellProps) {
                       {userDetails.email || "No email specified"}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {userDetails.profile?.telephone ||
-                        "-"}
-                      ,{" "}
-                      {userDetails.profile?.mobile ||
-                        "-"}
+                      {userDetails.profile?.telephone || "-"},{" "}
+                      {userDetails.profile?.mobile || "-"}
                     </p>
                   </div>
                 </div>
