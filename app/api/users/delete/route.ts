@@ -2,9 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/dbConnect";
 import { getCurrentUser } from "@/app/actions/functions";
 
-export async function DELETE(
-  req: NextRequest,
-) {
+export async function DELETE(req: NextRequest) {
   const currentUser = await getCurrentUser();
   const { id } = await req.json();
 
@@ -34,7 +32,7 @@ export async function DELETE(
       prisma.oauthApplication.deleteMany({ where: { userId: id } }),
       prisma.session.deleteMany({ where: { userId: id } }),
       prisma.registration.deleteMany({ where: { userId: id } }),
-      prisma.profile.delete({ where: { userId: id } }),
+      prisma.profile.deleteMany({ where: { userId: id } }), // <— changed to deleteMany
       prisma.user.delete({ where: { id } }),
     ]);
 
