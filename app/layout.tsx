@@ -12,6 +12,7 @@ import FooterWrapper from "@/components/Footer-Wrapper";
 import { TestimonialDialog } from "@/components/TestimonialDialog";
 import { NewsletterDialog } from "@/components/NewsletterDialog";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import UpNextWrapper from "@/components/ui/UpNextWrapper";
 
 export const metadata: Metadata = {
   title: {
@@ -55,6 +56,7 @@ export default function RootLayout({
       <head />
       <body>
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
+          <UpNextWrapper />
           {/* Use the wrapper component instead */}
           <StickyMenuWrapper />
 
