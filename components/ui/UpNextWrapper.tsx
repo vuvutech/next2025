@@ -1,38 +1,45 @@
 // components/ui/UpNextWrapper.tsx
+"use client";
+
 import Link from "next/link";
-import { prisma } from "@/prisma/dbConnect"; // adjust import to your setup
-import { Edition } from "@prisma/client";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 type NextEdition = {
   title: string;
   slug: string;
-  startDate: Date | null;
-  endDate: Date | null;
-};
+  startDate: string | null;
+  endDate: string | null;
+} | null;
 
-interface UpNextWrapperProps {
-  instituteId?: string;
-}
+export default function UpNextWrapper() {
+  const pathname = usePathname();
+  // Pages where Footer should be hidden (match by prefix)
+  const hiddenPrefixes = [
+    "/admin",
+    "/www",
+    "/coming-soon",
+    "/auth",
+    "/apply",
+    "/thank-you",
+  ];
 
-export default async function UpNextWrapper({
-  instituteId,
-}: UpNextWrapperProps) {
-  const now = new Date();
-  const nextEdition: NextEdition | null = await prisma.edition.findFirst({
-    where: {
-      startDate: { gt: now },
-      ...(instituteId && { instituteId }),
-    },
-    orderBy: { startDate: "asc" },
-    select: {
-      title: true,
-      slug: true,
-      startDate: true,
-      endDate: true,
-    },
-  });
+  const [nextEdition, setNextEdition] = useState<NextEdition>(null);
 
-  // If no upcoming edition, render nothing
+  useEffect(() => {
+    async function fetchEdition() {
+      const res = await fetch("/api/upnext");
+      const data = await res.json();
+      setNextEdition(data);
+    }
+    fetchEdition();
+  }, []);
+
+  const hideUpNext = hiddenPrefixes.some((prefix) =>
+    pathname.startsWith(prefix)
+  );
+
+  if (hideUpNext) return null;
   if (!nextEdition) return null;
 
   return (
@@ -43,16 +50,16 @@ export default async function UpNextWrapper({
             <span className="font-bold uppercase">UpNext:</span>
             &nbsp; <span className="font-mono">{nextEdition.title}</span>
             &nbsp;|&nbsp;
-            <span className="font-mono uppercase">
+            <span className="font-semibold uppercase ">
               {nextEdition.startDate
-                ? nextEdition.startDate.toLocaleDateString("en-US", {
+                ? new Date(nextEdition.startDate).toLocaleDateString("en-US", {
                     month: "short",
                     day: "numeric",
                   })
                 : ""}{" "}
               &mdash;{" "}
               {nextEdition.endDate
-                ? nextEdition.endDate.toLocaleDateString("en-US", {
+                ? new Date(nextEdition.endDate).toLocaleDateString("en-US", {
                     month: "short",
                     day: "numeric",
                     year: "numeric",
@@ -62,7 +69,7 @@ export default async function UpNextWrapper({
           </p>
           <div className="flex justify-center md:justify-start items-center gap-x-2.5">
             <Link
-              className="py-1.5 px-3.5 inline-flex justify-center items-center gap-x-1  bg-white/10 text-xs font-semibold text-white hover:bg-white/20 focus:outline-hidden focus:bg-white/20 rounded-full "
+              className="py-1.5 px-3.5 inline-flex justify-center items-center gap-x-1 bg-white/10 text-xs font-semibold text-white hover:bg-white/20 focus:outline-hidden focus:bg-white/20 rounded-full"
               href={`/apply`}
             >
               Apply Now
