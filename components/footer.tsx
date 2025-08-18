@@ -228,8 +228,8 @@ export default function Footer() {
             <div>&copy; COSTrAD {siteConfig.year} </div>
             <div className="flex gap-x-2">
               <div className="h-2 rounded-full transition-all animate-pulse  w-6 bg-primary dark:bg-primary" />
+              <div className=" h-2 w-2.5 rounded-full animate-pulse bg-chart-4 transition-all" />
               <div className="dark:bg-muted h-2 w-2.5 rounded-full bg-sidebar-border transition-all" />
-              <div className="dark:bg-muted h-2 w-2.5 rounded-full animate-pulse bg-muted-foreground transition-all" />
             </div>
             <div  className="">
               All Rights Reserved.
