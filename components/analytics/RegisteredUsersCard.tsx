@@ -22,7 +22,7 @@ export function RegisteredUsersCard() {
   React.useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("/api/analytics/registeredUsers");
+        const res = await fetch("/api/analytics?type=registered-users");
         const json = await res.json();
         setCount(json.registeredUsers ?? null);
         setTotalUsers(json.totalUsers ?? null);

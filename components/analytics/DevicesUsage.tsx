@@ -35,7 +35,7 @@ export function DevicesUsage() {
   React.useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch("/api/analytics/device-usage")
+        const res = await fetch("/api/analytics?type=device-usage")
         const json = await res.json()
         setChartData(json.data || [])
       } catch (error) {

@@ -13,7 +13,7 @@ export function SessionsCard() {
   React.useEffect(() => {
     (async () => {
       setLoading(true);
-      const res = await fetch("/api/analytics/sessions");
+      const res = await fetch("/api/analytics?type=sessions");
       const json = await res.json();
       setSessions(json.sessions ?? null);
       setLoading(false);

@@ -21,7 +21,7 @@ export function ActiveUsersCard() {
   React.useEffect(() => {
     (async () => {
       setLoading(true);
-      const res = await fetch("/api/analytics/active-users");
+      const res = await fetch("/api/analytics?type=active-users");
       const json = await res.json();
       setActiveUsers(json.activeUsers ?? null);
       setLoading(false);

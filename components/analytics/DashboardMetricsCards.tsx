@@ -37,7 +37,7 @@ const useMetric = (endpoint: string) => {
 };
 
 export function TotalUsersCard() {
-  const { value, loading } = useMetric("/api/analytics/total-users");
+  const { value, loading } = useMetric("/api/analytics?type=total-users");
 
   return (
     <Card className="w-full">
@@ -58,10 +58,10 @@ export function TotalUsersCard() {
 
 export function NewUsersCard() {
   const { value: weekly, loading: loadingWeek } = useMetric(
-    "/api/analytics/new-users?range=7d"
+    "/api/analytics?type=new-users&range=7d"
   );
   const { value: monthly, loading: loadingMonth } = useMetric(
-    "/api/analytics/new-users?range=30d"
+    "/api/analytics?type=new-users&range=30d"
   );
 
   return (
@@ -90,7 +90,7 @@ export function EditionPopularityCard() {
   React.useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("/api/analytics/edition-popularity");
+        const res = await fetch("/api/analytics?type=edition-popularity");
         const json = await res.json();
         setData(json.popularity ?? []);
       } catch (err) {
@@ -141,7 +141,7 @@ export function MostPopularEditionCard() {
   React.useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("/api/analytics/most-popular-edition");
+        const res = await fetch("/api/analytics?type=most-popular-edition");
         const json = await res.json();
         setData(json.edition ?? null);
       } catch (err) {

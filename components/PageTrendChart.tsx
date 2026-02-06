@@ -17,7 +17,7 @@ export function PageTrendChart({ path, range }: PageTrendChartProps) {
   React.useEffect(() => {
     (async () => {
       setLoading(true);
-      const res = await fetch(`/api/analytics/page-views?path=${encodeURIComponent(path)}&range=${range}`);
+      const res = await fetch(`/api/analytics?type=page-views&path=${encodeURIComponent(path)}&range=${range}`);
       const json = await res.json();
       setData(json.viewsByDate ?? []);
       setLoading(false);
