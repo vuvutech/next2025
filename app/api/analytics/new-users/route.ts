@@ -4,6 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { subDays } from "date-fns";
 import { prisma } from "@/prisma/dbConnect";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   const range = req.nextUrl.searchParams.get("range") ?? "7d";
 

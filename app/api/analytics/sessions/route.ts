@@ -1,6 +1,8 @@
-// File: app/api/analytics/sessions/route.ts
+// app/api/analytics/sessions/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { analyticsDataClient } from "@/lib/googleAnalytics";
+
+export const dynamic = 'force-dynamic';
 
 export async function GET(_req: NextRequest) {
   const propertyId = process.env.GA4_PROPERTY_ID!;

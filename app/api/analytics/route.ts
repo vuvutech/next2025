@@ -1,7 +1,10 @@
+// app\api\analytics\route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { analyticsDataClient } from "@/lib/googleAnalytics";
 import { prisma } from "@/prisma/dbConnect";
 import { subDays } from "date-fns";
+
+export const dynamic = 'force-dynamic';
 
 const RANGE_MAP: Record<string, string> = {
   "7d": "7daysAgo",

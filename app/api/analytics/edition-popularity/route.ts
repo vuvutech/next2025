@@ -1,6 +1,8 @@
-// File: app/api/analytics/edition-popularity/route.ts
+// app/api/analytics/edition-popularity/route.ts
 import { prisma } from "@/prisma/dbConnect";
 import { NextResponse } from "next/server";
+
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {

@@ -2,6 +2,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { analyticsDataClient } from "@/lib/googleAnalytics";
 
+export const dynamic = 'force-dynamic';
+
 const RANGE_MAP: Record<string, string> = {
   "7d": "7daysAgo",
   "30d": "30daysAgo",

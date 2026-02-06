@@ -2,8 +2,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { analyticsDataClient } from "@/lib/googleAnalytics";
 
+export const dynamic = 'force-dynamic';
 const RANGE_MAP: Record<string, string> = {
-  "7d":  "7daysAgo",
+  "7d": "7daysAgo",
   "30d": "30daysAgo",
   "90d": "90daysAgo",
 };
@@ -26,7 +27,7 @@ export async function GET(req: NextRequest) {
 
     const topPages =
       response.rows?.map((row) => ({
-        path:  row.dimensionValues?.[0].value ?? "/",
+        path: row.dimensionValues?.[0].value ?? "/",
         views: Number(row.metricValues?.[0].value ?? 0),
       })) ?? [];
 
