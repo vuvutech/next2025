@@ -55,6 +55,8 @@ export function ExtensionComponent() {
     inPersonDelivery: false,
     onlineDelivery: false,
     price: "",
+    earlyBirdPrice: "",
+    earlyBirdDeadline: "",
     priceViaZoom: "",
     startDate: "",
     endDate: "",
@@ -86,6 +88,7 @@ export function ExtensionComponent() {
           price: parseFloat(form.price),
           priceViaZoom: parseFloat(form.priceViaZoom || "0"),
           startDate: form.startDate ? new Date(form.startDate) : null,
+          earlyBirdDeadline: form.earlyBirdDeadline ? new Date(form.earlyBirdDeadline) : null,
           endDate: form.endDate ? new Date(form.endDate) : null,
         }),
       });
@@ -105,6 +108,8 @@ export function ExtensionComponent() {
         inPersonDelivery: false,
         onlineDelivery: false,
         price: "",
+        earlyBirdPrice: "",
+        earlyBirdDeadline: "",
         priceViaZoom: "",
         startDate: "",
         endDate: "",
@@ -128,7 +133,7 @@ export function ExtensionComponent() {
           Add Edition
         </div>
       </SheetTrigger>
-      <SheetContent className="p-4 overflow-y-scroll sm:max-w-xl">
+      <SheetContent className="p-4 overflow-y-scroll sm:max-w-2xl">
         <SheetHeader>
           <SheetTitle>Add New Edition</SheetTitle>
         </SheetHeader>
@@ -174,6 +179,10 @@ export function ExtensionComponent() {
               }}
             />
           </div>
+                      <div className="grid gap-2">
+              <Label>SEO (Comma Seperated List)</Label>
+              <Input name="seo" value={form.seo} onChange={handleChange} />
+            </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="grid gap-2">
@@ -200,7 +209,7 @@ export function ExtensionComponent() {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <div className="grid gap-2">
               <Label>Start Date</Label>
               <Popover>
@@ -274,12 +283,54 @@ export function ExtensionComponent() {
                 </PopoverContent>
               </Popover>
             </div>
+            <div className="grid gap-2">
+              <Label>Early Bird Deadline Date</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      "w-full justify-start text-left font-normal",
+                      !form.earlyBirdDeadline && "text-muted-foreground"
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {form.earlyBirdDeadline
+                      ? format(new Date(form.earlyBirdDeadline), "PPP")
+                      : "Select a date"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    selected={form.earlyBirdDeadline ? new Date(form.earlyBirdDeadline) : undefined}
+                    onSelect={(date) =>
+                      setForm((prev) => ({
+                        ...prev,
+                        earlyBirdDeadline: date?.toISOString().split("T")[0] || "",
+                      }))
+                    }
+                    initialFocus
+                    captionLayout="dropdown"
+                    fromYear={new Date().getFullYear()}
+                    toYear={2045}
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
           </div>
 
+
           <div className="grid grid-cols-3 gap-4">
+
             <div className="grid gap-2">
-              <Label>SEO</Label>
-              <Input name="seo" value={form.seo} onChange={handleChange} />
+              <Label>Early Bird Price</Label>
+              <Input
+                name="earlyBirdPrice"
+                type="number"
+                value={form.earlyBirdPrice}
+                onChange={handleChange}
+              />
             </div>
             <div className="grid gap-2">
               <Label>Price</Label>

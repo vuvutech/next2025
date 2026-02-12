@@ -1,4 +1,8 @@
 // app/institutes/[slug]/page.tsx
+
+// revalidate after 12 hours
+export const revalidate = 43200; // 12 hours in seconds
+
 import { prisma } from "@/prisma/dbConnect";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -6,7 +10,6 @@ import { Section1 } from "../Section1";
 import WorldMap from "@/components/WorldMap";
 import OverviewSection from "@/app/institutes/OverviewSection";
 import Jumbotron from "@/components/ui/Jumbotron";
-import { WorldMapSection } from "@/components/WorldMapSection";
 
 // Static paths for SSG
 export async function generateStaticParams() {

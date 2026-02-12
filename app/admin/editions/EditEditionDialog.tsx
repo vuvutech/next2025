@@ -38,9 +38,11 @@ export type EditionForm = {
   seo: string;
   overview: string;
   price: string;
+  earlyBirdPrice: string;
   priceViaZoom: string;
   startDate: string;
   endDate: string;
+  earlyBirdDeadline: string;
   banner: string;
   verticalBanner: string;
   inPersonDelivery: boolean;
@@ -62,9 +64,11 @@ export default function EditEditionDialog({ edition }: EditEditionDialogProps) {
     seo: "",
     overview: "",
     price: "",
+    earlyBirdPrice: "",
     priceViaZoom: "",
     startDate: "",
     endDate: "",
+    earlyBirdDeadline: "",
     banner: "",
     verticalBanner: "",
     inPersonDelivery: false,
@@ -94,9 +98,11 @@ export default function EditEditionDialog({ edition }: EditEditionDialogProps) {
         body: JSON.stringify({
           ...form,
           price: parseFloat(form.price || "0"),
+          earlyBirdPrice: parseFloat(form.earlyBirdPrice || "0"),
           priceViaZoom: parseFloat(form.priceViaZoom || "0"),
           startDate: form.startDate ? new Date(form.startDate) : null,
           endDate: form.endDate ? new Date(form.endDate) : null,
+          earlyBirdDeadline: form.earlyBirdDeadline ? new Date(form.earlyBirdDeadline) : null,
         }),
       });
 
@@ -119,7 +125,8 @@ export default function EditEditionDialog({ edition }: EditEditionDialogProps) {
         <IconPencilCog className="cursor-pointer" />
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-3xl overflow-y-scroll max-h-[90vh]">
+      <DialogContent className="sm:max-w-4xl overflow-y-scroll max-h-[90vh]">
+        
         <form onSubmit={handleSubmit} className="space-y-4">
           <DialogHeader>
             <DialogTitle>Edit Edition</DialogTitle>
@@ -201,7 +208,7 @@ export default function EditEditionDialog({ edition }: EditEditionDialogProps) {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-2">
             <div>
               <Label>Start Date</Label>
               <Popover>
@@ -262,6 +269,38 @@ export default function EditEditionDialog({ edition }: EditEditionDialogProps) {
                       setForm((prev) => ({
                         ...prev,
                         endDate: date?.toISOString().split("T")[0] || "",
+                      }))
+                    }
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
+            <div>
+              <Label>Early Bird Deadline</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      "w-full justify-start text-left font-normal",
+                      !form.earlyBirdDeadline && "text-muted-foreground"
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {form.earlyBirdDeadline
+                      ? format(new Date(form.earlyBirdDeadline), "PPP")
+                      : "Select a date"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    selected={form.earlyBirdDeadline ? new Date(form.earlyBirdDeadline) : undefined}
+                    onSelect={(date) =>
+                      setForm((prev) => ({
+                        ...prev,
+                        earlyBirdDeadline: date?.toISOString().split("T")[0] || "",
                       }))
                     }
                     initialFocus

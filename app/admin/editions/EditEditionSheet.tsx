@@ -46,10 +46,15 @@ export function EditEditionSheet({ edition }: { edition: any }) {
     price: (edition?.price ?? "").toString(),
     priceViaZoom:
       edition?.priceViaZoom != null ? edition.priceViaZoom.toString() : "",
+    earlyBirdPrice:
+      edition?.earlyBirdPrice != null ? edition.earlyBirdPrice.toString() : "",
     inPersonDelivery: edition?.inPersonDelivery ?? false,
     onlineDelivery: edition?.onlineDelivery ?? false,
     startDate: edition?.startDate
       ? new Date(edition.startDate).toISOString().split("T")[0]
+      : "",
+    earlyBirdDeadline: edition?.earlyBirdDeadline
+      ? new Date(edition.earlyBirdDeadline).toISOString().split("T")[0]
       : "",
     endDate: edition?.endDate
       ? new Date(edition.endDate).toISOString().split("T")[0]
@@ -82,6 +87,8 @@ export function EditEditionSheet({ edition }: { edition: any }) {
           ...form,
           price: parseFloat(form.price) || 0,
           priceViaZoom: parseFloat(form.priceViaZoom) || 0,
+          earlyBirdPrice: parseFloat(form.earlyBirdPrice) || 0,
+          earlyBirdDeadline: form.earlyBirdDeadline ? new Date(form.earlyBirdDeadline) : null,
           startDate: form.startDate ? new Date(form.startDate) : null,
           endDate: form.endDate ? new Date(form.endDate) : null,
         }),
@@ -106,13 +113,14 @@ export function EditEditionSheet({ edition }: { edition: any }) {
       <SheetTrigger className="cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-9 px-4 py-2">
         <IconEdit />
       </SheetTrigger>
-      <SheetContent className="p-4 overflow-y-scroll sm:max-w-xl">
+      <SheetContent className="p-4 overflow-y-scroll sm:max-w-2xl">
         <SheetHeader>
           <SheetTitle>Edit Edition</SheetTitle>
         </SheetHeader>
 
         <form onSubmit={handleUpdate} className="grid gap-4 py-2">
           <div className="grid grid-cols-2 gap-2 py-3">
+            
             <div className="flex items-center gap-3">
               <Checkbox
                 id="inPersonDelivery"
@@ -165,10 +173,14 @@ export function EditEditionSheet({ edition }: { edition: any }) {
               onChange={handleChange}
             />
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            {(["startDate", "endDate"] as const).map((key) => (
+            <div className="grid gap-2">
+              <Label>SEO Keyword (Comma Seperated)</Label>
+              <Input name="seo" value={form.seo} onChange={handleChange} />
+            </div>
+          <div className="grid grid-cols-3 gap-4">
+            {(["startDate", "endDate","earlyBirdDeadline"] as const).map((key) => (
               <div className="grid gap-2" key={key}>
-                <Label>{key === "startDate" ? "Start Date" : "End Date"}</Label>
+                <Label>{key === "startDate" ? "Start Date" : key === "endDate" ? "End Date" : "Early Bird Deadline"}</Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -204,12 +216,18 @@ export function EditEditionSheet({ edition }: { edition: any }) {
             ))}
           </div>
           <div className="grid grid-cols-3 gap-4">
+          
             <div className="grid gap-2">
-              <Label>SEO</Label>
-              <Input name="seo" value={form.seo} onChange={handleChange} />
+              <Label>Early Bird Price</Label>
+              <Input
+                name="earlyBirdPrice"
+                type="number"
+                value={form.earlyBirdPrice}
+                onChange={handleChange}
+              />
             </div>
             <div className="grid gap-2">
-              <Label>Price</Label>
+              <Label>Regular Price</Label>
               <Input
                 name="price"
                 type="number"
@@ -229,7 +247,7 @@ export function EditEditionSheet({ edition }: { edition: any }) {
            
           </div>
           <div className="grid grid-cols-2 gap-2">
-            <div>
+            <div className="grid gap-2">
               <UploadImage
                 label="Banner"
                 onUpload={(url) => setForm((f) => ({ ...f, banner: url }))}

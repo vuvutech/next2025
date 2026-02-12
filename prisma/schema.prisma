@@ -23,7 +23,7 @@ enum MaritalStatus {
 enum Religion {
   CHRISTIANITY
   ISLAM
-  HINDUISM
+  // HINDUISM
   BUDDHISM
   JUDAISM
   OTHER
@@ -325,6 +325,8 @@ model Edition {
   onlineDelivery   Boolean?       @default(true)
   price            Float?
   priceViaZoom     Float?
+  earlyBirdPrice   Float?
+  earlyBirdDeadline          DateTime?
   createdAt        DateTime?      @default(now())
   updatedAt        DateTime?      @updatedAt
   Registration     Registration[]

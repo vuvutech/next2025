@@ -9,6 +9,8 @@ import { useDialog } from "@/providers/DialogProvider";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
+import { MoveVerticalIcon } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 export default function OverviewSection({
   institute,
@@ -34,6 +36,14 @@ export default function OverviewSection({
         day: "numeric",
         year: "numeric",
       }).format(new Date(edition?.endDate))
+    : "";
+
+  const formattedEarlyBirdDeadline = edition?.earlyBirdDeadline
+    ? new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      }).format(new Date(edition?.earlyBirdDeadline))
     : "";
   return (
     <section id="about-section" className="max-w-8xl sm:px-2   mx-auto h-auto">
@@ -189,34 +199,63 @@ export default function OverviewSection({
                 {/* <p className="text-base font-bold text-gray-600 dark:text-gray-500">
                   Pay once &mdash; Own it forever
                 </p> */}
+                {edition?.onlineDelivery && edition?.priceViaZoom != null && (
+                  <div className="mt-6 text-center">
+                    {edition.earlyBirdDeadline &&
+                    new Date(edition.earlyBirdDeadline) > new Date() ? (
+                      // ── EARLY BIRD STILL ACTIVE ──
+                      <div>
+                        <p className="flex items-baseline justify-center gap-x-3">
+                          <span className="text-xl font-bold tracking-tight text-gray-400 dark:text-gray-500 line-through">
+                            ${edition.priceViaZoom.toFixed(2)}
+                          </span>
+                          <span className="text-3xl font-extrabold tracking-tight text-emerald-600 dark:text-emerald-400">
+                            ${edition.earlyBirdPrice?.toFixed(2) ?? "—"}
+                          </span>
+                        </p>
 
-                {/* display only if inPersonDelivery is true and price is not null */}
-                {edition?.inPersonDelivery && edition?.price && (
-                  <div>
-                    <p className="mt-6 flex items-baseline justify-center gap-x-2">
-                      <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-                        ${edition?.price}
-                      </span>
-                      <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
-                        USD
-                      </span>
-                    </p>
-                    <SeperatorWithText seperatorText={"In Person"} />
-                  </div>
-                )}
+                        <div className="mt-4">
+                          <SeperatorWithText seperatorText="Early Bird Discount – Limited Time" />
+                        </div>
 
-                {/* display priceViaZoom only if onlineDelivery is true and priceViaZoom is not null */}
-                {edition?.onlineDelivery && edition?.priceViaZoom && (
-                  <div>
-                    <p className="mt-6 flex items-baseline justify-center gap-x-2">
-                      <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-                        ${edition?.priceViaZoom}
-                      </span>
-                      <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
-                        USD
-                      </span>
-                    </p>
-                    <SeperatorWithText seperatorText={"Via Zoom"} />
+                        <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+                          Offer ends{" "}
+                          {new Date(
+                            edition.earlyBirdDeadline,
+                          ).toLocaleDateString("en-US", {
+                            month: "long",
+                            day: "numeric",
+                            year: "numeric",
+                          })}
+                        </p>
+                      </div>
+                    ) : (
+                      // ── EARLY BIRD EXPIRED or never existed ──
+                      <div>
+                        <p className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
+                          ${edition.priceViaZoom.toFixed(2)}
+                        </p>
+
+                        <div className="mt-4">
+                          <SeperatorWithText seperatorText="Online via Zoom" />
+                        </div>
+
+                        {/* Optional: subtle note if early bird existed but expired */}
+                        {edition.earlyBirdDeadline &&
+                          edition.earlyBirdPrice != null && (
+                            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+                              Early bird discount ended on{" "}
+                              {new Date(
+                                edition.earlyBirdDeadline,
+                              ).toLocaleDateString("en-US", {
+                                month: "long",
+                                day: "numeric",
+                                year: "numeric",
+                              })}
+                            </p>
+                          )}
+                      </div>
+                    )}
                   </div>
                 )}
 
@@ -244,10 +283,20 @@ export default function OverviewSection({
                   </span>
                 </div>
 
-                <p className="mt-6 text-xs leading-5 dark:text-gray-400">
-                  Gain knowledge that lasts a lifetime. Invoices and receipts
-                  available for easy company reimbursement.
-                </p>
+                {edition?.earlyBirdDeadline && (
+                  <>
+                    <Separator className="mt-5" />
+
+                    <p className="mt-6 text-xs leading-5 dark:text-gray-400">
+                      <span>Early bird discounted pricing</span> is available
+                      while spaces last or until{" "}
+                      <span className="font-bold">
+                        {formattedEarlyBirdDeadline}
+                      </span>
+                      , <br /> — whichever comes first.
+                    </p>
+                  </>
+                )}
               </div>
             )}
           </div>
