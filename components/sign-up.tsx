@@ -283,7 +283,7 @@ export function SignUpComponent({
               Sign In.{" "}
             </Link>{" "}
             <br />
-            By clicking continue, you agree to our{\" \"}
+            By clicking continue, you agree to our{" "}
             <Link href={"/terms"} prefetch={false}>Terms of Service</Link> and{" "}
             <Link href={"/privacy"} prefetch={false}>Privacy Policy</Link>.
           </div>

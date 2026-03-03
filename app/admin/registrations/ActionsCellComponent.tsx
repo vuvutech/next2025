@@ -315,8 +315,8 @@ export function ActionsCellComponent({ id }: ActionsCellProps) {
                     {userDetails.profile?.tiktok ||
                       "No TikTok account specified"}
                   </Link>
-                      "No TikTok account specified"}
-                  </Link>
+                      "No TikTok account specified"
+                
                 </div>
               </CardContent>
             </Card>

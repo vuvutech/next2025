@@ -50,7 +50,7 @@ export default function EmailVerification() {
         </CardContent>
         <CardFooter>
           <Button type="submit" className="w-full" asChild>
-            <Link href=\"/\" prefetch={false}>Back to Website</Link>
+            <Link href="/\" prefetch={false}>Back to Website</Link>
           </Button>
         </CardFooter>
       </Card>
