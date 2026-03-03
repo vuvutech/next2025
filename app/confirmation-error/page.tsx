@@ -27,15 +27,15 @@ export default function Unsubscribe() {
         <div>
           <p className="text-sm text-center text-gray-600 dark:text-gray-400">
             Need help? Email{" "}
-            <Link href="mailto:info@costrad.org" className="underline hover:text-blue-600 dark:hover:text-blue-400">
+            <Link href="mailto:info@costrad.org" className="underline hover:text-blue-600 dark:hover:text-blue-400" prefetch={false}>
               info@costrad.org
             </Link>
             ,{" "}
-            <Link href="mailto:webmaster@costrad.org" className="underline hover:text-blue-600 dark:hover:text-blue-400">
+            <Link href="mailto:webmaster@costrad.org" className="underline hover:text-blue-600 dark:hover:text-blue-400" prefetch={false}>
               webmaster@costrad.org
             </Link>{" "}
             or call{" "}
-            <Link href="tel:+233200201334" className="underline hover:text-blue-600 dark:hover:text-blue-400">
+            <Link href="tel:+233200201334" className="underline hover:text-blue-600 dark:hover:text-blue-400" prefetch={false}>
               +233 20 020 1334
             </Link>
           </p>

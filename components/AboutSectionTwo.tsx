@@ -34,6 +34,7 @@ const AboutSectionTwo = ({
             href={primaryButtonHref}
             className="inline-flex justify-center items-center py-1 px-5 text-base font-medium text-center text-white rounded-full
              bg-primary hover:bg-primary/90 focus:ring-4 focus:ring-primary/50"
+            prefetch={false}
           >
             {primaryButtonText}
             <svg
@@ -55,6 +56,7 @@ const AboutSectionTwo = ({
           <Link
             href={secondaryButtonHref}
             className="inline-flex justify-center hover:text-gray-900 items-center py-1 px-5 sm:ms-4 text-base font-medium text-center text-white  border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400 rounded-full"
+            prefetch={false}
           >
             {secondaryButtonText}
           </Link>

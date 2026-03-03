@@ -24,6 +24,7 @@ export default function BadgeLink({
         "mx-auto mb-3 sm:inline-flex flex justify-between items-center gap-3 uppercase rounded-full border px-2 py-1 text-xs sm:text-sm w-full sm:w-auto",
         className
       )}
+      prefetch={false}
     >
       <span
         data-slot="badge"

@@ -17,7 +17,7 @@ export default function ButtonWithLink({
   variant = "primary",
 }: ButtonWithLinkProps) {
   return (
-    <Link href={href}>
+    <Link href={href} prefetch={false}>
       <div className={`button-borders ${className}`}>
         <button className={`${variant}-button`}>{children}</button>
       </div>

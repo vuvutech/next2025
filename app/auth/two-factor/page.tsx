@@ -98,7 +98,7 @@ export default function TwoFactorComponent() {
             </form>
           </CardContent>
           <CardFooter className="text-sm text-muted-foreground gap-2">
-            <Link href={`/auth/two-factor/otp`} >
+            <Link href={`/auth/two-factor/otp`} prefetch={false}>
               <Button variant="link" size="sm">
                 Switch to <span className="font-bold">Email Verification</span>
               </Button>

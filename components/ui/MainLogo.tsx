@@ -16,7 +16,7 @@ const MainLogo = ({
 }: MainLogoProps) => {
   return (
     <div className="flex h-auto  items-center space-x-1 sm:space-x-3 cursor-pointer ">
-      <Link href="/" className="!opacity-100">
+      <Link href="/" className="!opacity-100" prefetch={false}>
         <div className={`relative rounded-full overflow-hidden ${logoSize}`}>
           <Image
             src="/images/costrad.png"
@@ -29,7 +29,7 @@ const MainLogo = ({
       </Link>
 
       {!hideText && (
-        <Link href={"/"}>
+        <Link href={"/"} prefetch={false}>
           {/* <Divider orientation='vertical' className='bg-gray-300' /> */}
           <div
             className={`${oswald.className} ${textColor} uppercase leading-[10px] text-[10px] md:text-sm 

@@ -32,7 +32,7 @@ export function InvitationError() {
 				</p>
 			</CardContent>
             <CardFooter>
-				<Link href="/" className="w-full" >
+				<Link href=\"/\" className="w-full\" prefetch={false}>
 					<Button variant="outline" className="w-full">
 						Go back to home
 					</Button>

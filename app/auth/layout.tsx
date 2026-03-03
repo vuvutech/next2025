@@ -18,8 +18,7 @@ export default function SignInLayout({
       </div>
       <Link
         href={"/"}
-        className="absolute top-3 md:top-7 left-3 md:left-7 z-90 "
-      >
+        className="absolute top-3 md:top-7 left-3 md:left-7 z-90 "        prefetch={false}      >
         {/* <LucideAArrowDown className='text-red-500' /> */}
         <LucideHome className="text-current" />
       </Link>

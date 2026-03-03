@@ -19,11 +19,11 @@ export default function Unsubscribe() {
         </div>
         <div>
           <p className="text-sm wrap-break-word text-center ">
-            <Link href="email:info@costrad.org">info@costrad.org</Link>,{" "}
-            <Link href="email:webmaster@costrad.org">
+            <Link href="email:info@costrad.org" prefetch={false}>info@costrad.org</Link>,{" "}
+            <Link href="email:webmaster@costrad.org" prefetch={false}>
               webmaster@costrad.org
             </Link>
-            , <Link href="tel: +233200201334">+233 20 020 1334</Link>
+            {" "}, <Link href="tel: +233200201334" prefetch={false}>+233 20 020 1334</Link>
           </p>
         </div>
       </div>

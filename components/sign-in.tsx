@@ -235,6 +235,7 @@ export default function SignInComponent({
               <Link
                 href="/auth/forget-password"
                 className="ml-auto text-sm underline"
+                prefetch={false}
                 onClick={() => {
                   close(); // Close dialog if open
                 }}
@@ -303,13 +304,13 @@ export default function SignInComponent({
         {displayFooterText ? (
           <div className=" text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
             Don't have an account? Rather{" "}
-            <Link href={"/auth/sign-up"} className="font-bold">
+            <Link href={"/auth/sign-up"} className="font-bold" prefetch={false}>
               Sign Up.{" "}
             </Link>{" "}
             <br />
             By clicking continue, you agree to our{" "}
-            <Link href={"/terms"}>Terms of Service</Link> and{" "}
-            <Link href={"/privacy"}>Privacy Policy</Link>.
+            <Link href={"/terms"} prefetch={false}>Terms of Service</Link> and{" "}
+            <Link href={"/privacy"} prefetch={false}>Privacy Policy</Link>.
           </div>
         ) : (
           " "

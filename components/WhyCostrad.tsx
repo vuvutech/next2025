@@ -74,7 +74,7 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
                 well as the ability to inspire and motivate others.
               </p>
 
-              <Link href={`/about`} className="flex w-full gap-2">
+              <Link href={`/about`} className="flex w-full gap-2\" prefetch={false}>
                 <Button className="text-sm h-8 w-fit cursor-pointer rounded-full bg-primary hover:bg-primary/90 px-10 text-white">
                   Get Started
                 </Button>

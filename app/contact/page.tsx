@@ -203,7 +203,7 @@ export default function ContactPage() {
                   you.
                 </p>
               </div>
-              <Link href="#" className="hover:underline">
+              <Link href="#" className="hover:underline" prefetch={false}>
                 Get support
               </Link>
             </div>
@@ -241,6 +241,7 @@ export default function ContactPage() {
             <Link
               className="group rounded-md border border-border p-6"
               href="#"
+              prefetch={false}
             >
               <div className="flex items-center justify-between gap-4">
                 <FaXTwitter className="size-10" />
@@ -256,6 +257,7 @@ export default function ContactPage() {
             <Link
               className="group rounded-md border border-border p-6"
               href="#"
+              prefetch={false}
             >
               <div className="flex items-center justify-between gap-4">
                 <FaTiktok className="size-10" />
@@ -271,6 +273,7 @@ export default function ContactPage() {
             <Link
               className="group rounded-md border border-border p-6"
               href="#"
+              prefetch={false}
             >
               <div className="flex items-center justify-between gap-4">
                 <FaWhatsapp className="size-10" />
@@ -286,6 +289,7 @@ export default function ContactPage() {
             <Link
               className="group rounded-md border border-border p-6"
               href="#"
+              prefetch={false}
             >
               <div className="flex items-center justify-between gap-4">
                 <FaFacebook className="size-10" />

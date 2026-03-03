@@ -298,6 +298,7 @@ export function ActionsCellComponent({ id }: ActionsCellProps) {
                     target="_blank"
                     href={userDetails.profile?.twitter || "#"}
                     className="text-xs text-muted-foreground"
+                    prefetch={false}
                   >
                     {userDetails.profile?.twitter ||
                       "No Twitter account specified"}
@@ -309,6 +310,7 @@ export function ActionsCellComponent({ id }: ActionsCellProps) {
                     target="_blank"
                     href={userDetails.profile?.youtube || "#"}
                     className="text-xs text-muted-foreground"
+                    prefetch={false}
                   >
                     {userDetails.profile?.youtube ||
                       "No Youtube account specified"}
@@ -320,6 +322,7 @@ export function ActionsCellComponent({ id }: ActionsCellProps) {
                     target="_blank"
                     href={userDetails.profile?.linkedin || "#"}
                     className="text-xs text-muted-foreground"
+                    prefetch={false}
                   >
                     {userDetails.profile?.linkedin ||
                       "No LinkedIn account specified"}
@@ -331,6 +334,7 @@ export function ActionsCellComponent({ id }: ActionsCellProps) {
                     target="_blank"
                     href={userDetails.profile?.instagram || "#"}
                     className="text-xs text-muted-foreground"
+                    prefetch={false}
                   >
                     {userDetails.profile?.instagram ||
                       "No Instagram account specified"}
@@ -342,6 +346,7 @@ export function ActionsCellComponent({ id }: ActionsCellProps) {
                     target="_blank"
                     href={userDetails.profile?.tiktok || "#"}
                     className="text-xs text-muted-foreground"
+                    prefetch={false}
                   >
                     {userDetails.profile?.tiktok ||
                       "No TikTok account specified"}
