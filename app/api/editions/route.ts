@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/dbConnect";
 import { getCurrentUser } from "@/app/actions/functions";
@@ -66,10 +67,29 @@ export async function POST(req: Request) {
       );
     }
 
+    // ────────────────────────────────────────────────
+    //   Copy the safe parsing pattern from PUT
+    // ────────────────────────────────────────────────
+
+    const {
+      title,           // we'll handle separately if needed
+      instituteId,
+      price,
+      earlyBirdPrice,
+      priceViaZoom,
+      ...rest
+    } = data;
+
     const edition = await prisma.edition.create({
       data: {
-        ...data,
+        ...rest,
+        title,
+        instituteId,
         slug,
+        // Only include price fields if they were sent, and convert them safely
+        ...(price !== undefined && { price: parseFloat(price) }),
+        ...(earlyBirdPrice !== undefined && { earlyBirdPrice: parseFloat(earlyBirdPrice) }),
+        ...(priceViaZoom !== undefined && { priceViaZoom: parseFloat(priceViaZoom) }),
       },
       include: { institute: { select: { slug: true, name: true } } },
     });
@@ -78,7 +98,7 @@ export async function POST(req: Request) {
       `✅ New edition created: "${edition.title}" (ID: ${edition.id}) for institute "${instituteExists.name}"`
     );
 
-    // Revalidate admin list + all institutes + specific institute if possible
+    // Revalidate paths (same as before)
     revalidatePath(`${baseUrl}/admin/editions`);
     revalidatePath('/institutes', 'page');
     if (edition.institute?.slug) {
@@ -98,6 +118,14 @@ export async function POST(req: Request) {
     if (error.code === "P2003") {
       return NextResponse.json(
         { error: "Invalid institute reference" },
+        { status: 400 }
+      );
+    }
+
+    // For Prisma validation errors (like string instead of float)
+    if (error instanceof Error && error.message.includes("Invalid value provided")) {
+      return NextResponse.json(
+        { error: "Invalid data format", details: error.message },
         { status: 400 }
       );
     }
