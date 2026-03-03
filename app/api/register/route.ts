@@ -39,7 +39,17 @@ export async function POST(req: NextRequest) {
     });
 
     if (alreadyRegistered) {
-      return NextResponse.json({ message: "You are already registered." }, { status: 200 });
+      console.log(
+        `User ${user.id} already registered for edition ${editionId} (${edition.title})`
+      );
+      return NextResponse.json(
+        { 
+          message: "You are already registered.",
+          editionTitle: edition.title,
+          editionId: edition.id 
+        }, 
+        { status: 200 }
+      );
     }
 
     const registration = await prisma.registration.create({

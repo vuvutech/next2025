@@ -77,14 +77,12 @@ interface ProfileForm {
 }
 
 export function GlobalDialog() {
-const { activeDialog, close } = useDialog();
-const isOpen = activeDialog === "registerForEdition";
+  const { activeDialog, close } = useDialog();
+  const isOpen = activeDialog === "registerForEdition";
   const { data: session } = useSession();
   const [profileComplete, setProfileComplete] = useState(false);
-  const [institutes, setInstitutes] = useState<string[]>([]);
-  const [selectedInstitute, setSelectedInstitute] = useState<string | null>(
-    null
-  );
+  const [editions, setEditions] = useState<Array<{ id: string; title: string }>>([]);
+  const [selectedEditionId, setSelectedEditionId] = useState<string | null>(null);
 
   const {
     register,
@@ -107,10 +105,9 @@ const isOpen = activeDialog === "registerForEdition";
           setProfileComplete(complete);
         });
     }
-    fetch("/api/institutes")
+    fetch("/api/getCurrentEditions")
       .then((res) => res.json())
-      .then((data) => setInstitutes(data.map((i: any) => i.name)));
-      console.log("Institutes fetched:", institutes);
+      .then((data) => setEditions(data.map((e: any) => ({ id: e.id, title: e.title }))));
   }, [session]);
 
   const onProfileSubmit = (data: ProfileForm) => {
@@ -123,11 +120,11 @@ const isOpen = activeDialog === "registerForEdition";
   };
 
   const onRegister = () => {
-    if (!selectedInstitute) return;
+    if (!selectedEditionId) return;
     fetch("/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ institute: selectedInstitute }),
+      body: JSON.stringify({ editionId: selectedEditionId }),
     }).then(() => close());
   };
 
@@ -362,19 +359,19 @@ const isOpen = activeDialog === "registerForEdition";
 
             {session?.user && profileComplete && (
               <div className="space-y-4 w-full">
-                <Select onValueChange={setSelectedInstitute}>
+                <Select onValueChange={setSelectedEditionId}>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select Institute" />
+                    <SelectValue placeholder="Select Edition" />
                   </SelectTrigger>
                   <SelectContent>
-                    {institutes.map((name) => (
-                      <SelectItem key={name} value={name}>
-                        <div><span>{name}</span></div>
+                    {editions.map((edition) => (
+                      <SelectItem key={edition.id} value={edition.id}>
+                        <div><span>{edition.title}</span></div>
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
-                <Button onClick={onRegister} disabled={!selectedInstitute}>
+                <Button onClick={onRegister} disabled={!selectedEditionId}>
                   Register
                 </Button>
               </div>

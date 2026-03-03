@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { MoveVerticalIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 
 export default function OverviewSection({
   institute,
@@ -92,14 +93,16 @@ export default function OverviewSection({
 
             {institute.acronym?.toLowerCase() === "costrad" ? (
               <div className="mx-auto max-w-xs px-8">
-                <Card
+                      <Badge variant="secondary">Pricing Details would be communicated soon.</Badge>
+
+                {/* <Card
                   className=" bg-lime-500 text-white font-bold p-2 text-center w-full
                 border rounded-none "
                 >
                   Specially Subsidized by the President.
-                </Card>
+                </Card> */}
 
-                <div>
+                {/* <div>
                   <div className="">
                     <div className="mt-6 flex items-baseline justify-center gap-x-2">
                       <span className="text-xl line-through font-bold tracking-tight text-muted-foreground">
@@ -119,9 +122,9 @@ export default function OverviewSection({
                     </div>
                   </div>
                   <SeperatorWithText seperatorText={"In Person"} />
-                </div>
+                </div> */}
 
-                <div>
+                {/* <div>
                   {" "}
                   <div className="">
                     <div className="mt-6 flex items-baseline justify-center gap-x-2">
@@ -142,9 +145,9 @@ export default function OverviewSection({
                     </div>
                   </div>
                   <SeperatorWithText seperatorText={"Via Zoom"} />
-                </div>
+                </div> */}
 
-                <div>
+                {/* <div>
                   <div className="">
                     <div className="mt-6 flex items-baseline justify-center gap-x-2">
                       <span className="text-xl line-through font-bold tracking-tight text-muted-foreground">
@@ -164,7 +167,7 @@ export default function OverviewSection({
                     </div>
                   </div>
                   <SeperatorWithText seperatorText={"Per Week"} />
-                </div>
+                </div> */}
                 <div className="text-center w-auto py-5">
                   <Link
                     href={"/apply"}
