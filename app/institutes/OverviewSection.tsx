@@ -88,220 +88,108 @@ export default function OverviewSection({
               />
             </div>
             <div className="text-foreground text-xl py-2 ">
-              {institute?.editions[0] ? institute?.editions[0].title : " "}{" "}
+              {institute?.editions[0] ? institute?.editions[0].title : " "}
             </div>
-
-            {institute.acronym?.toLowerCase() === "costrad" ? (
-              <div className="mx-auto max-w-xs px-8">
-                      <Badge variant="secondary">Pricing Details would be communicated soon.</Badge>
-
-                {/* <Card
-                  className=" bg-lime-500 text-white font-bold p-2 text-center w-full
-                border rounded-none "
-                >
-                  Specially Subsidized by the President.
-                </Card> */}
-
-                {/* <div>
-                  <div className="">
-                    <div className="mt-6 flex items-baseline justify-center gap-x-2">
-                      <span className="text-xl line-through font-bold tracking-tight text-muted-foreground">
-                        $1,800.00
-                      </span>
-                      <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
-                        USD
-                      </span>
-                    </div>
-                    <div className=" flex items-baseline justify-center gap-x-2">
-                      <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-                        ${institute.editions[0]?.price}
-                      </span>
-                      <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
-                        USD
-                      </span>
-                    </div>
-                  </div>
-                  <SeperatorWithText seperatorText={"In Person"} />
-                </div> */}
-
-                {/* <div>
-                  {" "}
-                  <div className="">
-                    <div className="mt-6 flex items-baseline justify-center gap-x-2">
-                      <span className="text-xl line-through font-bold tracking-tight text-muted-foreground">
-                        $800.00
-                      </span>
-                      <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
-                        USD
-                      </span>
-                    </div>
-                    <div className=" flex items-baseline justify-center gap-x-2">
-                      <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-                        ${institute.editions[0]?.priceViaZoom}
-                      </span>
-                      <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
-                        USD
-                      </span>
-                    </div>
-                  </div>
-                  <SeperatorWithText seperatorText={"Via Zoom"} />
-                </div> */}
-
-                {/* <div>
-                  <div className="">
-                    <div className="mt-6 flex items-baseline justify-center gap-x-2">
-                      <span className="text-xl line-through font-bold tracking-tight text-muted-foreground">
-                        $500.00
-                      </span>
-                      <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
-                        USD
-                      </span>
-                    </div>
-                    <div className=" flex items-baseline justify-center gap-x-2">
-                      <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-                        $300.00
-                      </span>
-                      <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-400">
-                        USD
-                      </span>
-                    </div>
-                  </div>
-                  <SeperatorWithText seperatorText={"Per Week"} />
-                </div> */}
-                <div className="text-center w-auto py-5">
-                  <Link
-                    href={"/apply"}
-                    type="button"
-                    className="cursor-pointer w-auto px-4 py-2 bg-firefly-600 text-white leading-tight uppercase rounded shadow-md hover:bg-firefly-700 hover:shadow-lg focus:bg-firefly-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-firefly-800 active:shadow-lg bg-lime-500 hover:bg-lime-600 transition duration-300 ease-in-out text-firefly-900 hover:text-white text-sm"
-                    data-hs-overlay="#hs-subscription-with-image"
-                  >
-                    Start Application
-                  </Link>
-                </div>
-
-                <div className="flex w-full items-center justify-center text-xs md:text-lg tracking-tighter">
-                  <span className="text-[11px] sm:text-sm font-bold uppercase">
-                    {formattedStartDate.toUpperCase()}
-                    {institute.editions[0]?.endDate && (
-                      <>
-                        &nbsp;<span className="text-primary">&mdash;</span>
-                        &nbsp;
-                        {formattedEndDate.toUpperCase()}
-                      </>
-                    )}
-                  </span>
-                </div>
-
-                <p className="mt-6 text-xs leading-5 dark:text-gray-400">
-                  Gain knowledge that lasts a lifetime. Invoices and receipts
-                  available for easy company reimbursement.
-                </p>
-              </div>
-            ) : (
-              <div className="mx-auto max-w-xs px-8">
-                {/* <p className="text-base font-bold text-gray-600 dark:text-gray-500">
-                  Pay once &mdash; Own it forever
-                </p> */}
-                {edition?.onlineDelivery && edition?.priceViaZoom != null && (
-                  <div className="mt-6 text-center">
-                    {edition.earlyBirdDeadline &&
-                    new Date(edition.earlyBirdDeadline) > new Date() ? (
-                      // ── EARLY BIRD STILL ACTIVE ──
-                      <div>
-                        <p className="flex items-baseline justify-center gap-x-3">
-                          <span className="text-xl font-bold tracking-tight text-gray-400 dark:text-gray-500 line-through">
-                            ${edition.priceViaZoom.toFixed(2)}
-                          </span>
-                          <span className="text-3xl font-extrabold tracking-tight text-emerald-600 dark:text-emerald-400">
-                            ${edition.earlyBirdPrice?.toFixed(2) ?? "—"}
-                          </span>
-                        </p>
-
-                        <div className="mt-4">
-                          <SeperatorWithText seperatorText="Early Bird Discount – Limited Time" />
-                        </div>
-
-                        <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
-                          Offer ends{" "}
-                          {new Date(
-                            edition.earlyBirdDeadline,
-                          ).toLocaleDateString("en-US", {
-                            month: "long",
-                            day: "numeric",
-                            year: "numeric",
-                          })}
-                        </p>
-                      </div>
-                    ) : (
-                      // ── EARLY BIRD EXPIRED or never existed ──
-                      <div>
-                        <p className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
+            <div className="mx-auto max-w-xs px-8">
+              {edition?.onlineDelivery && edition?.priceViaZoom != null && (
+                <div className="mt-6 text-center">
+                  {edition.earlyBirdDeadline &&
+                  new Date(edition.earlyBirdDeadline) > new Date() ? (
+                    // ── EARLY BIRD STILL ACTIVE ──
+                    <div>
+                      <p className="flex items-baseline justify-center gap-x-3">
+                        <span className="text-xl font-bold tracking-tight text-gray-400 dark:text-gray-500 line-through">
                           ${edition.priceViaZoom.toFixed(2)}
-                        </p>
+                        </span>
+                        <span className="text-3xl font-extrabold tracking-tight text-emerald-600 dark:text-emerald-400">
+                          ${edition.earlyBirdPrice?.toFixed(2) ?? "—"}
+                        </span>
+                      </p>
 
-                        <div className="mt-4">
-                          <SeperatorWithText seperatorText="Online via Zoom" />
-                        </div>
-
-                        {/* Optional: subtle note if early bird existed but expired */}
-                        {edition.earlyBirdDeadline &&
-                          edition.earlyBirdPrice != null && (
-                            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
-                              Early bird discount ended on{" "}
-                              {new Date(
-                                edition.earlyBirdDeadline,
-                              ).toLocaleDateString("en-US", {
-                                month: "long",
-                                day: "numeric",
-                                year: "numeric",
-                              })}
-                            </p>
-                          )}
+                      <div className="mt-4">
+                        <SeperatorWithText seperatorText="Early Bird Discount – Limited Time" />
                       </div>
-                    )}
-                  </div>
-                )}
 
-                <div className="text-center w-auto py-5">
-                  <button
-                    onClick={() => router.push("/apply")}
-                    type="button"
-                    className="cursor-pointer w-auto px-4 py-2 bg-firefly-600 text-white leading-tight uppercase rounded shadow-md hover:bg-firefly-700 hover:shadow-lg focus:bg-firefly-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-firefly-800 active:shadow-lg bg-lime-500 hover:bg-lime-600 transition duration-300 ease-in-out text-firefly-900 hover:text-white text-sm"
-                    data-hs-overlay="#hs-subscription-with-image"
-                  >
-                    Start Application
-                  </button>
+                      <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+                        Offer ends{" "}
+                        {new Date(
+                          edition.earlyBirdDeadline,
+                        ).toLocaleDateString("en-US", {
+                          month: "long",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </p>
+                    </div>
+                  ) : (
+                    // ── EARLY BIRD EXPIRED or never existed ──
+                    <div>
+                      <p className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
+                        ${edition.priceViaZoom.toFixed(2)}
+                      </p>
+
+                      <div className="mt-4">
+                        <SeperatorWithText seperatorText="Online via Zoom" />
+                      </div>
+
+                      {/* Optional: subtle note if early bird existed but expired */}
+                      {edition.earlyBirdDeadline &&
+                        edition.earlyBirdPrice != null && (
+                          <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+                            Early bird discount ended on{" "}
+                            {new Date(
+                              edition.earlyBirdDeadline,
+                            ).toLocaleDateString("en-US", {
+                              month: "long",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
+                          </p>
+                        )}
+                    </div>
+                  )}
                 </div>
+              )}
 
-                <div className="flex w-full items-center justify-center text-xs md:text-lg tracking-tighter">
-                  <span className="text-[11px] sm:text-sm font-bold uppercase">
-                    {formattedStartDate.toUpperCase()}
-                    {institute.editions[0]?.endDate && (
-                      <>
-                        &nbsp;<span className="text-primary">&mdash;</span>
-                        &nbsp;
-                        {formattedEndDate.toUpperCase()}
-                      </>
-                    )}
-                  </span>
-                </div>
-
-                {edition?.earlyBirdDeadline && (
-                  <>
-                    <Separator className="mt-5" />
-
-                    <p className="mt-6 text-xs leading-5 dark:text-gray-400">
-                      <span>Early bird discounted pricing</span> is available
-                      while spaces last or until{" "}
-                      <span className="font-bold">
-                        {formattedEarlyBirdDeadline}
-                      </span>
-                      , <br /> — whichever comes first.
-                    </p>
-                  </>
-                )}
+              <div className="text-center w-auto py-5">
+                <button
+                  onClick={() => router.push("/apply")}
+                  type="button"
+                  className="cursor-pointer w-auto px-4 py-2 bg-firefly-600 text-white leading-tight uppercase rounded shadow-md hover:bg-firefly-700 hover:shadow-lg focus:bg-firefly-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-firefly-800 active:shadow-lg bg-lime-500 hover:bg-lime-600 transition duration-300 ease-in-out text-firefly-900 hover:text-white text-sm"
+                  data-hs-overlay="#hs-subscription-with-image"
+                >
+                  Start Application
+                </button>
               </div>
-            )}
+
+              <div className="flex w-full items-center justify-center text-xs md:text-lg tracking-tighter">
+                <span className="text-[11px] sm:text-sm font-bold uppercase">
+                  {formattedStartDate.toUpperCase()}
+                  {institute.editions[0]?.endDate && (
+                    <>
+                      &nbsp;<span className="text-primary">&mdash;</span>
+                      &nbsp;
+                      {formattedEndDate.toUpperCase()}
+                    </>
+                  )}
+                </span>
+              </div>
+
+              {edition?.earlyBirdDeadline && (
+                <>
+                  <Separator className="mt-5" />
+
+                  <p className="mt-6 text-xs leading-5 dark:text-gray-400">
+                    <span>Early bird discounted pricing</span> is available
+                    while spaces last or until{" "}
+                    <span className="font-bold">
+                      {formattedEarlyBirdDeadline}
+                    </span>
+                    , <br /> — whichever comes first.
+                  </p>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
