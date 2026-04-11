@@ -14,8 +14,6 @@ import {
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-	fadeItem,
-	slideUp,
 	staggerContainer,
 	staggerItem,
 } from "../ui/animations/framerAnimations";
@@ -110,16 +108,22 @@ export const InstituteGallery = ({
 			<div className='container mx-auto px-4'>
 				<div className='mb-8 flex items-end justify-between md:mb-14 lg:mb-16'>
 					<motion.div
-						initial={{ opacity: 0, y: 30 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true, amount: 0.5 }}
-						transition={{ duration: 0.6, ease: "easeOut" }}
+						variants={staggerContainer}
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ once: false, margin: "-50px" }}
 						className='flex flex-col gap-4 md:px-8'
 					>
-						<motion.h2 className='text-3xl sm:text-5xl md:text-4xl'>
+						<motion.h2
+							variants={staggerItem}
+							className='text-3xl sm:text-5xl md:text-4xl'
+						>
 							{name}
 						</motion.h2>
-						<motion.p className='max-w-3xl text-foreground text-lg'>
+						<motion.p
+							variants={staggerItem}
+							className='max-w-3xl text-foreground text-lg'
+						>
 							{overview}
 						</motion.p>
 					</motion.div>
@@ -148,7 +152,7 @@ export const InstituteGallery = ({
 				</div>
 			</div>
 			<motion.div
-				variants={slideUp}
+				variants={staggerContainer}
 				initial='hidden'
 				whileInView='visible'
 				viewport={{ once: false, margin: "-50px" }}
@@ -157,7 +161,7 @@ export const InstituteGallery = ({
 				<Carousel
 					setApi={setCarouselApi}
 					opts={{
-						loop: true,
+						loop: false,
 						breakpoints: {
 							"(max-width: 768px)": {
 								dragFree: true,
@@ -224,3 +228,4 @@ export const InstituteGallery = ({
 		</section>
 	);
 };
+
