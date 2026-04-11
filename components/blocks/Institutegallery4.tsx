@@ -98,8 +98,10 @@ export const InstituteGallery = ({
     };
     updateSelection();
     carouselApi.on("select", updateSelection);
+    carouselApi.on("reInit", updateSelection);
     return () => {
       carouselApi.off("select", updateSelection);
+      carouselApi.off("reInit", updateSelection);
     };
   }, [carouselApi]);
 
@@ -127,16 +129,14 @@ export const InstituteGallery = ({
               {overview}
             </motion.p>
           </motion.div>
-          <div className="hidden shrink-0 gap-2 md:flex">
+          <div className="flex shrink-0 gap-2">
             <Button
-            
               size="icon"
               variant="default"
               onClick={() => {
                 carouselApi?.scrollPrev();
               }}
-              disabled={!canScrollPrev}
-              className="disabled:pointer-events-auto text-muted "
+              className="text-muted"
             >
               <ArrowLeft className="size-5" /> 
             </Button>
@@ -146,18 +146,24 @@ export const InstituteGallery = ({
               onClick={() => {
                 carouselApi?.scrollNext();
               }}
-              disabled={!canScrollNext}
-              className="disabled:pointer-events-auto text-muted"
+              className="text-muted"
             >
               <ArrowRight className="size-5" />
             </Button>
           </div>
         </div>
       </div>
-      <div className="w-full">
+      <motion.div 
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, margin: "-50px" }}
+        className="w-full"
+      >
         <Carousel
           setApi={setCarouselApi}
           opts={{
+            loop: true,
             breakpoints: {
               "(max-width: 768px)": {
                 dragFree: true,
@@ -171,12 +177,7 @@ export const InstituteGallery = ({
                 key={item.id}
                 className="max-w-[320px] pl-[20px] lg:max-w-[360px] relative rounded-3xl"
               >
-                <motion.div 
-                  variants={staggerItem}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: false, margin: "-50px" }}
-                >
+                <motion.div variants={staggerItem}>
                   <Link href={`/institutes/${item.slug}`} className="group rounded-3xl shadow-xs shadow-indigo-100" prefetch={false}>
                     <div className="group relative h-full min-h-[27rem] max-w-full overflow-hidden md:aspect-[5/4] lg:aspect-[16/9]">
                       <Image
@@ -219,7 +220,7 @@ export const InstituteGallery = ({
             />
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
