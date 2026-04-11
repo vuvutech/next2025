@@ -6,126 +6,120 @@ import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
+	Carousel,
+	CarouselApi,
+	CarouselContent,
+	CarouselItem,
 } from "@/components/ui/carousel";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { staggerContainer, staggerItem } from "../ui/animations/framerAnimations";
+import {
+	fadeItem,
+	slideUp,
+	staggerContainer,
+	staggerItem,
+} from "../ui/animations/framerAnimations";
 
 export interface InstituteItems {
-  id: string;
-  name: string;
-  overview: string;
-  slug: string;
-  banner: string;
+	id: string;
+	name: string;
+	overview: string;
+	slug: string;
+	banner: string;
 }
 
 export interface InstituteProps {
-  name?: string;
-  overview?: string;
-  items: InstituteItems[];
+	name?: string;
+	overview?: string;
+	items: InstituteItems[];
 }
 
 const data = [
-  {
-    id: "shadcn-ui",
-    name: "shadcn/ui: Building a Modern Component Library",
-    overview:
-      "Explore how shadcn/ui revolutionized React component libraries by providing a unique approach to component distribution and customization, making it easier for developers to build beautiful, accessible applications.",
-    slug: "https://ui.shadcn.com",
-    banner:
-      "https://images.unsplash.com/photo-1551250928-243dc937c49d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxMjN8fHx8fHwyfHwxNzIzODA2OTM5fA&ixlib=rb-4.0.3&q=80&w=1080",
-  },
-  {
-    id: "tailwind",
-    name: "Tailwind CSS: The Utility-First Revolution",
-    overview:
-      "Discover how Tailwind CSS transformed the way developers style their applications, offering a utility-first approach that speeds up development while maintaining complete design flexibility.",
-    slug: "https://tailwindcss.com",
-    banner:
-      "https://images.unsplash.com/photo-1551250928-e4a05afaed1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxMjR8fHx8fHwyfHwxNzIzODA2OTM5fA&ixlib=rb-4.0.3&q=80&w=1080",
-  },
-  {
-    id: "astro",
-    name: "Astro: The All-in-One Web Framework",
-    overview:
-      "Learn how Astro's innovative 'Islands Architecture' and zero-JS-by-default approach is helping developers build faster websites while maintaining rich interactivity where needed.",
-    slug: "https://astro.build",
-    banner:
-      "https://images.unsplash.com/photo-1536735561749-fc87494598cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxNzd8fHx8fHwyfHwxNzIzNjM0NDc0fA&ixlib=rb-4.0.3&q=80&w=1080",
-  },
-  {
-    id: "react",
-    name: "React: Pioneering Component-Based UI",
-    overview:
-      "See how React continues to shape modern web development with its component-based architecture, enabling developers to build complex user interfaces with reusable, maintainable code.",
-    slug: "https://react.dev",
-    banner:
-      "https://images.unsplash.com/photo-1548324215-9133768e4094?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxMzF8fHx8fHwyfHwxNzIzNDM1MzA1fA&ixlib=rb-4.0.3&q=80&w=1080",
-  },
-  {
-    id: "nextjs",
-    name: "Next.js: The React Framework for Production",
-    overview:
-      "Explore how Next.js has become the go-to framework for building full-stack React applications, offering features like server components, file-based routing, and automatic optimization.",
-    slug: "https://nextjs.org",
-    banner:
-      "",
-  },
+	{
+		id: "shadcn-ui",
+		name: "shadcn/ui: Building a Modern Component Library",
+		overview:
+			"Explore how shadcn/ui revolutionized React component libraries by providing a unique approach to component distribution and customization, making it easier for developers to build beautiful, accessible applications.",
+		slug: "https://ui.shadcn.com",
+		banner: "https://images.unsplash.com/photo-1551250928-243dc937c49d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxMjN8fHx8fHwyfHwxNzIzODA2OTM5fA&ixlib=rb-4.0.3&q=80&w=1080",
+	},
+	{
+		id: "tailwind",
+		name: "Tailwind CSS: The Utility-First Revolution",
+		overview:
+			"Discover how Tailwind CSS transformed the way developers style their applications, offering a utility-first approach that speeds up development while maintaining complete design flexibility.",
+		slug: "https://tailwindcss.com",
+		banner: "https://images.unsplash.com/photo-1551250928-e4a05afaed1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxMjR8fHx8fHwyfHwxNzIzODA2OTM5fA&ixlib=rb-4.0.3&q=80&w=1080",
+	},
+	{
+		id: "astro",
+		name: "Astro: The All-in-One Web Framework",
+		overview:
+			"Learn how Astro's innovative 'Islands Architecture' and zero-JS-by-default approach is helping developers build faster websites while maintaining rich interactivity where needed.",
+		slug: "https://astro.build",
+		banner: "https://images.unsplash.com/photo-1536735561749-fc87494598cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxNzd8fHx8fHwyfHwxNzIzNjM0NDc0fA&ixlib=rb-4.0.3&q=80&w=1080",
+	},
+	{
+		id: "react",
+		name: "React: Pioneering Component-Based UI",
+		overview:
+			"See how React continues to shape modern web development with its component-based architecture, enabling developers to build complex user interfaces with reusable, maintainable code.",
+		slug: "https://react.dev",
+		banner: "https://images.unsplash.com/photo-1548324215-9133768e4094?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxMzF8fHx8fHwyfHwxNzIzNDM1MzA1fA&ixlib=rb-4.0.3&q=80&w=1080",
+	},
+	{
+		id: "nextjs",
+		name: "Next.js: The React Framework for Production",
+		overview:
+			"Explore how Next.js has become the go-to framework for building full-stack React applications, offering features like server components, file-based routing, and automatic optimization.",
+		slug: "https://nextjs.org",
+		banner: "",
+	},
 ];
 
 export const InstituteGallery = ({
-  name = "The Costrad Mission",
-  overview = "Our Mission is to raise and develop generations of transformational leaders, equipped to bring systemic and sustainable change, to every sphere of society.",
-  items = data,
+	name = "The Costrad Mission",
+	overview = "Our Mission is to raise and develop generations of transformational leaders, equipped to bring systemic and sustainable change, to every sphere of society.",
+	items = data,
 }: InstituteProps) => {
-  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
+	const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+	const [canScrollPrev, setCanScrollPrev] = useState(false);
+	const [canScrollNext, setCanScrollNext] = useState(false);
+	const [currentSlide, setCurrentSlide] = useState(0);
 
-  useEffect(() => {
-    if (!carouselApi) {
-      return;
-    }
-    const updateSelection = () => {
-      setCanScrollPrev(carouselApi.canScrollPrev());
-      setCanScrollNext(carouselApi.canScrollNext());
-      setCurrentSlide(carouselApi.selectedScrollSnap());
-    };
-    updateSelection();
-    carouselApi.on("select", updateSelection);
-    carouselApi.on("reInit", updateSelection);
-    return () => {
-      carouselApi.off("select", updateSelection);
-      carouselApi.off("reInit", updateSelection);
-    };
-  }, [carouselApi]);
+	useEffect(() => {
+		if (!carouselApi) {
+			return;
+		}
+		const updateSelection = () => {
+			setCanScrollPrev(carouselApi.canScrollPrev());
+			setCanScrollNext(carouselApi.canScrollNext());
+			setCurrentSlide(carouselApi.selectedScrollSnap());
+		};
+		updateSelection();
+		carouselApi.on("select", updateSelection);
+		carouselApi.on("reInit", updateSelection);
+		return () => {
+			carouselApi.off("select", updateSelection);
+			carouselApi.off("reInit", updateSelection);
+		};
+	}, [carouselApi]);
 
-  return (
+	return (
 		<section className='py-20'>
 			<div className='container mx-auto px-4'>
 				<div className='mb-8 flex items-end justify-between md:mb-14 lg:mb-16'>
 					<motion.div
-						variants={staggerContainer}
-						initial='hidden'
-						whileInView='visible'
-						viewport={{ once: false, margin: "-50px" }}
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true, amount: 0.5 }}
+						transition={{ duration: 0.6, ease: "easeOut" }}
 						className='flex flex-col gap-4 md:px-8'
 					>
-						<motion.h2
-							variants={staggerItem}
-							className='text-3xl sm:text-5xl md:text-4xl'
-						>
+						<motion.h2 className='text-3xl sm:text-5xl md:text-4xl'>
 							{name}
 						</motion.h2>
-						<motion.p
-							variants={staggerItem}
-							className='max-w-3xl text-foreground text-lg'
-						>
+						<motion.p className='max-w-3xl text-foreground text-lg'>
 							{overview}
 						</motion.p>
 					</motion.div>
@@ -154,7 +148,7 @@ export const InstituteGallery = ({
 				</div>
 			</div>
 			<motion.div
-				variants={staggerContainer}
+				variants={slideUp}
 				initial='hidden'
 				whileInView='visible'
 				viewport={{ once: false, margin: "-50px" }}
@@ -228,6 +222,5 @@ export const InstituteGallery = ({
 				</div>
 			</motion.div>
 		</section>
-  );
+	);
 };
-
