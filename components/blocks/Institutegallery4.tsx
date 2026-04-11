@@ -166,48 +166,45 @@ export const InstituteGallery = ({
           }}
         >
           <CarouselContent>
-            <motion.div 
-              className="flex"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, margin: "-50px" }}
-            >
-              {items.map((item, index) => (
-                <CarouselItem
-                  key={item.id}
-                  className="max-w-[320px] pl-[20px] lg:max-w-[360px] relative rounded-3xl"
+            {items.map((item, index) => (
+              <CarouselItem
+                key={item.id}
+                className="max-w-[320px] pl-[20px] lg:max-w-[360px] relative rounded-3xl"
+              >
+                <motion.div 
+                  variants={staggerItem}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, margin: "-50px" }}
                 >
-                  <motion.div variants={staggerItem}>
-                    <Link href={`/institutes/${item.slug}`} className="group rounded-3xl shadow-xs shadow-indigo-100" prefetch={false}>
-                      <div className="group relative h-full min-h-[27rem] max-w-full overflow-hidden md:aspect-[5/4] lg:aspect-[16/9]">
-                        <Image
-                          src={`/${item.banner}`}
-                          alt={item.name}
-                          fill
-                          className="absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-99 rounded-3xl"
-                          sizes="(max-width: 768px) 100vw, 360px"
-                          priority={index === 0}
-                        />
-                        <div className="absolute inset-0 h-full bg-[linear-gradient(hsl(var(--primary)/0),hsl(var(--primary)/0.4),hsl(var(--primary)/0.8)_100%)] mix-blend-multiply" />
-                        <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-6 md:p-8">
-                          <div className="mb-2 pt-4 md:w-3/4 text-2xl leading-tight font-bebas text-primary uppercase md:mb-3 md:pt-4 lg:pt-4">
-                            {item.name}
-                          </div>
-                          <div className="mb-8 line-clamp-4 invisible font-bold font-foreground leading-5 md:leading-6 md:mb-12 lg:mb-9">
-                            {item.overview}
-                          </div>
-                          <div className="flex items-center text-firefly font-bold text-sm">
-                            Read more{" "}
-                            <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
-                          </div>
+                  <Link href={`/institutes/${item.slug}`} className="group rounded-3xl shadow-xs shadow-indigo-100" prefetch={false}>
+                    <div className="group relative h-full min-h-[27rem] max-w-full overflow-hidden md:aspect-[5/4] lg:aspect-[16/9]">
+                      <Image
+                        src={`/${item.banner}`}
+                        alt={item.name}
+                        fill
+                        className="absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-99 rounded-3xl"
+                        sizes="(max-width: 768px) 100vw, 360px"
+                        priority={index === 0}
+                      />
+                      <div className="absolute inset-0 h-full bg-[linear-gradient(hsl(var(--primary)/0),hsl(var(--primary)/0.4),hsl(var(--primary)/0.8)_100%)] mix-blend-multiply" />
+                      <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-6 md:p-8">
+                        <div className="mb-2 pt-4 md:w-3/4 text-2xl leading-tight font-bebas text-primary uppercase md:mb-3 md:pt-4 lg:pt-4">
+                          {item.name}
+                        </div>
+                        <div className="mb-8 line-clamp-4 invisible font-bold font-foreground leading-5 md:leading-6 md:mb-12 lg:mb-9">
+                          {item.overview}
+                        </div>
+                        <div className="flex items-center text-firefly font-bold text-sm">
+                          Read more{" "}
+                          <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
                         </div>
                       </div>
-                    </Link>
-                  </motion.div>
-                </CarouselItem>
-              ))}
-            </motion.div>
+                    </div>
+                  </Link>
+                </motion.div>
+              </CarouselItem>
+            ))}
           </CarouselContent>
         </Carousel>
         <div className="mt-8 flex justify-center gap-2">
