@@ -106,122 +106,128 @@ export const InstituteGallery = ({
   }, [carouselApi]);
 
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
-        <div className="mb-8 flex items-end justify-between md:mb-14 lg:mb-16">
-          <motion.div 
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, margin: "-50px" }}
-            className="flex flex-col gap-4 md:px-8"
-          >
-            <motion.h2 
-              variants={staggerItem}
-              className="text-3xl sm:text-5xl md:text-4xl"
-            >
-              {name}
-            </motion.h2>
-            <motion.p 
-              variants={staggerItem}
-              className="max-w-3xl text-foreground text-lg"
-            >
-              {overview}
-            </motion.p>
-          </motion.div>
-          <div className="flex shrink-0 gap-2">
-            <Button
-              size="icon"
-              variant="default"
-              onClick={() => {
-                carouselApi?.scrollPrev();
-              }}
-              className="text-muted"
-            >
-              <ArrowLeft className="size-5" /> 
-            </Button>
-            <Button
-              size="icon"
-              variant="default"
-              onClick={() => {
-                carouselApi?.scrollNext();
-              }}
-              className="text-muted"
-            >
-              <ArrowRight className="size-5" />
-            </Button>
-          </div>
-        </div>
-      </div>
-      <motion.div 
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, margin: "-50px" }}
-        className="w-full"
-      >
-        <Carousel
-          setApi={setCarouselApi}
-          opts={{
-            loop: true,
-            breakpoints: {
-              "(max-width: 768px)": {
-                dragFree: true,
-              },
-            },
-          }}
-        >
-          <CarouselContent>
-            {items.map((item, index) => (
-              <CarouselItem
-                key={item.id}
-                className="max-w-[320px] pl-[20px] lg:max-w-[360px] relative rounded-3xl"
-              >
-                <motion.div variants={staggerItem}>
-                  <Link href={`/institutes/${item.slug}`} className="group rounded-3xl shadow-xs shadow-indigo-100" prefetch={false}>
-                    <div className="group relative h-full min-h-[27rem] max-w-full overflow-hidden md:aspect-[5/4] lg:aspect-[16/9]">
-                      <Image
-                        src={`/${item.banner}`}
-                        alt={item.name}
-                        fill
-                        className="absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-99 rounded-3xl"
-                        sizes="(max-width: 768px) 100vw, 360px"
-                        priority={index === 0}
-                      />
-                      <div className="absolute inset-0 h-full bg-[linear-gradient(hsl(var(--primary)/0),hsl(var(--primary)/0.4),hsl(var(--primary)/0.8)_100%)] mix-blend-multiply" />
-                      <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-6 md:p-8">
-                        <div className="mb-2 pt-4 md:w-3/4 text-2xl leading-tight font-bebas text-primary uppercase md:mb-3 md:pt-4 lg:pt-4">
-                          {item.name}
-                        </div>
-                        <div className="mb-8 line-clamp-4 invisible font-bold font-foreground leading-5 md:leading-6 md:mb-12 lg:mb-9">
-                          {item.overview}
-                        </div>
-                        <div className="flex items-center text-firefly font-bold text-sm">
-                          Read more{" "}
-                          <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" />
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-        <div className="mt-8 flex justify-center gap-2">
-          {items.map((_, index) => (
-            <button
-              key={index}
-              className={`h-2 w-2 rounded-full transition-colors ${
-                currentSlide === index ? "bg-primary" : "bg-primary/20"
-              }`}
-              onClick={() => carouselApi?.scrollTo(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-      </motion.div>
-    </section>
+		<section className='py-20'>
+			<div className='container mx-auto px-4'>
+				<div className='mb-8 flex items-end justify-between md:mb-14 lg:mb-16'>
+					<motion.div
+						variants={staggerContainer}
+						initial='hidden'
+						whileInView='visible'
+						viewport={{ once: false, margin: "-50px" }}
+						className='flex flex-col gap-4 md:px-8'
+					>
+						<motion.h2
+							variants={staggerItem}
+							className='text-3xl sm:text-5xl md:text-4xl'
+						>
+							{name}
+						</motion.h2>
+						<motion.p
+							variants={staggerItem}
+							className='max-w-3xl text-foreground text-lg'
+						>
+							{overview}
+						</motion.p>
+					</motion.div>
+					<div className='flex shrink-0 gap-2'>
+						<Button
+							size='icon'
+							variant='default'
+							onClick={() => {
+								carouselApi?.scrollPrev();
+							}}
+							className='text-muted cursor-pointer'
+						>
+							<ArrowLeft className='size-5' />
+						</Button>
+						<Button
+							size='icon'
+							variant='default'
+							onClick={() => {
+								carouselApi?.scrollNext();
+							}}
+							className='text-muted cursor-pointer'
+						>
+							<ArrowRight className='size-5' />
+						</Button>
+					</div>
+				</div>
+			</div>
+			<motion.div
+				variants={staggerContainer}
+				initial='hidden'
+				whileInView='visible'
+				viewport={{ once: false, margin: "-50px" }}
+				className='w-full'
+			>
+				<Carousel
+					setApi={setCarouselApi}
+					opts={{
+						loop: true,
+						breakpoints: {
+							"(max-width: 768px)": {
+								dragFree: true,
+							},
+						},
+					}}
+				>
+					<CarouselContent>
+						{items.map((item, index) => (
+							<CarouselItem
+								key={item.id}
+								className='max-w-[320px] pl-[20px] lg:max-w-[360px] relative rounded-3xl'
+							>
+								<motion.div variants={staggerItem}>
+									<Link
+										href={`/institutes/${item.slug}`}
+										className='group rounded-3xl shadow-xs shadow-indigo-100'
+										prefetch={false}
+									>
+										<div className='group relative h-full min-h-[27rem] max-w-full overflow-hidden rounded-3xl md:aspect-[5/4] lg:aspect-[16/9]'>
+											<Image
+												src={`/${item.banner}`}
+												alt={item.name}
+												fill
+												className='absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-99'
+												sizes='(max-width: 768px) 100vw, 360px'
+												priority={index === 0}
+											/>
+											<div className='absolute inset-0 h-full bg-gradient-to-t from-black/90 via-black/40 to-black/20 rounded-3xl' />
+											<div className='absolute inset-x-0 bottom-0 flex flex-col items-start p-6 md:p-8'>
+												<div className='mb-2 pt-4 md:w-3/4 text-2xl leading-tight font-bebas text-white uppercase md:mb-3 md:pt-4 lg:pt-4'>
+													{item.name}
+												</div>
+												<div className='mb-8 line-clamp-4 invisible font-bold font-foreground leading-5 md:leading-6 md:mb-12 lg:mb-9'>
+													{item.overview}
+												</div>
+												<div className='flex items-center text-firefly font-bold text-sm'>
+													Read more{" "}
+													<ArrowRight className='ml-2 size-5 cursor-pointer transition-transform group-hover:translate-x-1' />
+												</div>
+											</div>
+										</div>
+									</Link>
+								</motion.div>
+							</CarouselItem>
+						))}
+					</CarouselContent>
+				</Carousel>
+				<div className='mt-8 flex justify-center gap-2'>
+					{items.map((_, index) => (
+						<button
+							key={index}
+							className={`h-2 w-2 rounded-full transition-colors ${
+								currentSlide === index
+									? "bg-primary"
+									: "bg-primary/20"
+							}`}
+							onClick={() => carouselApi?.scrollTo(index)}
+							aria-label={`Go to slide ${index + 1}`}
+						/>
+					))}
+				</div>
+			</motion.div>
+		</section>
   );
 };
 
