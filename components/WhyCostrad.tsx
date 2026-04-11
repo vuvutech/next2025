@@ -6,6 +6,8 @@ import { ArrowUpRight } from "lucide-react";
 import { useDevice } from "@/hooks/useDevice";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "./ui/animations/framerAnimations";
 
 interface WhyCostradProps {
   backgroundImageUrl?: string;
@@ -20,27 +22,49 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
     <section className="max-w-auto  mx-auto h-auto  text-lg md:text-3xl  ">
       <div className="  md:py-8 py-4 ">
         <div className="px-2 mx-auto max-w-8xl sm:px-6 lg:px-8">
-          <div className="grid items-stretch gap-y-10 md:grid-cols-2 md:gap-x-6">
-            <div className="relative grid grid-cols-2 gap-2 mt-10 md:mt-0 py-12 h-auto">
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, margin: "-50px" }}
+            className="grid items-stretch gap-y-10 md:grid-cols-2 md:gap-x-6"
+          >
+            <motion.div variants={staggerItem} className="relative grid grid-cols-2 gap-2 mt-10 md:mt-0 py-12 h-auto">
               <div className="overflow-hidden aspect-w-3 aspect-h-4 rounded-none md:rounded-2xl">
-                <Image
-                  className="object-cover object-top origin-top scale-150 "
-                  src="/images/leader2.webp"
-                  alt=""
-                  width={400}
-                  height={533}
-                />
-              </div>
-
-              <div className="relative">
-                <div className="h-full overflow-hidden aspect-w-3 aspect-h-4 rounded-none md:rounded-2xl">
+                <motion.div
+                  initial={{ scale: 1.5 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  viewport={{ once: false }}
+                  className="h-full w-full"
+                >
                   <Image
-                    className="object-cover object-top origin-top scale-110"
-                    src="/images/steps.webp"
+                    className="object-cover object-top origin-top h-full w-full"
+                    src="/images/leader2.webp"
                     alt=""
                     width={400}
                     height={533}
                   />
+                </motion.div>
+              </div>
+
+              <div className="relative">
+                <div className="h-full overflow-hidden aspect-w-3 aspect-h-4 rounded-none md:rounded-2xl">
+                  <motion.div
+                    initial={{ scale: 1.3 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    viewport={{ once: false }}
+                    className="h-full w-full"
+                  >
+                    <Image
+                      className="object-cover object-top origin-top h-full w-full"
+                      src="/images/steps.webp"
+                      alt=""
+                      width={400}
+                      height={533}
+                    />
+                  </motion.div>
                 </div>
               </div>
 
@@ -54,9 +78,9 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
                   priority
                 />
               </div>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col items-start  justify-center md:px-8 space-y-6 text-left  ">
+            <motion.div variants={staggerItem} className="flex flex-col items-start  justify-center md:px-8 space-y-6 text-left  ">
               <h2 className="uppercase   ">
                 The Vital Role of Leadership Training Today
               </h2>
@@ -86,8 +110,8 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
                   <ArrowUpRight />
                 </Button>
               </Link>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

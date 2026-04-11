@@ -1,4 +1,6 @@
-export const slideUp = {
+import { Variants } from "framer-motion";
+
+export const slideUp: Variants = {
     initial: {
         y: 300
     },
@@ -8,3 +10,29 @@ export const slideUp = {
     }
 }
 
+export const staggerContainer: Variants = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.1,
+			delayChildren: 0.1,
+		},
+	},
+};
+
+export const staggerItem: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 300, damping: 24 },
+  },
+};
+
+export const fadeItem: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+  },
+};

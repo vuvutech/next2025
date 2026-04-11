@@ -17,6 +17,9 @@ import { getCurrentSession } from "../actions/functions";
 import { toast } from "sonner";
 import BadgeLink from "@/components/BadgeLink";
 import { useDialog } from "@/providers/DialogProvider";
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "@/components/ui/animations/framerAnimations";
+import { FadeIn } from "@/components/ui/animations/FadeIn";
 import CTA from "@/components/ui/CTA";
 
 // Define the type for the contact form inputs
@@ -143,31 +146,41 @@ export default function ContactPage() {
     <div className="py-8 space-y-8">
       <section className="container">
         <div>
-          <div className="max-w-3xl space-y-3">
-            <div>
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, margin: "-50px" }}
+            className="max-w-3xl space-y-3"
+          >
+            <motion.div variants={staggerItem}>
               <BadgeLink
                 href="#testimonials"
                 badge={"Contact us"}
                 label={"Let’s Talk — Reach Out"}
               />
-            </div>
-            <h1 className="text-3xl  lg:text-5xl">
+            </motion.div>
+            <motion.h1 variants={staggerItem} className="text-3xl  lg:text-5xl">
               Get in touch with us today to learn more
-            </h1>
-            <p className="">
+            </motion.h1>
+            <motion.p variants={staggerItem} className="">
               We'd love to hear from you! Reach out to our team today to
               discover more about <span className="font-">COSTrAD</span>, ask
               questions, or get the information you need. Don't hesitate to
               contact us — we're here to help and look forward to connecting
               with you.
-            </p>
-          </div>
-          <div
+            </motion.p>
+          </motion.div>
+          <motion.div
             id="testimonials"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, margin: "-50px" }}
             className="mt-4 grid gap-4 md:mt-20 md:grid-cols-3 md:gap-8"
           >
             {/* Testimonials Section */}
-            <div className="flex flex-col justify-between gap-6 rounded-lg border p-6">
+            <motion.div variants={staggerItem} className="flex flex-col justify-between gap-6 rounded-lg border p-6">
               <div>
                 <h2 className="mb-4 text-xl font-medium md:text-2xl">
                   Testimonials
@@ -187,10 +200,10 @@ export default function ContactPage() {
                 <span>Submit Testimonial</span>
                 <ArrowRight className="size-4 inline-block ml-1 pt-1" />
               </Button>
-            </div>
+            </motion.div>
 
             {/* Support Section */}
-            <div className="flex flex-col justify-between gap-6 rounded-lg border p-6">
+            <motion.div variants={staggerItem} className="flex flex-col justify-between gap-6 rounded-lg border p-6">
               <div>
                 <h2 className="mb-4 text-xl font-medium md:text-2xl">
                   Support
@@ -206,10 +219,10 @@ export default function ContactPage() {
               <Link href="#" className="hover:underline" prefetch={false}>
                 Get support
               </Link>
-            </div>
+            </motion.div>
 
             {/* Feedback Section */}
-            <div className="flex flex-col justify-between gap-6 rounded-lg border p-6">
+            <motion.div variants={staggerItem} className="flex flex-col justify-between gap-6 rounded-lg border p-6">
               <div>
                 <h2 className="mb-4 text-xl font-medium md:text-2xl">
                   Feedback
@@ -223,86 +236,100 @@ export default function ContactPage() {
               <a href="#" className="hover:underline">
                 Submit Feedback
               </a>
-            </div>
-          </div>
-          <div className="mt-12">
+            </motion.div>
+          </motion.div>
+          <FadeIn className="mt-12">
             <Jumbotron
               className=""
               heroImage="/images/contact3.jpg"
               height="md:h-[550px] h-dvh rounded-2xl"
             />
-          </div>
+          </FadeIn>
         </div>
       </section>
 
       <section className="">
         <div className="container">
-          <div className="mt-10 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
-            <Link
-              className="group rounded-md border border-border p-6"
-              href="#"
-              prefetch={false}
-            >
-              <div className="flex items-center justify-between gap-4">
-                <FaXTwitter className="size-10" />
-                <ArrowUpRight className="size-4 -translate-x-2 translate-y-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
-              </div>
-              <div className="mt-4">
-                <h3 className="mb-1 font-semibold">Twitter</h3>
-                <p className="text-sm text-muted-foreground">
-                  Follow our latest updates and announcements.
-                </p>
-              </div>
-            </Link>
-            <Link
-              className="group rounded-md border border-border p-6"
-              href="#"
-              prefetch={false}
-            >
-              <div className="flex items-center justify-between gap-4">
-                <FaTiktok className="size-10" />
-                <ArrowUpRight className="size-4 -translate-x-2 translate-y-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
-              </div>
-              <div className="mt-4">
-                <h3 className="mb-1 font-semibold">TikTok</h3>
-                <p className="text-sm text-muted-foreground">
-                  Discover short-form leadership insights.
-                </p>
-              </div>
-            </Link>
-            <Link
-              className="group rounded-md border border-border p-6"
-              href="#"
-              prefetch={false}
-            >
-              <div className="flex items-center justify-between gap-4">
-                <FaWhatsapp className="size-10" />
-                <ArrowUpRight className="size-4 -translate-x-2 translate-y-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
-              </div>
-              <div className="mt-4">
-                <h3 className="mb-1 font-semibold">Whatsapp</h3>
-                <p className="text-sm text-muted-foreground">
-                  Connect directly for instant support.
-                </p>
-              </div>
-            </Link>
-            <Link
-              className="group rounded-md border border-border p-6"
-              href="#"
-              prefetch={false}
-            >
-              <div className="flex items-center justify-between gap-4">
-                <FaFacebook className="size-10" />
-                <ArrowUpRight className="size-4 -translate-x-2 translate-y-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
-              </div>
-              <div className="mt-4">
-                <h3 className="mb-1 font-semibold">FaceBook</h3>
-                <p className="text-sm text-muted-foreground">
-                  Join our Discord server and connect with other developers.
-                </p>
-              </div>
-            </Link>
-          </div>
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, margin: "-50px" }}
+            className="mt-10 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4"
+          >
+            <motion.div variants={staggerItem}>
+              <Link
+                className="group rounded-md border border-border p-6 h-full flex flex-col"
+                href="#"
+                prefetch={false}
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <FaXTwitter className="size-10" />
+                  <ArrowUpRight className="size-4 -translate-x-2 translate-y-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
+                </div>
+                <div className="mt-4">
+                  <h3 className="mb-1 font-semibold">Twitter</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Follow our latest updates and announcements.
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+            <motion.div variants={staggerItem}>
+              <Link
+                className="group rounded-md border border-border p-6 h-full flex flex-col"
+                href="#"
+                prefetch={false}
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <FaTiktok className="size-10" />
+                  <ArrowUpRight className="size-4 -translate-x-2 translate-y-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
+                </div>
+                <div className="mt-4">
+                  <h3 className="mb-1 font-semibold">TikTok</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Discover short-form leadership insights.
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+            <motion.div variants={staggerItem}>
+              <Link
+                className="group rounded-md border border-border p-6 h-full flex flex-col"
+                href="#"
+                prefetch={false}
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <FaWhatsapp className="size-10" />
+                  <ArrowUpRight className="size-4 -translate-x-2 translate-y-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
+                </div>
+                <div className="mt-4">
+                  <h3 className="mb-1 font-semibold">Whatsapp</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Connect directly for instant support.
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+            <motion.div variants={staggerItem}>
+              <Link
+                className="group rounded-md border border-border p-6 h-full flex flex-col"
+                href="#"
+                prefetch={false}
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <FaFacebook className="size-10" />
+                  <ArrowUpRight className="size-4 -translate-x-2 translate-y-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
+                </div>
+                <div className="mt-4">
+                  <h3 className="mb-1 font-semibold">FaceBook</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Join our Discord server and connect with other developers.
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
       {/* Testimonial Submission Modal */}

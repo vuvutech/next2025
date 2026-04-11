@@ -4,6 +4,8 @@ import Image from "next/image"; // Import Image component
 import Link from "next/link"; // Optional: Import Link if using Next.js routing
 import { useRouter } from "next/navigation";
 import { RainbowButton } from "./magicui/rainbow-button";
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "./ui/animations/framerAnimations";
 
 const AboutSectionFour = () => {
   const router = useRouter();
@@ -34,7 +36,13 @@ const AboutSectionFour = () => {
                 </div>
                 {/* End Title */}
               </div>
-              <div className="max-w-7xl grid grid-cols-2 md:grid-cols-9 gap-6 md:gap-6 mx-auto my-8">
+              <motion.div 
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, margin: "-50px" }}
+                className="max-w-7xl grid grid-cols-2 md:grid-cols-9 gap-6 md:gap-6 mx-auto my-8"
+              >
                 {[
                   {
                     href: "/institutes/family-development-institute",
@@ -91,7 +99,8 @@ const AboutSectionFour = () => {
                     label: "ioasc",
                   },
                 ].map((item, index) => (
-                  <div
+                  <motion.div
+                    variants={staggerItem}
                     key={index}
                     className="flex md:flex-col justify-start items-center gap-2 text-center text-xs md:text-lg"
                   >
@@ -109,9 +118,9 @@ const AboutSectionFour = () => {
                       />
                     </Link>
                     <div className="uppercase font-bold text-background">{item.label}</div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
              <div className="flex  items-center sm:justify-center py-8">
                <RainbowButton
                 onClick={() => {

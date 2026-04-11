@@ -29,6 +29,7 @@ export default function Component() {
 		setError("");
 
 		try {
+			// @ts-ignore: better-auth plugin types obscure forgetPassword
 			const res = await client.forgetPassword({
 				email,
 				redirectTo: "/auth/reset-password",
