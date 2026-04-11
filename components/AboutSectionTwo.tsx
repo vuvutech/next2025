@@ -1,6 +1,9 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "./ui/animations/framerAnimations";
 
 const AboutSectionTwo = ({
   backgroundImage = "/images/lecture_in_progress.webp",
@@ -21,14 +24,20 @@ const AboutSectionTwo = ({
         priority
       />
       <div className="absolute inset-0 bg-gray-500 opacity-5 rounded-3xl"></div>
-      <div className="relative z-10 px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
-        <h1 className="mb-4 text-4xl ont-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+      <motion.div 
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="relative z-10 px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56"
+      >
+        <motion.h1 variants={staggerItem} className="mb-4 text-4xl ont-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
           {title}
-        </h1>
-        <p className="mb-8 text-lg font-normal shadow text-white lg:text-xl sm:px-16 lg:px-48">
+        </motion.h1>
+        <motion.p variants={staggerItem} className="mb-8 text-lg font-normal shadow text-white lg:text-xl sm:px-16 lg:px-48">
           {subtitle}
-        </p>
-        <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+        </motion.p>
+        <motion.div variants={staggerItem} className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
           
           <Link
             href={primaryButtonHref}
@@ -60,8 +69,8 @@ const AboutSectionTwo = ({
           >
             {secondaryButtonText}
           </Link>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

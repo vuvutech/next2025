@@ -228,9 +228,9 @@ export const auth = betterAuth({
 
 		multiSession(),
 		oAuthProxy(),
-		oidcProvider({
-			loginPage: "/auth/sign-in",
-		}),
+		// oidcProvider({
+		// 	loginPage: "/auth/sign-in",
+		// }),
 		nextCookies(),
 	],
 });

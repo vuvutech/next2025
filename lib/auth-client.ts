@@ -6,7 +6,6 @@ import {
 	adminClient,
 	multiSessionClient,
 	oneTapClient,
-	oidcClient,
 	genericOAuthClient,
 	emailOTPClient,
 } from "better-auth/client/plugins";
@@ -38,7 +37,7 @@ export const client = createAuthClient({
 		oneTapClient({
 			clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
 		}),
-		oidcClient(),
+		// oidcClient(),
 		genericOAuthClient(),
 	],
 	fetchOptions: {

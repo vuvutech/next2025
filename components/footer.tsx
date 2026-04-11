@@ -2,6 +2,8 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { useDialog } from "@/providers/DialogProvider";
 import CTA from "./ui/CTA";
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "./ui/animations/framerAnimations";
 
 type FooterLink = {
   label: string;
@@ -94,9 +96,16 @@ export default function Footer() {
       <CTA />
       <div className="bg-background text-foreground text-md border-foreground/20">
       <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14  pt-14 border-t ">
-        <div className="grid grid-cols-1  sm:grid-cols-5 gap-4 sm:gap-8 mb-10">
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, margin: "-50px" }}
+          className="grid grid-cols-1  sm:grid-cols-5 gap-4 sm:gap-8 mb-10"
+        >
           {footerLinks.map((section) => (
-            <div
+            <motion.div
+              variants={staggerItem}
               key={section.title}
               className={
                 section.title === "Institutes"
@@ -107,11 +116,14 @@ export default function Footer() {
               <h3 className="text-lg sm:text-xl font-bold  sm:mb-4  ">
                 {section.title}
               </h3>
-              <ul className="space-y-2  pb-4">
+              <motion.ul 
+                variants={staggerContainer}
+                className="space-y-2  pb-4"
+              >
                 {section.links.map((link: FooterLink) => {
                   const { label, href, onClick } = link;
                   return (
-                    <li key={label}>
+                    <motion.li variants={staggerItem} key={label}>
                       {onClick ? (
                         <div
                           onClick={onClick}
@@ -128,14 +140,14 @@ export default function Footer() {
                           {label}
                         </Link>
                       )}
-                    </li>
+                    </motion.li>
                   );
                 })}
-              </ul>
-            </div>
-          ))}
+                </motion.ul>
+              </motion.div>
+            ))}
 
-          <div>
+          <motion.div variants={staggerItem}>
             <h3 className="text-lg sm:text-xl font-bold  sm:mb-4 ">
               Follow us
             </h3>
@@ -212,11 +224,16 @@ export default function Footer() {
                 </svg>
               </Link>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="flex flex-wrap sm:justify-center justify-start text-[11px] md:text-xs  gap-2 sm:gap-4 md:text-center uppercase sm:text-left">
-          {legalLinks.map((link) => (
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ delay: 0.5 }}
+          className="flex flex-wrap sm:justify-center justify-start text-[11px] md:text-xs  gap-2 sm:gap-4 md:text-center uppercase sm:text-left"
+        >  {legalLinks.map((link) => (
             <Link
               key={link.label}
               href={`/${link.href}`}
@@ -226,9 +243,15 @@ export default function Footer() {
               {link.label}
             </Link>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-6 text-xs sm:text-center space-y-2  ">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: false }}
+          transition={{ delay: 0.7 }}
+          className="mt-6 text-xs sm:text-center space-y-2  "
+        >
           <div className="flex items-center sm:justify-center gap-2">
             <div>&copy; COSTrAD {siteConfig.year} </div>
             <div className="flex gap-x-2">
@@ -253,7 +276,7 @@ export default function Footer() {
             under the regulatory framework and legal statutes of the Republic of
             Ghana.
           </p>
-        </div>
+        </motion.div>
       </footer>
     </div>
     </>

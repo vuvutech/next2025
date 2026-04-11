@@ -1,3 +1,4 @@
+import { FadeIn } from "@/components/ui/animations/FadeIn";
 
 export default function Privacy() {
   return (
@@ -5,12 +6,12 @@ export default function Privacy() {
     <div className="max-w-7xl mx-auto  md:p-8  space-y-6" >
         <h1 className="text-5xl  mb-4">Privacy Policy for COSTrAD</h1>
 
-        <section className="">
+        <FadeIn as="section" className="">
             <h2 className="text-2xl font-semibold mb-2">Introduction</h2>
             <p>COSTrAD is committed to protecting the privacy and security of our members and visitors to our website. This Privacy Policy explains how we collect, use, and protect your personal information when you interact with us online and offline. By using our website or services, you consent to the terms of this Privacy Policy.</p>
-        </section>
+        </FadeIn>
 
-        <section className="">
+        <FadeIn as="section" className="">
             <h2 className="text-2xl font-semibold mb-2">Information We Collect</h2>
             <ul className="list-disc list-inside space-y-3 indent-[2%]">
                 <li><strong>Contact Information</strong>: Name, email address, phone number, and mailing address.</li>
@@ -19,9 +20,9 @@ export default function Privacy() {
                 <li><strong>Donations</strong>: Information related to your donations, including payment details and donation history.</li>
                 <li><strong>Website Usage</strong>: Data collected through cookies and similar technologies to understand how you use our website and improve your experience.</li>
             </ul>
-        </section>
+        </FadeIn>
 
-        <section className="">
+        <FadeIn as="section" className="">
             <h2 className="text-2xl font-semibold mb-2">How We Use Your Information</h2>
             <ul className="list-disc list-inside space-y-3 indent-[2%]">
                 <li><strong>Membership Management</strong>: To process membership applications, renewals, and provide member benefits.</li>
@@ -31,9 +32,9 @@ export default function Privacy() {
                 <li><strong>Website Improvement</strong>: To analyze website usage and improve our online presence and services.</li>
                 <li><strong>Legal Compliance</strong>: To comply with legal obligations and protect our rights and interests.</li>
             </ul>
-        </section>
+        </FadeIn>
 
-        <section className="">
+        <FadeIn as="section" className="">
             <h2 className="text-2xl font-semibold mb-2">How We Share Your Information</h2>
             <p>We do not sell or rent your personal information to third parties. We may share your information in the following circumstances:</p>
             <ul className="list-disc list-inside space-y-3 indent-[2%]">
@@ -41,14 +42,14 @@ export default function Privacy() {
                 <li><strong>Legal Requirements</strong>: If required by law, we may disclose your information to comply with legal obligations or protect our rights.</li>
                 <li><strong>Event Partners</strong>: With partners and sponsors of our events for the purpose of organizing and managing events, provided you have given consent.</li>
             </ul>
-        </section>
+        </FadeIn>
 
-        <section className="">
+        <FadeIn as="section" className="">
             <h2 className="text-2xl font-semibold mb-2">Data Security</h2>
             <p>We take the security of your personal information seriously. We implement appropriate technical and organizational measures to protect your data from unauthorized access, alteration, disclosure, or destruction.</p>
-        </section>
+        </FadeIn>
 
-        <section className="">
+        <FadeIn as="section" className="">
             <h2 className="text-2xl font-semibold mb-2">Your Rights</h2>
             <p>You have the following rights regarding your personal information:</p>
             <ul className="list-disc list-inside space-y-3 indent-[2%]">
@@ -59,19 +60,19 @@ export default function Privacy() {
                 <li><strong>Data Portability</strong>: You can request a copy of your personal information in a structured, commonly used, and machine-readable format.</li>
             </ul>
             <p>To exercise these rights, please contact us using the contact information provided below.</p>
-        </section>
+        </FadeIn>
 
-        <section className="">
+        <FadeIn as="section" className="">
             <h2 className="text-2xl font-semibold mb-2">Cookies and Tracking Technologies</h2>
             <p>Our website uses cookies and similar tracking technologies to enhance your experience. You can manage your cookie preferences through your browser settings. For more information, please refer to our Cookie Policy.</p>
-        </section>
+        </FadeIn>
 
-        <section className="">
+        <FadeIn as="section" className="">
             <h2 className="text-2xl font-semibold mb-2">Changes to This Privacy Policy</h2>
             <p>We may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new Privacy Policy on our website. Your continued use of our services after such changes constitutes your acceptance of the new Privacy Policy.</p>
-        </section>
+        </FadeIn>
 
-        <section className="">
+        <FadeIn as="section" className="">
             <h2 className="text-2xl font-semibold mb-2">Contact Us</h2>
             <p>If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:</p>
             <p className="mt-2">
@@ -80,7 +81,7 @@ export default function Privacy() {
             Email: info@costrad.org <br />
             Phone: +233200201334
           </p>
-        </section>
+        </FadeIn>
 
         <footer className=" mt-6">
             <p className="text-gray-600">Effective Date: 11/11/2024</p>

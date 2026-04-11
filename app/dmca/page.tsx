@@ -1,9 +1,10 @@
+import { FadeIn } from "@/components/ui/animations/FadeIn";
 
 export default function DMCA() {
   // Changed function name to DMCA for clarity
   return (
     <>
-      <section className="max-w-8xl p-2 md:px-8   mx-auto h-auto">
+      <FadeIn as="section" className="max-w-8xl p-2 md:px-8   mx-auto h-auto">
         <div className=" min-h-[600px] mx-auto  space-y-5">
           <div className=" text-left w-full  md:p-8  sm:rounded-lg prose-img:rounded-xl max-w-max  prose dark:prose-invert ">
             <h1 className="text-3xl md:text-4xl ">DMCA Policy</h1>
@@ -139,7 +140,7 @@ export default function DMCA() {
             </div>
           </div>
         </div>
-      </section>
+      </FadeIn>
     </>
   );
 }

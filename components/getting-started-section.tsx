@@ -1,6 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
+"use client";
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "./ui/animations/framerAnimations";
 import BadgeLink from "./BadgeLink";
 
 interface Hero7Props {
@@ -57,28 +60,38 @@ const GettingStarted = ({
   return (
     <section className="py-32">
       <div className="lg:container space-y-3">
-        <div className="max-w-3xl space-y-3 pb-12">
-          <div>
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, margin: "-50px" }}
+          className="max-w-3xl space-y-3 pb-12"
+        >
+          <motion.div variants={staggerItem}>
             <BadgeLink
               href="#"
               badge={"Speed"}
               label={"Start Your Journey with COSTrAD"}
             />
-          </div>
-          <h1 className="text-3xl  lg:text-5xl">
+          </motion.div>
+          <motion.h1 variants={staggerItem} className="text-3xl  lg:text-5xl">
             Get in touch with us today to learn more
-          </h1>
-          <p className="">
+          </motion.h1>
+          <motion.p variants={staggerItem} className="">
             Ready to take the next step toward transformational leadership?
             Getting started with COSTrAD is simple, intentional, and designed to
             ensure the best experience for every student. To begin your journey,
             create your account, complete your profile, choose from one of our
             specialized institutes, and await approval.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
         <div>
           <div dir="ltr" data-orientation="horizontal">
-            <div
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, margin: "-50px" }}
               role="tablist"
               aria-orientation="horizontal"
               className="relative grid items-start gap-6 lg:grid-cols-4"
@@ -87,7 +100,8 @@ const GettingStarted = ({
               style={{ outline: "none" }}
             >
               <div className="absolute top-[30px] right-0 left-4 -z-10 hidden h-px bg-input lg:block" />
-              <button
+              <motion.button
+                variants={staggerItem}
                 type="button"
                 role="tab"
                 aria-selected="true"
@@ -127,8 +141,9 @@ const GettingStarted = ({
                     />
                   </div>
                 </div>
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                variants={staggerItem}
                 type="button"
                 role="tab"
                 aria-selected="false"
@@ -167,8 +182,9 @@ const GettingStarted = ({
                     />
                   </div>
                 </div>
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                variants={staggerItem}
                 type="button"
                 role="tab"
                 aria-selected="false"
@@ -207,8 +223,9 @@ const GettingStarted = ({
                     />
                   </div>
                 </div>
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                variants={staggerItem}
                 type="button"
                 role="tab"
                 aria-selected="false"
@@ -247,8 +264,8 @@ const GettingStarted = ({
                     />
                   </div>
                 </div>
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
             <div className="mt-10 hidden rounded-3xl  p-10 lg:block">
               <div
                 data-state="active"

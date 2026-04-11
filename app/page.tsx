@@ -4,6 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import { InstitutesIntro } from "@/components/InstitutesIntro";
 import { Testimonials } from "@/components/Testimonials";
 import Preloader from "@/components/ui/animations/Preloader";
+import { FadeIn } from "@/components/ui/animations/FadeIn";
 import CTA from "@/components/ui/CTA";
 import Jumbotron from "@/components/ui/Jumbotron";
 import WhyCostrad from "@/components/WhyCostrad";
@@ -34,7 +35,7 @@ export default function Home() {
       </AnimatePresence> */}
       <HeroSection backgroundImageUrl="/images/united-nations.jpg" />
       <InstitutesIntro />
-      <section
+      <FadeIn as="section"
         className="px-2 md:p-8 max-w-8xl text-[24px] mx-auto md:text-[37px] 
   md:min-h-[60dvh] font-oswald flex flex-col justify-center pb-24"
       >
@@ -52,13 +53,15 @@ export default function Home() {
           energize, and mobilize those around them toward a shared{" "}
           <span className="text-destructive">vision</span>.
         </div>
-      </section>
+      </FadeIn>
 
-      <Jumbotron
-        className="object-center"
-        heroImage="/images/center2.jpg"
-        height="md:h-[600px]"
-      />
+      <FadeIn>
+        <Jumbotron
+          className="object-center"
+          heroImage="/images/center2.jpg"
+          height="md:h-[600px]"
+        />
+      </FadeIn>
       <div className="flex flex-col justify-center">
         <VelocityScroll
           className="uppercase md:text-3xl text-xs w-full mx-auto font-poppins font-thin "

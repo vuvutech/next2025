@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { FadeIn } from "@/components/ui/animations/FadeIn";
 
 export default function OurStory() {
   return (
@@ -7,7 +8,7 @@ export default function OurStory() {
         <div className="container">
           <div className="flex flex-col items-center justify-start gap-6 lg:flex-row">
             <div className="flex w-full flex-col items-start justify-start gap-24 lg:w-1/2">
-              <div className="pr-6">
+              <FadeIn delay={0.1} className="pr-6">
                 <h1 className="mb-6 text-4xl font-bold md:text-5xl lg:mb-10 lg:text-6xl">
                   Our Story
                 </h1>
@@ -27,7 +28,7 @@ export default function OurStory() {
                   laborum, nostrum omnis quos excepturi dolorum reprehenderit
                   vel labore eaque libero perferendis? Qui illo numquam beatae?
                 </p>
-              </div>
+              </FadeIn>
               <div className="flex flex-col items-center justify-center gap-6 md:flex-row">
                 <img
                   src="/images/our-story/our-story1.webp"
@@ -68,7 +69,7 @@ export default function OurStory() {
                   />
                 </div>
               </div>
-              <div className="px-8">
+              <FadeIn delay={0.2} className="px-8">
                 <h1 className="mb-8 text-2xl font-semibold lg:mb-6">
                   Our Workplace
                 </h1>
@@ -84,7 +85,7 @@ export default function OurStory() {
                   nihil blanditiis quae, beatae assumenda ad reiciendis soluta
                   dolorem. Natus repellendus quidem dolorum temporibus!
                 </p>
-              </div>
+              </FadeIn>
             </div>
           </div>
         </div>

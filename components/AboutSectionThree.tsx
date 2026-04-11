@@ -1,24 +1,33 @@
+"use client";
 import React from "react";
 import Image from "next/image";
-
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "./ui/animations/framerAnimations";
 
 const AboutSectionThree = () => {
   return (
     <div className="py-4">
       <section className="max-w-8xl w-full py-4 mx-auto  dark:bg-firefly-900">
         {/* Grid */}
-        <div className="grid md:grid-cols-3  md:gap-8 ">
-          <Image
-            className="rounded-2xl h-dvh md:h-[90vh] md:col-span-2"
-            src="/images/quarterglobe.webp"
-            alt="Costrad on leadership"
-            width={800}
-            height={600}
-            style={{ width: "100%", height: "auto" }}
-            priority
-          />
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, margin: "-50px" }}
+          className="grid md:grid-cols-3  md:gap-8 "
+        >
+          <motion.div variants={staggerItem} className="md:col-span-2">
+            <Image
+              className="rounded-2xl h-dvh md:h-[90vh] w-full object-cover"
+              src="/images/quarterglobe.webp"
+              alt="Costrad on leadership"
+              width={800}
+              height={600}
+              priority
+            />
+          </motion.div>
           {/* End Col */}
-          <div className="mt-5 sm:mt-10 md:mt-0 md:order-1 md:col-span-1 md:flex flex-col justify-center ">
+          <motion.div variants={staggerItem} className="mt-5 sm:mt-10 md:mt-0 md:order-1 md:col-span-1 md:flex flex-col justify-center ">
             <div className="space-y-6 sm:space-y-8">
               {/* Title */}
               <div className="space-y-2 md:space-y-4">
@@ -41,9 +50,9 @@ const AboutSectionThree = () => {
               {/* End Title */}
         
             </div>
-          </div>
+          </motion.div>
           {/* End Col */}
-        </div>
+        </motion.div>
         {/* End Grid */}
       </section>
     </div>

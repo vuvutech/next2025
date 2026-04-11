@@ -8,6 +8,8 @@ import { useHasMounted } from "@/hooks/useHasMounted";
 
 import { Separator } from "@radix-ui/react-separator";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "./ui/animations/framerAnimations";
 
 interface HeroSectionProps {
   backgroundImageUrl?: string;
@@ -36,25 +38,31 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ backgroundImageUrl = '
           sizes="100vw"
         />
         <div className="relative h-full flex flex-col justify-center sm:justify-end items-start z-10">
-          <div
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, margin: "-50px" }}
             data-scroll
             data-scroll-speed={0.1}
             className="space-y-4 bg-black p-4 sm:p-8"
           >
-            <div className="">
+            <motion.div variants={staggerItem} className="">
               <h2 className="leading-[0.9em] text-lg sm:text-3xl text-primary-light dark:text-primary ">
                 Doing The
                 <br />
                 Seemingly Impossible
               </h2>
-            </div>
-            <Separator className="my-4 w-1/5 h-1 bg-accent " />
-            <div className="text-firefly">
+            </motion.div>
+            <motion.div variants={staggerItem}>
+              <Separator className="my-4 w-1/5 h-1 bg-accent " />
+            </motion.div>
+            <motion.div variants={staggerItem} className="text-firefly">
               <p className=" text-xs sm:text-lg text-background dark:text-foreground">
                 Explore what COSTrAD can help you achieve.
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

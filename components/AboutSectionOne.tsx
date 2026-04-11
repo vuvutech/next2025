@@ -1,14 +1,23 @@
+"use client";
 import Link from "next/link";
 import React from "react";
-
+import { motion } from "framer-motion";
+import { staggerContainer, staggerItem } from "./ui/animations/framerAnimations";
 
 const AboutSectionOne = () => {
   return (
     <div  className="py-8 pb-4">
       <section>
         <div className="container">
-          <div className="text-left space-y-4">
-            <Link
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="text-left space-y-4"
+          >
+            <motion.div variants={staggerItem}>
+              <Link
               href="#"
               className="mx-auto mb-3 sm:inline-flex flex justify-between  uppercase items-center gap-3 rounded-full 
               border px-2 py-1 text-xs sm:text-sm w-full sm:w-auto"
@@ -39,17 +48,17 @@ const AboutSectionOne = () => {
                 </svg>
               </span>
             </Link>
-            <h1 className="text-3xl sm:text-5xl max-w-2xl  ">
+            </motion.div>
+            <motion.h1 variants={staggerItem} className="text-3xl sm:text-5xl max-w-2xl  ">
               Cultivating Purposeful Leadership
-            </h1>
-            <p className="lg:text-xl m max-w-3xl text-foreground">
+            </motion.h1>
+            <motion.p variants={staggerItem} className="lg:text-xl m max-w-3xl text-foreground">
               The College of Sustainable Transformation and Development
               (COSTrAD) is an initiative of the Logos-Rhema Foundation for
               Leadership Resource Development, a Non-Governmental Foundation
               registered in Ghana.
-            </p>
-         
-          </div>
+            </motion.p>
+          </motion.div>
         </div>
       </section>
 

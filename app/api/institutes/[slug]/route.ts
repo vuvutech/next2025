@@ -33,10 +33,11 @@ export async function GET(request: NextRequest, props: { params: Promise<{ slug:
   }
 }
 
-export async function PUT(request: NextRequest, props: { params: Promise<{ slugOrId: string }> }) {
+export async function PUT(request: NextRequest, props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
 
-  const identifier = params.slugOrId;
+  const identifier = params.slug;
+
   const json = await request.json();
 
   const fields = [
