@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/dbConnect";
 import { getCurrentUser } from "@/app/actions/functions";
-import { admin } from "@/lib/auth-client";
+import { auth } from "@/lib/auth";
 
 export async function PUT(req: NextRequest) {
   // Extract id and add a safety check
@@ -41,7 +41,10 @@ export async function PUT(req: NextRequest) {
     });
 
     if (banned) {
-      await admin.revokeUserSessions({ userId: id });
+      await auth.api.revokeUserSessions({
+        body: { userId: id },
+        headers: req.headers,
+      });
     }
 
     return NextResponse.json({ success: true, user: updated });

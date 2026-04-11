@@ -16,7 +16,7 @@ export async function PUT(
   const { id, role } = await req.json()
   console.log("Updating user role:", id, role);
 
-  if (role !== "ADMIN" && role !== "USER") {
+  if (role !== "ADMIN" && role !== "USER" && role !== "SUPERADMIN") {
     return NextResponse.json({ error: "Invalid role" }, { status: 400 })
   }
 
