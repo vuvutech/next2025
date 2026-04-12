@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
       orderBys: [{ dimension: { dimensionName: "date" }, desc: false }],
     });
 
-    const viewsByDate = response.rows?.map((row) => ({
+    const viewsByDate = response.rows?.map((row: any) => ({
       date: row.dimensionValues?.[0].value,
       views: Number(row.metricValues?.[0].value ?? 0),
     })) ?? [];

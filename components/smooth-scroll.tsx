@@ -1,12 +1,12 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 import 'locomotive-scroll/dist/locomotive-scroll.css';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 const SmoothScroll: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const locomotiveRef = useRef<any>(null);
-  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -19,23 +19,16 @@ const SmoothScroll: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
       scrollInstance = new LocomotiveScroll({
         el: containerRef.current!,
         smooth: true,
-      });
+      } as any);
 
       locomotiveRef.current = scrollInstance;
 
-      const routerChangeHandler = () => {
-        scrollInstance?.update?.();
-      };
-
-      router.events.on('routeChangeComplete', routerChangeHandler);
-
       // Cleanup
       return () => {
-        router.events.off('routeChangeComplete', routerChangeHandler);
         scrollInstance?.destroy();
       };
     });
-  }, [router]);
+  }, [pathname]);
 
   useEffect(() => {
     locomotiveRef.current?.update?.();

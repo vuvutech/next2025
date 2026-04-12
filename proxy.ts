@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 import { betterFetch } from "@better-fetch/fetch";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
 
   // Redirect to login if no session
@@ -32,7 +32,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL("/", request.url));
       }
     } catch (e) {
-      console.error("Failed to fetch role in middleware:", e);
+      console.error("Failed to fetch role in proxy:", e);
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
