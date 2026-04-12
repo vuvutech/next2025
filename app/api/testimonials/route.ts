@@ -6,6 +6,7 @@ import { prisma } from "@/prisma/dbConnect";
 import { getCurrentUser } from "@/app/actions/functions";
 import { revalidatePath } from "next/cache";
 import { baseUrl } from "@/lib/metadata";
+import { validateContentLength, containsMaliciousPatterns, sanitizeHtml } from "@/lib/security";
 
 // GET all testimonials (admin only)
 export async function GET(req: NextRequest) {
@@ -35,15 +36,26 @@ export async function POST(req: NextRequest) {
   }
 
   const { content, userFeaturePermission } = await req.json();
-  if (!content || content.trim() === "") {
-    return NextResponse.json({ error: "Content required" }, { status: 400 });
+
+  // Input validation
+  if (!content || typeof content !== "string" || content.trim() === "") {
+    return NextResponse.json({ error: "Content is required and must be a non-empty string" }, { status: 400 });
+  }
+
+  const sanitizedContent = sanitizeHtml(content.trim());
+  if (!validateContentLength(sanitizedContent, 5000)) {
+    return NextResponse.json({ error: "Content is too long (maximum 5000 characters)" }, { status: 400 });
+  }
+
+  if (containsMaliciousPatterns(sanitizedContent)) {
+    return NextResponse.json({ error: "Content contains invalid characters or patterns" }, { status: 400 });
   }
 
   try {
     const testimonial = await prisma.testimonial.create({
       data: {
         userId: user.id,
-        content,
+        content: sanitizedContent,
         userFeaturePermission: userFeaturePermission,
       },
     });

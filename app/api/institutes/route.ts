@@ -5,20 +5,6 @@ import { revalidatePath } from "next/cache";
 import { getCurrentUser } from "@/app/actions/functions";
 import { baseUrl } from "@/lib/metadata";
 
-const AUTH_TOKEN = process.env.AUTH_TOKEN;
-
-function checkAuth(req: NextRequest) {
-  const authHeader = req.headers.get("authorization");
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-  const token = authHeader.split(" ")[1];
-  if (token !== AUTH_TOKEN) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
-  return null;
-}
-
 // GET handler
 export async function GET(req: NextRequest) {
   // const authResult = checkAuth(req);
@@ -53,9 +39,6 @@ export async function GET(req: NextRequest) {
 
 // POST handler
 export async function POST(req: NextRequest) {
-  const authResult = checkAuth(req);
-  if (authResult) return authResult;
-
   const user = await getCurrentUser();
   if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
@@ -127,9 +110,6 @@ export async function PUT(req: NextRequest) {
 
 // DELETE handler
 export async function DELETE(req: NextRequest) {
-  const authResult = checkAuth(req);
-  if (authResult) return authResult;
-
   const user = await getCurrentUser();
   if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });

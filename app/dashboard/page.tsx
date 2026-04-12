@@ -11,18 +11,12 @@ import EditableProfileForm from "@/components/EditableProfileForm";
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
-  const [session, activeSessions, deviceSessions, organization] =
+  const [session, activeSessions] =
     await Promise.all([
       auth.api.getSession({
         headers: await headers(),
       }),
       auth.api.listSessions({
-        headers: await headers(),
-      }),
-      auth.api.listDeviceSessions({
-        headers: await headers(),
-      }),
-      auth.api.getFullOrganization({
         headers: await headers(),
       }),
     ]).catch((e: any) => {

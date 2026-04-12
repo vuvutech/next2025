@@ -60,6 +60,7 @@ import {
 	ReactPortal,
 	SetStateAction,
 	useState,
+	useEffect,
 } from "react";
 
 export default function UserCard(props: {
@@ -77,6 +78,29 @@ export default function UserCard(props: {
   const [isSignOut, setIsSignOut] = useState<boolean>(false);
   const [emailVerificationPending, setEmailVerificationPending] =
     useState<boolean>(false);
+  const [userData, setUserData] = useState<{
+    twoFactorEnabled?: boolean;
+    role?: string;
+    banned?: boolean;
+  } | null>(null);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch('/api/user');
+      if (response.ok) {
+        const data = await response.json();
+        setUserData(data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch user data:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (session?.user?.id) {
+      fetchUserData();
+    }
+  }, [session?.user?.id]);
   return (
     <div className="space-y-6">
       <div>
@@ -210,7 +234,7 @@ export default function UserCard(props: {
             <div className="flex flex-col gap-2">
               <p className="text-sm">Two Factor</p>
               <div className="flex gap-2">
-                {!!session?.user.twoFactorEnabled && (
+                {!!userData?.twoFactorEnabled && (
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button variant="outline" className="gap-2">
@@ -282,19 +306,19 @@ export default function UserCard(props: {
                   <DialogTrigger asChild>
                     <Button
                       variant={
-                        session?.user.twoFactorEnabled
+                        userData?.twoFactorEnabled
                           ? "destructive"
                           : "outline"
                       }
                       className="gap-2"
                     >
-                      {session?.user.twoFactorEnabled ? (
+                      {userData?.twoFactorEnabled ? (
                         <ShieldOff size={16} />
                       ) : (
                         <ShieldCheck size={16} />
                       )}
                       <span className="md:text-sm text-xs">
-                        {session?.user.twoFactorEnabled
+                        {userData?.twoFactorEnabled
                           ? "Disable 2FA"
                           : "Enable 2FA"}
                       </span>
@@ -303,12 +327,12 @@ export default function UserCard(props: {
                   <DialogContent className="sm:max-w-[425px] w-11/12">
                     <DialogHeader>
                       <DialogTitle>
-                        {session?.user.twoFactorEnabled
+                        {userData?.twoFactorEnabled
                           ? "Disable 2FA"
                           : "Enable 2FA"}
                       </DialogTitle>
                       <DialogDescription>
-                        {session?.user.twoFactorEnabled
+                        {userData?.twoFactorEnabled
                           ? "Disable the second factor authentication from your account"
                           : "Enable 2FA to secure your account"}
                       </DialogDescription>
@@ -352,7 +376,7 @@ export default function UserCard(props: {
                             return;
                           }
                           setIsPendingTwoFa(true);
-                          if (session?.user.twoFactorEnabled) {
+                          if (userData?.twoFactorEnabled) {
                             const res = await client.twoFactor.disable({
                               password: twoFaPassword,
                               fetchOptions: {
@@ -362,6 +386,7 @@ export default function UserCard(props: {
                                 onSuccess() {
                                   toast("2FA disabled successfully");
                                   setTwoFactorDialog(false);
+                                  fetchUserData();
                                 },
                               },
                             });
@@ -381,6 +406,7 @@ export default function UserCard(props: {
                                     setIsPendingTwoFa(false);
                                     setTwoFaPassword("");
                                     setTwoFactorDialog(false);
+                                    fetchUserData();
                                   },
                                 },
                               });
@@ -406,7 +432,7 @@ export default function UserCard(props: {
                       >
                         {isPendingTwoFa ? (
                           <Loader2 size={15} className="animate-spin" />
-                        ) : session?.user.twoFactorEnabled ? (
+                        ) : userData?.twoFactorEnabled ? (
                           "Disable 2FA"
                         ) : (
                           "Enable 2FA"
