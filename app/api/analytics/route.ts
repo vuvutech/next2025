@@ -52,12 +52,12 @@ export async function GET(req: NextRequest) {
         }
 
         const chartData = Object.entries(dailyStats)
-          .map(([date, counts]) => ({
+          .map(([date, counts]: [string, any]) => ({
             date: formatGA4Date(date),
             desktop: counts.desktop,
             mobile: counts.mobile + counts.tablet,
           }))
-          .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+          .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
         return NextResponse.json({ data: chartData });
       }
@@ -85,22 +85,22 @@ export async function GET(req: NextRequest) {
         const registrations = await prisma.registration.findMany({
           select: { editionId: true },
         });
-        const countMap = registrations.reduce((acc, reg) => {
+        const countMap = registrations.reduce((acc: Record<string, number>, reg: any) => {
           const id = reg.editionId;
           acc[id] = (acc[id] || 0) + 1;
           return acc;
         }, {} as Record<string, number>);
 
-        const topEditions = Object.entries(countMap)
-          .sort((a, b) => b[1] - a[1])
+        const topEditions = (Object.entries(countMap) as [string, number][])
+          .sort((a: [string, number], b: [string, number]) => b[1] - a[1])
           .slice(0, 3);
 
         const editions = await prisma.edition.findMany({
           where: { id: { in: topEditions.map(([id]) => id) } },
         });
 
-        const editionMap = Object.fromEntries(editions.map((e) => [e.id, e.title]));
-        const top = topEditions.map(([editionId, count]) => ({
+        const editionMap = Object.fromEntries(editions.map((e: any) => [e.id, e.title]));
+        const top = topEditions.map(([editionId, count]: [string, number]) => ({
           edition: editionMap[editionId] ?? `Edition ${editionId}`,
           count,
         }));
@@ -165,7 +165,7 @@ export async function GET(req: NextRequest) {
           orderBys: [{ dimension: { dimensionName: "date" }, desc: false }],
         });
 
-        const viewsByDate = response.rows?.map((row) => ({
+        const viewsByDate = response.rows?.map((row: any) => ({
           date: row.dimensionValues?.[0].value,
           views: Number(row.metricValues?.[0].value ?? 0),
         })) ?? [];
@@ -195,7 +195,7 @@ export async function GET(req: NextRequest) {
           limit: 10,
         });
 
-        const topPages = response.rows?.map((row) => ({
+        const topPages = response.rows?.map((row: any) => ({
           path: row.dimensionValues?.[0].value ?? "/",
           views: Number(row.metricValues?.[0].value ?? 0),
         })) || [];

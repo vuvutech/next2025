@@ -11,15 +11,15 @@ export async function GET() {
     });
 
     // Tally counts per editionId
-    const countMap = registrations.reduce((acc, reg) => {
+    const countMap = registrations.reduce((acc: Record<string, number>, reg: any) => {
       const id = reg.editionId;
       acc[id] = (acc[id] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
 
     // Sort and pick top 3
-    const topEditions = Object.entries(countMap)
-      .sort((a, b) => b[1] - a[1])
+    const topEditions = (Object.entries(countMap) as [string, number][])
+      .sort((a: [string, number], b: [string, number]) => b[1] - a[1])
       .slice(0, 3);
 
     const editionIds = topEditions.map(([id]) => id);
@@ -28,9 +28,9 @@ export async function GET() {
       where: { id: { in: editionIds } },
     });
 
-    const editionMap = Object.fromEntries(editions.map(e => [e.id, e.title]));
+    const editionMap = Object.fromEntries(editions.map((e: any) => [e.id, e.title]));
 
-    const top = topEditions.map(([editionId, count]) => ({
+    const top = topEditions.map(([editionId, count]: [string, number]) => ({
       title: editionMap[editionId] ?? `Edition ${editionId}`,
       count,
     }));

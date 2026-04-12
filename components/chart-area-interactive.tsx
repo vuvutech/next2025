@@ -88,7 +88,6 @@ export function GaTopPagesChartBar() {
               dataKey="views"
               fill="var(--color-views)"
               radius={5}
-              layout="vertical"
             />
           </BarChart>
         </ChartContainer>

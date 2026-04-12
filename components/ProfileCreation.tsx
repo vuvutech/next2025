@@ -65,24 +65,20 @@ export const FormSchema = z.object({
     ])
     .optional(),
   nationality: z.string().min(1, "Nationality is required"),
-  disabilityAssistance: z.boolean().optional(),
-  disabilityDescription: z.string().optional(),
+  disabilityAssistance: z.boolean().default(false),
+  disabilityDescription: z.string().default(""),
   telephone: phoneSchema,
-  mobile: phoneSchema
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
-  address: z.string().optional(),
-  addressLine2: z.string().optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
+  mobile: phoneSchema.optional().default(""),
+  address: z.string().default(""),
+  addressLine2: z.string().default(""),
+  city: z.string().default(""),
+  state: z.string().default(""),
   country: z.string().min(1, "Please select a country"),
-  zipcode: z.string().optional(),
-  emergencyContactName: z.string().optional(),
-  emergencyContactTelephone: phoneSchema
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
-  biography: z.string().optional(),
-  profession: z.string().optional(),
+  zipcode: z.string().default(""),
+  emergencyContactName: z.string().default(""),
+  emergencyContactTelephone: phoneSchema.optional().default(""),
+  biography: z.string().default(""),
+  profession: z.string().default(""),
   highestQualification: z
     .enum(["HIGH_SCHOOL", "BACHELORS", "MASTERS", "DOCTORATE", "OTHER"])
     .optional(),
@@ -97,48 +93,16 @@ export const FormSchema = z.object({
       "OTHER",
     ])
     .optional(),
-  linkedIn: z
-    .string()
-    .url()
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
-  personalWebsite: z
-    .string()
-    .url()
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
-  twitter: z
-    .string()
-    .url()
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
-  facebook: z
-    .string()
-    .url()
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
-  instagram: z
-    .string()
-    .url()
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
-  youtube: z
-    .string()
-    .url()
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
-  github: z
-    .string()
-    .url()
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
-  tiktok: z
-    .string()
-    .url()
-    .optional()
-    .transform((val) => (val === "" ? undefined : val)),
+  linkedIn: z.string().url().optional().default(""),
+  personalWebsite: z.string().url().optional().default(""),
+  twitter: z.string().url().optional().default(""),
+  facebook: z.string().url().optional().default(""),
+  instagram: z.string().url().optional().default(""),
+  youtube: z.string().url().optional().default(""),
+  github: z.string().url().optional().default(""),
+  tiktok: z.string().url().optional().default(""),
 });
-type FormSchema = z.infer<typeof FormSchema>;
+type FormValues = z.infer<typeof FormSchema>;
 
 export const ProfileCreation = () => {
   const [countryData, setCountryData] = React.useState<CountryData>();
@@ -148,42 +112,42 @@ export const ProfileCreation = () => {
   const [selectedNationality, setSelectedNationality] =
     React.useState<Country | null>(null);
 
-  const form = useForm<FormSchema>({
+  const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      gender: "MALE", // or "" if optional
+      gender: "MALE" as const,
       dateOfBirth: "",
-    //   maritalStatus: undefined,
-    //   religion: undefined,
-    //   nationality: "",
-    //   disabilityAssistance: false,
-    //   disabilityDescription: "",
-    //   telephone: "",
-    //   mobile: "",
-    //   address: "",
-    //   addressLine2: "",
-    //   city: "",
-    //   state: "",
-    //   country: "",
-    //   zipcode: "",
-    //   emergencyContactName: "",
-    //   emergencyContactTelephone: "",
-    //   biography: "",
-    //   profession: "",
-    //   highestQualification: undefined,
-    //   languagePreference: undefined,
-    //   linkedIn: "",
-    //   personalWebsite: "",
-    //   twitter: "",
-    //   facebook: "",
-    //   instagram: "",
-    //   youtube: "",
-    //   github: "",
-    //   tiktok: "",
+      nationality: "",
+      telephone: "",
+      mobile: "",
+      address: "",
+      addressLine2: "",
+      city: "",
+      state: "",
+      country: "",
+      zipcode: "",
+      emergencyContactName: "",
+      emergencyContactTelephone: "",
+      biography: "",
+      profession: "",
+      maritalStatus: undefined,
+      religion: undefined,
+      disabilityAssistance: false,
+      disabilityDescription: "",
+      highestQualification: undefined,
+      languagePreference: undefined,
+      linkedIn: "",
+      personalWebsite: "",
+      twitter: "",
+      facebook: "",
+      instagram: "",
+      youtube: "",
+      github: "",
+      tiktok: "",
     },
   });
 
-  function onSubmit(data: FormSchema) {
+  function onSubmit(data: any) { // Use any briefly or the inferred type for handling validated data
     toast.success("Profile submitted successfully!");
     console.log(data);
   }

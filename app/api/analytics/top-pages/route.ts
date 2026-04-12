@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
     });
 
     const topPages =
-      response.rows?.map((row) => ({
+      response.rows?.map((row: any) => ({
         path: row.dimensionValues?.[0].value ?? "/",
         views: Number(row.metricValues?.[0].value ?? 0),
       })) ?? [];
