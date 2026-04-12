@@ -129,7 +129,7 @@ export const auth = betterAuth({
 		"https://costrad.org",
 		"https://www.costrad.net",
 		"https://costrad.net",
-		"http://localhost:3000",
+		"http://localhost:3000"
 	],
 
 	account: {
