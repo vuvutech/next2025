@@ -76,3 +76,5 @@ A comprehensive educational and management platform built with modern web techno
 ## 📜 License
 
 [MIT](LICENSE)
+
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/costrad/next2025?utm_source=oss&utm_medium=github&utm_campaign=costrad%2Fnext2025&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
