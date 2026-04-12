@@ -46,7 +46,6 @@ export function ActionsCellComponent({
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTH_TOKEN}`,
       },
       body: JSON.stringify({ id, ...data }),
     });
@@ -61,7 +60,6 @@ export function ActionsCellComponent({
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTH_TOKEN}`,
       },
       body: JSON.stringify({ id }),
     });

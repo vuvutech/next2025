@@ -94,6 +94,10 @@ export const auth = betterAuth({
 
 	baseURL: baseUrl.toString(),
 
+	session: {
+		freshAge: 60 * 60 * 24, // 24 hours - require re-auth after this time
+	},
+
 	emailVerification: {
 		autoSignInAfterVerification: true,
 		sendOnSignUp: true,
@@ -117,8 +121,8 @@ export const auth = betterAuth({
 	},
 	rateLimit: {
 		enabled: true,
-		max: 100,
-		duration: 60,
+		max: 10, // Reduced from 100 to be more restrictive
+		duration: 60, // 1 minute window
 	},
 	trustedOrigins: [
 		"https://www.costrad.org",

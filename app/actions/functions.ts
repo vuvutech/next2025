@@ -160,7 +160,13 @@ export async function getUserRole() {
     return null;
   }
 
-  return session.user.role;
+  // Fetch user from database to get role
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { role: true },
+  });
+
+  return user?.role || null;
 }
 
 // app/actions/functions.ts
@@ -169,7 +175,21 @@ export async function getCurrentUser(req?: NextRequest) {
     headers: await headers(),
   });
 
-  const user = session?.user ?? null;
+  if (!session?.user?.id) return null;
+
+  // Fetch user from database to get additional fields like banned status
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      role: true,
+      banned: true,
+      banReason: true,
+      studentId: true,
+    },
+  });
 
   // If user is banned, deny
   if (user?.banned) return null;

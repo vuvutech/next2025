@@ -23,9 +23,7 @@ export const client = createAuthClient({
 				window.location.href = "/auth/two-factor";
 			},
 		}),
-		oneTapClient({
-			clientId: process.env.GOOGLE_CLIENT_SECRET as string,
-		}),
+
 		adminClient({
 			ac,
 			roles: {

@@ -41,9 +41,9 @@ export async function PUT(req: NextRequest) {
     });
 
     if (banned) {
-      await auth.api.revokeUserSessions({
-        body: { userId: id },
-        headers: req.headers,
+      // Revoke all sessions for the banned user
+      await prisma.session.deleteMany({
+        where: { userId: id },
       });
     }
 

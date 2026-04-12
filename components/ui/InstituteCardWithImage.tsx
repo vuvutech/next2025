@@ -43,7 +43,7 @@ export default function InstituteCardWithImage({
   // dialog provider
   return (
     <Card id={id}
-      className="w-full p-0 gap-2 dark:bg-gray-950 rounded-2xl
+      className="w-full h-full p-0 gap-2 dark:bg-gray-950 rounded-2xl
     flex flex-col justify-between "
     >
       <Image
