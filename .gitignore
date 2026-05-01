@@ -45,6 +45,7 @@ costrad-*.json
 
 # AI Coding Assistant local folders
 .agents/
+!.agents/skills/vercel-react-best-practices
 .claude/
 .kilocode/
 .kiro/
