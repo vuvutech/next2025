@@ -43,13 +43,3 @@ next-env.d.ts
 .env*.local
 costrad-*.json
 
-# AI Coding Assistant local folders
-.agents
-.claude
-.kilocode
-.kiro
-.kode
-.pi
-.qoder
-.qwen
-skills-lock.json
