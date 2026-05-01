@@ -111,7 +111,7 @@ export const InstituteGallery = ({
 						variants={staggerContainer}
 						initial='hidden'
 						whileInView='visible'
-						viewport={{ once: false, margin: "-50px" }}
+						viewport={{ once: true, margin: "-50px" }}
 						className='flex flex-col gap-4 md:px-8'
 					>
 						<motion.h2
@@ -122,7 +122,7 @@ export const InstituteGallery = ({
 						</motion.h2>
 						<motion.p
 							variants={staggerItem}
-							className='max-w-3xl text-foreground text-lg'
+							className='max-w-4xl text-foreground text-lg'
 						>
 							{overview}
 						</motion.p>
@@ -155,7 +155,7 @@ export const InstituteGallery = ({
 				variants={staggerContainer}
 				initial='hidden'
 				whileInView='visible'
-				viewport={{ once: false, margin: "-50px" }}
+				viewport={{ once: true, margin: "-50px" }}
 				className='w-full'
 			>
 				<Carousel

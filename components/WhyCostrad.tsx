@@ -26,7 +26,7 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, margin: "-50px" }}
+            viewport={{ once: true, margin: "-50px" }}
             className="grid items-stretch gap-y-10 md:grid-cols-2 md:gap-x-6"
           >
             <motion.div variants={staggerItem} className="relative grid grid-cols-2 gap-2 mt-10 md:mt-0 py-12 h-auto">
@@ -35,7 +35,7 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
                   initial={{ scale: 1.5 }}
                   whileInView={{ scale: 1 }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
-                  viewport={{ once: false }}
+                  viewport={{ once: true }}
                   className="h-full w-full"
                 >
                   <Image
@@ -54,7 +54,7 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
                     initial={{ scale: 1.3 }}
                     whileInView={{ scale: 1 }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
-                    viewport={{ once: false }}
+                    viewport={{ once: true }}
                     className="h-full w-full"
                   >
                     <Image

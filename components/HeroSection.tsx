@@ -15,7 +15,7 @@ interface HeroSectionProps {
   backgroundImageUrl?: string;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ backgroundImageUrl = '/images/united-nations.jpg' }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ backgroundImageUrl = '/images/united-nations.webp' }) => {
   const { isMobile } = useDevice();
   const hasMounted = useHasMounted();
 
@@ -36,6 +36,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ backgroundImageUrl = '
           }}
           priority
           sizes="100vw"
+          placeholder="blur"
+          blurDataURL="data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAQCdASoIAAUAAUAmJaQAA3AA/v60AAAA"
         />
         <div className="relative h-full flex flex-col justify-center sm:justify-end items-start z-10">
           <motion.div

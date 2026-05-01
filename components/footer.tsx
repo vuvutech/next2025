@@ -100,7 +100,7 @@ export default function Footer() {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, margin: "-50px" }}
+          viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1  sm:grid-cols-5 gap-4 sm:gap-8 mb-10"
         >
           {footerLinks.map((section) => (
@@ -230,7 +230,7 @@ export default function Footer() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
           transition={{ delay: 0.5 }}
           className="flex flex-wrap sm:justify-center justify-start text-[11px] md:text-xs  gap-2 sm:gap-4 md:text-center uppercase sm:text-left"
         >  {legalLinks.map((link) => (
@@ -248,7 +248,7 @@ export default function Footer() {
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
           transition={{ delay: 0.7 }}
           className="mt-6 text-xs sm:text-center space-y-2  "
         >

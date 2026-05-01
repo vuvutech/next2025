@@ -35,7 +35,7 @@ export default function Jumbotron({
 					<Image
 						loading='eager'
 						src={heroImage}
-						alt='...'
+						alt='Hero image'
 						fill
 						className={clsx(
 							"object-cover",
@@ -43,6 +43,8 @@ export default function Jumbotron({
 							coverPosition,
 							className,
 						)}
+						placeholder="blur"
+						blurDataURL="data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAQCdASoIAAUAAUAmJaQAA3AA/v60AAAA"
 					/>
 
 					{/* <div className={`absolute inset-0 bg-black/${shade}`} /> */}

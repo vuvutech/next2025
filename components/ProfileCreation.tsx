@@ -147,7 +147,7 @@ export const ProfileCreation = () => {
     },
   });
 
-  function onSubmit(data: any) { // Use any briefly or the inferred type for handling validated data
+  function onSubmit(data: FormValues) {
     toast.success("Profile submitted successfully!");
     console.log(data);
   }
@@ -201,7 +201,7 @@ export const ProfileCreation = () => {
                               variant="secondary"
                               className={cn(
                                 "w-full justify-start text-left font-normal",
-                                !field.value && "text-muted-foreg<SelectTrigger>round"
+                                !field.value && "text-muted-foreground"
                               )}
                             >
                               <CalendarIcon className="mr-2 h-4 w-4" />

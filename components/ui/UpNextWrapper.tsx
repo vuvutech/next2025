@@ -13,6 +13,7 @@ import {
   SeparatorVertical,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 type NextEdition = {
   title: string;
@@ -52,46 +53,52 @@ export default function UpNextWrapper() {
   if (!nextEdition) return null;
 
   return (
-    <div className="bg-linear-to-r from-primary to-primary/90">
-      <div className="max-w-[85rem] px-1 py-1  sm:px-6 lg:px-8 mx-auto">
-        <div className="flex  justify-center items-center ">
-          <p
-            className={`${oswald.className} text-white uppercase leading-[10px] text-[10px] md:text-[12px] flex items-center `}
-          >
-            <span className="font-bold uppercase">UpNext:</span>
-            &nbsp; <span className="font-mono">{nextEdition.title}</span>
+		<div className='bg-primary/95 backdrop-blur-sm border-b border-white/10'>
+			<div className='max-w-[90rem] px-4 py-1.5 sm:px-6 lg:px-8 mx-auto'>
+				<div className='flex flex-wrap justify-center items-center gap-y-1 gap-x-4 sm:gap-x-8'>
+					<div
+						className={cn(
+							oswald.className,
+							"flex items-center gap-x-2 text-white uppercase text-[10px] md:text-[13px] tracking-wider",
+						)}
+					>
+						<span className='font-bold opacity-80'>UpNext:</span>
+						<span className='font-medium'>{nextEdition.title}</span>
+						<div className='h-3 w-[1px] bg-white/20 mx-1 hidden sm:block' />
+						<span className='font-medium text-white/90'>
+							{nextEdition.startDate
+								? new Date(
+										nextEdition.startDate,
+									).toLocaleDateString("en-US", {
+										month: "short",
+										day: "numeric",
+									})
+								: ""}{" "}
+							&mdash;{" "}
+							{nextEdition.endDate
+								? new Date(
+										nextEdition.endDate,
+									).toLocaleDateString("en-US", {
+										month: "short",
+										day: "numeric",
+										year: "numeric",
+									})
+								: ""}{" "}
+						</span>
+					</div>
 
-            <LucideTally1 size={14} className="pl-2  box-content" />
-            <span className="font-semibold uppercase ">
-              {nextEdition.startDate
-                ? new Date(nextEdition.startDate).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                  })
-                : ""}{" "}
-              &mdash;{" "}
-              {nextEdition.endDate
-                ? new Date(nextEdition.endDate).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })
-                : ""}{" "}
-            </span>
-          </p>
-          &nbsp;&nbsp;
-          <Link
-            className="py-0.5 sm:py-1 px-3 md:px-4 inline-flex justify-center items-center gap-x-1 bg-white/10 text-[9px] md:text-[11px] font-oswald
-                uppercase font-semibold text-white hover:bg-white/20 focus:outline-hidden focus:bg-white/20 rounded-full"
-            href={`/apply`}
-          >
-            Apply Now
-            <span className=" sm:inline-flex">
-              <LucideMoveRight size={18} />
-            </span>
-          </Link>
-        </div>
-      </div>
-    </div>
+					<Link
+						className={cn(
+							oswald.className,
+							"py-0.5 px-3 md:px-5 inline-flex items-center gap-x-2 bg-white text-primary text-[10px] md:text-[11px] uppercase font-bold hover:bg-white/90 transition-all rounded-full shadow-lg shrink-0",
+						)}
+						href={`/apply`}
+					>
+						Apply Now
+						<LucideMoveRight size={14} strokeWidth={3} />
+					</Link>
+				</div>
+			</div>
+		</div>
   );
 }

@@ -26,7 +26,7 @@ const CTA = () => {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, margin: "-50px" }}
+          viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-3 md:h-[70dvh] w-full flex-col gap-16 overflow-hidden rounded-xl bg-accent
           dark:bg-black  p-4 sm:p-8 md:rounded-3xl lg:flex-row lg:items-center lg:p-16"
         >

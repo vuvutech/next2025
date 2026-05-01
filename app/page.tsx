@@ -33,12 +33,12 @@ export default function Home() {
 			{/* <AnimatePresence mode="wait">
         {isLoading && <Preloader />}
       </AnimatePresence> */}
-			<HeroSection backgroundImageUrl='/images/united-nations.jpg' />
+			<HeroSection backgroundImageUrl='/images/united-nations.webp' />
 			<InstitutesIntro />
 			<FadeIn
 				as='section'
 				className='px-2 md:p-8 max-w-8xl text-[24px] mx-auto md:text-[37px] 
-  md:min-h-[60dvh] font-oswald flex flex-col justify-center pb-24'
+				md:min-h-[60dvh] font-oswald flex flex-col justify-center pb-24'
 			>
 				<div>
 					{" "}
@@ -60,7 +60,7 @@ export default function Home() {
 			<FadeIn className='pb-5 md:pb-10'>
 				<Jumbotron
 					className='object-center'
-					heroImage='/images/center2.jpg'
+					heroImage='/images/center2.webp'
 					height='md:h-[600px]'
 				/>
 			</FadeIn>

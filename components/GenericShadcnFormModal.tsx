@@ -13,6 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"; // Shadcn Dialog components
+import { cn } from "@/lib/utils";
 
 // Define the props interface for GenericShadcnFormModal
 interface GenericShadcnFormModalProps {
@@ -67,7 +68,9 @@ export default function GenericShadcnFormModal({
       <DialogContent className="md:max-w-2/4  mx-auto">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          {description && <DialogDescription>{description}</DialogDescription>}
+          <DialogDescription className={cn(!description && "sr-only")}>
+            {description || `Action for ${title}`}
+          </DialogDescription>
         </DialogHeader>
 
         {/* The dynamic content for the form */}

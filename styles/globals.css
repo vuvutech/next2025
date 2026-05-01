@@ -8,7 +8,8 @@
 
 
 html {
-  scroll-behavior: "smooth";
+  scroll-behavior: smooth;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 @layer base {
@@ -22,40 +23,34 @@ html {
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    /* font-family: var(--font-oswald), sans-serif; */
-    font-size: medium;
+    font-size: var(--text-base);
+    line-height: 1.6;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5 {
-    font-family:
-      var(--font-opensans), sans-serif; /* Default font for headings */
-    font-weight: 300; /* Default weight, adjust as needed */
-    text-transform: uppercase; /* Uppercase for all headings */
-    margin: 0; /* Reset margin for headings */
-    padding: 0; /* Reset padding for headings */
-    line-height: 1.2; /* Adjust line height for better readability */
-    letter-spacing: 0.05em; /* Slightly increase letter spacing for clarity */
-    color: var(--primary); /* Default color for headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-opensans), sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--primary);
   }
 
-  h1 {
-    font-size: x-large;
-  }
-
-  h5 {
-    font-size: small;
-  }
+  h1 { font-size: var(--text-5xl); }
+  h2 { font-size: var(--text-4xl); }
+  h3 { font-size: var(--text-3xl); }
+  h4 { font-size: var(--text-2xl); }
+  h5 { font-size: var(--text-xl); }
+  h6 { font-size: var(--text-lg); }
 
   p {
-    font-family:
-      var(--font-opensans), sans-serif; /* Default font for headings */
-    font-size: large;
-    line-height: 1.6; /* Adjust line height for better readability */
-    color: var(--foreground); /* Default color for paragraphs */
+    font-family: var(--font-opensans), sans-serif;
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--foreground);
+    margin-bottom: 1rem;
   }
 }
 
@@ -142,6 +137,9 @@ html {
   --color-color-3: var(--color-3);
   --color-color-2: var(--color-2);
   --color-color-1: var(--color-1);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
   @keyframes rainbow {
     0% {
       background-position: 0%;
@@ -154,6 +152,23 @@ html {
 :root {
   --font-opensans: "Open Sans", sans-serif;
   --radius: 0.3rem;
+  
+  /* Fluid Typography Scale (Ultra-Refined for Premium Aesthetic) */
+  --text-xs: clamp(0.7rem, 0.05vw + 0.68rem, 0.75rem);
+  --text-sm: clamp(0.8rem, 0.1vw + 0.78rem, 0.875rem);
+  --text-base: clamp(0.9375rem, 0.15vw + 0.9rem, 1rem);
+  --text-lg: clamp(1rem, 0.25vw + 0.95rem, 1.125rem);
+  --text-xl: clamp(1.125rem, 0.4vw + 1.05rem, 1.25rem);
+  --text-2xl: clamp(1.25rem, 0.8vw + 1.15rem, 1.5rem);
+  --text-3xl: clamp(1.5rem, 1.2vw + 1.35rem, 2rem);
+  --text-4xl: clamp(1.875rem, 1.8vw + 1.65rem, 2.5rem);
+  --text-5xl: clamp(2.25rem, 3.0vw + 2.0rem, 3.25rem);
+
+  /* Semantic Colors */
+  --success: oklch(0.627 0.265 149.213);
+  --warning: oklch(0.841 0.19 86.635);
+  --info: oklch(0.627 0.265 244.3);
+
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -198,6 +213,12 @@ html {
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
+  
+  /* Semantic Colors - Dark Optimized */
+  --success: oklch(0.727 0.265 149.213);
+  --warning: oklch(0.891 0.19 86.635);
+  --info: oklch(0.727 0.265 244.3);
+
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);

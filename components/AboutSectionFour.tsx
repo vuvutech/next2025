@@ -40,7 +40,7 @@ const AboutSectionFour = () => {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: false, margin: "-50px" }}
+                viewport={{ once: true, margin: "-50px" }}
                 className="max-w-7xl grid grid-cols-2 md:grid-cols-9 gap-6 md:gap-6 mx-auto my-8"
               >
                 {[

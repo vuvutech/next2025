@@ -61,7 +61,7 @@ const GettingStarted = ({
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, margin: "-50px" }}
+          viewport={{ once: true, margin: "-50px" }}
           className="max-w-3xl space-y-3 pb-12"
         >
           <motion.div variants={staggerItem}>
