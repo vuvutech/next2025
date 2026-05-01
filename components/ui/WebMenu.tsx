@@ -39,7 +39,16 @@ export const gettingStarted: {
   },
 ];
 
+import { usePathname } from "next/navigation";
+
 export function WebMenu() {
+  const pathname = usePathname();
+
+  const isActive = (path: string) => {
+    if (path === "/" && pathname !== "/") return false;
+    return pathname.startsWith(path);
+  };
+
   return (
     <div className="flex items-center justify-end gap-x-2 divide-x-1 font-poppins divide-dotted space-x-1 z-20  ">
       <NavigationMenu className="pr-5">
@@ -47,7 +56,10 @@ export function WebMenu() {
           <NavigationMenuItem>
             <NavigationMenuLink
               href="/"
-              className={navigationMenuTriggerStyle()}
+              className={cn(
+                navigationMenuTriggerStyle(),
+                isActive("/") && "text-primary font-semibold"
+              )}
             >
               <span className="uppercase cursor-pointer">Home</span>
             </NavigationMenuLink>
@@ -56,7 +68,10 @@ export function WebMenu() {
           <NavigationMenuItem>
             <NavigationMenuLink
               href="/about"
-              className={navigationMenuTriggerStyle()}
+              className={cn(
+                navigationMenuTriggerStyle(),
+                isActive("/about") && "text-primary font-semibold"
+              )}
             >
               <span className="uppercase">About</span>
             </NavigationMenuLink>
@@ -64,7 +79,10 @@ export function WebMenu() {
           <NavigationMenuItem>
             <NavigationMenuLink
               href="/institutes"
-              className={navigationMenuTriggerStyle()}
+              className={cn(
+                navigationMenuTriggerStyle(),
+                isActive("/institutes") && "text-primary font-semibold"
+              )}
             >
               <span className="uppercase">Institutes</span>
             </NavigationMenuLink>
@@ -72,7 +90,10 @@ export function WebMenu() {
           <NavigationMenuItem>
             <NavigationMenuLink
               href="/donate"
-              className={navigationMenuTriggerStyle()}
+              className={cn(
+                navigationMenuTriggerStyle(),
+                isActive("/donate") && "text-primary font-semibold"
+              )}
             >
               <span className="uppercase">Donate</span>
             </NavigationMenuLink>
@@ -80,7 +101,10 @@ export function WebMenu() {
           <NavigationMenuItem>
             <NavigationMenuLink
               href="/apply"
-              className={navigationMenuTriggerStyle()}
+              className={cn(
+                navigationMenuTriggerStyle(),
+                isActive("/apply") && "text-primary font-semibold"
+              )}
             >
               <span className="uppercase">Apply</span>
             </NavigationMenuLink>
@@ -88,7 +112,10 @@ export function WebMenu() {
           <NavigationMenuItem>
             <NavigationMenuLink
               href="/contact"
-              className={navigationMenuTriggerStyle()}
+              className={cn(
+                navigationMenuTriggerStyle(),
+                isActive("/contact") && "text-primary font-semibold"
+              )}
             >
               <span className="uppercase">Contact</span>
             </NavigationMenuLink>
@@ -100,6 +127,7 @@ export function WebMenu() {
     </div>
   );
 }
+
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,

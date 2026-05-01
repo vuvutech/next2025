@@ -1,0 +1,121 @@
+▲ Next.js 16.2.3 (Turbopack)
+- Environments: .env.local
+- Experiments (use with caution):
+  · serverActions
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 13.0s
+  Running TypeScript ...
+  Finished TypeScript in 16.6s ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/65) ...
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+  Generating static pages using 11 workers (16/65) 
+  Generating static pages using 11 workers (32/65) 
+  Generating static pages using 11 workers (48/65) 
+✓ Generating static pages using 11 workers (65/65) in 10.2s
+  Finalizing page optimization ...
+
+Route (app)                                                Revalidate  Expire
+┌ ○ /
+├ ○ /_not-found
+├ ○ /about
+├ ƒ /accept-invitation/[id]
+├ ○ /accessibility
+├ ○ /admin
+├ ƒ /admin/announcements
+├ ƒ /admin/editions
+├ ƒ /admin/institutes
+├ ƒ /admin/institutes/[slug]/edit
+├ ƒ /admin/participants
+├ ○ /admin/publications
+├ ƒ /admin/registrations
+├ ƒ /admin/testimonials
+├ ƒ /admin/users
+├ ƒ /api/analytics
+├ ƒ /api/analytics/active-users
+├ ƒ /api/analytics/device-usage
+├ ƒ /api/analytics/edition-popularity
+├ ƒ /api/analytics/most-popular-edition
+├ ƒ /api/analytics/new-users
+├ ƒ /api/analytics/page-views
+├ ƒ /api/analytics/registeredUsers
+├ ƒ /api/analytics/sessions
+├ ƒ /api/analytics/top-pages
+├ ƒ /api/analytics/total-users
+├ ƒ /api/announcements
+├ ƒ /api/approve-and-email-payment-details
+├ ƒ /api/auth/[...all]
+├ ƒ /api/checkProfile
+├ ƒ /api/editions
+├ ƒ /api/getCurrentEditions
+├ ƒ /api/institutes
+├ ƒ /api/institutes/[slug]
+├ ƒ /api/institutes/getInstitute/[id]
+├ ƒ /api/isEmailVerified
+├ ƒ /api/newsletter
+├ ƒ /api/newsletter/confirm/[token]
+├ ƒ /api/newsletter/unsubscribe/[token]
+├ ƒ /api/profile
+├ ƒ /api/register
+├ ƒ /api/seed
+├ ƒ /api/talk-to-us
+├ ƒ /api/testimonials
+├ ƒ /api/upnext
+├ ƒ /api/user
+├ ƒ /api/user/testimonials
+├ ƒ /api/userRole
+├ ƒ /api/users/ban
+├ ƒ /api/users/delete
+├ ƒ /api/users/role
+├ ƒ /api/verify-turnstile
+├ ○ /apply
+├ ○ /auth/emailVerification
+├ ○ /auth/error
+├ ○ /auth/forget-password
+├ ○ /auth/reset-password
+├ ○ /auth/sign-in
+├ ○ /auth/sign-up
+├ ○ /auth/two-factor
+├ ○ /auth/two-factor/otp
+├ ○ /coming-soon
+├ ○ /confirmation-error
+├ ○ /confirmed-successfully
+├ ○ /contact
+├ ○ /cookies
+├ ƒ /dashboard
+├ ○ /dmca
+├ ○ /donate
+├ ○ /events-and-webinar
+├ ○ /faqs
+├ ○ /getting-started
+├ ○ /help-and-support
+├ ƒ /institutes
+├ ● /institutes/[slug]                                            12h      1y
+│ ├ /institutes/family-development-institute                      12h      1y
+│ ├ /institutes/mindset-transformation-institute                  12h      1y
+│ ├ /institutes/institute-of-governance-and-public-policy         12h      1y
+│ └ [+6 more paths]
+├ ○ /login
+├ ○ /our-story
+├ ○ /press
+├ ○ /privacy
+├ ƒ /profile
+├ ○ /terms
+├ ○ /unsubscribed-successfully
+└ ○ /www
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

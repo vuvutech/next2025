@@ -1,11 +1,7 @@
-// fonts.ts
 import {
   Bebas_Neue,
-  Playfair_Display,
   Poppins,
-  Plus_Jakarta_Sans,
   Special_Elite,
-  Montserrat,
   Open_Sans,
   Oswald,
   Anton,
@@ -39,11 +35,6 @@ export const opensans = Open_Sans({
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-opensans",
 });
-export const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
-  variable: "--font-montserrat",
-});
 
 export const specialElite = Special_Elite({
   subsets: ["latin"],
@@ -51,12 +42,6 @@ export const specialElite = Special_Elite({
   display: "swap",
   adjustFontFallback: false,
   variable: "--font-special-elite",
-});
-
-export const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
-  variable: "--font-plusjakartasans",
 });
 
 export const oswald = Oswald({
@@ -76,16 +61,6 @@ export const bebas = Bebas_Neue({
   variable: "--font-bebas",
 });
 
-export const playfair = Playfair_Display({ subsets: ["latin"] });
-export const playfair_display = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["500"],
-  style: ["italic"],
-  display: "swap",
-  adjustFontFallback: false,
-  variable: "--font-playfair_display",
-});
-
 export const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "900"],
@@ -94,3 +69,4 @@ export const poppins = Poppins({
   adjustFontFallback: false,
   variable: "--font-poppins",
 });
+

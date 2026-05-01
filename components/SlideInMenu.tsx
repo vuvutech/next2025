@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 import {
   Sheet,
@@ -27,7 +29,7 @@ import MainLogo from "./ui/MainLogo";
 
 export default function Component() {
   const [isSignOut, setIsSignOut] = useState<boolean>(false);
-
+  const pathname = usePathname();
   const router = useRouter();
 
   const {
@@ -80,7 +82,7 @@ export default function Component() {
             </SheetTrigger>
             <SheetContent className="w-[320px] sm:w-[540px] p-2 sm:p-6">
               <SheetHeader className="border-b ">
-                <SheetTitle></SheetTitle>
+                <SheetTitle className="sr-only">Main Navigation Menu</SheetTitle>
                 <MainLogo />
               </SheetHeader>
               <div className="space-y-2 pl-5 font-poppins ">
@@ -90,26 +92,38 @@ export default function Component() {
                   initial="hidden"
                   animate="visible"
                 >
-                  {siteConfig.navItems.map((item) => (
-                    <motion.div
-                      key={item.number}
-                      className="group relative flex items-start justify-center"
-                      variants={itemVariants}
-                    >
-                      <span className="absolute -left-8 text-xs text-primary">
-                        {item.number}
-                      </span>
-                      <SheetClose asChild>
-                        <button
-                          onClick={() => handleLinkClick(item.href)}
-                          className="group relative text-xl font-bold sm:text-4xl transition-all duration-300 cursor-pointer "
-                        >
-                          <span className="uppercase">{item.label}</span>
-                          <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-purple-600 transition-all duration-300 group-hover:w-full" />
-                        </button>
-                      </SheetClose>
-                    </motion.div>
-                  ))}
+                  {siteConfig.navItems.map((item) => {
+                    const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+                    return (
+                      <motion.div
+                        key={item.number}
+                        className="group relative flex items-start justify-center"
+                        variants={itemVariants}
+                      >
+                        <span className={cn(
+                          "absolute -left-8 text-xs",
+                          active ? "text-primary font-bold" : "text-muted-foreground"
+                        )}>
+                          {item.number}
+                        </span>
+                        <SheetClose asChild>
+                          <button
+                            onClick={() => handleLinkClick(item.href)}
+                            className={cn(
+                              "group relative text-xl font-bold sm:text-4xl transition-all duration-300 cursor-pointer uppercase",
+                              active ? "text-primary" : "text-foreground"
+                            )}
+                          >
+                            <span>{item.label}</span>
+                            <span className={cn(
+                              "absolute -bottom-2 left-0 h-0.5 transition-all duration-300 group-hover:w-full",
+                              active ? "w-full bg-primary" : "w-0 bg-purple-600"
+                            )} />
+                          </button>
+                        </SheetClose>
+                      </motion.div>
+                    );
+                  })}
                 </motion.nav>
               </div>
 

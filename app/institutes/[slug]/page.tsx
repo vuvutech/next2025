@@ -10,6 +10,7 @@ import { Section1 } from "../Section1";
 import WorldMap from "@/components/WorldMap";
 import OverviewSection from "@/app/institutes/OverviewSection";
 import Jumbotron from "@/components/ui/Jumbotron";
+import { AppBreadcrumbs } from "@/components/AppBreadcrumbs";
 
 // Static paths for SSG
 export async function generateStaticParams() {
@@ -58,6 +59,10 @@ export default async function InstituteViewPage(props: {
       <Jumbotron
         heroImage={edition?.banner ? edition.banner : "/images/institute.jpg"}
       />
+
+      <div className="container py-4">
+        <AppBreadcrumbs />
+      </div>
 
       <div className="relative overflow-hidden pb-5">
         <Section1
