@@ -44,12 +44,12 @@ next-env.d.ts
 costrad-*.json
 
 # AI Coding Assistant local folders
-.agents/
-.claude/
-.kilocode/
-.kiro/
-.kode/
-.pi/
-.qoder/
-.qwen/
+.agents
+.claude
+.kilocode
+.kiro
+.kode
+.pi
+.qoder
+.qwen
 skills-lock.json
