@@ -1,6 +1,6 @@
 "use client";
 
-import SignInComponent from "@/components/sign-in";
+import SignInComponent from "@/components/forms/sign-in";
 
 export default function SignIn() {
   return <SignInComponent />;

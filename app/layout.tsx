@@ -7,10 +7,15 @@ import { siteConfig } from "@/config/site";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import StickyMenuWrapper from "@/components/ui/StickyMenuWrapper";
-import FooterWrapper from "@/components/Footer-Wrapper";
-import { TestimonialDialog } from "@/components/TestimonialDialog";
-import { NewsletterDialog } from "@/components/NewsletterDialog";
+import StickyMenuWrapper from "@/components/navigation/StickyMenuWrapper";
+import FooterWrapper from "@/components/layout/Footer-Wrapper";
+import dynamic from "next/dynamic";
+const TestimonialDialog = dynamic(() =>
+	import("@/components/modals/TestimonialDialog").then((mod) => mod.TestimonialDialog),
+);
+const NewsletterDialog = dynamic(() =>
+	import("@/components/modals/NewsletterDialog").then((mod) => mod.NewsletterDialog),
+);
 import { GoogleAnalytics } from '@next/third-parties/google'
 import UpNextWrapper from "@/components/ui/UpNextWrapper";
 
@@ -51,6 +56,7 @@ export default function RootLayout({
     <html
       suppressHydrationWarning
       lang="en"
+      data-scroll-behavior="smooth"
       className={` ${bebas.variable} ${anton.variable}  ${ibmplex.variable} ${oswald.variable} ${opensans.variable}  ${opensans.className} 
          text-lg font-extralight min-h-screen text-foreground bg-background antialiased`}
     >

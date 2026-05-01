@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { Checkbox } from "@/components/ui/checkbox"; // Corrected import for Checkbox
 import { ActionsCellComponent } from "./ActionsCellComponent";
 import { BadgeCheckIcon, Trash } from "lucide-react";
-import { DeleteConfirmationDialog } from "@/components/delete-confirmation-dialog";
+import { DeleteConfirmationDialog } from "@/components/modals/delete-confirmation-dialog";
 import { Button } from "@/components/ui/button";
 import { getBaseUrl } from "@/config/site";
 import { InstituteInfo } from "./InstituteEditionImage";

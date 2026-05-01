@@ -1,4 +1,4 @@
-import Jumbotron from '@/components/ui/Jumbotron';
+import Jumbotron from '@/components/sections/Jumbotron';
 import { Toaster } from 'sonner' ;
 
 

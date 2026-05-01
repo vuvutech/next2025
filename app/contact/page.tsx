@@ -4,23 +4,23 @@ import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
-import Jumbotron from "@/components/ui/Jumbotron";
+import Jumbotron from "@/components/sections/Jumbotron";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { FaFacebook, FaXTwitter, FaWhatsapp, FaTiktok } from "react-icons/fa6";
 
 // Import the Shadcn-based modal and form
-import GenericShadcnFormModal from "@/components/GenericShadcnFormModal"; // Adjust path
+import GenericShadcnFormModal from "@/components/modals/GenericShadcnFormModal"; // Adjust path
 import TestimonialForm, {
   TestimonialFormData,
-} from "@/components/TestimonialForm"; // Adjust path, import interface
+} from "@/components/forms/TestimonialForm"; // Adjust path, import interface
 import { getCurrentSession } from "../actions/functions";
 import { toast } from "sonner";
-import BadgeLink from "@/components/BadgeLink";
+import BadgeLink from "@/components/sections/BadgeLink";
 import { useDialog } from "@/providers/DialogProvider";
 import { motion } from "framer-motion";
-import { staggerContainer, staggerItem } from "@/components/ui/animations/framerAnimations";
-import { FadeIn } from "@/components/ui/animations/FadeIn";
-import CTA from "@/components/ui/CTA";
+import { staggerContainer, staggerItem } from "@/components/animations/framerAnimations";
+import { FadeIn } from "@/components/animations/FadeIn";
+import CTA from "@/components/sections/CTA";
 
 // Define the type for the contact form inputs
 type ContactFormInputs = {

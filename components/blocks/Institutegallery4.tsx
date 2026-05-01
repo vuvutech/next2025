@@ -16,7 +16,7 @@ import { motion } from "framer-motion";
 import {
 	staggerContainer,
 	staggerItem,
-} from "../ui/animations/framerAnimations";
+} from "@/components/animations/framerAnimations";
 
 export interface InstituteItems {
 	id: string;
@@ -187,7 +187,8 @@ export const InstituteGallery = ({
 												alt={item.name}
 												fill
 												className='absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-99'
-												sizes='(max-width: 768px) 100vw, 360px'
+												sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px'
+												quality={80}
 												priority={index === 0}
 											/>
 											<div className='absolute inset-0 h-full bg-gradient-to-t from-black/90 via-black/40 to-black/20 rounded-3xl' />

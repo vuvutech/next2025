@@ -1,4 +1,4 @@
-import { DataTable } from "@/components/data-table";
+import { DataTable } from "@/components/ui/data-table/data-table";
 
 import data from "./institute_mongo.json";
 

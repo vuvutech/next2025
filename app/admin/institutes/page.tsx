@@ -1,7 +1,7 @@
 // File: app/admin/institutes/page.tsx
 
 import { prisma } from "@/prisma/dbConnect";
-import { GenericDataTable } from "@/components/generic-data-table";
+import { GenericDataTable } from "@/components/ui/data-table/generic-data-table";
 import { columns } from "./columns";
 import { ExtensionComponent } from "./ExtensionComponent";
 

@@ -1,7 +1,7 @@
 // File: app/admin/registrations/ClientWrapper.tsx
 "use client";
 
-import { GenericDataTable } from "@/components/generic-data-table";
+import { GenericDataTable } from "@/components/ui/data-table/generic-data-table";
 import { columns } from "./columns";
 
 export const dynamic = "force-dynamic";

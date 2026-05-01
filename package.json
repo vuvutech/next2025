@@ -65,6 +65,7 @@
 		"framer-motion": "^12.38.0",
 		"i18n-iso-countries": "^7.14.0",
 		"libphonenumber-js": "^1.12.41",
+		"locomotive-scroll": "^5.0.1",
 		"lucide-react": "^1.8.0",
 		"mongodb": "^7.1.1",
 		"motion": "^12.38.0",
@@ -95,7 +96,9 @@
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.3.5",
 		"@faker-js/faker": "^10.4.0",
+		"@playwright/test": "^1.59.1",
 		"@tailwindcss/postcss": "^4.2.2",
+		"@types/locomotive-scroll": "^4.1.4",
 		"@types/node": "^25.6.0",
 		"@types/nodemailer": "^8.0.0",
 		"@types/react": "^19.2.14",

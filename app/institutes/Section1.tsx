@@ -7,7 +7,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { DottedDiv } from "@/components/DottedDiv";
-import BadgeLink from "@/components/BadgeLink";
+import BadgeLink from "@/components/sections/BadgeLink";
 
 type Section1Props = {
   name: string;

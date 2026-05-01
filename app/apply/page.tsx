@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { useDialog } from "@/providers/DialogProvider";
 import { useSession } from "@/lib/auth-client";
-import RegistrationSteps from "@/components/RegistrationSteps";
-import { CloseButton } from "@/components/CloseButton";
+import RegistrationSteps from "@/components/forms/RegistrationSteps";
+import { CloseButton } from "@/components/ui/CloseButton";
 import { useRouter } from "next/navigation";
-import { ProfileForRegistration } from "@/components/profileForRegistration";
+import { ProfileForRegistration } from "@/components/forms/profileForRegistration";
 import { toast } from "sonner";
-import { EditionSelect } from "@/components/editionSelect";
+import { EditionSelect } from "@/components/forms/editionSelect";
 import Loading from "../loading";
 import { getCurrentEditions } from "../actions/functions";
 

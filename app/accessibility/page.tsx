@@ -1,5 +1,5 @@
 // app/donate/page.tsx
-import AccessibilityComponent from "@/components/AccessibilityComponent";
+import AccessibilityComponent from "@/components/sections/AccessibilityComponent";
 
 export default function Faqspage() {
   return (

@@ -6,7 +6,7 @@ import { PreferencesSection } from "@/components/dashboard/preference-section";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TestimonialCard from "./TestimonialCard";
 import RegistrationSection from "@/components/dashboard/registration-section";
-import EditableProfileForm from "@/components/EditableProfileForm";
+import EditableProfileForm from "@/components/forms/EditableProfileForm";
 
 export const dynamic = "force-dynamic";
 

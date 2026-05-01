@@ -1,4 +1,4 @@
-import MainLogo from '@/components/ui/MainLogo'
+import MainLogo from '@/components/layout/MainLogo'
 import { ThemeSwitch } from '@/components/ui/theme-switch'
 import Link from 'next/link'
 import React from 'react'

@@ -13,7 +13,7 @@ import { useSession } from "@/hooks/use-session";
 import { useRouter, useSearchParams } from "next/navigation"; // Added useSearchParams
 import { useEffect } from "react";
 import Link from "next/link";
-import Loading from "@/components/Loading";
+import Loading from "@/components/feedback/Loading";
 
 export default function EmailVerification() {
   const searchParams = useSearchParams(); // 👈 Get query params

@@ -1,5 +1,5 @@
 // import { ChartAreaInteractive } from "@/components/chart-area-interactive";
-import { DataTable } from "@/components/data-table";
+import { DataTable } from "@/components/ui/data-table/data-table";
 
 import { ActiveUsersCard } from "@/components/analytics/ActiveUsersCard";
 import { SessionsCard } from "@/components/analytics/SessionsCard";

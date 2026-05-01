@@ -1,6 +1,6 @@
-import Jumbotron from '@/components/ui/Jumbotron';
+import Jumbotron from '@/components/sections/Jumbotron';
 import { Toaster } from 'sonner' ;
-import { AppBreadcrumbs } from '@/components/AppBreadcrumbs';
+import { AppBreadcrumbs } from '@/components/navigation/AppBreadcrumbs';
 
 
 

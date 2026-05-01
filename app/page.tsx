@@ -1,16 +1,22 @@
 "use client";
 
-import HeroSection from "@/components/HeroSection";
-import { InstitutesIntro } from "@/components/InstitutesIntro";
-import { Testimonials } from "@/components/Testimonials";
-import Preloader from "@/components/ui/animations/Preloader";
-import { FadeIn } from "@/components/ui/animations/FadeIn";
-import CTA from "@/components/ui/CTA";
-import Jumbotron from "@/components/ui/Jumbotron";
-import WhyCostrad from "@/components/WhyCostrad";
+import HeroSection from "@/components/sections/HeroSection";
+import { InstitutesIntro } from "@/components/sections/InstitutesIntro";
+import dynamic from "next/dynamic";
+import { FadeIn } from "@/components/animations/FadeIn";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { VelocityScroll } from "@/components/magicui/scroll-based-velocity";
+
+const Jumbotron = dynamic(() => import("@/components/sections/Jumbotron"));
+const VelocityScroll = dynamic(() =>
+	import("@/components/magicui/scroll-based-velocity").then(
+		(mod) => mod.VelocityScroll,
+	),
+);
+const WhyCostrad = dynamic(() => import("@/components/sections/WhyCostrad"));
+const Testimonials = dynamic(() =>
+	import("@/components/sections/Testimonials").then((mod) => mod.Testimonials),
+);
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);

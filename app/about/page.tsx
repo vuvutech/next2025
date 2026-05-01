@@ -1,9 +1,9 @@
 // app/donate/page.tsx
-import AboutSectionFour from "@/components/AboutSectionFour";
-import AboutSectionOne from "@/components/AboutSectionOne";
-import AboutSectionThree from "@/components/AboutSectionThree";
-import AboutSectionTwo from "@/components/AboutSectionTwo";
-import { FadeIn } from "@/components/ui/animations/FadeIn";
+import AboutSectionFour from "@/components/sections/AboutSectionFour";
+import AboutSectionOne from "@/components/sections/AboutSectionOne";
+import AboutSectionThree from "@/components/sections/AboutSectionThree";
+import AboutSectionTwo from "@/components/sections/AboutSectionTwo";
+import { FadeIn } from "@/components/animations/FadeIn";
 
 export default function AboutPage() {
   return (

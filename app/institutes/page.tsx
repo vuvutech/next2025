@@ -1,7 +1,7 @@
 // app/institute/page.tsx
-import InstitutesComponent from "@/components/InstitutesComponent";
+import InstitutesComponent from "@/components/sections/InstitutesComponent";
 import { getInstitutes } from "@/app/actions/functions";
-import Jumbotron from "@/components/ui/Jumbotron";
+import Jumbotron from "@/components/sections/Jumbotron";
 
 export const dynamic = "force-dynamic";
 

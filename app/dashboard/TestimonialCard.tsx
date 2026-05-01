@@ -8,10 +8,10 @@ import { useRouter } from "next/navigation";
 import { testimonialcolumns } from "./testimonialcolumns";
 import { DataTable } from "./testimonial-data-table";
 import { useEffect, useState } from "react";
-import GenericShadcnFormModal from "@/components/GenericShadcnFormModal";
+import GenericShadcnFormModal from "@/components/modals/GenericShadcnFormModal";
 import TestimonialForm, {
   TestimonialFormData,
-} from "@/components/TestimonialForm";
+} from "@/components/forms/TestimonialForm";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { getCurrentSession } from "../actions/functions";

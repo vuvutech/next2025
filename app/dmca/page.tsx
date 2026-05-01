@@ -1,4 +1,4 @@
-import { FadeIn } from "@/components/ui/animations/FadeIn";
+import { FadeIn } from "@/components/animations/FadeIn";
 
 export default function DMCA() {
   // Changed function name to DMCA for clarity

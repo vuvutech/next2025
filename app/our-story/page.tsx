@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { FadeIn } from "@/components/ui/animations/FadeIn";
+import { FadeIn } from "@/components/animations/FadeIn";
 
 export default function OurStory() {
   return (
