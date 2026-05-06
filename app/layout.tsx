@@ -53,32 +53,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      suppressHydrationWarning
-      lang="en"
-      data-scroll-behavior="smooth"
-      className={` ${bebas.variable} ${anton.variable}  ${ibmplex.variable} ${oswald.variable} ${opensans.variable}  ${opensans.className} 
+		<html
+			suppressHydrationWarning
+			lang='en'
+			data-scroll-behavior='smooth'
+			className={` ${bebas.variable} ${anton.variable}  ${ibmplex.variable} ${oswald.variable} ${opensans.variable}  ${opensans.className} 
          text-lg font-extralight min-h-screen text-foreground bg-background antialiased`}
-    >
-      <head />
-      <body>
-        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
-          <UpNextWrapper />
-          {/* Use the wrapper component instead */}
-          <StickyMenuWrapper />
+		>
+			<head />
+			<body>
+				<Providers
+					themeProps={{ attribute: "class", defaultTheme: "light" }}
+				>
+					<UpNextWrapper />
+					<StickyMenuWrapper />
 
-          <main className="relative overflow-x-hidden">{children}</main>
-          <FooterWrapper />
-          <Toaster />
-          <Analytics />
-          <SpeedInsights />
-          <GoogleAnalytics gaId="G-1GJ79QESWQ" />
+					<main className='relative overflow-x-hidden'>
+						{children}
+					</main>
+					<FooterWrapper />
+					<Toaster />
+					<Analytics />
+					<SpeedInsights />
+					<GoogleAnalytics gaId='G-1GJ79QESWQ' />
 
-          {/* <GlobalDialog /> */}
-          <TestimonialDialog />
-          <NewsletterDialog />
-        </Providers>
-      </body>
-    </html>
+					{/* <GlobalDialog /> */}
+					<TestimonialDialog />
+					<NewsletterDialog />
+				</Providers>
+			</body>
+		</html>
   );
 }

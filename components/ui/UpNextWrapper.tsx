@@ -39,6 +39,7 @@ export default function UpNextWrapper() {
   useEffect(() => {
     async function fetchEdition() {
       const res = await fetch("/api/upnext");
+      if (!res.ok) return;
       const data = await res.json();
       setNextEdition(data);
     }

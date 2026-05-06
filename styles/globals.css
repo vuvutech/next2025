@@ -154,7 +154,7 @@ html {
   --radius: 0.3rem;
   
   /* Fluid Typography Scale (Ultra-Refined for Premium Aesthetic) */
-  --text-xs: clamp(0.7rem, 0.05vw + 0.68rem, 0.75rem);
+  --text-xs: clamp(0.7rem, 0.05vw + 0.68rem, 0.65rem);
   --text-sm: clamp(0.8rem, 0.1vw + 0.78rem, 0.875rem);
   --text-base: clamp(0.9375rem, 0.15vw + 0.9rem, 1rem);
   --text-lg: clamp(1rem, 0.25vw + 0.95rem, 1.125rem);
