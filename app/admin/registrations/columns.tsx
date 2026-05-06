@@ -27,14 +27,13 @@ export const columns: ColumnDef<any>[] = [
     accessorKey: "user.name",
     cell: ({ row }) => (
       <div>
-        <h4 className="text-current">
-          {" "}
-          {row.original.user?.name} <br />
-          &mdash; <br />
-          <span className="text-[10px] font-bold">
-            {row.original.user?.email}
-          </span>
-        </h4>
+        <h6 className="text-current gap-2 text-sm">
+          {row.original.user?.name}
+        </h6>
+        —
+        <div className="text-[10px] font-bold uppercase">
+          {row.original.user?.email}
+        </div>
       </div>
     ),
   },
@@ -64,7 +63,7 @@ export const columns: ColumnDef<any>[] = [
                 year: "numeric",
                 month: "long",
                 day: "numeric",
-              }
+              },
             )}
           </span>{" "}
           &mdash;{" "}
@@ -75,7 +74,7 @@ export const columns: ColumnDef<any>[] = [
                 year: "numeric",
                 month: "long",
                 day: "numeric",
-              }
+              },
             )}
           </span>{" "}
         </span>
@@ -97,9 +96,13 @@ export const columns: ColumnDef<any>[] = [
     header: "Status",
     cell: ({ row }) =>
       row.original.approved ? (
-        <Badge className="bg-green-500 text-background uppercase">Approved</Badge>
+        <Badge className="bg-green-500 text-background uppercase">
+          Approved
+        </Badge>
       ) : (
-        <Badge className="bg-yellow-500 text-background uppercase">Pending</Badge>
+        <Badge className="bg-yellow-500 text-background uppercase">
+          Pending
+        </Badge>
       ),
   },
   {
@@ -107,7 +110,7 @@ export const columns: ColumnDef<any>[] = [
     header: "Approve",
     cell: ({ row }) => (
       <ApproveButton
-        id={row.original.id} 
+        id={row.original.id}
         name={row.original.user.name}
         email={row.original.user.email}
         approved={row.original.approved}
@@ -119,17 +122,17 @@ export const columns: ColumnDef<any>[] = [
     ),
   },
   {
-      header: "",
-      enableSorting: false,
-      id: "actions",
-  
-      // accessorFn: (row) => (row.createdAt ? new Date(row.createdAt) : null),
-      cell: ({ row }) => {
-        return (
-          <div className="flex items-center gap-2">
-            <ActionsCellComponent id={row.original.user.id} />
-          </div>
-        );
-      },
+    header: "",
+    enableSorting: false,
+    id: "actions",
+
+    // accessorFn: (row) => (row.createdAt ? new Date(row.createdAt) : null),
+    cell: ({ row }) => {
+      return (
+        <div className="flex items-center gap-2">
+          <ActionsCellComponent id={row.original.user.id} />
+        </div>
+      );
     },
+  },
 ];
