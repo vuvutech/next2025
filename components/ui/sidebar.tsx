@@ -41,15 +41,19 @@ type SidebarContextProps = {
   toggleSidebar: () => void
 }
 
-const SidebarContext = React.createContext<SidebarContextProps | null>(null)
+const defaultSidebarContext: SidebarContextProps = {
+  state: "expanded",
+  open: true,
+  setOpen: () => {},
+  openMobile: false,
+  setOpenMobile: () => {},
+  toggleSidebar: () => {},
+}
+
+const SidebarContext = React.createContext<SidebarContextProps>(defaultSidebarContext)
 
 function useSidebar() {
-  const context = React.useContext(SidebarContext)
-  if (!context) {
-    throw new Error("useSidebar must be used within a SidebarProvider.")
-  }
-
-  return context
+  return React.useContext(SidebarContext)
 }
 
 function SidebarProvider({
@@ -162,7 +166,10 @@ function Sidebar({
   variant?: "sidebar" | "floating" | "inset"
   collapsible?: "offcanvas" | "icon" | "none"
 }) {
-  const { state, openMobile, setOpenMobile } = useSidebar()
+  const sidebarContext = useSidebar()
+  const openMobile = sidebarContext.openMobile
+  const setOpenMobile = sidebarContext.setOpenMobile
+  const state = sidebarContext.state
   const isMobile = useIsMobile()
 
   if (collapsible === "none") {
@@ -258,7 +265,8 @@ function SidebarTrigger({
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar()
+  const sidebarContext = useSidebar()
+  const toggleSidebar = sidebarContext.toggleSidebar
 
   return (
     <Button
@@ -280,7 +288,8 @@ function SidebarTrigger({
 }
 
 function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
-  const { toggleSidebar } = useSidebar()
+  const sidebarContext = useSidebar()
+  const toggleSidebar = sidebarContext.toggleSidebar
 
   return (
     <button
@@ -509,7 +518,8 @@ function SidebarMenuButton({
   tooltip?: string | React.ComponentProps<typeof TooltipContent>
 } & VariantProps<typeof sidebarMenuButtonVariants>) {
   const Comp = asChild ? Slot : "button"
-  const { state } = useSidebar()
+  const sidebarContext = useSidebar()
+  const state = sidebarContext.state
   const isMobile = useIsMobile()
 
   const button = (
