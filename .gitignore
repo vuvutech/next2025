@@ -42,30 +42,12 @@ yarn-error.log*
 next-env.d.ts
 .env*.local
 costrad-*.json
-# AI Coding Assistant local folders
-.agents/
-.claude/
-.kilocode/
-.kiro/
-.kode/
-.pi/
-.qoder/
-.qwen/
-skills-lock.json
 
 # MCP config (contains API keys)
 .mcp.json
 
 # logs
 *.log
-logs/
-
-# turbo
-.turbo/
-
-# cache
-.cache/
-.next/cache/
 
 # local database
 *.sqlite
