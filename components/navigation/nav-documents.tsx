@@ -22,8 +22,8 @@ import {
   SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/components/ui/sidebar"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export function NavDocuments({
   items,
@@ -34,7 +34,7 @@ export function NavDocuments({
     icon: Icon
   }[]
 }) {
-  const { isMobile } = useSidebar()
+  const isMobile = useIsMobile()
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden hidden">
