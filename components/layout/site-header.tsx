@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { SearchButton } from "@/components/ui/search-button";
 import Link from "next/link";
 import { ThemeSwitch } from "@/components/ui/theme-switch";
 
@@ -18,6 +19,7 @@ export function SiteHeader() {
           College of Sustainable Transformation and Development
         </h1>
         <div className="ml-auto  items-center gap-2 hidden">
+          <SearchButton />
           <Button variant="ghost" asChild size="sm" className="hidden sm:flex">
             <Link
               href="/"

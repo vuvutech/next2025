@@ -6,6 +6,7 @@ import MainLogo from "@/components/layout/MainLogo";
 import { WebMenu } from "@/components/navigation/WebMenu";
 import SlideInMenu from "@/components/navigation/SlideInMenu";
 import { SignInButton } from "@/components/ui/auth/signin-button";
+import { SearchButton } from "@/components/ui/search-button";
 import { client } from "@/lib/auth-client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDevice } from "@/hooks/useDevice";
@@ -44,7 +45,7 @@ export default function StickyMenu() {
         "w-full block transition-all bg-background text-foreground z-50 shadow dark:border-b border-b-slate-300/",
         isFixed
           ? "fixed top-0 left-0 right-0 duration-600 z-50 py-1"
-          : "relative py-1"
+          : "relative py-1",
       )}
     >
       <div className="flex items-center justify-between px-2 py-1">
@@ -69,7 +70,10 @@ export default function StickyMenu() {
                 </div>
               </div>
             ) : (
-              <SignInButton />
+              <>
+                <SearchButton />
+                <SignInButton />
+              </>
             )}
           </div>
         )}
