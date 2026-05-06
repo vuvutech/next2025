@@ -52,3 +52,28 @@ costrad-*.json
 .qoder/
 .qwen/
 skills-lock.json
+
+# MCP config (contains API keys)
+.mcp.json
+
+# logs
+*.log
+logs/
+
+# turbo
+.turbo/
+
+# cache
+.cache/
+.next/cache/
+
+# local database
+*.sqlite
+*.db
+.database/
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
