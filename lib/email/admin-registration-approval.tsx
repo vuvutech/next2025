@@ -16,8 +16,11 @@ interface AdminApprovalRequestEmailProps {
   applicantName: string;
   editionTitle: string;
   instituteName: string;
-  startDate: string; // format: "Month Day, Year"
+  startDate: string;
   endDate: string;
+  applicantEmail: string;
+  applicantPhone?: string;
+  applicantAddress?: string;
   approvalLink?: string;
   dashboardLink?: string;
 }
@@ -29,6 +32,9 @@ export const AdminApprovalRequestEmail = ({
   instituteName,
   startDate,
   endDate,
+  applicantEmail,
+  applicantPhone,
+  applicantAddress,
   dashboardLink = "https://www.costrad.org/admin/registrations",
 
 }: AdminApprovalRequestEmailProps) => {
@@ -58,6 +64,21 @@ export const AdminApprovalRequestEmail = ({
               <strong>Edition:</strong> {editionTitle}<br />
               <strong>Start Date:</strong> {startDate}<br />
               <strong>End Date:</strong> {endDate}
+            </Text>
+
+            <Text className="text-sm leading-6 mt-4">
+              <strong>Applicant Contact Details:</strong><br />
+              <strong>Email:</strong> {applicantEmail}<br />
+              {applicantPhone && (
+                <>
+                  <strong>Phone:</strong> {applicantPhone}<br />
+                </>
+              )}
+              {applicantAddress && (
+                <>
+                  <strong>Address:</strong> {applicantAddress}
+                </>
+              )}
             </Text>
 
             <Text className="text-sm leading-6">

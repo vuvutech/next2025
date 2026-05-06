@@ -16,7 +16,10 @@ export async function POST(req: NextRequest) {
   const { editionId } = await req.json();
 
   if (!editionId) {
-    return NextResponse.json({ error: "Edition ID is required" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Edition ID is required" },
+      { status: 400 },
+    );
   }
 
   try {
@@ -40,17 +43,37 @@ export async function POST(req: NextRequest) {
 
     if (alreadyRegistered) {
       console.log(
-        `User ${user.id} already registered for edition ${editionId} (${edition.title})`
+        `User ${user.id} already registered for edition ${editionId} (${edition.title})`,
       );
       return NextResponse.json(
-        { 
+        {
           message: "You are already registered.",
           editionTitle: edition.title,
-          editionId: edition.id 
-        }, 
-        { status: 200 }
+          editionId: edition.id,
+        },
+        { status: 409 },
       );
     }
+
+    const applicantProfile = await prisma.profile.findUnique({
+      where: { userId: user.id },
+      select: {
+        telephone: true,
+        address: true,
+      },
+    });
+
+    const formatDate = (date?: Date | null) =>
+      date
+        ? new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }).format(new Date(date))
+        : "TBD";
+
+    const formattedStartDate = formatDate(edition.startDate);
+    const formattedEndDate = formatDate(edition.endDate);
 
     const registration = await prisma.registration.create({
       data: {
@@ -58,12 +81,6 @@ export async function POST(req: NextRequest) {
         editionId,
       },
     });
-
-    const formatDate = (date?: Date | null) =>
-      date ? new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric" }).format(new Date(date)) : "TBD";
-
-    const formattedStartDate = formatDate(edition.startDate);
-    const formattedEndDate = formatDate(edition.endDate);
 
     // Email Content
     const applicantName = user.name || "Participant";
@@ -78,7 +95,7 @@ export async function POST(req: NextRequest) {
         startDate: formattedStartDate,
         endDate: formattedEndDate,
         dashboardLink: `https://www.costrad.org/dashboard`,
-      })
+      }),
     );
 
     const adminEmailHtml = await render(
@@ -89,7 +106,10 @@ export async function POST(req: NextRequest) {
         instituteName,
         startDate: formattedStartDate,
         endDate: formattedEndDate,
-      })
+        applicantEmail: user.email,
+        applicantPhone: applicantProfile?.telephone ?? undefined,
+        applicantAddress: applicantProfile?.address ?? undefined,
+      }),
     );
 
     // Send Emails
@@ -108,7 +128,6 @@ export async function POST(req: NextRequest) {
       ]);
     } catch (emailError) {
       console.error("📧 Failed to send email:", emailError);
-      // You might still want to return success depending on your UX preference.
     }
 
     return NextResponse.json({ success: true, registration });
