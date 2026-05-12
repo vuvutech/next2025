@@ -13,11 +13,11 @@ const nextConfig: NextConfig = {
         key: "Content-Security-Policy",
         value: [
           "default-src 'self'",
-          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://www.google.com https://www.gstatic.com",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://www.google.com https://www.gstatic.com https://www.googletagmanager.com",
           "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
           "font-src 'self' https://fonts.gstatic.com",
           "img-src 'self' data: https: blob:",
-          "connect-src 'self' https://challenges.cloudflare.com https://www.google.com https://res.cloudinary.com https://*.resend.com",
+          "connect-src 'self' https://challenges.cloudflare.com https://www.google.com https://res.cloudinary.com https://*.resend.com https://www.google-analytics.com",
           "frame-src 'self' https://challenges.cloudflare.com",
           "object-src 'none'",
           "base-uri 'self'",

@@ -47,37 +47,31 @@ export const columns: ColumnDef<any>[] = [
       <div className="flex items-center gap-2">
         <Image
           src={
-            `/${row.original.edition?.institute?.logo}` || "/images/costrad.png"
+            row.original.edition?.institute?.logo
+              ? `/${row.original.edition.institute.logo}`
+              : "/images/costrad.png"
           }
           alt="Institute Logo"
           width={50}
           height={50}
         />
-        <span>
-          {row.original.edition?.institute?.name} <br />
-          <span className=" text-firefly text-[11px] font-bold uppercase">
-            {" "}
-            {new Date(row.original.edition?.startDate).toLocaleDateString(
-              "en-US",
-              {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              },
-            )}
-          </span>{" "}
-          &mdash;{" "}
-          <span className=" text-destructive text-[11px] font-bold uppercase">
-            {new Date(row.original.edition?.endDate).toLocaleDateString(
-              "en-US",
-              {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              },
-            )}
-          </span>{" "}
-        </span>
+<span>
+           {row.original.edition?.institute?.name} <br />
+           {row.original.edition?.startDate && (
+             <>
+               <span className=" text-firefly text-[11px] font-bold uppercase" suppressHydrationWarning>
+                 {" "}
+                 {format(new Date(row.original.edition.startDate), "MMMM d, yyyy")}
+               </span>{" "}
+               &mdash;{" "}
+               <span className=" text-destructive text-[11px] font-bold uppercase" suppressHydrationWarning>
+                 {row.original.edition?.endDate
+                   ? format(new Date(row.original.edition.endDate), "MMMM d, yyyy")
+                   : "TBC"}
+               </span>{" "}
+             </>
+           )}
+         </span>
       </div>
     ),
   },
@@ -88,7 +82,7 @@ export const columns: ColumnDef<any>[] = [
     accessorFn: (row) => (row.createdAt ? new Date(row.createdAt) : null),
     cell: ({ row }) => (
       <div>
-        {format(new Date(row.original.createdAt).toLocaleDateString(), "PPP")}
+        {row.original.createdAt ? format(new Date(row.original.createdAt), "PPP") : "—"}
       </div>
     ),
   },
@@ -111,8 +105,8 @@ export const columns: ColumnDef<any>[] = [
     cell: ({ row }) => (
       <ApproveButton
         id={row.original.id}
-        name={row.original.user.name}
-        email={row.original.user.email}
+        name={row.original.user?.name || "Unknown"}
+        email={row.original.user?.email || "Unknown"}
         approved={row.original.approved}
         startDate={row.original.edition?.startDate}
         endDate={row.original.edition?.endDate}
@@ -130,7 +124,7 @@ export const columns: ColumnDef<any>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center gap-2">
-          <ActionsCellComponent id={row.original.user.id} />
+          <ActionsCellComponent id={row.original.user?.id} />
         </div>
       );
     },
