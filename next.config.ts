@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["192.168.10.20"],
   headers: async () => {
     const securityHeaders = [
       { key: "X-Frame-Options", value: "DENY" },

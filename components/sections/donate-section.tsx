@@ -29,9 +29,9 @@ const Donate = ({
   },
 }: Hero7Props) => {
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 container mx-auto">
       <section className="py-8">
-        <div className="container sm:text-left">
+        <div className="sm:text-left">
           <div className="flex flex-col max-w-3xl md:px-8">
             <div>
               <BadgeLink
@@ -49,7 +49,10 @@ const Donate = ({
       <section className="max-w-[85rem] mx-auto sm:px-6 lg:px-8">
         {/* Grid */}
 
-        <div id="begin" className="border-gray-500/20 gap-4 grid md:border md:gap-8 md:items-center md:p-8 rounded-3xl xl:gap-20">
+        <div
+          id="begin"
+          className="border-gray-500/20 gap-4 grid md:border md:gap-8 md:items-center md:p-8 rounded-3xl xl:gap-20"
+        >
           <div className="sm:p-4 md:p-8 space-y-5">
             <h1 className="block text-2xl text-current sm:text-3xl lg:text-5xl lg:leading-tight ">
               <span className="">COSTrAD</span> Giving Guide

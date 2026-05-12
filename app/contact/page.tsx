@@ -18,7 +18,10 @@ import { toast } from "sonner";
 import BadgeLink from "@/components/sections/BadgeLink";
 import { useDialog } from "@/providers/DialogProvider";
 import { motion } from "framer-motion";
-import { staggerContainer, staggerItem } from "@/components/animations/framerAnimations";
+import {
+  staggerContainer,
+  staggerItem,
+} from "@/components/animations/framerAnimations";
 import { FadeIn } from "@/components/animations/FadeIn";
 import CTA from "@/components/sections/CTA";
 
@@ -58,7 +61,7 @@ export default function ContactPage() {
   const { reset } = useForm<ContactFormInputs>();
 
   const handleTestimonialSubmit = async (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     event.preventDefault(); // Prevent default form submission behavior
     setIsTestimonialLoading(true);
@@ -76,7 +79,7 @@ export default function ContactPage() {
       testimonialData.content.trim().length < 10
     ) {
       toast.error(
-        "Testimonial content is too short. Please write at least 10 characters."
+        "Testimonial content is too short. Please write at least 10 characters.",
       );
       setIsTestimonialLoading(false);
       return;
@@ -102,14 +105,14 @@ export default function ContactPage() {
       // }
 
       toast.success(
-        "Testimonial submitted successfully! It will be reviewed before being featured."
+        "Testimonial submitted successfully! It will be reviewed before being featured.",
       );
       setIsTestimonialModalOpen(false); // Close modal on success
       setTestimonialData({ content: "" }); // Reset form data
     } catch (error: any) {
       console.error("Error submitting testimonial:", error);
       toast.error(
-        `Failed to submit testimonial: ${error.message || "An unexpected error occurred."}`
+        `Failed to submit testimonial: ${error.message || "An unexpected error occurred."}`,
       );
     } finally {
       setIsTestimonialLoading(false);
@@ -144,9 +147,9 @@ export default function ContactPage() {
 
   return (
     <div className="py-8 space-y-8">
-      <section className="container">
+      <section className="container mx-auto">
         <div>
-          <motion.div 
+          <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -180,7 +183,10 @@ export default function ContactPage() {
             className="mt-4 grid gap-4 md:mt-20 md:grid-cols-3 md:gap-8"
           >
             {/* Testimonials Section */}
-            <motion.div variants={staggerItem} className="flex flex-col justify-between gap-6 rounded-lg border p-6">
+            <motion.div
+              variants={staggerItem}
+              className="flex flex-col justify-between gap-6 rounded-lg border p-6"
+            >
               <div>
                 <h2 className="mb-4 text-xl font-medium md:text-2xl">
                   Testimonials
@@ -203,7 +209,10 @@ export default function ContactPage() {
             </motion.div>
 
             {/* Support Section */}
-            <motion.div variants={staggerItem} className="flex flex-col justify-between gap-6 rounded-lg border p-6">
+            <motion.div
+              variants={staggerItem}
+              className="flex flex-col justify-between gap-6 rounded-lg border p-6"
+            >
               <div>
                 <h2 className="mb-4 text-xl font-medium md:text-2xl">
                   Support
@@ -222,7 +231,10 @@ export default function ContactPage() {
             </motion.div>
 
             {/* Feedback Section */}
-            <motion.div variants={staggerItem} className="flex flex-col justify-between gap-6 rounded-lg border p-6">
+            <motion.div
+              variants={staggerItem}
+              className="flex flex-col justify-between gap-6 rounded-lg border p-6"
+            >
               <div>
                 <h2 className="mb-4 text-xl font-medium md:text-2xl">
                   Feedback
@@ -249,8 +261,8 @@ export default function ContactPage() {
       </section>
 
       <section className="">
-        <div className="container">
-          <motion.div 
+        <div className="container mx-auto">
+          <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"

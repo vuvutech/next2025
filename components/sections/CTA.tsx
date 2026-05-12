@@ -7,11 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useDialog } from "@/providers/DialogProvider";
 import { motion } from "framer-motion";
-import { staggerContainer, staggerItem } from "@/components/animations/framerAnimations";
+import {
+  staggerContainer,
+  staggerItem,
+} from "@/components/animations/framerAnimations";
 
 const CTA = () => {
-    const { open } = useDialog();
-  
+  const { open } = useDialog();
+
   const [emailInput, setEmailInput] = useState("");
   const [name, setName] = useState<string | undefined>();
 
@@ -21,8 +24,8 @@ const CTA = () => {
 
   return (
     <section className="p-2 md:p-6">
-      <div className="container">
-        <motion.div 
+      <div className="container mx-auto">
+        <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -31,7 +34,7 @@ const CTA = () => {
           dark:bg-black  p-4 sm:p-8 md:rounded-3xl lg:flex-row lg:items-center lg:p-16"
         >
           <div className="col-span-full md:col-span-2 relative">
-            <motion.h1 
+            <motion.h1
               variants={staggerItem}
               className="text-xl sm:text-2xl md:mb-4 md:text-3xl lg:mb-6"
             >
@@ -40,7 +43,7 @@ const CTA = () => {
             <motion.div variants={staggerItem}>
               <Separator className="my-2 max-w-1/5 bg-primary" />
             </motion.div>
-            <motion.p 
+            <motion.p
               variants={staggerItem}
               className="text-foreground lg:text-lg"
             >
@@ -51,7 +54,7 @@ const CTA = () => {
             </motion.p>
           </div>
 
-          <motion.div 
+          <motion.div
             variants={staggerItem}
             className="col-span-full md:col-span-1"
           >
@@ -72,9 +75,9 @@ const CTA = () => {
 
               <motion.div variants={staggerItem}>
                 <Button
-                  onClick={()=>{
+                  onClick={() => {
                     handleClick();
-                    open('newsletter');
+                    open("newsletter");
                   }}
                   className="bg-primary text-white hover:text-secondary 
                   shadow border border-accent-background cursor-pointer w-full"
@@ -83,7 +86,7 @@ const CTA = () => {
                 </Button>
               </motion.div>
             </div>
-            <motion.p 
+            <motion.p
               variants={staggerItem}
               className="mt-2 text-left text-xs text-muted-foreground"
             >

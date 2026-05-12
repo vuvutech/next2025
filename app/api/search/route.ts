@@ -32,88 +32,84 @@ export async function GET(request: NextRequest) {
       editions: [],
     };
 
-    // Search Institutes
-    if (type === "all" || type === "institute") {
-      const institutes = await prisma.institute.findMany({
-        where: {
-          AND: [
-            { active: true },
-            {
-              OR: [
-                { name: { contains: query, mode: "insensitive" } },
-                { overview: { contains: query, mode: "insensitive" } },
-                { about: { contains: query, mode: "insensitive" } },
-                { introduction: { contains: query, mode: "insensitive" } },
+    // Search both in parallel
+    const [institutes, editions] = await Promise.all([
+      (type === "all" || type === "institute")
+        ? prisma.institute.findMany({
+            where: {
+              AND: [
+                { active: true },
+                {
+                  OR: [
+                    { name: { contains: query, mode: "insensitive" } },
+                    { overview: { contains: query, mode: "insensitive" } },
+                    { about: { contains: query, mode: "insensitive" } },
+                    { introduction: { contains: query, mode: "insensitive" } },
+                  ],
+                },
               ],
             },
-          ],
-        },
-        select: {
-          id: true,
-          name: true,
-          slug: true,
-          overview: true,
-          about: true,
-          introduction: true,
-        },
-        take: 5,
-        orderBy: { name: "asc" },
-      });
-
-      results.institutes = institutes.map((inst) => ({
-        id: inst.id,
-        name: inst.name,
-        title: inst.name,
-        slug: inst.slug,
-        description: truncateDescription(inst.overview || inst.about || inst.introduction),
-        type: "institute" as const,
-        url: `/institutes/${inst.slug}`,
-      }));
-    }
-
-    // Search Editions
-    if (type === "all" || type === "edition") {
-      const editions = await prisma.edition.findMany({
-        where: {
-          AND: [
-            { active: true },
-            {
-              OR: [
-                { title: { contains: query, mode: "insensitive" } },
-                { overview: { contains: query, mode: "insensitive" } },
-                { about: { contains: query, mode: "insensitive" } },
-                { introduction: { contains: query, mode: "insensitive" } },
-              ],
-            },
-          ],
-        },
-        select: {
-          id: true,
-          title: true,
-          slug: true,
-          overview: true,
-          about: true,
-          introduction: true,
-          institute: {
             select: {
+              id: true,
+              name: true,
               slug: true,
+              overview: true,
+              about: true,
+              introduction: true,
             },
-          },
-        },
-        take: 5,
-        orderBy: { title: "asc" },
-      });
+            take: 5,
+            orderBy: { name: "asc" },
+          })
+        : Promise.resolve([]),
+      (type === "all" || type === "edition")
+        ? prisma.edition.findMany({
+            where: {
+              AND: [
+                { active: true },
+                {
+                  OR: [
+                    { title: { contains: query, mode: "insensitive" } },
+                    { overview: { contains: query, mode: "insensitive" } },
+                    { about: { contains: query, mode: "insensitive" } },
+                    { introduction: { contains: query, mode: "insensitive" } },
+                  ],
+                },
+              ],
+            },
+            select: {
+              id: true,
+              title: true,
+              slug: true,
+              overview: true,
+              about: true,
+              introduction: true,
+              institute: { select: { slug: true } },
+            },
+            take: 5,
+            orderBy: { title: "asc" },
+          })
+        : Promise.resolve([]),
+    ]);
 
-      results.editions = editions.map((ed) => ({
-        id: ed.id,
-        name: ed.title,
-        title: ed.title,
-        slug: ed.slug,
-        description: truncateDescription(ed.overview || ed.about || ed.introduction),
-        type: "edition" as const,
-        url: `/institutes/${ed.institute.slug}/edition/${ed.slug}`,
-      }));
-    }
+    results.institutes = institutes.map((inst) => ({
+      id: inst.id,
+      name: inst.name,
+      title: inst.name,
+      slug: inst.slug,
+      description: truncateDescription(inst.overview || inst.about || inst.introduction),
+      type: "institute",
+      url: `/institutes/${inst.slug}`,
+    }));
+
+    results.editions = editions.map((ed) => ({
+      id: ed.id,
+      name: ed.title,
+      title: ed.title,
+      slug: ed.slug,
+      description: truncateDescription(ed.overview || ed.about || ed.introduction),
+      type: "edition",
+      url: `/institutes/${ed.institute.slug}/edition/${ed.slug}`,
+    }));
 
     return NextResponse.json(results);
   } catch (error) {
