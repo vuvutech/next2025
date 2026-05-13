@@ -98,14 +98,14 @@ export const WhyCostrad: React.FC<WhyCostradProps> = ({
                 well as the ability to inspire and motivate others.
               </p>
 
-              <Link href={`/about`} className="flex w-full gap-2\" prefetch={false}>
-                <Button className="text-sm h-8 w-fit cursor-pointer rounded-full bg-primary hover:bg-primary/90 px-10 text-white">
+              <Link href={`/about`} className="flex flex-col sm:flex-row w-full sm:w-auto gap-2" prefetch={false}>
+                <Button className="text-sm h-10 sm:h-8 w-full sm:w-auto cursor-pointer rounded-full bg-primary hover:bg-primary/90 px-6 sm:px-10 text-white min-w-[120px]">
                   Get Started
                 </Button>
                
                 <Button
                   variant="outline"
-                  className="text-sm h-8 w-8 cursor-pointer border border-foreground/30 p-0 text-foreground rounded-full transition-all ease-in-out hover:rotate-45"
+                  className="text-sm h-10 sm:h-8 w-full sm:w-10 cursor-pointer border border-foreground/30 p-0 text-foreground rounded-full transition-all ease-in-out hover:rotate-45"
                 >
                   <ArrowUpRight />
                 </Button>

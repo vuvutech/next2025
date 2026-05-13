@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image"; // Import Image component
 import Link from "next/link"; // Optional: Import Link if using Next.js routing
 import { useRouter } from "next/navigation";
-import { RainbowButton } from "@/components/magicui/rainbow-button";
 import { motion } from "framer-motion";
 import { staggerContainer, staggerItem } from "@/components/animations/framerAnimations";
 
@@ -121,16 +120,14 @@ const AboutSectionFour = () => {
                   </motion.div>
                 ))}
               </motion.div>
-             <div className="flex  items-center sm:justify-center py-8">
-               <RainbowButton
-                onClick={() => {
-                  router.push("/institutes");
-                }}
-                variant="outline"
-              >
-                Explore Our Institutes
-              </RainbowButton>
-             </div>
+<div className="flex items-center sm:justify-center py-8 px-4">
+                <button
+                  onClick={() => router.push("/institutes")}
+                  className="px-6 sm:px-8 py-3 sm:py-4 bg-white text-black font-semibold rounded-full text-base sm:text-lg hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg w-full sm:w-auto min-w-[200px]"
+                >
+                  Explore Our Institutes
+                </button>
+              </div>
             </div>
           </div>
         </div>

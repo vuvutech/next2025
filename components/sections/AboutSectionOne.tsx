@@ -18,18 +18,18 @@ const AboutSectionOne = () => {
           >
             <motion.div variants={staggerItem}>
               <Link
-              href="#"
-              className="mx-auto mb-3 sm:inline-flex flex justify-between  uppercase items-center gap-3 rounded-full 
-              border px-2 py-1 text-xs sm:text-sm w-full sm:w-auto"
+              href="/institutes"
+              className="mx-auto mb-3 inline-flex justify-between items-center gap-2 sm:gap-3 rounded-full 
+              border px-3 sm:px-4 py-2 text-xs sm:text-sm w-full sm:w-auto hover:bg-accent/50 transition-colors duration-200 cursor-pointer"
             >
               <span
                 data-slot="badge"
-                className="inline-flex  items-center justify-center border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden border-transparent bg-primary text-white [a&]:hover:bg-primary/90 rounded-full"
+                className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 bg-primary text-primary-foreground rounded-full"
               >
-                Costrad
+                COSTrAD
               </span>
-              <span className=" font-oswald text-[11px] sm:text-xs ">Transformational and Enduring progress</span>
-              <span className="flex size-7 items-center justify-center rounded-full bg-muted">
+              <span className="font-oswald text-[10px] sm:text-xs truncate max-w-[120px] sm:max-w-none">Transformational</span>
+              <span className="flex size-5 sm:size-6 items-center justify-center rounded-full bg-muted flex-shrink-0">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -40,7 +40,7 @@ const AboutSectionOne = () => {
                   strokeWidth={2}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="lucide lucide-arrow-right w-4"
+                  className="lucide lucide-arrow-right w-3 h-3"
                   aria-hidden="true"
                 >
                   <path d="M5 12h14" />

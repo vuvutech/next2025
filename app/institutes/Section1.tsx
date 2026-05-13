@@ -69,13 +69,13 @@ export const Section1 = ({
               <p className="tracking-tight text-lg text-foreground ">
                 {overview ?? "This institute currently has no overview."}
               </p>
-              <div className="flex w-full gap-2">
-                <Button className="text-md h-8 w-fit cursor-pointer rounded-full text-white bg-primary px-10 ">
+              <div className="flex flex-col sm:flex-row w-full gap-2">
+                <Button className="text-md h-10 sm:h-8 w-full sm:w-auto cursor-pointer rounded-full text-white bg-primary px-6 sm:px-10 min-w-[140px]">
                   Get Started
                 </Button>
                 <Button
                   variant="outline"
-                  className="text-md h-8 w-8 cursor-pointer rounded-full transition-all ease-in-out hover:rotate-45"
+                  className="text-md h-10 sm:h-8 w-full sm:w-10 cursor-pointer rounded-full transition-all ease-in-out hover:rotate-45"
                 >
                   <ArrowUpRight />
                 </Button>

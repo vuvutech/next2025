@@ -37,17 +37,17 @@ const AboutSectionTwo = ({
         <motion.p variants={staggerItem} className="mb-8 text-lg font-normal shadow text-white lg:text-xl sm:px-16 lg:px-48">
           {subtitle}
         </motion.p>
-        <motion.div variants={staggerItem} className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+        <motion.div variants={staggerItem} className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
           
           <Link
             href={primaryButtonHref}
-            className="inline-flex justify-center items-center py-1 px-5 text-base font-medium text-center text-white rounded-full
-             bg-primary hover:bg-primary/90 focus:ring-4 focus:ring-primary/50"
+            className="inline-flex justify-center items-center py-3 px-6 sm:py-2 sm:px-5 text-base font-medium text-center text-white rounded-full
+             bg-primary hover:bg-primary/90 focus:ring-4 focus:ring-primary/50 transition-transform hover:scale-105"
             prefetch={false}
           >
             {primaryButtonText}
             <svg
-              className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
+              className="w-4 h-4 ms-2"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -64,7 +64,7 @@ const AboutSectionTwo = ({
           </Link>
           <Link
             href={secondaryButtonHref}
-            className="inline-flex justify-center hover:text-gray-900 items-center py-1 px-5 sm:ms-4 text-base font-medium text-center text-white  border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400 rounded-full"
+            className="inline-flex justify-center items-center py-3 px-6 sm:py-2 sm:px-5 text-base font-medium text-center text-white border border-white hover:bg-white hover:text-gray-900 rounded-full transition-all duration-200"
             prefetch={false}
           >
             {secondaryButtonText}
