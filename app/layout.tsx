@@ -18,6 +18,7 @@ const NewsletterDialog = dynamic(() =>
 );
 import { GoogleAnalytics } from '@next/third-parties/google'
 import UpNextWrapper from "@/components/ui/UpNextWrapper";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 
 export const metadata: Metadata = {
   title: {
@@ -71,6 +72,7 @@ export default function RootLayout({
 					<main className='relative overflow-x-hidden'>
 						{children}
 					</main>
+					<ScrollToTop />
 					<FooterWrapper />
 					<Toaster />
 					<Analytics />

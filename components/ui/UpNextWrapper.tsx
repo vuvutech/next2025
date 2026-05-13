@@ -54,49 +54,45 @@ export default function UpNextWrapper() {
   if (!nextEdition) return null;
 
   return (
-		<div className='bg-primary/95 backdrop-blur-sm border-b border-white/10'>
-			<div className='max-w-[90rem] px-4 py-1.5 sm:px-6 lg:px-8 mx-auto'>
-				<div className='flex flex-wrap justify-center items-center gap-y-1 gap-x-4 sm:gap-x-8'>
-					<div
-						className={cn(
-							oswald.className,
-							"flex items-center gap-x-2 text-white uppercase text-[10px] md:text-[13px] tracking-wider",
-						)}
-					>
-						<span className='font-bold opacity-80'>UpNext:</span>
-						<span className='font-medium'>{nextEdition.title}</span>
-						<div className='h-3 w-[1px] bg-white/20 mx-1 hidden sm:block' />
-						<span className='font-medium text-white/90'>
-							{nextEdition.startDate
-								? new Date(
-										nextEdition.startDate,
-									).toLocaleDateString("en-US", {
-										month: "short",
-										day: "numeric",
-									})
-								: ""}{" "}
-							&mdash;{" "}
-							{nextEdition.endDate
-								? new Date(
-										nextEdition.endDate,
-									).toLocaleDateString("en-US", {
-										month: "short",
-										day: "numeric",
-										year: "numeric",
-									})
-								: ""}{" "}
-						</span>
-					</div>
+		<div className='bg-primary/95 backdrop-blur-sm border-b border-white/10 overflow-x-hidden'>
+			<div className='max-w-[90rem] px-2 py-1 sm:px-6 lg:px-8 mx-auto'>
+				<div className='flex flex-nowrap justify-center items-center gap-x-2 sm:gap-x-3 text-[9px] sm:text-[10px] md:text-[13px]'>
+					<span className={cn(oswald.className, "text-white uppercase font-bold opacity-80 shrink-0")}>
+						UpNext:
+					</span>
+					<span className={cn(oswald.className, "text-white font-medium truncate max-w-[90px] sm:max-w-none")}>
+						{nextEdition.title}
+					</span>
+					<div className='h-3 w-[1px] bg-white/20 shrink-0' />
+					<span className={cn(oswald.className, "font-medium text-white/90 shrink-0 whitespace-nowrap")}>
+						{nextEdition.startDate
+							? new Date(
+									nextEdition.startDate,
+								).toLocaleDateString("en-US", {
+									month: "short",
+									day: "numeric",
+								})
+							: ""}{" "}
+						&mdash;{" "}
+						{nextEdition.endDate
+							? new Date(
+									nextEdition.endDate,
+								).toLocaleDateString("en-US", {
+									month: "short",
+									day: "numeric",
+								})
+							: ""}{" "}
+					</span>
 
 					<Link
 						className={cn(
 							oswald.className,
-							"py-0.5 px-3 md:px-5 inline-flex items-center gap-x-2 bg-white text-primary text-[10px] md:text-[11px] uppercase font-bold hover:bg-white/90 transition-all rounded-full shadow-lg shrink-0",
+							"py-0.5 px-2.5 sm:px-3 md:px-5 inline-flex items-center gap-x-1 bg-white text-primary text-[9px] sm:text-[10px] md:text-[11px] uppercase font-bold hover:bg-white/90 transition-all rounded-full shadow-lg shrink-0",
 						)}
 						href={`/apply`}
 					>
-						Apply Now
-						<LucideMoveRight size={14} strokeWidth={3} />
+						Apply
+						<LucideMoveRight size={12} strokeWidth={3} className="hidden sm:block" />
 					</Link>
 				</div>
 			</div>
