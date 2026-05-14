@@ -20,9 +20,9 @@ export default function HelpComponent() {
       <section className="text-center space-y-6">
         <h1 className="text-3xl sm:text-5xl font-bold">How can we help you?</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Search our knowledge base or browse help topics below. Whether you&apos;re a
-          prospective participant, current student, partner, or media contact,
-          we&apos;re here to support you.
+          Search our knowledge base or browse help topics below. Whether
+          you&apos;re a prospective participant, current student, partner, or
+          media contact, we&apos;re here to support you.
         </p>
         <div className="max-w-xl mx-auto relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -35,17 +35,19 @@ export default function HelpComponent() {
       </section>
 
       <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <Link href="/faq" className="group">
+        <Link href="/faqs" className="group">
           <div className="p-6 rounded-lg border bg-card hover:bg-accent/50 transition-colors cursor-pointer h-full">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
               <HelpCircle className="h-6 w-6 text-primary" />
             </div>
             <h3 className="text-xl font-semibold mb-2">FAQs</h3>
             <p className="text-muted-foreground text-sm mb-4">
-              Find answers to common questions about programs, registration, and more.
+              Find answers to common questions about programs, registration, and
+              more.
             </p>
             <span className="inline-flex items-center text-primary text-sm font-medium">
-              Browse FAQs <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              Browse FAQs{" "}
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           </div>
         </Link>
@@ -60,7 +62,8 @@ export default function HelpComponent() {
               Login issues, file uploads, Zoom links, and technical problems.
             </p>
             <span className="inline-flex items-center text-primary text-sm font-medium">
-              Get help <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              Get help{" "}
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           </div>
         </a>
@@ -77,10 +80,12 @@ export default function HelpComponent() {
             </div>
             <h3 className="text-xl font-semibold mb-2">Community</h3>
             <p className="text-muted-foreground text-sm mb-4">
-              Connect with participants, faculty, and ambassadors on social media.
+              Connect with participants, faculty, and ambassadors on social
+              media.
             </p>
             <span className="inline-flex items-center text-primary text-sm font-medium">
-              Join us <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              Join us{" "}
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           </div>
         </a>
@@ -95,7 +100,8 @@ export default function HelpComponent() {
               Questions about programs, partnerships, or anything else.
             </p>
             <span className="inline-flex items-center text-primary text-sm font-medium">
-              Contact us <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              Contact us{" "}
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           </div>
         </a>
@@ -108,10 +114,13 @@ export default function HelpComponent() {
           <h2 className="text-2xl font-semibold">Popular Topics</h2>
           <ul className="space-y-3">
             {[
-              { label: "How to register for a program", href: "/faq" },
-              { label: "Virtual vs in-person attendance", href: "/faq" },
-              { label: "Scholarship and sponsorship opportunities", href: "/faq" },
-              { label: "Accessing learning materials", href: "/faq" },
+              { label: "How to register for a program", href: "/faqs" },
+              { label: "Virtual vs in-person attendance", href: "/faqs" },
+              {
+                label: "Scholarship and sponsorship opportunities",
+                href: "/faqs",
+              },
+              { label: "Accessing learning materials", href: "/faqs" },
               { label: "Institute-specific information", href: "/institutes" },
             ].map((item, index) => (
               <li key={index}>
@@ -126,9 +135,7 @@ export default function HelpComponent() {
             ))}
           </ul>
           <Button variant="outline" asChild className="mt-4">
-            <Link href="/faq">
-              View all FAQs
-            </Link>
+            <Link href="/faqs">View all FAQs</Link>
           </Button>
         </div>
 
@@ -184,7 +191,8 @@ export default function HelpComponent() {
       <section className="bg-muted/50 rounded-lg p-8 text-center space-y-4">
         <h2 className="text-2xl font-semibold">Still need help?</h2>
         <p className="text-muted-foreground max-w-lg mx-auto">
-          Can&apos;t find what you&apos;re looking for? Our team is ready to assist you.
+          Can&apos;t find what you&apos;re looking for? Our team is ready to
+          assist you.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Button asChild>
