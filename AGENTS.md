@@ -1,43 +1,67 @@
-<!-- gitnexus:start -->
-# GitNexus — Code Intelligence
+# Costrad 2025 Platform - Agent Guidelines
 
-This project is indexed by GitNexus as **next2025** (2379 symbols, 3980 relationships, 21 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+## 🛠️ Development Commands
+- **Dev server**: `npm run dev` (uses turbopack)
+- **Build**: `npm run build` (runs `prisma generate` then `next build`)
+- **Start**: `npm run start`
+- **Lint**: `npm run lint` (uses Next.js ESLint config)
+- **Test**: `npm run test` (vitest)
+- **Test watch**: `npm run test:watch`
+- **Prisma generate**: `npx prisma generate`
+- **Prisma db push**: `npx prisma db push`
+- **Prisma seed**: `npx prisma db seed` (runs `ts-node --compiler-options "{\"module\":\"CommonJS\"}" prisma/seed.ts`)
 
-> If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
+## 🏗️ Architecture & Key Files
+- **Framework**: Next.js 15 with App Router (`app/` directory)
+- **Database**: MongoDB via Prisma ORM (`prisma/schema.prisma`)
+- **Authentication**: Better Auth with custom plugins (`lib/auth.ts`)
+- **Entry point**: `app/layout.tsx` (root layout with providers)
+- **Auth configuration**: `lib/auth.ts` (betterAuth instance with MongoDB adapter)
+- **Database connection**: `prisma/dbConnect.ts`
+- **Email service**: Uses Resend with React Email templates (`lib/email/`)
 
-## Always Do
+## 📁 Important Directories
+- `app/`: Next.js App Router pages, layouts, route handlers
+- `components/`: Reusable UI components (Radix UI, shadcn-based)
+- `lib/`: Utility functions, auth config, email services, database helpers
+- `prisma/`: Database schema, seed scripts, connection setup
+- `providers/`: React providers for auth, theme, etc.
+- `hooks/`: Custom React hooks
+- `actions/`: Server actions (likely in `app/actions/`)
 
-- **MUST run impact analysis before editing any symbol.** Before modifying a function, class, or method, run `gitnexus_impact({target: "symbolName", direction: "upstream"})` and report the blast radius (direct callers, affected processes, risk level) to the user.
-- **MUST run `gitnexus_detect_changes()` before committing** to verify your changes only affect expected symbols and execution flows.
-- **MUST warn the user** if impact analysis returns HIGH or CRITICAL risk before proceeding with edits.
-- When exploring unfamiliar code, use `gitnexus_query({query: "concept"})` to find execution flows instead of grepping. It returns process-grouped results ranked by relevance.
-- When you need full context on a specific symbol — callers, callees, which execution flows it participates in — use `gitnexus_context({name: "symbolName"})`.
+## 🔑 Environment Variables
+Required in `.env.local`:
+- `DATABASE_URL`: MongoDB connection string
+- `BETTER_AUTH_SECRET`: Secret for Better Auth encryption
+- `BETTER_AUTH_URL`: Base URL (e.g., `http://localhost:3000`)
+- `NEXT_PUBLIC_GOOGLE_CLIENT_ID`: Google OAuth client ID
+- `GOOGLE_CLIENT_SECRET`: Google OAuth client secret
+- `MICROSOFT_CLIENT_ID`: Microsoft OAuth client ID
+- `MICROSOFT_CLIENT_SECRET`: Microsoft OAuth client secret
+- `BETTER_AUTH_EMAIL`: From email for notifications
+- `RESEND_API_KEY`: For email sending via Resend
 
-## Never Do
+## 🧪 Testing Approach
+- **Framework**: Vitest
+- **Config**: `vitest.config.ts`
+- **Test files**: Located alongside source or in `__tests__` directories
+- **Mocking**: Prisma client should be mocked in unit tests
+- **Database**: Integration tests require MongoDB instance
 
-- NEVER edit a function, class, or method without first running `gitnexus_impact` on it.
-- NEVER ignore HIGH or CRITICAL risk warnings from impact analysis.
-- NEVER rename symbols with find-and-replace — use `gitnexus_rename` which understands the call graph.
-- NEVER commit changes without running `gitnexus_detect_changes()` to check affected scope.
+## ⚠️ Important Notes
+- **Prisma MongoDB**: Uses `@map("_id")` and `@db.ObjectId` for MongoDB ObjectId compatibility
+- **Auth hooks**: Custom database hooks in `lib/auth.ts` handle banned users and student ID generation
+- **Email verification**: Uses React Email components with Resend for templated emails
+- **Role system**: Three roles - USER (default), ADMIN, SUPERADMIN
+- **Student ID**: Auto-generated unique ID on user creation via `generateStudentId()` function
+- **Next.js 15**: Uses App Router exclusively, no pages directory
+- **TypeScript**: Strict mode enabled in tsconfig.json
+- **Tailwind CSS**: v4 with class-variance-authority for variant management
 
-## Resources
-
-| Resource | Use for |
-|----------|---------|
-| `gitnexus://repo/next2025/context` | Codebase overview, check index freshness |
-| `gitnexus://repo/next2025/clusters` | All functional areas |
-| `gitnexus://repo/next2025/processes` | All execution flows |
-| `gitnexus://repo/next2025/process/{name}` | Step-by-step execution trace |
-
-## CLI
-
-| Task | Read this skill file |
-|------|---------------------|
-| Understand architecture / "How does X work?" | `.claude/skills/gitnexus/gitnexus-exploring/SKILL.md` |
-| Blast radius / "What breaks if I change X?" | `.claude/skills/gitnexus/gitnexus-impact-analysis/SKILL.md` |
-| Trace bugs / "Why is X failing?" | `.claude/skills/gitnexus/gitnexus-debugging/SKILL.md` |
-| Rename / extract / split / refactor | `.claude/skills/gitnexus/gitnexus-refactoring/SKILL.md` |
-| Tools, resources, schema reference | `.claude/skills/gitnexus/gitnexus-guide/SKILL.md` |
-| Index, status, clean, wiki CLI commands | `.claude/skills/gitnexus/gitnexus-cli/SKILL.md` |
-
-<!-- gitnexus:end -->
+## 📝 Code Conventions
+- **Imports**: Group external libraries first, then internal modules
+- **File extensions**: Use explicit `.ts`/`.tsx` for internal imports
+- **Components**: Use Radix UI primitives as base components
+- **Forms**: React Hook Form + Zod for validation
+- **Server actions**: Defined in `app/actions/` or as async functions in server components
+- **Error handling**: Auth errors redirect to `/auth/error` by configuration
