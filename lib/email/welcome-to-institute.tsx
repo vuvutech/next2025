@@ -45,7 +45,8 @@ export const WelcomeToInstituteEmail = ({
             <Text className="text-sm leading-6">Dear {name},</Text>
 
             <Text className="text-sm leading-6">
-              Thank you for registering for The <strong>{instituteName}</strong> (<strong>{editionTitle}</strong>).
+              Thank you for registering for The <strong>{instituteName}</strong>{" "}
+              (<strong>{editionTitle}</strong>).
             </Text>
 
             <Text className="text-sm leading-6">
@@ -65,15 +66,20 @@ export const WelcomeToInstituteEmail = ({
 
             <Text className="text-xs text-gray-600 mt-6">
               If you have any questions or need further clarification about your
-              registration, please don't hesitate to get in touch with us. Our support team ({" "}
-              <a className="text-primary" href="mailto:correspondence@costrad.org">
-                correspondence@costrad.org, 
+              registration, please don't hesitate to contact us. Our support
+              team ({" "}
+              <a
+                className="text-primary"
+                href="mailto:correspondence@costrad.org"
+              >
+                correspondence@costrad.org
               </a>{" "}
+              | Phone:{" "}
               <a className="text-primary" href="tel:+233200201334">
-               Phone: +233200201334 (Office Hours: Mon–Fri, 9AM–4PM GMT)
-              </a>{" "} )
-              is always available and ready to assist you with any concerns or
-              inquiries you may have.
+                +233 20 020 1334
+              </a>{" "}
+              — Office Hours: Mon–Fri, 9AM–4PM GMT) is always available to
+              assist you.
             </Text>
           </Container>
         </Body>

@@ -19,21 +19,17 @@ _Thinking:_
 The user wants me to study and memorize the codebase. Since I'm in plan mode (read-only), I can only observe and analyze. Let me start by exploring the codebase structure to understand what this project is about.
 
 I should start by:
+
 1. Looking at the directory structure
 2. Reading key files like package.json, README, etc.
 3. Understanding the architecture
 
 Let me begin by exploring the codebase.
 
-
-
-
-
-
-
 **Tool: filesystem_directory_tree**
 
 **Input:**
+
 ```json
 {
   "path": "/home/tl-wr840n/Documents/Projects/development/costrad"
@@ -41,6 +37,7 @@ Let me begin by exploring the codebase.
 ```
 
 **Output:**
+
 ```
 [
   {
@@ -1936,6 +1933,7 @@ Use the Task tool to have explore agent process this file with Grep and Read (wi
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/package.json"
@@ -1943,6 +1941,7 @@ Use the Task tool to have explore agent process this file with Grep and Read (wi
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/package.json</path>
 <type>file</type>
@@ -2071,6 +2070,7 @@ Use the Task tool to have explore agent process this file with Grep and Read (wi
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/README.md"
@@ -2078,16 +2078,17 @@ Use the Task tool to have explore agent process this file with Grep and Read (wi
 ```
 
 **Output:**
-```
+
+````
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/README.md</path>
 <type>file</type>
 <content>
 1: # Costrad 2025 Platform
-2: 
+2:
 3: A comprehensive educational and management platform built with modern web technologies. This system handles user management, institutional profiles, event editions, and registrations.
-4: 
+4:
 5: ## 🚀 Tech Stack
-6: 
+6:
 7: - **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
 8: - **Language:** [TypeScript](https://www.typescriptlang.org/)
 9: - **Database:** [MongoDB](https://www.mongodb.com/) via [Prisma ORM](https://www.prisma.io/)
@@ -2096,36 +2097,36 @@ Use the Task tool to have explore agent process this file with Grep and Read (wi
 12: - **Animations:** [Framer Motion](https://www.framer.com/motion/)
 13: - **Forms & Validation:** [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)
 14: - **Email:** [Resend](https://resend.com/) + [React Email](https://react.email/)
-15: 
+15:
 16: ## ✨ Key Features
-17: 
+17:
 18: - **Robust Authentication**: Secure user authentication with support for roles (User, Admin, Superadmin) and Two-Factor Authentication (2FA).
 19: - **User Profiles**: Detailed profile management including demographics, professional details, and social links.
 20: - **Institute Management**: Manage institutes, editions (courses/events), and handle registrations.
 21: - **Organization Support**: capabilities for managing organizations and team members.
 22: - **Communication**: Integrated newsletter subscription and announcements system.
 23: - **Modern UI/UX**: Responsive design with smooth animations and accessible components.
-24: 
+24:
 25: ## 🛠️ Getting Started
-26: 
+26:
 27: ### Prerequisites
-28: 
+28:
 29: - Node.js (v20 or later recommended)
 30: - MongoDB database (local or cloud)
-31: 
+31:
 32: ### Installation
-33: 
+33:
 34: 1.  **Clone the repository:**
 35:     ```bash
 36:     git clone <repository-url>
 37:     cd costrad-2025
 38:     ```
-39: 
+39:
 40: 2.  **Install dependencies:**
 41:     ```bash
 42:     npm install
 43:     ```
-44: 
+44:
 45: 3.  **Set up environment variables:**
 46:     Create a `.env.local` file in the root directory and configure the following variables (example):
 47:     ```env
@@ -2134,38 +2135,38 @@ Use the Task tool to have explore agent process this file with Grep and Read (wi
 50:     BETTER_AUTH_URL="http://localhost:3000"
 51:     # Add other provider keys (Google, GitHub, Resend, etc.)
 52:     ```
-53: 
+53:
 54: 4.  **Database Setup:**
 55:     Generate the Prisma client and sync the schema with your MongoDB database.
 56:     ```bash
 57:     npx prisma generate
 58:     npx prisma db push
 59:     ```
-60: 
+60:
 61: 5.  **Run the development server:**
 62:     ```bash
 63:     npm run dev
 64:     ```
-65: 
+65:
 66:     Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-67: 
+67:
 68: ## 📂 Project Structure
-69: 
+69:
 70: - `app/`: Next.js App Router pages and layouts.
 71: - `components/`: Reusable UI components.
 72: - `lib/`: Utility functions and library configurations (Auth, Prisma).
 73: - `prisma/`: Database schema and seed scripts.
 74: - `public/`: Static assets.
-75: 
+75:
 76: ## 📜 License
-77: 
+77:
 78: [MIT](LICENSE)
-79: 
+79:
 80: ![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/costrad/next2025?utm_source=oss&utm_medium=github&utm_campaign=costrad%2Fnext2025&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
 
 (End of file - total 80 lines)
 </content>
-```
+````
 
 ---
 
@@ -2176,6 +2177,7 @@ _Thinking:_
 Good, I now have an overview of the project. This is "Costrad 2025 Platform" - an educational and management platform built with Next.js 15, MongoDB, and Better Auth. Let me explore more to understand the structure better.
 
 Let me look at:
+
 1. Prisma schema for database models
 2. Auth configuration
 3. App directory structure
@@ -2183,18 +2185,10 @@ Let me look at:
 
 I'll start by reading multiple important files in parallel.
 
-
-
-
-
-
-
-
-
-
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/prisma/schema.prisma"
@@ -2202,6 +2196,7 @@ I'll start by reading multiple important files in parallel.
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/prisma/schema.prisma</path>
 <type>file</type>
@@ -2209,17 +2204,17 @@ I'll start by reading multiple important files in parallel.
 1: generator client {
 2:   provider = "prisma-client-js"
 3: }
-4: 
+4:
 5: datasource db {
 6:   provider = "mongodb"
 7:   url      = env("DATABASE_URL")
 8: }
-9: 
+9:
 10: enum Gender {
 11:   MALE
 12:   FEMALE
 13: }
-14: 
+14:
 15: enum MaritalStatus {
 16:   SINGLE
 17:   MARRIED
@@ -2227,7 +2222,7 @@ I'll start by reading multiple important files in parallel.
 19:   WIDOWED
 20:   OTHER
 21: }
-22: 
+22:
 23: enum Religion {
 24:   CHRISTIANITY
 25:   ISLAM
@@ -2237,14 +2232,14 @@ I'll start by reading multiple important files in parallel.
 29:   OTHER
 30:   NONE
 31: }
-32: 
+32:
 33: enum ProfileStatus {
 34:   ACTIVE
 35:   INACTIVE
 36:   SUSPENDED
 37:   WITHDRAWN
 38: }
-39: 
+39:
 40: enum HighestQualification {
 41:   HIGH_SCHOOL
 42:   BACHELORS
@@ -2252,7 +2247,7 @@ I'll start by reading multiple important files in parallel.
 44:   DOCTORATE
 45:   OTHER
 46: }
-47: 
+47:
 48: enum LanguagePreference {
 49:   ENGLISH
 50:   FRENCH
@@ -2262,13 +2257,13 @@ I'll start by reading multiple important files in parallel.
 54:   ARABIC
 55:   OTHER
 56: }
-57: 
+57:
 58: enum Role {
 59:   USER
 60:   ADMIN
 61:   SUPERADMIN
 62: }
-63: 
+63:
 64: model User {
 65:   id               String         @id @map("_id")
 66:   name             String
@@ -2290,16 +2285,16 @@ I'll start by reading multiple important files in parallel.
 82:   testimonials     Testimonial[] // 👈 one-to-many relation
 83:   announcements    Announcement[] // 👈 one-to-many relation
 84:   profile          Profile?
-85: 
+85:
 86:   newsletterSubscribers NewsletterSubscriber[] // 👈 relation to NewsletterSubscriber
-87: 
+87:
 88:   studentId    String?
 89:   registration Registration[]
-90: 
+90:
 91:   @@unique([studentId])
 92:   @@map("user")
 93: }
-94: 
+94:
 95: model Profile {
 96:   id                        String                @id @default(auto()) @map("_id") @db.ObjectId
 97:   gender                    Gender
@@ -2338,16 +2333,16 @@ I'll start by reading multiple important files in parallel.
 130:   tags                      String[] // ["tech", "education", "AI"]
 131:   interests                 String[] // Custom structure for user interests
 132:   skills                    String[] // ["JavaScript", "Python", "Data Analysis"]
-133: 
+133:
 134:   userId String @unique
 135:   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-136: 
+136:
 137:   createdAt DateTime @default(now())
 138:   updatedAt DateTime @updatedAt
-139: 
+139:
 140:   @@map("profile")
 141: }
-142: 
+142:
 143: model Session {
 144:   id                   String   @id @map("_id")
 145:   expiresAt            DateTime
@@ -2360,11 +2355,11 @@ I'll start by reading multiple important files in parallel.
 152:   user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 153:   activeOrganizationId String?
 154:   impersonatedBy       String?
-155: 
+155:
 156:   @@unique([token])
 157:   @@map("session")
 158: }
-159: 
+159:
 160: model Account {
 161:   id                    String    @id @map("_id")
 162:   accountId             String
@@ -2380,10 +2375,10 @@ I'll start by reading multiple important files in parallel.
 172:   password              String?
 173:   createdAt             DateTime
 174:   updatedAt             DateTime
-175: 
+175:
 176:   @@map("account")
 177: }
-178: 
+178:
 179: model Verification {
 180:   id         String    @id @map("_id")
 181:   identifier String
@@ -2391,10 +2386,10 @@ I'll start by reading multiple important files in parallel.
 183:   expiresAt  DateTime
 184:   createdAt  DateTime?
 185:   updatedAt  DateTime?
-186: 
+186:
 187:   @@map("verification")
 188: }
-189: 
+189:
 190: model Organization {
 191:   id          String       @id @map("_id")
 192:   name        String
@@ -2404,11 +2399,11 @@ I'll start by reading multiple important files in parallel.
 196:   metadata    String?
 197:   members     Member[]
 198:   invitations Invitation[]
-199: 
+199:
 200:   @@unique([slug])
 201:   @@map("organization")
 202: }
-203: 
+203:
 204: model Member {
 205:   id             String       @id @map("_id")
 206:   organizationId String
@@ -2417,10 +2412,10 @@ I'll start by reading multiple important files in parallel.
 209:   user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 210:   role           String
 211:   createdAt      DateTime
-212: 
+212:
 213:   @@map("member")
 214: }
-215: 
+215:
 216: model Invitation {
 217:   id             String       @id @map("_id")
 218:   organizationId String
@@ -2431,20 +2426,20 @@ I'll start by reading multiple important files in parallel.
 223:   expiresAt      DateTime
 224:   inviterId      String
 225:   user           User         @relation(fields: [inviterId], references: [id], onDelete: Cascade)
-226: 
+226:
 227:   @@map("invitation")
 228: }
-229: 
+229:
 230: model TwoFactor {
 231:   id          String @id @map("_id")
 232:   secret      String
 233:   backupCodes String
 234:   userId      String
 235:   user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-236: 
+236:
 237:   @@map("twoFactor")
 238: }
-239: 
+239:
 240: model OauthApplication {
 241:   id           String    @id @map("_id")
 242:   name         String?
@@ -2458,11 +2453,11 @@ I'll start by reading multiple important files in parallel.
 250:   userId       String?
 251:   createdAt    DateTime?
 252:   updatedAt    DateTime?
-253: 
+253:
 254:   @@unique([clientId])
 255:   @@map("oauthApplication")
 256: }
-257: 
+257:
 258: model OauthAccessToken {
 259:   id                    String    @id @map("_id")
 260:   accessToken           String?
@@ -2474,12 +2469,12 @@ I'll start by reading multiple important files in parallel.
 266:   scopes                String?
 267:   createdAt             DateTime?
 268:   updatedAt             DateTime?
-269: 
+269:
 270:   @@unique([accessToken])
 271:   @@unique([refreshToken])
 272:   @@map("oauthAccessToken")
 273: }
-274: 
+274:
 275: model OauthConsent {
 276:   id           String    @id @map("_id")
 277:   clientId     String?
@@ -2488,10 +2483,10 @@ I'll start by reading multiple important files in parallel.
 280:   createdAt    DateTime?
 281:   updatedAt    DateTime?
 282:   consentGiven Boolean?
-283: 
+283:
 284:   @@map("oauthConsent")
 285: }
-286: 
+286:
 287: model Institute {
 288:   id           String    @id @default(auto()) @map("_id") @db.ObjectId
 289:   name         String
@@ -2508,10 +2503,10 @@ I'll start by reading multiple important files in parallel.
 300:   createdAt    DateTime? @default(now())
 301:   updatedAt    DateTime? @updatedAt
 302:   editions     Edition[]
-303: 
+303:
 304:   @@map("institute")
 305: }
-306: 
+306:
 307: model Edition {
 308:   id                String         @id @default(auto()) @map("_id") @db.ObjectId
 309:   instituteId       String         @db.ObjectId
@@ -2538,11 +2533,11 @@ I'll start by reading multiple important files in parallel.
 330:   createdAt         DateTime?      @default(now())
 331:   updatedAt         DateTime?      @updatedAt
 332:   Registration      Registration[]
-333: 
+333:
 334:   @@index([startDate])
 335:   @@map("edition")
 336: }
-337: 
+337:
 338: model Testimonial {
 339:   id                    String   @id @default(auto()) @map("_id") @db.ObjectId
 340:   userId                String
@@ -2553,10 +2548,10 @@ I'll start by reading multiple important files in parallel.
 345:   approved              Boolean  @default(false)
 346:   createdAt             DateTime @default(now())
 347:   updatedAt             DateTime @updatedAt
-348: 
+348:
 349:   @@map("testimonial")
 350: }
-351: 
+351:
 352: model Announcement {
 353:   id        String   @id @default(auto()) @map("_id") @db.ObjectId
 354:   userId    String
@@ -2566,29 +2561,29 @@ I'll start by reading multiple important files in parallel.
 358:   approved  Boolean  @default(false)
 359:   createdAt DateTime @default(now())
 360:   updatedAt DateTime @updatedAt
-361: 
+361:
 362:   @@map("announcement")
 363: }
-364: 
+364:
 365: model StudentIdCounter {
 366:   id         String @id @default(auto()) @map("_id") @db.ObjectId
 367:   nextNumber Int    @default(1)
 368: }
-369: 
+369:
 370: model Registration {
 371:   id        String   @id @default(auto()) @map("_id") @db.ObjectId
 372:   userId    String
 373:   approved  Boolean  @default(false)
 374:   editionId String   @db.ObjectId
 375:   createdAt DateTime @default(now())
-376: 
+376:
 377:   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 378:   edition Edition @relation(fields: [editionId], references: [id], onDelete: Cascade)
-379: 
+379:
 380:   @@unique([userId, editionId]) // A user can register for an edition only once
 381:   @@map("registration")
 382: }
-383: 
+383:
 384: model NewsletterSubscriber {
 385:   id                String    @id @default(auto()) @map("_id") @db.ObjectId
 386:   email             String    @unique
@@ -2606,7 +2601,7 @@ I'll start by reading multiple important files in parallel.
 398:   source            String?   @default("unknown")
 399:   ipAddress         String?
 400:   locale            String?
-401: 
+401:
 402:   @@map("newsletter_subscriber")
 403: }
 
@@ -2617,6 +2612,7 @@ I'll start by reading multiple important files in parallel.
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/lib/auth.ts"
@@ -2624,6 +2620,7 @@ I'll start by reading multiple important files in parallel.
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/lib/auth.ts</path>
 <type>file</type>
@@ -2641,7 +2638,7 @@ I'll start by reading multiple important files in parallel.
 11: 	oidcProvider,
 12: 	emailOTP,
 13: } from "better-auth/plugins";
-14: 
+14:
 15: import { reactInvitationEmail } from "./email/invitation";
 16: import { reactResetPasswordEmail } from "./email/rest-password";
 17: import { resend } from "./email/resend";
@@ -2652,16 +2649,16 @@ I'll start by reading multiple important files in parallel.
 22: import { generateStudentId } from "@/app/actions/functions";
 23: import VerifyEmail from "./email/VerifyEmail";
 24: import { ac, adminRole, superAdminRole } from "./auth/permissions";
-25: 
+25:
 26: const from = process.env.BETTER_AUTH_EMAIL || "notifications@costrad.org";
-27: 
+27:
 28: export const auth = betterAuth({
 29: 	appName: "College of Sustainable Transformation and Development",
-30: 
+30:
 31: 	database: prismaAdapter(prisma, {
 32: 		provider: "mongodb",
 33: 	}),
-34: 
+34:
 35: 	user: {
 36: 		additionalFields: {
 37: 			studentId: {
@@ -2670,7 +2667,7 @@ I'll start by reading multiple important files in parallel.
 40: 			},
 41: 		},
 42: 	},
-43: 
+43:
 44: 	databaseHooks: {
 45: 		user: {
 46: 			create: {
@@ -2696,13 +2693,13 @@ I'll start by reading multiple important files in parallel.
 66: 						where: { id: session.userId },
 67: 						select: { banned: true },
 68: 					});
-69: 
+69:
 70: 					if (bannedUser?.banned) {
 71: 						// Returning false prevents the session from being created
-72: 
+72:
 73: 						return false;
 74: 					}
-75: 
+75:
 76: 					return { data: session };
 77: 				},
 78: 			},
@@ -2721,13 +2718,13 @@ I'll start by reading multiple important files in parallel.
 91: 		},
 92: 		errorURL: "/auth/error",
 93: 	},
-94: 
+94:
 95: 	baseURL: baseUrl.toString(),
-96: 
+96:
 97: 	session: {
 98: 		freshAge: 60 * 60 * 24, // 24 hours - require re-auth after this time
 99: 	},
-100: 
+100:
 101: 	emailVerification: {
 102: 		autoSignInAfterVerification: true,
 103: 		sendOnSignUp: true,
@@ -2761,7 +2758,7 @@ I'll start by reading multiple important files in parallel.
 131: 		"https://costrad.net",
 132: 		"http://localhost:3000"
 133: 	],
-134: 
+134:
 135: 	account: {
 136: 		accountLinking: {
 137: 			enabled: true,
@@ -2776,7 +2773,7 @@ I'll start by reading multiple important files in parallel.
 146: 		minPasswordLength: 8,
 147: 		async sendResetPassword({ user, url }) {
 148: 			await resend.emails.send({
-149: 				from: "no-reply@costrad.org",
+149: 				from: "correspondence@costrad.org",
 150: 				to: user.email,
 151: 				subject: "Reset your COSTrAD password",
 152: 				react: reactResetPasswordEmail({
@@ -2796,7 +2793,7 @@ I'll start by reading multiple important files in parallel.
 166: 			clientSecret: process.env.MICROSOFT_CLIENT_SECRET || "",
 167: 		},
 168: 	},
-169: 
+169:
 170: 	plugins: [
 171: 		admin({
 172: 			ac,
@@ -2859,7 +2856,7 @@ I'll start by reading multiple important files in parallel.
 229: 		}),
 230: 		openAPI(),
 231: 		bearer(),
-232: 
+232:
 233: 		multiSession(),
 234: 		oAuthProxy(),
 235: 		// oidcProvider({
@@ -2876,6 +2873,7 @@ I'll start by reading multiple important files in parallel.
 **Tool: glob**
 
 **Input:**
+
 ```json
 {
   "path": "/home/tl-wr840n/Documents/Projects/development/costrad",
@@ -2884,6 +2882,7 @@ I'll start by reading multiple important files in parallel.
 ```
 
 **Output:**
+
 ```
 /home/tl-wr840n/Documents/Projects/development/costrad/app/dashboard/page.tsx
 /home/tl-wr840n/Documents/Projects/development/costrad/app/admin/layout.tsx
@@ -2996,6 +2995,7 @@ I'll start by reading multiple important files in parallel.
 _Thinking:_
 
 Good, I'm getting a good picture of the project. Let me continue exploring to understand more about:
+
 1. The app structure (layouts, pages)
 2. Authentication (Better Auth)
 3. Server actions
@@ -3005,18 +3005,10 @@ Good, I'm getting a good picture of the project. Let me continue exploring to un
 
 Let me read more key files to understand the architecture better.
 
-
-
-
-
-
-
-
-
-
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/app/layout.tsx"
@@ -3024,6 +3016,7 @@ Let me read more key files to understand the architecture better.
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/app/layout.tsx</path>
 <type>file</type>
@@ -3031,7 +3024,7 @@ Let me read more key files to understand the architecture better.
 1: import "@/styles/globals.css";
 2: import { Metadata, Viewport } from "next";
 3: import { bebas, oswald, opensans, anton, ibmplex } from "@/config/fonts";
-4: 
+4:
 5: import { Providers } from "./providers";
 6: import { siteConfig } from "@/config/site";
 7: import { Toaster } from "sonner";
@@ -3049,7 +3042,7 @@ Let me read more key files to understand the architecture better.
 19: import { GoogleAnalytics } from '@next/third-parties/google'
 20: import UpNextWrapper from "@/components/ui/UpNextWrapper";
 21: import ScrollToTop from "@/components/ui/ScrollToTop";
-22: 
+22:
 23: export const metadata: Metadata = {
 24:   title: {
 25:     default: siteConfig.name,
@@ -3069,7 +3062,7 @@ Let me read more key files to understand the architecture better.
 39:     url: true,
 40:   },
 41: };
-42: 
+42:
 43: export const viewport: Viewport = {
 44:   themeColor: [
 45:     { media: "(prefers-color-scheme: light)", color: "white" },
@@ -3077,7 +3070,7 @@ Let me read more key files to understand the architecture better.
 47:   ],
 48:   viewportFit: "cover",
 49: };
-50: 
+50:
 51: export default function RootLayout({
 52:   children,
 53: }: {
@@ -3088,7 +3081,7 @@ Let me read more key files to understand the architecture better.
 58: 			suppressHydrationWarning
 59: 			lang='en'
 60: 			data-scroll-behavior='smooth'
-61: 			className={` ${bebas.variable} ${anton.variable}  ${ibmplex.variable} ${oswald.variable} ${opensans.variable}  ${opensans.className} 
+61: 			className={` ${bebas.variable} ${anton.variable}  ${ibmplex.variable} ${oswald.variable} ${opensans.variable}  ${opensans.className}
 62:          text-lg font-extralight min-h-screen text-foreground bg-background antialiased`}
 63: 		>
 64: 			<head />
@@ -3098,7 +3091,7 @@ Let me read more key files to understand the architecture better.
 68: 				>
 69: 					<UpNextWrapper />
 70: 					<StickyMenuWrapper />
-71: 
+71:
 72: 					<main className='relative overflow-x-hidden'>
 73: 						{children}
 74: 					</main>
@@ -3108,7 +3101,7 @@ Let me read more key files to understand the architecture better.
 78: 					<Analytics />
 79: 					<SpeedInsights />
 80: 					<GoogleAnalytics gaId='G-1GJ79QESWQ' />
-81: 
+81:
 82: 					{/* <GlobalDialog /> */}
 83: 					<TestimonialDialog />
 84: 					<NewsletterDialog />
@@ -3125,6 +3118,7 @@ Let me read more key files to understand the architecture better.
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/app/actions/functions.ts"
@@ -3132,20 +3126,21 @@ Let me read more key files to understand the architecture better.
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/app/actions/functions.ts</path>
 <type>file</type>
 <content>
 1: // app/actions/functions.ts
 2: "use server";
-3: 
+3:
 4: import { headers } from "next/headers";
 5: import { NextRequest } from "next/server";
 6: import { auth } from "@/lib/auth";
 7: import { baseUrl } from "@/lib/metadata";
 8: import { prisma } from "@/prisma/dbConnect";
 9: import crypto from "crypto";
-10: 
+10:
 11: export const getInstitutes = async () => {
 12:   //  get institutes in descending order by startDate
 13:   try {
@@ -3154,11 +3149,11 @@ Let me read more key files to understand the architecture better.
 16:       // cache: "force-cache",
 17:       // next: { revalidate: 300 }, // 12 minutes
 18:     });
-19: 
+19:
 20:     if (!res.ok) {
 21:       throw new Error(`HTTP error: ${res.status} ${res.statusText}`);
 22:     }
-23: 
+23:
 24:     const institutes = await res.json();
 25:     return Array.isArray(institutes) ? institutes : [];
 26:   } catch (err) {
@@ -3166,7 +3161,7 @@ Let me read more key files to understand the architecture better.
 28:     return null; // Explicitly return null
 29:   }
 30: };
-31: 
+31:
 32: // eslint-disable-next-line @typescript-eslint/no-unused-vars
 33: async function getProfilePercentage() {
 34:   try {
@@ -3175,7 +3170,7 @@ Let me read more key files to understand the architecture better.
 37:       throw new Error("Failed to fetch profile");
 38:     }
 39:     const profile = await response.json();
-40: 
+40:
 41:     const profileFields = [
 42:       "gender",
 43:       "dateOfBirth",
@@ -3213,17 +3208,17 @@ Let me read more key files to understand the architecture better.
 75:       "interests",
 76:       "skills",
 77:     ];
-78: 
+78:
 79:     const totalFields = profileFields.length;
 80:     let filledFields = 0;
-81: 
+81:
 82:     profileFields.forEach((field) => {
 83:       const value = profile[field];
 84:       if (isFieldFilled(value)) {
 85:         filledFields++;
 86:       }
 87:     });
-88: 
+88:
 89:     const percentage = (filledFields / totalFields) * 100;
 90:     return percentage;
 91:   } catch (error) {
@@ -3231,7 +3226,7 @@ Let me read more key files to understand the architecture better.
 93:     return 0;
 94:   }
 95: }
-96: 
+96:
 97: function isFieldFilled(field: string | any[] | null | undefined) {
 98:   if (field === null || field === undefined) {
 99:     return false;
@@ -3244,7 +3239,7 @@ Let me read more key files to understand the architecture better.
 106:   }
 107:   return true;
 108: }
-109: 
+109:
 110: export async function generateStudentId(): Promise<string> {
 111:   const result = await prisma.studentIdCounter.findFirst();
 112:   if (!result) {
@@ -3253,16 +3248,16 @@ Let me read more key files to understand the architecture better.
 115:       data: { nextNumber: 8 }, // we'll return 1 now
 116:     });
 117:     return "COSTRAD-00007";}
-118: 
+118:
 119:   const current = result.nextNumber;
 120:   await prisma.studentIdCounter.update({
 121:     where: { id: result.id },
 122:     data: { nextNumber: current + 1 },
 123:   });
-124: 
+124:
 125:   return `COSTRAD-${String(current).padStart(5, "0")}`;
 126: }
-127: 
+127:
 128: export async function getInstituteBySlug(slug: string) {
 129:   try {
 130:     const res = await fetch(`${baseUrl}/api/institutes/${slug}`);
@@ -3274,47 +3269,47 @@ Let me read more key files to understand the architecture better.
 136:     return null;
 137:   }
 138: }
-139: 
+139:
 140: export async function generateUnsubscribeToken() {
 141:   return crypto.randomBytes(32).toString("hex");
 142: }
-143: 
+143:
 144: export async function isEmailVerified(email: string): Promise<boolean> {
 145:   if (!email) return false;
-146: 
+146:
 147:   const user = await prisma.user.findUnique({
 148:     where: { email },
 149:     select: { emailVerified: true },
 150:   });
-151: 
+151:
 152:   return user?.emailVerified === true;
 153: }
 154: export async function getUserRole() {
 155:   const session = await auth.api.getSession({
 156:     headers: await headers(),
 157:   });
-158: 
+158:
 159:   if (!session || !session.user) {
 160:     return null;
 161:   }
-162: 
+162:
 163:   // Fetch user from database to get role
 164:   const user = await prisma.user.findUnique({
 165:     where: { id: session.user.id },
 166:     select: { role: true },
 167:   });
-168: 
+168:
 169:   return user?.role || null;
 170: }
-171: 
+171:
 172: // app/actions/functions.ts
 173: export async function getCurrentUser(req?: NextRequest) {
 174:   const session = await auth.api.getSession({
 175:     headers: await headers(),
 176:   });
-177: 
+177:
 178:   if (!session?.user?.id) return null;
-179: 
+179:
 180:   // Fetch user from database to get additional fields like banned status
 181:   const user = await prisma.user.findUnique({
 182:     where: { id: session.user.id },
@@ -3328,21 +3323,21 @@ Let me read more key files to understand the architecture better.
 190:       studentId: true,
 191:     },
 192:   });
-193: 
+193:
 194:   // If user is banned, deny
 195:   if (user?.banned) return null;
-196: 
+196:
 197:   return user;
 198: }
-199: 
+199:
 200: export async function getCurrentSession(req?: NextRequest) {
 201:   const session = await auth.api.getSession({
 202:     headers: await headers(),
 203:   });
-204: 
+204:
 205:   return session ?? null;
 206: }
-207: 
+207:
 208: export async function getCurrentEditions() {
 209:   // get editions where the starting date is greater than today
 210:   try {
@@ -3373,6 +3368,7 @@ Let me read more key files to understand the architecture better.
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/lib/auth/permissions.ts"
@@ -3380,13 +3376,14 @@ Let me read more key files to understand the architecture better.
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/lib/auth/permissions.ts</path>
 <type>file</type>
 <content>
 1: import { createAccessControl } from "better-auth/plugins/access";
 2: import { defaultStatements } from "better-auth/plugins/admin/access";
-3: 
+3:
 4: /**
 5:  * Access control for the admin plugin.
 6:  * `defaultStatements` contains the built-in user/session permissions.
@@ -3394,9 +3391,9 @@ Let me read more key files to understand the architecture better.
 8: const statement = {
 9:   ...defaultStatements,
 10: } as const;
-11: 
+11:
 12: export const ac = createAccessControl(statement);
-13: 
+13:
 14: /** Admin — can manage users and sessions */
 15: export const adminRole = ac.newRole({
 16:   user: [
@@ -3412,7 +3409,7 @@ Let me read more key files to understand the architecture better.
 26:   ],
 27:   session: ["list", "revoke", "delete"],
 28: });
-29: 
+29:
 30: /** Superadmin — full control including impersonating other admins */
 31: export const superAdminRole = ac.newRole({
 32:   user: [
@@ -3437,6 +3434,7 @@ Let me read more key files to understand the architecture better.
 **Tool: glob**
 
 **Input:**
+
 ```json
 {
   "path": "/home/tl-wr840n/Documents/Projects/development/costrad",
@@ -3445,6 +3443,7 @@ Let me read more key files to understand the architecture better.
 ```
 
 **Output:**
+
 ```
 /home/tl-wr840n/Documents/Projects/development/costrad/components/ui/tooltip.tsx
 /home/tl-wr840n/Documents/Projects/development/costrad/components/ui/sheet.tsx
@@ -3558,18 +3557,10 @@ _Thinking:_
 
 I'm getting a good picture of the project structure. Let me continue exploring the lib folder, email templates, API routes, and other key areas.
 
-
-
-
-
-
-
-
-
-
 **Tool: filesystem_list_directory**
 
 **Input:**
+
 ```json
 {
   "path": "/home/tl-wr840n/Documents/Projects/development/costrad/lib"
@@ -3577,6 +3568,7 @@ I'm getting a good picture of the project structure. Let me continue exploring t
 ```
 
 **Output:**
+
 ```
 [DIR] __tests__
 [DIR] auth
@@ -3598,6 +3590,7 @@ I'm getting a good picture of the project structure. Let me continue exploring t
 **Tool: filesystem_list_directory**
 
 **Input:**
+
 ```json
 {
   "path": "/home/tl-wr840n/Documents/Projects/development/costrad/lib/email"
@@ -3605,6 +3598,7 @@ I'm getting a good picture of the project structure. Let me continue exploring t
 ```
 
 **Output:**
+
 ```
 [FILE] VerifyEmail.tsx
 [FILE] admin-registration-approval.tsx
@@ -3619,6 +3613,7 @@ I'm getting a good picture of the project structure. Let me continue exploring t
 **Tool: glob**
 
 **Input:**
+
 ```json
 {
   "pattern": "app/api/**/*.{ts,tsx}",
@@ -3627,6 +3622,7 @@ I'm getting a good picture of the project structure. Let me continue exploring t
 ```
 
 **Output:**
+
 ```
 /home/tl-wr840n/Documents/Projects/development/costrad/app/api/register/route.ts
 /home/tl-wr840n/Documents/Projects/development/costrad/app/api/search/route.ts
@@ -3678,17 +3674,12 @@ _Thinking:_
 
 Let me continue exploring the project to understand more key areas: providers, config files, hooks, and additional utilities.
 
-
-
-
-
-
 Let me explore more of the codebase structure:
-
 
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/app/providers.tsx"
@@ -3696,23 +3687,24 @@ Let me explore more of the codebase structure:
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/app/providers.tsx</path>
 <type>file</type>
 <content>
 1: "use client";
-2: 
+2:
 3: import * as React from "react";
 4: import { ThemeProvider as NextThemesProvider } from "next-themes";
 5: import type { ThemeProviderProps } from "next-themes";
 6: import { DialogProvider } from "@/providers/DialogProvider";
 7: import { LazyMotion, domAnimation } from "framer-motion";
-8: 
+8:
 9: export interface ProvidersProps {
 10:   children: React.ReactNode;
 11:   themeProps?: ThemeProviderProps;
 12: }
-13: 
+13:
 14: export function Providers({ children, themeProps }: ProvidersProps) {
 15:   return (
 16:     <NextThemesProvider
@@ -3735,6 +3727,7 @@ Let me explore more of the codebase structure:
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/lib/utils.ts"
@@ -3742,13 +3735,14 @@ Let me explore more of the codebase structure:
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/lib/utils.ts</path>
 <type>file</type>
 <content>
 1: import { clsx, type ClassValue } from "clsx"
 2: import { twMerge } from "tailwind-merge"
-3: 
+3:
 4: export function cn(...inputs: ClassValue[]) {
 5:   return twMerge(clsx(inputs))
 6: }
@@ -3760,6 +3754,7 @@ Let me explore more of the codebase structure:
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/prisma/seed.ts"
@@ -3767,6 +3762,7 @@ Let me explore more of the codebase structure:
 ```
 
 **Error:**
+
 ```
 File not found: /home/tl-wr840n/Documents/Projects/development/costrad/prisma/seed.ts
 ```
@@ -3774,6 +3770,7 @@ File not found: /home/tl-wr840n/Documents/Projects/development/costrad/prisma/se
 **Tool: glob**
 
 **Input:**
+
 ```json
 {
   "path": "/home/tl-wr840n/Documents/Projects/development/costrad",
@@ -3782,6 +3779,7 @@ File not found: /home/tl-wr840n/Documents/Projects/development/costrad/prisma/se
 ```
 
 **Output:**
+
 ```
 /home/tl-wr840n/Documents/Projects/development/costrad/hooks/use-mobile.ts
 /home/tl-wr840n/Documents/Projects/development/costrad/hooks/use-session.ts
@@ -3799,19 +3797,10 @@ _Thinking:_
 
 Let me continue exploring to understand more about the providers directory, the hooks, and the config directory.
 
-
-
-
-
-
-
-
-
-
-
 **Tool: filesystem_list_directory**
 
 **Input:**
+
 ```json
 {
   "path": "/home/tl-wr840n/Documents/Projects/development/costrad/providers"
@@ -3819,6 +3808,7 @@ Let me continue exploring to understand more about the providers directory, the 
 ```
 
 **Output:**
+
 ```
 [FILE] DialogProvider.tsx
 [FILE] theme-provider.tsx
@@ -3827,6 +3817,7 @@ Let me continue exploring to understand more about the providers directory, the 
 **Tool: filesystem_list_directory**
 
 **Input:**
+
 ```json
 {
   "path": "/home/tl-wr840n/Documents/Projects/development/costrad/config"
@@ -3834,6 +3825,7 @@ Let me continue exploring to understand more about the providers directory, the 
 ```
 
 **Output:**
+
 ```
 [FILE] fonts.ts
 [FILE] site.ts
@@ -3842,6 +3834,7 @@ Let me continue exploring to understand more about the providers directory, the 
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/hooks/use-session.ts"
@@ -3849,6 +3842,7 @@ Let me continue exploring to understand more about the providers directory, the 
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/hooks/use-session.ts</path>
 <type>file</type>
@@ -3856,11 +3850,11 @@ Let me continue exploring to understand more about the providers directory, the 
 1: import { useEffect, useState } from "react";
 2: import { Session } from "better-auth/types";
 3: import { client } from "@/lib/auth-client";
-4: 
+4:
 5: export function useSession() {
 6:   const [session, setSession] = useState<Session | undefined>(undefined);
 7:   const [isLoading, setIsLoading] = useState(true);
-8: 
+8:
 9:   useEffect(() => {
 10:     async function fetchSession() {
 11:       try {
@@ -3872,10 +3866,10 @@ Let me continue exploring to understand more about the providers directory, the 
 17:         setIsLoading(false);
 18:       }
 19:     }
-20: 
+20:
 21:     fetchSession();
 22:   }, []);
-23: 
+23:
 24:   return { session, isLoading };
 25: }
 
@@ -3886,6 +3880,7 @@ Let me continue exploring to understand more about the providers directory, the 
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/prisma/dbConnect.ts"
@@ -3893,20 +3888,21 @@ Let me continue exploring to understand more about the providers directory, the 
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/prisma/dbConnect.ts</path>
 <type>file</type>
 <content>
 1: import { PrismaClient } from "@prisma/client";
-2: 
+2:
 3: const globalForPrisma = global as unknown as { prisma: PrismaClient };
-4: 
+4:
 5: export const prisma =
 6:   globalForPrisma.prisma ||
 7:   new PrismaClient({
 8:     log: ["warn"],
 9:   });
-10: 
+10:
 11: if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
 (End of file - total 11 lines)
@@ -3921,18 +3917,10 @@ _Thinking:_
 
 Let me continue exploring the config, lib/auth-client.ts, and other key files to understand the project better.
 
-
-
-
-
-
-
-
-
-
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/config/site.ts"
@@ -3940,13 +3928,14 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/config/site.ts</path>
 <type>file</type>
 <content>
 1: // /config/site.ts
 2: export type SiteConfig = typeof siteConfig;
-3: 
+3:
 4: export const siteConfig = {
 5:   name: "College of Sustainable Transformation and Development (COSTrAD)",
 6:   shortName: "COSTrAD",
@@ -4033,7 +4022,7 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 87:       number: "08",
 88:     },
 89:   ],
-90: 
+90:
 91:   links: {
 92:     github: "https://github.com/nextui-org/nextui",
 93:     twitter: "https://twitter.com/getnextui",
@@ -4042,7 +4031,7 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 96:     sponsor: "https://patreon.com/jrgarciadev",
 97:   },
 98: };
-99: 
+99:
 100: export const quickLinks = [
 101:   {
 102:     label: "Privacy Policy",
@@ -4083,12 +4072,12 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 137:   // { number: '05', label: 'Events & Webinars', href: '/events-and-webinar' },
 138:   { number: "05", label: "contact", href: "/contact" },
 139: ];
-140: 
+140:
 141: export const shareSocial = {
 142:   url: "https://www.costrad.org",
 143:   title: "COSTrAD - By: Dr. Abu Bako",
 144: };
-145: 
+145:
 146: export const getBaseUrl = () => {
 147:   if (typeof window !== "undefined") {
 148:     // Running on the client
@@ -4105,6 +4094,7 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/lib/auth-client.ts"
@@ -4112,6 +4102,7 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/lib/auth-client.ts</path>
 <type>file</type>
@@ -4130,7 +4121,7 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 12: import { toast } from "sonner";
 13: import { baseUrl } from "./metadata";
 14: import { ac, adminRole, superAdminRole } from "./auth/permissions";
-15: 
+15:
 16: export const client = createAuthClient({
 17: 	baseURL: `${baseUrl}` || "http://localhost:3000",
 18: 	plugins: [
@@ -4141,7 +4132,7 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 23: 				window.location.href = "/auth/two-factor";
 24: 			},
 25: 		}),
-26: 
+26:
 27: 		adminClient({
 28: 			ac,
 29: 			roles: {
@@ -4164,7 +4155,7 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 46: 		},
 47: 	},
 48: });
-49: 
+49:
 50: export const {
 51:   admin,
 52:   signUp,
@@ -4186,6 +4177,7 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/lib/metadata.ts"
@@ -4193,13 +4185,14 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/lib/metadata.ts</path>
 <type>file</type>
 <content>
 1: import { siteConfig } from "@/config/site";
 2: import type { Metadata } from "next/types";
-3: 
+3:
 4: export function createMetadata(override: Metadata): Metadata {
 5: 	return {
 6: 		...override,
@@ -4221,14 +4214,14 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 22: 		},
 23: 	};
 24: }
-25: 
-26: 
+25:
+26:
 27: 		// lib/metadata.ts
 28: export const baseUrl =
 29: 	process.env.NODE_ENV === "development"
 30: 		? new URL("http://localhost:3000")
 31: 		: new URL(`https://www.costrad.org`);
-32: 
+32:
 
 (End of file - total 32 lines)
 </content>
@@ -4237,6 +4230,7 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/providers/DialogProvider.tsx"
@@ -4244,37 +4238,38 @@ Let me continue exploring the config, lib/auth-client.ts, and other key files to
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/providers/DialogProvider.tsx</path>
 <type>file</type>
 <content>
 1: // providers/DialogProvider.tsx
 2: "use client";
-3: 
+3:
 4: import { createContext, useContext, useState, ReactNode } from "react";
-5: 
+5:
 6: type DialogKey = string;
-7: 
+7:
 8: type DialogContextType = {
 9:   open: (key: DialogKey) => void;
 10:   close: () => void;
 11:   activeDialog: DialogKey | null;
 12: };
-13: 
+13:
 14: const DialogContext = createContext<DialogContextType | null>(null);
-15: 
+15:
 16: export function useDialog() {
 17:   const context = useContext(DialogContext);
 18:   if (!context) throw new Error("useDialog must be used within DialogProvider");
 19:   return context;
 20: }
-21: 
+21:
 22: export function DialogProvider({ children }: { children: ReactNode }) {
 23:   const [activeDialog, setActiveDialog] = useState<DialogKey | null>(null);
-24: 
+24:
 25:   const open = (key: DialogKey) => setActiveDialog(key);
 26:   const close = () => setActiveDialog(null);
-27: 
+27:
 28:   return (
 29:     <DialogContext.Provider value={{ open, close, activeDialog }}>
 30:       {children}
@@ -4294,20 +4289,12 @@ _Thinking:_
 
 Now let me get more information about the email templates, API routes, and other important components of the project.
 
-
-
-
-
-
-
-
-
 Now let me explore the email templates and some more API routes:
-
 
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/lib/email/VerifyEmail.tsx"
@@ -4315,6 +4302,7 @@ Now let me explore the email templates and some more API routes:
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/lib/email/VerifyEmail.tsx</path>
 <type>file</type>
@@ -4331,12 +4319,12 @@ Now let me explore the email templates and some more API routes:
 10:   Text,
 11:   Button,
 12: } from "@react-email/components";
-13: 
+13:
 14: interface VerifyEmailProps {
 15:   username?: string;
 16:   verifyLink: string;
 17: }
-18: 
+18:
 19: export const VerifyEmail = ({ username = "there", verifyLink }: VerifyEmailProps) => (
 20:   <Html>
 21:     <Head />
@@ -4381,7 +4369,7 @@ Now let me explore the email templates and some more API routes:
 60:     </Body>
 61:   </Html>
 62: );
-63: 
+63:
 64: export default VerifyEmail;
 
 (End of file - total 64 lines)
@@ -4391,6 +4379,7 @@ Now let me explore the email templates and some more API routes:
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/app/api/institutes/route.ts"
@@ -4398,6 +4387,7 @@ Now let me explore the email templates and some more API routes:
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/app/api/institutes/route.ts</path>
 <type>file</type>
@@ -4408,12 +4398,12 @@ Now let me explore the email templates and some more API routes:
 4: import { revalidatePath } from "next/cache";
 5: import { getCurrentUser } from "@/app/actions/functions";
 6: import { baseUrl } from "@/lib/metadata";
-7: 
+7:
 8: // GET handler
 9: export async function GET(req: NextRequest) {
 10:   // const authResult = checkAuth(req);
 11:   // if (authResult) return authResult;
-12: 
+12:
 13:   try {
 14:     const institutes = await prisma.institute.findMany({
 15:       orderBy: {
@@ -4440,7 +4430,7 @@ Now let me explore the email templates and some more API routes:
 36:     await prisma.$disconnect();
 37:   }
 38: }
-39: 
+39:
 40: // POST handler
 41: export async function POST(req: NextRequest) {
 42:   const user = await getCurrentUser();
@@ -4467,17 +4457,17 @@ Now let me explore the email templates and some more API routes:
 63:   if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
 64:     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 65:   }
-66: 
+66:
 67:   const body = await req.json();
 68:   const { slug, overview, about } = body;
-69: 
+69:
 70:   if (!slug) {
 71:     return NextResponse.json(
 72:       { error: "Missing institute slug" },
 73:       { status: 400 }
 74:     );
 75:   }
-76: 
+76:
 77:   try {
 78:     const existing = await prisma.institute.findUnique({ where: { slug } });
 79:     if (!existing) {
@@ -4486,7 +4476,7 @@ Now let me explore the email templates and some more API routes:
 82:         { status: 404 }
 83:       );
 84:     }
-85: 
+85:
 86:     const updated = await prisma.institute.update({
 87:       where: { slug },
 88:       data: {
@@ -4497,11 +4487,11 @@ Now let me explore the email templates and some more API routes:
 93:         editions: false,
 94:       },
 95:     });
-96: 
+96:
 97:     // 🔄 Revalidate both public and admin edit pages
 98:     revalidatePath(`${baseUrl}/institutes/${slug}`);
 99:     revalidatePath(`${baseUrl}/admin/institutes/${slug}/edit`);
-100: 
+100:
 101:     return NextResponse.json(updated);
 102:   } catch (error) {
 103:     console.error("❌ Update failed:", error);
@@ -4511,14 +4501,14 @@ Now let me explore the email templates and some more API routes:
 107:     );
 108:   }
 109: }
-110: 
+110:
 111: // DELETE handler
 112: export async function DELETE(req: NextRequest) {
 113:   const user = await getCurrentUser();
 114:   if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
 115:     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 116:   }
-117: 
+117:
 118:   try {
 119:     const { id } = await req.json();
 120:     if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
@@ -4542,6 +4532,7 @@ Now let me explore the email templates and some more API routes:
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/app/api/auth/[...all]/route.ts"
@@ -4549,6 +4540,7 @@ Now let me explore the email templates and some more API routes:
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/app/api/auth/[...all]/route.ts</path>
 <type>file</type>
@@ -4556,7 +4548,7 @@ Now let me explore the email templates and some more API routes:
 1: // app/api/auth/[...all]/route.ts
 2: import { auth } from "@/lib/auth";
 3: import { toNextJsHandler } from "better-auth/next-js";
-4: 
+4:
 5: export const { GET, POST } = toNextJsHandler(auth.handler);
 
 (End of file - total 5 lines)
@@ -4571,19 +4563,12 @@ _Thinking:_
 
 Let me explore a few more important areas to get a complete picture: the styles, the middleware, and any additional configuration files.
 
-
-
-
-
-
-
 Let me explore the styles and middleware:
-
-
 
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/middleware.ts"
@@ -4591,6 +4576,7 @@ Let me explore the styles and middleware:
 ```
 
 **Error:**
+
 ```
 File not found: /home/tl-wr840n/Documents/Projects/development/costrad/middleware.ts
 ```
@@ -4598,6 +4584,7 @@ File not found: /home/tl-wr840n/Documents/Projects/development/costrad/middlewar
 **Tool: glob**
 
 **Input:**
+
 ```json
 {
   "pattern": "styles/**/*.{css,scss}",
@@ -4606,6 +4593,7 @@ File not found: /home/tl-wr840n/Documents/Projects/development/costrad/middlewar
 ```
 
 **Output:**
+
 ```
 /home/tl-wr840n/Documents/Projects/development/costrad/styles/globals.css
 /home/tl-wr840n/Documents/Projects/development/costrad/styles/fonts.css
@@ -4618,6 +4606,7 @@ File not found: /home/tl-wr840n/Documents/Projects/development/costrad/middlewar
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/components/layout/Footer-Wrapper.tsx"
@@ -4625,27 +4614,28 @@ File not found: /home/tl-wr840n/Documents/Projects/development/costrad/middlewar
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/components/layout/Footer-Wrapper.tsx</path>
 <type>file</type>
 <content>
 1: "use client";
-2: 
+2:
 3: import { usePathname } from "next/navigation";
 4: import Footer from "@/components/layout/footer";
-5: 
+5:
 6: export default function FooterWrapper() {
 7:   const pathname = usePathname();
-8: 
+8:
 9:   // Pages where Footer should be hidden (match by prefix)
 10:   const hiddenPrefixes = ["/admin", "/www", "/coming-soon", "/auth","/apply","/thank-you"];
-11: 
+11:
 12:   const shouldHideFooter = hiddenPrefixes.some((prefix) =>
 13:     pathname.startsWith(prefix)
 14:   );
-15: 
+15:
 16:   if (shouldHideFooter) return null;
-17: 
+17:
 18:   return <Footer />;
 19: }
 
@@ -4663,21 +4653,12 @@ Let me look at a few more components to understand the navigation structure and 
 
 Let me also check the main page and the admin pages to get a better picture of the project.
 
-
-
-
-
-
-
-
-
 Let me look at a few more key components:
-
-
 
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/components/navigation/StickyMenuWrapper.tsx"
@@ -4685,27 +4666,28 @@ Let me look at a few more key components:
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/components/navigation/StickyMenuWrapper.tsx</path>
 <type>file</type>
 <content>
 1: "use client";
-2: 
+2:
 3: import { usePathname } from "next/navigation";
 4: import StickyMenu from "@/components/navigation/StickyMenu";
-5: 
+5:
 6: export default function StickyMenuWrapper() {
 7:   const pathname = usePathname();
-8: 
+8:
 9:   // Pages where Footer should be hidden (match by prefix)
 10:   const hiddenPrefixes = ["/admin", "/www", "/coming-soon", "/auth","/apply","/thank-you"];
-11: 
+11:
 12:   const shouldHideFooter = hiddenPrefixes.some((prefix) =>
 13:     pathname.startsWith(prefix)
 14:   );
-15: 
+15:
 16:   if (shouldHideFooter) return null;
-17: 
+17:
 18:   return <StickyMenu />;
 19: }
 
@@ -4716,6 +4698,7 @@ Let me look at a few more key components:
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/app/admin/page.tsx"
@@ -4723,20 +4706,21 @@ Let me look at a few more key components:
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/app/admin/page.tsx</path>
 <type>file</type>
 <content>
 1: // import { ChartAreaInteractive } from "@/components/chart-area-interactive";
 2: import { DataTable } from "@/components/ui/data-table/data-table";
-3: 
+3:
 4: import { ActiveUsersCard } from "@/components/analytics/ActiveUsersCard";
 5: import { SessionsCard } from "@/components/analytics/SessionsCard";
 6: import { RegisteredUsersCard } from "@/components/analytics/RegisteredUsersCard";
 7: import { MostPopularEditionCard } from "@/components/analytics/DashboardMetricsCards";
 8: import { DevicesUsage } from "@/components/analytics/DevicesUsage";
 9: import { GaTopPagesChartBar } from "@/components/chart-area-interactive";
-10: 
+10:
 11: export default function Page() {
 12:   return (
 13:     <div className="space-y-4">
@@ -4745,22 +4729,22 @@ Let me look at a few more key components:
 16:         <ActiveUsersCard />
 17:         <SessionsCard />
 18:         <RegisteredUsersCard />
-19: 
+19:
 20:       </section>
 21:       {/* <SectionCards /> */}
 22:       <section className="px-4 lg:px-6">
 23:         {/* <ChartAreaInteractive /> */}
-24: 
+24:
 25:       <GaTopPagesChartBar />
 26:         {/* <GaTopPagesChart /> */}
 27:       </section>
 28:       <section className="px-4 lg:px-6">
 29:         {/* <ChartAreaInteractive /> */}
-30: 
-31:       
+30:
+31:
 32:         <DevicesUsage />
 33:       </section>
-34: 
+34:
 35:       {/* <PageTrendChart path="/about" /> */}
 36:       {/* <DataTable data={data} /> */}
 37:     </div>
@@ -4774,6 +4758,7 @@ Let me look at a few more key components:
 **Tool: read**
 
 **Input:**
+
 ```json
 {
   "filePath": "/home/tl-wr840n/Documents/Projects/development/costrad/app/page.tsx"
@@ -4781,19 +4766,20 @@ Let me look at a few more key components:
 ```
 
 **Output:**
+
 ```
 <path>/home/tl-wr840n/Documents/Projects/development/costrad/app/page.tsx</path>
 <type>file</type>
 <content>
 1: "use client";
-2: 
+2:
 3: import HeroSection from "@/components/sections/HeroSection";
 4: import { InstitutesIntro } from "@/components/sections/InstitutesIntro";
 5: import dynamic from "next/dynamic";
 6: import { FadeIn } from "@/components/animations/FadeIn";
 7: import { AnimatePresence } from "framer-motion";
 8: import { useEffect, useState } from "react";
-9: 
+9:
 10: const Jumbotron = dynamic(() => import("@/components/sections/Jumbotron"));
 11: const VelocityScroll = dynamic(() =>
 12: 	import("@/components/magicui/scroll-based-velocity").then(
@@ -4804,15 +4790,15 @@ Let me look at a few more key components:
 17: const Testimonials = dynamic(() =>
 18: 	import("@/components/sections/Testimonials").then((mod) => mod.Testimonials),
 19: );
-20: 
+20:
 21: export default function Home() {
 22:   const [isLoading, setIsLoading] = useState(true);
-23: 
+23:
 24:   // useEffect(() => {
 25:   //   (async () => {
 26:   //     const LocomotiveScroll = (await import("locomotive-scroll")).default;
 27:   //     const locomotiveScroll = new LocomotiveScroll();
-28: 
+28:
 29:   //     setTimeout(() => {
 30:   //       setIsLoading(false);
 31:   //       document.body.style.cursor = "default";
@@ -4820,7 +4806,7 @@ Let me look at a few more key components:
 33:   //     }, 2000);
 34:   //   })();
 35:   // }, []);
-36: 
+36:
 37:   return (
 38: 		<main className=' space-y-2 '>
 39: 			{/* <AnimatePresence mode="wait">
@@ -4830,7 +4816,7 @@ Let me look at a few more key components:
 43: 			<InstitutesIntro />
 44: 			<FadeIn
 45: 				as='section'
-46: 				className='px-2 md:p-8 max-w-8xl text-[24px] mx-auto md:text-[37px] 
+46: 				className='px-2 md:p-8 max-w-8xl text-[24px] mx-auto md:text-[37px]
 47: 				md:min-h-[60dvh] font-oswald flex flex-col justify-center pb-24'
 48: 			>
 49: 				<div>
@@ -4849,7 +4835,7 @@ Let me look at a few more key components:
 62: 					<span className='text-destructive'>vision</span>.
 63: 				</div>
 64: 			</FadeIn>
-65: 
+65:
 66: 			<FadeIn className='pb-5 md:pb-10'>
 67: 				<Jumbotron
 68: 					className='object-center'
@@ -4870,7 +4856,7 @@ Let me look at a few more key components:
 83: 					&mdash;
 84: 				</VelocityScroll>
 85: 			</div>
-86: 
+86:
 87: 			<WhyCostrad />
 88: 			<Testimonials className='hidden' />
 89: 			{/* <Newsletter /> */}
@@ -4912,18 +4898,10 @@ I now have a good overview of the codebase. Let me store what I've learned in me
 
 Let me store this information in memory.
 
-
-
-
-
-
-
-
-
-
 **Tool: memory_create_entities**
 
 **Input:**
+
 ```json
 {
   "entities": [
@@ -5049,6 +5027,7 @@ Let me store this information in memory.
 ```
 
 **Output:**
+
 ```
 [
   {
@@ -5169,18 +5148,12 @@ _Thinking:_
 
 Now let me add the project entity and create relations between entities.
 
-
-
-
-
-
 Now let me create the relations and add the project entity:
-
-
 
 **Tool: memory_create_relations**
 
 **Input:**
+
 ```json
 {
   "relations": [
@@ -5244,6 +5217,7 @@ Now let me create the relations and add the project entity:
 ```
 
 **Output:**
+
 ```
 [
   {
@@ -5312,15 +5286,14 @@ _Thinking:_
 
 I've studied the codebase and memorized it. Let me give a brief summary to the user.
 
-
-
-
 I've studied and memorized the **Costrad 2025 Platform** codebase. Here's a summary:
 
 ## Project Overview
+
 An educational/management platform for **COSTrAD (College of Sustainable Transformation and Development)** built with Next.js 15.
 
 ## Tech Stack
+
 - **Frontend**: Next.js 15 (App Router), Tailwind CSS 4, Radix UI, Framer Motion
 - **Backend**: MongoDB via Prisma ORM
 - **Auth**: Better Auth with Google/Microsoft OAuth + 2FA (email OTP)
@@ -5328,12 +5301,14 @@ An educational/management platform for **COSTrAD (College of Sustainable Transfo
 - **Forms**: React Hook Form + Zod validation
 
 ## Key Data Models
+
 - **User** → Profile (1:1), Registrations (many), Testimonials, Announcements
 - **Institute** → Editions (1:many)
 - **Edition** → Registrations (1:many)
 - **Organization** → Members, Invitations
 
 ## Key Features
+
 - Role-based access (USER/ADMIN/SUPERADMIN) with RBAC permissions
 - Institute/Edition management for courses with pricing
 - Registration system with approval workflow
@@ -5342,6 +5317,7 @@ An educational/management platform for **COSTrAD (College of Sustainable Transfo
 - Organization management with team invitations
 
 ## Important Files
+
 - `prisma/schema.prisma` - Database models
 - `lib/auth.ts` - Server-side auth configuration
 - `lib/auth-client.ts` - Client-side auth client
@@ -5362,10 +5338,6 @@ _Thinking:_
 
 The user is asking if I'm done memorizing the codebase. I should give a brief confirmation.
 
-
-
-
 Yes, done. I've memorized the key aspects of the Costrad 2025 Platform and stored the knowledge in the memory graph.
 
 ---
-

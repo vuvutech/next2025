@@ -74,12 +74,12 @@ export function EditionSelect({
             ) : (
               <>
                 <Select onValueChange={onSelect}>
-                  <SelectTrigger className="w-full h-20 px-4 py-6">
+                  <SelectTrigger className="w-full h-24 px-4 py-6">
                     <SelectValue placeholder="Select Edition" />
                   </SelectTrigger>
-                  <SelectContent className="w-auto">
+                  <SelectContent className="w-auto h-auto">
                     {editions.map(({ id, title, institute }) => (
-                      <SelectItem key={id} value={id} className="h-16">
+                      <SelectItem key={id} value={id} className="h-20">
                         <div className="flex items-center space-x-2">
                           {institute.logo && (
                             <Image
@@ -87,7 +87,8 @@ export function EditionSelect({
                               alt={`${institute.name} logo`}
                               width={150}
                               height={150}
-                              className=" w-10 h-10  sm:w-12 sm:h-12 object-contain rounded"
+                              className=" w-10 h-10  sm:w-12 sm:h-12 object-contain rounded 
+                              box-content "
                             />
                           )}
                           <div className="text-left">
