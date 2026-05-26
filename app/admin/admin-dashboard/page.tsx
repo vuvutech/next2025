@@ -52,66 +52,16 @@ type Counts = {
 };
 
 const navItems: NavItem[] = [
-  {
-    title: "Dashboard",
-    url: "/admin/",
-    icon: IconDashboard,
-    countKey: "users",
-  },
-  {
-    title: "Edition Cohorts",
-    url: "/admin/edition-cohorts",
-    icon: IconSchool,
-    countKey: "cohorts",
-  },
-  {
-    title: "All Registrations",
-    url: "/admin/registrations",
-    icon: IconDatabase,
-    countKey: "registrations",
-  },
-  {
-    title: "Institutes",
-    url: "/admin/institutes",
-    icon: IconListDetails,
-    countKey: "institutes",
-  },
-  {
-    title: "Institute Editions",
-    url: "/admin/editions",
-    icon: IconChartBar,
-    countKey: "editions",
-  },
-  {
-    title: "Donations",
-    url: "/admin/donations",
-    icon: IconMoneybagPlus,
-    countKey: "donations",
-  },
-  {
-    title: "Announcements",
-    url: "/admin/announcements",
-    icon: IconNewSection,
-    countKey: "announcements",
-  },
-  {
-    title: "Publications",
-    url: "/admin/publications",
-    icon: IconFolder,
-    countKey: "publications",
-  },
-  {
-    title: "Testimonials",
-    url: "/admin/testimonials",
-    icon: IconPackages,
-    countKey: "testimonials",
-  },
-  {
-    title: "Participants",
-    url: "/admin/participants",
-    icon: IconUsers,
-    countKey: "participants",
-  },
+  { title: "Dashboard", url: "/admin/", icon: IconDashboard, countKey: "users" },
+  { title: "Edition Cohorts", url: "/admin/edition-cohorts", icon: IconSchool, countKey: "cohorts" },
+  { title: "All Registrations", url: "/admin/registrations", icon: IconDatabase, countKey: "registrations" },
+  { title: "Institutes", url: "/admin/institutes", icon: IconListDetails, countKey: "institutes" },
+  { title: "Institute Editions", url: "/admin/editions", icon: IconChartBar, countKey: "editions" },
+  { title: "Donations", url: "/admin/donations", icon: IconMoneybagPlus, countKey: "donations" },
+  { title: "Announcements", url: "/admin/announcements", icon: IconNewSection, countKey: "announcements" },
+  { title: "Publications", url: "/admin/publications", icon: IconFolder, countKey: "publications" },
+  { title: "Testimonials", url: "/admin/testimonials", icon: IconPackages, countKey: "testimonials" },
+  { title: "Participants", url: "/admin/participants", icon: IconUsers, countKey: "participants" },
   { title: "Users", url: "/admin/users", icon: IconReport, countKey: "users" },
 ];
 
@@ -120,9 +70,7 @@ export default async function AdminDashboardPage() {
     users: await prisma.user.count(),
     editions: await prisma.edition.count(),
     registrations: await prisma.registration.count(),
-    pendingApprovals: await prisma.registration.count({
-      where: { approved: false },
-    }),
+    pendingApprovals: await prisma.registration.count({ where: { approved: false } }),
     institutes: await prisma.institute.count(),
     cohorts: await prisma.edition.count(),
     announcements: await prisma.announcement.count(),
@@ -166,11 +114,7 @@ export default async function AdminDashboardPage() {
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
-              <Link
-                key={item.url}
-                href={item.url}
-                className="block cursor-pointer"
-              >
+              <Link key={item.url} href={item.url} className="block cursor-pointer">
                 <Card className="transition-all hover:shadow-md hover:border-primary/50 h-full">
                   <CardHeader className="flex flex-row items-center gap-3">
                     <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
@@ -179,8 +123,7 @@ export default async function AdminDashboardPage() {
                     <div>
                       <CardTitle className="text-sm">{item.title}</CardTitle>
                       <CardDescription>
-                        {counts[item.countKey]} record
-                        {counts[item.countKey] !== 1 ? "s" : ""}
+                        {counts[item.countKey]} record{counts[item.countKey] !== 1 ? "s" : ""}
                       </CardDescription>
                     </div>
                   </CardHeader>

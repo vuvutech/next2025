@@ -10,7 +10,8 @@ export default function AdminLayout({
 }) {
   return (
     <SidebarProvider
-    className="font-opensans"
+      defaultOpen={false}
+      className="font-opensans"
       style={
         {
           "--sidebar-width": "calc(var(--spacing) * 72)",

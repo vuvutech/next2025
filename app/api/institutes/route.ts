@@ -32,8 +32,6 @@ export async function GET(req: NextRequest) {
       { error: "Failed to fetch institutes" },
       { status: 500 }
     );
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
@@ -53,8 +51,6 @@ export async function POST(req: NextRequest) {
       { error: "Failed to create institute" },
       { status: 500 }
     );
-  } finally {
-    await prisma.$disconnect();
   }
 }
 // PUT update institute (admin only)
@@ -126,7 +122,5 @@ export async function DELETE(req: NextRequest) {
       { error: "Failed to delete institute" },
       { status: 500 }
     );
-  } finally {
-    await prisma.$disconnect();
   }
 }
