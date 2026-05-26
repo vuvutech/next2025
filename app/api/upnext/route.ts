@@ -15,6 +15,11 @@ export async function GET(req: NextRequest) {
       slug: true,
       startDate: true,
       endDate: true,
+      institute: {
+        select: {
+          slug: true,
+        },
+      },
     },
   });
 

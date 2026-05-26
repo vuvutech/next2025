@@ -20,6 +20,9 @@ type NextEdition = {
   slug: string;
   startDate: string | null;
   endDate: string | null;
+  institute?: {
+    slug: string;
+  } | null;
 } | null;
 
 export default function UpNextWrapper() {
@@ -60,9 +63,12 @@ export default function UpNextWrapper() {
 					<span className={cn(oswald.className, "text-white uppercase font-bold opacity-80 shrink-0")}>
 						UpNext:
 					</span>
-					<span className={cn(oswald.className, "text-white font-medium truncate max-w-[90px] sm:max-w-none")}>
+					<Link
+						href={nextEdition.institute?.slug ? `/institutes/${nextEdition.institute.slug}` : `#`}
+						className={cn(oswald.className, "text-white font-medium truncate max-w-[90px] sm:max-w-none hover:underline cursor-pointer")}
+					>
 						{nextEdition.title}
-					</span>
+					</Link>
 					<div className='h-3 w-[1px] bg-white/20 shrink-0' />
 					<span className={cn(oswald.className, "font-medium text-white/90 shrink-0 whitespace-nowrap")}>
 						{nextEdition.startDate

@@ -2,6 +2,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/dbConnect";
 import { sendMail } from "@/lib/nodemailer-mail";
+import { render } from "@react-email/render";
+import { IEARegistrationEmail } from "@/react-email-starter/emails/iea-welcome-email";
 
 export async function POST(req: NextRequest) {
   try {
@@ -22,11 +24,34 @@ export async function POST(req: NextRequest) {
       ? formatter.format(new Date(endDate))
       : "TBD";
 
-    // Send email with payment info
-    await sendMail({
-      to: email,
-      subject: `Payment Details for Institute Edition`,
-      html: `
+    // ✅ Fetch the registration and its institute information to check if it's IEA
+    const registration = await prisma.registration.findUnique({
+      where: { id },
+      include: {
+        edition: {
+          include: {
+            institute: true,
+          },
+        },
+      },
+    });
+
+    const isIEA = registration?.edition?.institute?.acronym?.toLowerCase() === "iea";
+
+    let htmlContent = "";
+    if (isIEA) {
+      htmlContent = await render(
+        IEARegistrationEmail({
+          name,
+          startDate: formattedStartDate,
+          endDate: formattedEndDate,
+          price,
+          priceViaZoom,
+          theme: registration?.edition?.theme ?? undefined,
+        })
+      );
+    } else {
+      htmlContent = `
         <h2>Hello ${name},</h2>
         <p>Thank you for registering. Here are your payment details:</p>
         <ul>
@@ -36,7 +61,18 @@ export async function POST(req: NextRequest) {
           <li><strong>Price (Via Zoom):</strong> $${priceViaZoom}</li>
         </ul>
         <p>Kind regards,<br />COSTrAD Team</p>
-      `,
+      `;
+    }
+
+    const subject = isIEA
+      ? `Welcome to the ${new Date().getFullYear()} Institute of Economic Affairs (IEA) - Payment Details`
+      : `Payment Details for Institute Edition`;
+
+    // Send email with payment info
+    await sendMail({
+      to: email,
+      subject,
+      html: htmlContent,
     });
 
     // ✅ Update registration as approved
