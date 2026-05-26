@@ -6,9 +6,9 @@ import { AppSidebarCollapse } from "@/components/admin/dashboard/app-sidebar-col
 
 export default function SidebarSwitch(props: React.ComponentProps<typeof AppSidebar>) {
   const pathname = usePathname();
-  const isDashboard = pathname === "/admin/admin-dashboard";
+  const useCollapse = pathname.startsWith("/admin");
 
-  if (isDashboard) {
+  if (useCollapse) {
     return <AppSidebarCollapse {...props} />;
   }
 

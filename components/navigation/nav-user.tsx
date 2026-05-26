@@ -1,19 +1,20 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import {
-  IconCreditCard,
   IconDotsVertical,
   IconLogout,
-  IconNotification,
+  IconMoon,
+  IconSun,
   IconUserCircle,
 } from "@tabler/icons-react";
+import { useTheme } from "next-themes";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -26,6 +27,29 @@ import {
 } from "@/components/ui/sidebar";
 import { client } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  const isLight = theme === "light";
+
+  return (
+    <DropdownMenuItem
+      className="cursor-pointer"
+      onClick={() => setTheme(isLight ? "dark" : "light")}
+    >
+      {isLight ? <IconMoon className="size-4" /> : <IconSun className="size-4" />}
+      <span>{isLight ? "Dark Mode" : "Light Mode"}</span>
+    </DropdownMenuItem>
+  );
+}
 
 export function NavUser({
   user,
@@ -81,35 +105,27 @@ export function NavUser({
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem
-                className="cursor-pointer"
-                onClick={() => {
-                  router.push("/dashboard");
-                }}
-              >
-                <IconUserCircle />
-                Profile
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                className="cursor-pointer"
-                onClick={() => {
-                  router.push("/dashboard");
-                }}
-              >
-                <IconCreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                className="cursor-pointer"
-                onClick={() => {
-                  router.push("/dashboard");
-                }}
-              >
-                <IconNotification />
-                Notifications
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => {
+                router.push("/profile");
+              }}
+            >
+              <IconUserCircle />
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => {
+                router.push("/admin/admin-dashboard");
+              }}
+            >
+              <IconUserCircle />
+              My Dashboard
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <ThemeToggle />
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="cursor-pointer"
