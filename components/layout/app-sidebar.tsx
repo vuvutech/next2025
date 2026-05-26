@@ -16,6 +16,7 @@ import {
   IconNewSection,
   IconPackages,
   IconReport,
+  IconSchool,
   IconSearch,
   IconSettings,
   IconUsers,
@@ -54,7 +55,12 @@ const data = {
     //   icon: IconUsers,
     // },
     {
-      title: "Registrations",
+      title: "Edition Cohorts",
+      url: "/admin/edition-cohorts",
+      icon: IconSchool,
+    },
+    {
+      title: "All Registrations",
       url: "/admin/registrations",
       icon: IconDatabase,
     },
@@ -175,7 +181,6 @@ const data = {
       url: "#",
       icon: IconReport,
     },
-   
   ],
 };
 
@@ -215,7 +220,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
         <hr />
-        <NavDocuments items={data.documents}  />
+        <NavDocuments items={data.documents} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       {user ? (

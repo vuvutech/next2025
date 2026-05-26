@@ -88,16 +88,24 @@ export const columns: ColumnDef<any>[] = [
   },
   {
     header: "Status",
-    cell: ({ row }) =>
-      row.original.approved ? (
+    cell: ({ row }) => {
+      const isPast =
+        row.original.edition?.endDate &&
+        new Date(row.original.edition.endDate) < new Date();
+      return row.original.approved ? (
         <Badge className="bg-green-500 text-background uppercase">
           Approved
+        </Badge>
+      ) : isPast ? (
+        <Badge className="bg-muted text-muted-foreground uppercase">
+          Expired
         </Badge>
       ) : (
         <Badge className="bg-yellow-500 text-background uppercase">
           Pending
         </Badge>
-      ),
+      );
+    },
   },
   {
     id: "details",
