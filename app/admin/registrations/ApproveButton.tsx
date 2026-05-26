@@ -10,8 +10,8 @@ interface ApproveButtonProps {
   name: string;
   email: string;
   approved: boolean;
-  startDate: Date;
-  endDate: Date;
+  startDate: Date | null;
+  endDate: Date | null;
   price: number;
   priceViaZoom: number;
 }
@@ -28,7 +28,10 @@ export function ApproveButton({
 }: ApproveButtonProps) {
   const [isPending, startTransition] = useTransition();
 
+  const isPast = endDate ? new Date(endDate) < new Date() : false;
+
   const handleApprove = async () => {
+    if (isPast) return;
     startTransition(async () => {
       const res = await fetch("/api/approve-and-email-payment-details", {
         method: "POST",
@@ -48,12 +51,12 @@ export function ApproveButton({
 
   return (
     <Button
-    className="cursor-pointer px-1 py-0.5 h-auto uppercase text-[10px]"
+      className="cursor-pointer px-1 py-0.5 h-auto uppercase text-[10px]"
       size="sm"
-      disabled={approved || isPending}
+      disabled={approved || isPending || isPast}
       onClick={handleApprove}
     >
-      {approved ? "Approved" : isPending ? "Approving..." : "Approve"}
+      {approved ? "Approved" : isPast ? "Past Edition" : isPending ? "Approving..." : "Approve"}
     </Button>
   );
 }
