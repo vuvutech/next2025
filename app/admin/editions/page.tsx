@@ -1,7 +1,7 @@
-// File: app/admin/editions/page.tsx
-
 import { prisma } from "@/prisma/dbConnect";
 import { GenericDataTable } from "@/components/ui/data-table/generic-data-table";
+import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
+import { IconCalendarEvent } from "@tabler/icons-react";
 import { columns } from "./columns";
 import { ExtensionComponent } from "./ExtensionComponent";
 
@@ -11,14 +11,30 @@ export default async function AdminEditionsPage() {
   const editions = await prisma.edition.findMany();
 
   return (
-    <div className="p-6 space-y-4">
-      <h1 className="text-2xl font-bold">Editions</h1>
+    <AdminPageWrapper
+      icon={IconCalendarEvent}
+      title="Institute Editions"
+      description="Create and manage academic program editions for institutes."
+      stats={[
+        { label: "Total", value: editions.length, variant: "default" },
+        {
+          label: "Active",
+          value: editions.filter((e) => e.active).length,
+          variant: "success",
+        },
+        {
+          label: "In-Person",
+          value: editions.filter((e) => e.inPersonDelivery).length,
+          variant: "info",
+        },
+      ]}
+    >
       <GenericDataTable
         extention={<ExtensionComponent />}
         addFiltering={true}
         columns={columns}
         data={editions}
       />
-    </div>
+    </AdminPageWrapper>
   );
 }

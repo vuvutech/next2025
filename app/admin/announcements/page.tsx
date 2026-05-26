@@ -1,7 +1,7 @@
-// File: app/admin/announcements/page.tsx
-
 import { prisma } from "@/prisma/dbConnect";
 import { GenericDataTable } from "@/components/ui/data-table/generic-data-table";
+import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
+import { IconNewSection } from "@tabler/icons-react";
 import { columns } from "./columns";
 import { ExtensionComponent } from "./ExtensionComponent";
 
@@ -12,15 +12,26 @@ export default async function AdminAnnouncementsPage() {
     include: { user: true },
   });
 
+  const approved = announcements.filter((a) => a.approved).length;
+  const featured = announcements.filter((a) => a.featured).length;
+
   return (
-    <div className="p-6 space-y-4">
-      <h1 className="text-2xl font-bold">User Announcements</h1>
+    <AdminPageWrapper
+      icon={IconNewSection}
+      title="User Announcements"
+      description="Review, approve, and feature user announcements."
+      stats={[
+        { label: "Total", value: announcements.length, variant: "default" },
+        { label: "Approved", value: approved, variant: "success" },
+        { label: "Featured", value: featured, variant: "warning" },
+      ]}
+    >
       <GenericDataTable
         extention={<ExtensionComponent />}
         addFiltering={true}
         columns={columns}
         data={announcements}
       />
-    </div>
+    </AdminPageWrapper>
   );
 }

@@ -56,11 +56,11 @@ const navMain = [
     url: "/admin/editions",
     icon: IconChartBar,
   },
-  {
-    title: "Donations",
-    url: "/admin/donations",
-    icon: IconMoneybagPlus,
-  },
+  // {
+  //   title: "Donations",
+  //   url: "/admin/donations",
+  //   icon: IconMoneybagPlus,
+  // },
   {
     title: "Announcements",
     url: "/admin/announcements",
@@ -101,7 +101,7 @@ export function AppSidebarCollapse({
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link href="/admin/admin-dashboard">
+              <Link href="/admin">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <IconDashboard className="size-4" />
                 </div>

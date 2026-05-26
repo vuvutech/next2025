@@ -1,13 +1,20 @@
 import { DataTable } from "@/components/ui/data-table/data-table";
-
+import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
+import { IconUserCheck } from "@tabler/icons-react";
 import data from "./institute_mongo.json";
 
 export const dynamic = "force-dynamic";
 
 export default function Page() {
   return (
-    <div className="px-4 space-y-4">
-      {/* Map your data to the expected shape for DataTable */}
+    <AdminPageWrapper
+      icon={IconUserCheck}
+      title="Participants"
+      description="View and manage program participants."
+      stats={[
+        { label: "Total", value: data.length, variant: "default" },
+      ]}
+    >
       <DataTable
         data={data.map((item, idx) => ({
           header: item.name,
@@ -19,6 +26,6 @@ export default function Page() {
           reviewer: item.updated_at || "",
         }))}
       />
-    </div>
+    </AdminPageWrapper>
   );
 }

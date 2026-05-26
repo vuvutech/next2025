@@ -1,5 +1,7 @@
 import { prisma } from "@/prisma/dbConnect";
-import ClientWrapper from "./ClientWrapper"; // your table wrapper
+import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
+import { IconUsers } from "@tabler/icons-react";
+import ClientWrapper from "./ClientWrapper";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +22,6 @@ export default async function AdminUsersPage() {
           registration: true,
         },
       },
-      
     },
   });
 
@@ -29,10 +30,21 @@ export default async function AdminUsersPage() {
     createdAt: user.createdAt.toISOString(),
   }));
 
+  const admins = users.filter((u) => u.role === "ADMIN" || u.role === "SUPERADMIN").length;
+  const banned = users.filter((u) => u.banned).length;
+
   return (
-    <div className="p-6 space-y-4">
-      <h1 className="text-2xl font-bold">COSTrAD Users</h1>
+    <AdminPageWrapper
+      icon={IconUsers}
+      title="COSTrAD Users"
+      description="Manage platform users, roles, and permissions."
+      stats={[
+        { label: "Total", value: users.length, variant: "default" },
+        { label: "Admins", value: admins, variant: "info" },
+        { label: "Banned", value: banned, variant: banned > 0 ? "danger" : "success" },
+      ]}
+    >
       <ClientWrapper data={serializedUsers} />
-    </div>
+    </AdminPageWrapper>
   );
 }

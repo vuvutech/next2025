@@ -1,27 +1,37 @@
-// File: app/admin/testimonials/page.tsx
-
 import { prisma } from "@/prisma/dbConnect";
 import { GenericDataTable } from "@/components/ui/data-table/generic-data-table";
+import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
+import { IconPackages } from "@tabler/icons-react";
 import { columns } from "./columns";
 import { ExtensionComponent } from "./ExtensionComponent";
 
 export const dynamic = "force-dynamic";
-
 
 export default async function AdminTestimonialsPage() {
   const testimonials = await prisma.testimonial.findMany({
     include: { user: true },
   });
 
+  const approved = testimonials.filter((t) => t.approved).length;
+  const featured = testimonials.filter((t) => t.featured).length;
+
   return (
-    <div className="p-6 space-y-4">
-      <h1 className="text-2xl font-bold">User Testimonials</h1>
+    <AdminPageWrapper
+      icon={IconPackages}
+      title="User Testimonials"
+      description="Review, approve, and feature user testimonials."
+      stats={[
+        { label: "Total", value: testimonials.length, variant: "default" },
+        { label: "Approved", value: approved, variant: "success" },
+        { label: "Featured", value: featured, variant: "warning" },
+      ]}
+    >
       <GenericDataTable
         extention={<ExtensionComponent />}
         addFiltering={true}
         columns={columns}
         data={testimonials}
       />
-    </div>
+    </AdminPageWrapper>
   );
 }

@@ -1,4 +1,3 @@
-// File: app/admin/admin-dashboard/page.tsx
 import {
   Card,
   CardContent,
@@ -12,12 +11,16 @@ import {
   IconDatabase,
   IconListDetails,
   IconChartBar,
-  IconMoneybagPlus,
   IconNewSection,
   IconFolder,
   IconPackages,
   IconUsers,
   IconReport,
+  IconAlertTriangle,
+  IconChecklist,
+  IconBuildingBank,
+  IconCalendarEvent,
+  IconUserCheck,
 } from "@tabler/icons-react";
 import { MostPopularEditionCard } from "@/components/analytics/DashboardMetricsCards";
 import { ActiveUsersCard } from "@/components/analytics/ActiveUsersCard";
@@ -25,6 +28,7 @@ import { SessionsCard } from "@/components/analytics/SessionsCard";
 import { RegisteredUsersCard } from "@/components/analytics/RegisteredUsersCard";
 import { GaTopPagesChartBar } from "@/components/chart-area-interactive";
 import { DevicesUsage } from "@/components/analytics/DevicesUsage";
+import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
 import { prisma } from "@/prisma/dbConnect";
 import Link from "next/link";
 
@@ -35,6 +39,7 @@ type NavItem = {
   url: string;
   icon: React.ElementType;
   countKey: keyof Counts;
+  description: string;
 };
 
 type Counts = {
@@ -53,135 +58,154 @@ type Counts = {
 
 const navItems: NavItem[] = [
   {
-    title: "Dashboard",
-    url: "/admin/",
-    icon: IconDashboard,
-    countKey: "users",
+    title: "Institutes",
+    url: "/admin/institutes",
+    icon: IconBuildingBank,
+    countKey: "institutes",
+    description: "Manage partner institutes",
+  },
+  {
+    title: "Institute Editions",
+    url: "/admin/editions",
+    icon: IconCalendarEvent,
+    countKey: "editions",
+    description: "Academic program editions",
   },
   {
     title: "Edition Cohorts",
     url: "/admin/edition-cohorts",
     icon: IconSchool,
     countKey: "cohorts",
+    description: "View cohort registrations",
   },
   {
     title: "All Registrations",
     url: "/admin/registrations",
     icon: IconDatabase,
     countKey: "registrations",
+    description: "Manage all registrations",
   },
   {
-    title: "Institutes",
-    url: "/admin/institutes",
-    icon: IconListDetails,
-    countKey: "institutes",
+    title: "Participants",
+    url: "/admin/participants",
+    icon: IconUserCheck,
+    countKey: "participants",
+    description: "View participants",
   },
   {
-    title: "Institute Editions",
-    url: "/admin/editions",
-    icon: IconChartBar,
-    countKey: "editions",
-  },
-  {
-    title: "Donations",
-    url: "/admin/donations",
-    icon: IconMoneybagPlus,
-    countKey: "donations",
+    title: "Users",
+    url: "/admin/users",
+    icon: IconUsers,
+    countKey: "users",
+    description: "Manage system users",
   },
   {
     title: "Announcements",
     url: "/admin/announcements",
     icon: IconNewSection,
     countKey: "announcements",
-  },
-  {
-    title: "Publications",
-    url: "/admin/publications",
-    icon: IconFolder,
-    countKey: "publications",
+    description: "User announcements",
   },
   {
     title: "Testimonials",
     url: "/admin/testimonials",
     icon: IconPackages,
     countKey: "testimonials",
+    description: "User testimonials",
   },
   {
-    title: "Participants",
-    url: "/admin/participants",
-    icon: IconUsers,
-    countKey: "participants",
+    title: "Publications",
+    url: "/admin/publications",
+    icon: IconFolder,
+    countKey: "publications",
+    description: "Manage publications",
   },
-  { title: "Users", url: "/admin/users", icon: IconReport, countKey: "users" },
 ];
 
 export default async function AdminDashboardPage() {
+  const [
+    users,
+    editions,
+    registrations,
+    pendingApprovals,
+    institutes,
+    announcements,
+    testimonials,
+  ] = await Promise.all([
+    prisma.user.count(),
+    prisma.edition.count(),
+    prisma.registration.count(),
+    prisma.registration.count({ where: { approved: false } }),
+    prisma.institute.count(),
+    prisma.announcement.count(),
+    prisma.testimonial.count(),
+  ]);
+
   const counts: Counts = {
-    users: await prisma.user.count(),
-    editions: await prisma.edition.count(),
-    registrations: await prisma.registration.count(),
-    pendingApprovals: await prisma.registration.count({
-      where: { approved: false },
-    }),
-    institutes: await prisma.institute.count(),
-    cohorts: await prisma.edition.count(),
-    announcements: await prisma.announcement.count(),
-    testimonials: await prisma.testimonial.count(),
-    participants: await prisma.user.count(),
+    users,
+    editions,
+    registrations,
+    pendingApprovals,
+    institutes,
+    cohorts: editions,
+    announcements,
+    testimonials,
+    participants: users,
     donations: 0,
     publications: 0,
   };
 
   return (
-    <div className="space-y-4">
-      <div className="px-4 lg:px-6">
-        <div className="flex flex-col gap-1 mb-4">
-          <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
-          <p className="text-muted-foreground">
-            Overview of your platform metrics and analytics.
-          </p>
-        </div>
-      </div>
-
-      <section className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 lg:grid-cols-4">
+    <AdminPageWrapper
+      icon={IconDashboard}
+      title="Admin Dashboard"
+      description="Overview of your platform metrics and analytics."
+    >
+      <section className="grid grid-cols-1 gap-4 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
         <MostPopularEditionCard />
         <ActiveUsersCard />
         <SessionsCard />
         <RegisteredUsersCard />
       </section>
 
-      <section className="px-4 lg:px-6">
-        <GaTopPagesChartBar />
-      </section>
-
-      <section className="px-4 lg:px-6">
-        <DevicesUsage />
-      </section>
-
-      <section className="space-y-4 px-4 lg:px-6">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Quick Navigation</h2>
+      <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <GaTopPagesChartBar />
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div>
+          <DevicesUsage />
+        </div>
+      </section>
+
+      <section className="space-y-4">
+        <div className="flex items-center gap-2">
+          <IconChecklist className="size-5 text-primary" />
+          <h2 className="text-lg font-semibold">Quick Navigation</h2>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
               <Link
                 key={item.url}
                 href={item.url}
-                className="block cursor-pointer"
+                className="group block cursor-pointer"
               >
-                <Card className="transition-all hover:shadow-md hover:border-primary/50 h-full">
-                  <CardHeader className="flex flex-row items-center gap-3">
-                    <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <Card className="h-full border-border/50 transition-all duration-200 hover:border-primary/30 hover:shadow-sm">
+                  <CardHeader className="flex flex-row items-start gap-4 p-4">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
                       <Icon className="size-5" />
                     </div>
-                    <div>
-                      <CardTitle className="text-sm">{item.title}</CardTitle>
-                      <CardDescription>
-                        {counts[item.countKey]} record
-                        {counts[item.countKey] !== 1 ? "s" : ""}
+                    <div className="flex-1 space-y-1">
+                      <CardTitle className="text-sm font-medium">
+                        {item.title}
+                      </CardTitle>
+                      <CardDescription className="text-xs">
+                        {item.description}
                       </CardDescription>
+                    </div>
+                    <div className="flex size-8 items-center justify-center rounded-md bg-muted text-xs font-bold tabular-nums text-muted-foreground">
+                      {counts[item.countKey]}
                     </div>
                   </CardHeader>
                 </Card>
@@ -190,6 +214,6 @@ export default async function AdminDashboardPage() {
           })}
         </div>
       </section>
-    </div>
+    </AdminPageWrapper>
   );
 }

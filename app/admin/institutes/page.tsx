@@ -1,7 +1,7 @@
-// File: app/admin/institutes/page.tsx
-
 import { prisma } from "@/prisma/dbConnect";
 import { GenericDataTable } from "@/components/ui/data-table/generic-data-table";
+import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
+import { IconListDetails } from "@tabler/icons-react";
 import { columns } from "./columns";
 import { ExtensionComponent } from "./ExtensionComponent";
 
@@ -9,19 +9,29 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminInstitutesPage() {
   const institutes = await prisma.institute.findMany({
-    // Add your include fields here, for example:
-    include: { editions: true }
+    include: { editions: true },
   });
 
   return (
-    <div className="p-6 space-y-4">
-      <h1 className="text-2xl font-bold"> Institutes</h1>
+    <AdminPageWrapper
+      icon={IconListDetails}
+      title="Institutes"
+      description="Manage partner institutes and their configurations."
+      stats={[
+        { label: "Total", value: institutes.length, variant: "default" },
+        {
+          label: "Active",
+          value: institutes.filter((i) => i.active).length,
+          variant: "success",
+        },
+      ]}
+    >
       <GenericDataTable
         extention={<ExtensionComponent />}
         addFiltering={true}
         columns={columns}
         data={institutes}
       />
-    </div>
+    </AdminPageWrapper>
   );
 }
