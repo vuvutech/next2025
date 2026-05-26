@@ -1,6 +1,6 @@
-import { AppSidebar } from "@/components/layout/app-sidebar";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import SidebarSwitch from "@/components/layout/sidebar-switch";
 
 
 export default function AdminLayout({
@@ -18,7 +18,7 @@ export default function AdminLayout({
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" />
+      <SidebarSwitch variant="inset" />
       <SidebarInset>
         <SiteHeader />
         <div className="flex flex-1 flex-col">
