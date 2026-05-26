@@ -1,6 +1,4 @@
 // File: app/admin/admin-dashboard/page.tsx
-import { prisma } from "@/prisma/dbConnect";
-import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -21,6 +19,14 @@ import {
   IconUsers,
   IconReport,
 } from "@tabler/icons-react";
+import { MostPopularEditionCard } from "@/components/analytics/DashboardMetricsCards";
+import { ActiveUsersCard } from "@/components/analytics/ActiveUsersCard";
+import { SessionsCard } from "@/components/analytics/SessionsCard";
+import { RegisteredUsersCard } from "@/components/analytics/RegisteredUsersCard";
+import { GaTopPagesChartBar } from "@/components/chart-area-interactive";
+import { DevicesUsage } from "@/components/analytics/DevicesUsage";
+import { prisma } from "@/prisma/dbConnect";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -74,41 +80,36 @@ export default async function AdminDashboardPage() {
     publications: 0,
   };
 
-  const metricCards = [
-    { label: "Total Users", value: counts.users, key: "users", href: "/admin/users" },
-    { label: "Editions", value: counts.editions, key: "editions", href: "/admin/editions" },
-    { label: "Registrations", value: counts.registrations, key: "registrations", href: "/admin/registrations" },
-    { label: "Pending Approvals", value: counts.pendingApprovals, key: "pending", href: "/admin/registrations" },
-  ];
-
   return (
-    <div className="p-6 space-y-8">
-      <div className="flex flex-col gap-1">
-        <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
-        <p className="text-muted-foreground">
-          Overview of your platform.
-        </p>
+    <div className="space-y-4">
+      <div className="px-4 lg:px-6">
+        <div className="flex flex-col gap-1 mb-4">
+          <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
+          <p className="text-muted-foreground">
+            Overview of your platform metrics and analytics.
+          </p>
+        </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {metricCards.map((card) => (
-          <Link key={card.key} href={card.href} className="cursor-pointer">
-            <Card className="transition-all hover:shadow-md hover:border-primary/50 h-full">
-              <CardHeader>
-                <CardTitle className="text-sm font-medium text-muted-foreground">
-                  {card.label}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-3xl font-bold">{card.value}</p>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
-      </div>
+      <section className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 lg:grid-cols-4">
+        <MostPopularEditionCard />
+        <ActiveUsersCard />
+        <SessionsCard />
+        <RegisteredUsersCard />
+      </section>
 
-      <div>
-        <h2 className="text-xl font-semibold mb-4">Quick Navigation</h2>
+      <section className="px-4 lg:px-6">
+        <GaTopPagesChartBar />
+      </section>
+
+      <section className="px-4 lg:px-6">
+        <DevicesUsage />
+      </section>
+
+      <section className="space-y-4 px-4 lg:px-6">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-semibold">Quick Navigation</h2>
+        </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -131,7 +132,7 @@ export default async function AdminDashboardPage() {
             );
           })}
         </div>
-      </div>
+      </section>
     </div>
   );
 }
