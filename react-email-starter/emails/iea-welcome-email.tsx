@@ -34,7 +34,7 @@ export const IEARegistrationEmail = ({
         <Head>
           {/* Responsive style override for email clients that process media queries */}
           <style>{`
-            @media screen and (max-width: 900px) {
+            @media screen and (max-width: 700px) {
               .desktop-table { display: none !important; }
               .mobile-cards { display: block !important; }
             }
@@ -42,7 +42,7 @@ export const IEARegistrationEmail = ({
         </Head>
         <Preview>{previewText}</Preview>
         <Body className="mx-auto my-auto bg-[#fdfdfd] px-2 font-sans text-[#333333]">
-          <Container className="mx-auto my-[40px] max-w-[900px] bg-white p-[20px] border border-solid border-[#eaeaea] rounded">
+          <Container className="mx-auto my-[40px] max-w-[700px] bg-white p-[20px] border border-solid border-[#eaeaea] rounded">
             <Text className="text-[16px] font-bold mt-0">Shalom {name}!</Text>
 
             <Text className="text-[14px] leading-[24px]">
@@ -168,8 +168,8 @@ export const IEARegistrationEmail = ({
             </table>
 
             <Text className="mt-[30px] text-[14px] leading-[24px]">
-              Kindly complete your registration by making payment using the
-              details provided below:
+              {/* Kindly complete your registration by making payment using the
+              details provided below: */}
             </Text>
 
             {/* Dynamic Payment Details or Pius Highlight Placeholder */}
@@ -200,10 +200,16 @@ export const IEARegistrationEmail = ({
                 </table>
               </Section>
             ) : (
-              <Section className="bg-[#fffbcc] border border-dashed border-[#e6db55] p-[15px] my-[20px] text-center italic text-[14px]">
-                (Pius, kindly insert payment details here.)
+              <Section className="hidden bg-[#fffbcc] border border-dashed border-[#e6db55] p-[15px] my-[20px] text-center italic text-[14px]">
+                Payment details would be communicated to you shortly.
               </Section>
             )}
+
+            <Text className="mt-[30px] text-[14px] leading-[24px]">
+              <strong>
+                Payment details would be communicated to you shortly.
+              </strong>
+            </Text>
 
             <Text className="mt-[30px] text-[14px] leading-[24px]">
               Thank you once again for registering. We look forward to the
@@ -221,6 +227,13 @@ export const IEARegistrationEmail = ({
               If you have any questions or need further clarification about your
               registration, please don't hesitate to contact us. Our support
               team ({" "}
+              <a
+                className="text-primary"
+                href="mailto:ieaoffice@costrad.org"
+              >
+                ieaoffice@costrad.org
+              </a>{" "},
+           
               <a
                 className="text-primary"
                 href="mailto:correspondence@costrad.org"

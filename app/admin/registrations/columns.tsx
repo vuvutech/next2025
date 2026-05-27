@@ -37,6 +37,15 @@ export const columns: ColumnDef<any>[] = [
       </div>
     ),
   },
+  {
+    header: "Student ID",
+    accessorFn: (row) => row.user?.studentId,
+    accessorKey: "user.studentId",
+    cell: ({ row }) => (
+      <div className="text-xs">{row.original.user?.studentId || "Not specified"}</div>
+    ),
+  },
+
 
   {
     header: "Institute",

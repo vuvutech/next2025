@@ -277,7 +277,7 @@ export default async function AdminDashboardPage() {
         <RegisteredUsersCard />
       </section>
 
-      {/* Analytics Charts & Pending Actions side-by-side row */}
+      {/* Analytics Charts & Stats side-by-side row */}
       <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
         <div className="flex flex-col md:col-span-2 lg:col-span-1 h-full">
           <GaTopPagesChartBar />
@@ -287,35 +287,35 @@ export default async function AdminDashboardPage() {
         </div>
         <div className="flex h-full">
           <Card className="relative overflow-hidden border border-border bg-card/60 backdrop-blur-sm transition-all duration-300 hover:shadow-md w-full flex flex-col justify-between">
-            <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-amber-500 to-orange-500" />
+            <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-primary to-primary/60" />
             <CardHeader className="p-5 pb-3">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-semibold tracking-wide uppercase text-muted-foreground">Pending Action</CardTitle>
-                <div className="flex size-8 items-center justify-center rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                <CardTitle className="text-sm font-semibold tracking-wide uppercase text-muted-foreground">Total Registrations</CardTitle>
+                <div className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <IconClipboardCheck className="size-4" />
                 </div>
               </div>
-              <CardDescription className="text-xs">Registrations awaiting admin review</CardDescription>
+              <CardDescription className="text-xs">All registration records</CardDescription>
             </CardHeader>
             <CardContent className="p-5 pt-2 flex-1 flex flex-col justify-between">
               <div className="flex flex-col justify-center flex-1 py-4">
-                <span className="text-5xl font-extrabold tabular-nums tracking-tight text-amber-600 dark:text-amber-400">
-                  {pendingApprovals}
+                <span className="text-5xl font-extrabold tabular-nums tracking-tight text-primary">
+                  {registrations}
                 </span>
-                <span className="text-[11px] text-muted-foreground mt-1">Requires manual validation</span>
+                <span className="text-[11px] text-muted-foreground mt-1">
+                  {pendingApprovals > 0
+                    ? `${pendingApprovals} pending approval`
+                    : 'All registrations approved'}
+                </span>
               </div>
               <div className="pt-4 border-t border-border/50">
-                {pendingApprovals > 0 ? (
-                  <Link
-                    href="/admin/registrations"
-                    className="group inline-flex items-center gap-1.5 text-xs font-semibold text-primary transition-colors hover:text-primary/80"
-                  >
-                    Review pending registrations
-                    <IconArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                ) : (
-                  <span className="text-xs text-muted-foreground">All caught up. No pending reviews.</span>
-                )}
+                <Link
+                  href="/admin/registrations"
+                  className="group inline-flex items-center gap-1.5 text-xs font-semibold text-primary transition-colors hover:text-primary/80"
+                >
+                  View all registrations
+                  <IconArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
+                </Link>
               </div>
             </CardContent>
           </Card>
