@@ -54,6 +54,19 @@ costrad-*.json
 *.db
 database/
 
+# admin docs
+admin_security_efficiency_plan.md
+
+# python
+__pycache__/
+*.pyc
+
+# generated starters
+react-email-starter/
+
+# personal env config
+.antigravitycli/
+
 # IDE
 *.swp
 *.swo
