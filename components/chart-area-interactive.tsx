@@ -46,7 +46,7 @@ export function GaTopPagesChartBar() {
   } satisfies ChartConfig
 
   return (
-    <Card className="@container/card">
+    <Card className="@container/card h-full flex flex-col justify-between">
       <CardHeader>
         <CardTitle>Top Pages</CardTitle>
         <CardDescription>
@@ -69,8 +69,8 @@ export function GaTopPagesChartBar() {
         )}
       </CardHeader>
 
-      <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        <ChartContainer config={chartConfig} className="aspect-auto h-[300px] w-full">
+      <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6 flex-1 flex flex-col justify-end">
+        <ChartContainer config={chartConfig} className="aspect-auto h-[260px] w-full">
           <BarChart data={chartData} layout="vertical" margin={{ left: 100 }}>
             <YAxis
               dataKey="path"

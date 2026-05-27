@@ -47,14 +47,14 @@ export function DevicesUsage() {
   }, [])
 
   return (
-    <Card className="py-0">
+    <Card className="py-0 h-full flex flex-col justify-between">
       <CardHeader className="px-6 pt-4">
         <CardTitle>Device Usage</CardTitle>
         <CardDescription>Showing desktop vs mobile over 30 days</CardDescription>
       </CardHeader>
-
-      <CardContent className="px-2 sm:p-6">
-        <ChartContainer config={chartConfig} className="aspect-auto h-[250px] w-full">
+ 
+      <CardContent className="px-2 sm:p-6 flex-1 flex flex-col justify-end">
+        <ChartContainer config={chartConfig} className="aspect-auto h-[260px] w-full">
           <BarChart
             accessibilityLayer
             data={chartData}
