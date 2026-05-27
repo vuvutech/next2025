@@ -9,17 +9,16 @@ import {
   IconDashboard,
   IconSchool,
   IconDatabase,
-  IconListDetails,
   IconChartBar,
   IconNewSection,
   IconFolder,
   IconPackages,
   IconUsers,
-  IconReport,
+  IconChecklist,
   IconBuildingBank,
   IconCalendarEvent,
   IconUserCheck,
-  IconChecklist,
+  IconClipboardCheck,
 } from "@tabler/icons-react";
 import { MostPopularEditionCard } from "@/components/analytics/DashboardMetricsCards";
 import { ActiveUsersCard } from "@/components/analytics/ActiveUsersCard";
@@ -160,12 +159,39 @@ export default async function AdminDashboardPage() {
         <RegisteredUsersCard />
       </section>
 
-      <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <div className="lg:col-span-2">
+      <section className="grid grid-cols-1 gap-4 lg:grid-cols-4">
+        <div className="lg:col-span-3">
           <GaTopPagesChartBar />
         </div>
-        <div>
+        <div className="flex flex-col gap-4">
           <DevicesUsage />
+
+          <Card className="border-l-4 border-l-warning/30">
+            <CardHeader className="p-4 pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium">Pending Approvals</CardTitle>
+                <div className="flex size-8 items-center justify-center rounded-lg bg-warning/10 text-warning">
+                  <IconClipboardCheck className="size-4" />
+                </div>
+              </div>
+              <CardDescription className="text-xs">Registrations awaiting review</CardDescription>
+            </CardHeader>
+            <CardContent className="p-4 pt-1">
+              <div className="flex items-end justify-between">
+                <span className="text-3xl font-bold tabular-nums tracking-tight text-warning">
+                  {pendingApprovals}
+                </span>
+                {pendingApprovals > 0 && (
+                  <Link
+                    href="/admin/registrations"
+                    className="cursor-pointer text-xs font-medium text-primary transition-colors hover:text-primary/80"
+                  >
+                    Review all
+                  </Link>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 

@@ -9,28 +9,31 @@ import {
   IconDashboard,
   IconSchool,
   IconDatabase,
-  IconListDetails,
   IconChartBar,
   IconNewSection,
   IconFolder,
   IconPackages,
   IconUsers,
-  IconReport,
-  IconAlertTriangle,
   IconChecklist,
   IconBuildingBank,
   IconCalendarEvent,
   IconUserCheck,
+  IconAlertTriangle,
+  IconTrendingUp,
+  IconUsersGroup,
+  IconClipboardCheck,
 } from "@tabler/icons-react";
-import { MostPopularEditionCard } from "@/components/analytics/DashboardMetricsCards";
+import { MostPopularEditionCard, EditionPopularityCard } from "@/components/analytics/DashboardMetricsCards";
 import { ActiveUsersCard } from "@/components/analytics/ActiveUsersCard";
 import { SessionsCard } from "@/components/analytics/SessionsCard";
 import { RegisteredUsersCard } from "@/components/analytics/RegisteredUsersCard";
 import { GaTopPagesChartBar } from "@/components/chart-area-interactive";
 import { DevicesUsage } from "@/components/analytics/DevicesUsage";
 import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
+import { KpiCard } from "@/components/admin/kpi-card";
 import { prisma } from "@/prisma/dbConnect";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 export const dynamic = "force-dynamic";
 
@@ -168,12 +171,39 @@ export default async function AdminDashboardPage() {
         <RegisteredUsersCard />
       </section>
 
-      <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <div className="lg:col-span-2">
+      <section className="grid grid-cols-1 gap-4 lg:grid-cols-4">
+        <div className="lg:col-span-3">
           <GaTopPagesChartBar />
         </div>
-        <div>
+        <div className="flex flex-col gap-4">
           <DevicesUsage />
+
+          <Card className="border-l-4 border-l-warning/30">
+            <CardHeader className="p-4 pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium">Pending Approvals</CardTitle>
+                <div className="flex size-8 items-center justify-center rounded-lg bg-warning/10 text-warning">
+                  <IconClipboardCheck className="size-4" />
+                </div>
+              </div>
+              <CardDescription className="text-xs">Registrations awaiting review</CardDescription>
+            </CardHeader>
+            <CardContent className="p-4 pt-1">
+              <div className="flex items-end justify-between">
+                <span className="text-3xl font-bold tabular-nums tracking-tight text-warning">
+                  {pendingApprovals}
+                </span>
+                {pendingApprovals > 0 && (
+                  <Link
+                    href="/admin/registrations"
+                    className="cursor-pointer text-xs font-medium text-primary transition-colors hover:text-primary/80"
+                  >
+                    Review all
+                  </Link>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 

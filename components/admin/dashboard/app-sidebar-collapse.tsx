@@ -66,11 +66,11 @@ const navMain = [
     url: "/admin/announcements",
     icon: IconNewSection,
   },
-  {
-    title: "Publications",
-    url: "/admin/publications",
-    icon: IconFolder,
-  },
+  // {
+  //   title: "Publications",
+  //   url: "/admin/publications",
+  //   icon: IconFolder,
+  // },
   {
     title: "Testimonials",
     url: "/admin/testimonials",
@@ -82,7 +82,7 @@ const navMain = [
     icon: IconUsers,
   },
   {
-    title: "Users",
+    title: "User List",
     url: "/admin/users",
     icon: IconReport,
   },
