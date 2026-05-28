@@ -1,5 +1,12 @@
 "use client";
 
+import { ChevronDownIcon, PlusIcon } from "@radix-ui/react-icons";
+import { AnimatePresence, motion } from "framer-motion";
+import { Loader2, MailPlus } from "lucide-react";
+// import CopyButton from "@/components/ui/copy-button";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -33,14 +40,7 @@ import {
 	useListOrganizations,
 	useSession,
 } from "@/lib/auth-client";
-import { ActiveOrganization, Session } from "@/lib/auth-types";
-import { ChevronDownIcon, PlusIcon } from "@radix-ui/react-icons";
-import { Loader2, MailPlus } from "lucide-react";
-import { useState, useEffect } from "react";
-import { toast } from "sonner";
-import { AnimatePresence, motion } from "framer-motion";
-// import CopyButton from "@/components/ui/copy-button";
-import Image from "next/image";
+import type { ActiveOrganization, Session } from "@/lib/auth-types";
 
 export function OrganizationCard(props: {
 	session: Session | null;

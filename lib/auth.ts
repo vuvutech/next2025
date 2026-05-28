@@ -1,27 +1,25 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { betterAuth } from "better-auth";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+import { nextCookies } from "better-auth/next-js";
 import {
-	bearer,
 	admin,
+	bearer,
+	emailOTP,
 	multiSession,
-	organization,
-	twoFactor,
 	oAuthProxy,
 	openAPI,
-	oidcProvider,
-	emailOTP,
+	organization,
+	twoFactor,
 } from "better-auth/plugins";
-
-import { reactInvitationEmail } from "./email/invitation";
-import { reactResetPasswordEmail } from "./email/rest-password";
-import { resend } from "./email/resend";
-import { nextCookies } from "better-auth/next-js";
-import { baseUrl } from "./metadata";
-import { prismaAdapter } from "better-auth/adapters/prisma";
-import { prisma } from "@/prisma/dbConnect";
 import { generateStudentId } from "@/app/actions/functions";
-import VerifyEmail from "./email/VerifyEmail";
+import { prisma } from "@/prisma/dbConnect";
 import { ac, adminRole, superAdminRole } from "./auth/permissions";
+import { reactInvitationEmail } from "./email/invitation";
+import { resend } from "./email/resend";
+import { reactResetPasswordEmail } from "./email/rest-password";
+import VerifyEmail from "./email/VerifyEmail";
+import { baseUrl } from "./metadata";
 
 const from = process.env.BETTER_AUTH_EMAIL || "notifications@costrad.org";
 
@@ -51,10 +49,12 @@ export const auth = betterAuth({
 							...user,
 							studentId,
 							role: "USER",
+							banned: false,
+							banReason: "",
 						},
 					};
 				},
-				after: async (user) => {
+				after: async (_user) => {
 					//
 				},
 			},
@@ -62,17 +62,6 @@ export const auth = betterAuth({
 		session: {
 			create: {
 				before: async (session) => {
-					const bannedUser = await prisma.user.findUnique({
-						where: { id: session.userId },
-						select: { banned: true },
-					});
-
-					if (bannedUser?.banned) {
-						// Returning false prevents the session from being created
-
-						return false;
-					}
-
 					return { data: session };
 				},
 			},
@@ -86,7 +75,7 @@ export const auth = betterAuth({
 	},
 	onAPIError: {
 		throw: true,
-		onError: (error, ctx) => {
+		onError: (error, _ctx) => {
 			console.error("Auth error:", error);
 		},
 		errorURL: "/auth/error",
@@ -108,8 +97,15 @@ export const auth = betterAuth({
 					type: "string",
 					defaultValue: "USER",
 				},
-				// Add studentId to session payload
 				studentId: {
+					type: "string",
+					defaultValue: "",
+				},
+				banned: {
+					type: "boolean",
+					defaultValue: false,
+				},
+				banReason: {
 					type: "string",
 					defaultValue: "",
 				},
@@ -148,7 +144,7 @@ export const auth = betterAuth({
 		"https://costrad.org",
 		"https://www.costrad.net",
 		"https://costrad.net",
-		"http://localhost:3000"
+		"http://localhost:3000",
 	],
 
 	account: {
@@ -199,11 +195,10 @@ export const auth = betterAuth({
 			defaultBanReason: "Spamming",
 			impersonationSessionDuration: 60 * 60 * 24, // 1 day
 			defaultBanExpiresIn: 60 * 60 * 24 * 365, // 365 days
-			bannedUserMessage:
-				"Account suspended For Violating Our Terms of Service",
+			bannedUserMessage: "Account suspended For Violating Our Terms of Service",
 		}),
 		emailOTP({
-			async sendVerificationOTP({ email, otp, type = "sign-in" }) {
+			async sendVerificationOTP({ email, otp, type: _type = "sign-in" }) {
 				await resend.emails.send({
 					from,
 					to: email,

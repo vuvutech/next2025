@@ -1,17 +1,18 @@
 // lib/auth-client.ts
-import { createAuthClient } from "better-auth/react";
+
 import {
-	organizationClient,
-	twoFactorClient,
 	adminClient,
+	emailOTPClient,
+	genericOAuthClient,
 	multiSessionClient,
 	oneTapClient,
-	genericOAuthClient,
-	emailOTPClient,
+	organizationClient,
+	twoFactorClient,
 } from "better-auth/client/plugins";
+import { createAuthClient } from "better-auth/react";
 import { toast } from "sonner";
-import { baseUrl } from "./metadata";
 import { ac, adminRole, superAdminRole } from "./auth/permissions";
+import { baseUrl } from "./metadata";
 
 export const client = createAuthClient({
 	baseURL: `${baseUrl}` || "http://localhost:3000",
@@ -48,15 +49,15 @@ export const client = createAuthClient({
 });
 
 export const {
-  admin,
-  signUp,
-  signIn,
-  signOut,
-  resetPassword,
-  verifyEmail,
-  getSession,
-  useSession,
-  organization,
-  useListOrganizations,
-  useActiveOrganization,
+	admin,
+	signUp,
+	signIn,
+	signOut,
+	resetPassword,
+	verifyEmail,
+	getSession,
+	useSession,
+	organization,
+	useListOrganizations,
+	useActiveOrganization,
 } = client;

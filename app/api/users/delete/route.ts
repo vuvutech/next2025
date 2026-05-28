@@ -1,49 +1,49 @@
-import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/prisma/dbConnect";
+import { type NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/app/actions/functions";
+import { prisma } from "@/prisma/dbConnect";
 
 export async function DELETE(req: NextRequest) {
-  const currentUser = await getCurrentUser();
-  const { id } = await req.json();
+	const currentUser = await getCurrentUser();
+	const { id } = await req.json();
 
-  console.log("Deleting user with ID:", id);
+	console.log("Deleting user with ID:", id);
 
-  // Check admin privileges
-  if (
-    !currentUser ||
-    (currentUser.role !== "ADMIN" && currentUser.role !== "SUPERADMIN")
-  ) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
+	// Check admin privileges
+	if (
+		!currentUser ||
+		(currentUser.role !== "ADMIN" && currentUser.role !== "SUPERADMIN")
+	) {
+		return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+	}
 
-  // Prevent self-deletion
-  if (currentUser.id === id) {
-    return NextResponse.json(
-      { error: "You cannot delete your own account" },
-      { status: 400 }
-    );
-  }
+	// Prevent self-deletion
+	if (currentUser.id === id) {
+		return NextResponse.json(
+			{ error: "You cannot delete your own account" },
+			{ status: 400 },
+		);
+	}
 
-  try {
-    await prisma.$transaction([
-      prisma.newsletterSubscriber.deleteMany({ where: { userId: id } }),
-      prisma.oauthAccessToken.deleteMany({ where: { userId: id } }),
-      prisma.oauthConsent.deleteMany({ where: { userId: id } }),
-      prisma.oauthApplication.deleteMany({ where: { userId: id } }),
-      prisma.session.deleteMany({ where: { userId: id } }),
-      prisma.account.deleteMany({ where: { userId: id } }),
-      prisma.verification.deleteMany({ where: { id: id } }),
-      prisma.registration.deleteMany({ where: { userId: id } }),
-      prisma.profile.deleteMany({ where: { userId: id } }), // <— changed to deleteMany
-      prisma.user.delete({ where: { id } }),
-    ]);
+	try {
+		await prisma.$transaction([
+			prisma.newsletterSubscriber.deleteMany({ where: { userId: id } }),
+			prisma.oauthAccessToken.deleteMany({ where: { userId: id } }),
+			prisma.oauthConsent.deleteMany({ where: { userId: id } }),
+			prisma.oauthApplication.deleteMany({ where: { userId: id } }),
+			prisma.session.deleteMany({ where: { userId: id } }),
+			prisma.account.deleteMany({ where: { userId: id } }),
+			prisma.verification.deleteMany({ where: { id: id } }),
+			prisma.registration.deleteMany({ where: { userId: id } }),
+			prisma.profile.deleteMany({ where: { userId: id } }), // <— changed to deleteMany
+			prisma.user.delete({ where: { id } }),
+		]);
 
-    return NextResponse.json({ success: true });
-  } catch (error: any) {
-    console.error("Failed to delete user:", error);
-    return NextResponse.json(
-      { error: "Failed to delete user" },
-      { status: 500 }
-    );
-  }
+		return NextResponse.json({ success: true });
+	} catch (error: any) {
+		console.error("Failed to delete user:", error);
+		return NextResponse.json(
+			{ error: "Failed to delete user" },
+			{ status: 500 },
+		);
+	}
 }

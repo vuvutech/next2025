@@ -1,75 +1,74 @@
-import { auth } from "@/lib/auth";
-import UserCard from "./user-card";
-import { redirect } from "next/navigation";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { PreferencesSection } from "@/components/dashboard/preference-section";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import TestimonialCard from "./TestimonialCard";
 import RegistrationSection from "@/components/dashboard/registration-section";
 import EditableProfileForm from "@/components/forms/EditableProfileForm";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { auth } from "@/lib/auth";
+import TestimonialCard from "./TestimonialCard";
+import UserCard from "./user-card";
 
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
-  const [session, activeSessions] =
-    await Promise.all([
-      auth.api.getSession({
-        headers: await headers(),
-      }),
-      auth.api.listSessions({
-        headers: await headers(),
-      }),
-    ]).catch((e: any) => {
-      throw redirect("/auth/sign-in");
-    });
+	const [session, activeSessions] = await Promise.all([
+		auth.api.getSession({
+			headers: await headers(),
+		}),
+		auth.api.listSessions({
+			headers: await headers(),
+		}),
+	]).catch((e: any) => {
+		throw redirect("/auth/sign-in");
+	});
 
-  return (
-    <div className=" mx-auto p-2 sm:p-4 sm:m-4 w-full  sm:overflow-x-hidden relative">
-      <Tabs defaultValue="account" className="rounded-lg w-full">
-        <TabsList className="overflow-x-auto">
-          <TabsTrigger id="account" value="account">
-            Account
-          </TabsTrigger>
-          <TabsTrigger id="profile" value="profile">
-            My Profile
-          </TabsTrigger>
-          <TabsTrigger id="preferences" value="preferences">
-            Preferences
-          </TabsTrigger>
-          {/* <TabsTrigger id="billing" value="billing">
+	return (
+		<div className=" mx-auto p-2 sm:p-4 sm:m-4 w-full  sm:overflow-x-hidden relative">
+			<Tabs defaultValue="account" className="rounded-lg w-full">
+				<TabsList className="overflow-x-auto">
+					<TabsTrigger id="account" value="account">
+						Account
+					</TabsTrigger>
+					<TabsTrigger id="profile" value="profile">
+						My Profile
+					</TabsTrigger>
+					<TabsTrigger id="preferences" value="preferences">
+						Preferences
+					</TabsTrigger>
+					{/* <TabsTrigger id="billing" value="billing">
             Billing & Invoices
           </TabsTrigger> */}
-          <TabsTrigger id="testimonials" value="testimonials">
-            My Testimonials
-          </TabsTrigger>
-          <TabsTrigger id="registration" value="registration">
-            My Institutes
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="account">
-          <UserCard
-            session={JSON.parse(JSON.stringify(session))}
-            activeSessions={JSON.parse(JSON.stringify(activeSessions))}
-          />
-        </TabsContent>
-        <TabsContent value="profile">
-          {/* <ProfileSection session={session!} /> */}
-          <EditableProfileForm />
-          {/* <ProfileCreation /> */}
-        </TabsContent>
-        <TabsContent value="preferences">
-          <PreferencesSection />
-        </TabsContent>
-        {/* <TabsContent id="billing" value="billing">
+					<TabsTrigger id="testimonials" value="testimonials">
+						My Testimonials
+					</TabsTrigger>
+					<TabsTrigger id="registration" value="registration">
+						My Institutes
+					</TabsTrigger>
+				</TabsList>
+				<TabsContent value="account">
+					<UserCard
+						session={JSON.parse(JSON.stringify(session))}
+						activeSessions={JSON.parse(JSON.stringify(activeSessions))}
+					/>
+				</TabsContent>
+				<TabsContent value="profile">
+					{/* <ProfileSection session={session!} /> */}
+					<EditableProfileForm />
+					{/* <ProfileCreation /> */}
+				</TabsContent>
+				<TabsContent value="preferences">
+					<PreferencesSection />
+				</TabsContent>
+				{/* <TabsContent id="billing" value="billing">
           <BillingSection />
         </TabsContent> */}
-        <TabsContent id="testimonials" value="testimonials">
-          <TestimonialCard session={null} />
-        </TabsContent>
-        <TabsContent value="registration">
-          <RegistrationSection />
-        </TabsContent>
-      </Tabs>
-    </div>
-  );
+				<TabsContent id="testimonials" value="testimonials">
+					<TestimonialCard session={null} />
+				</TabsContent>
+				<TabsContent value="registration">
+					<RegistrationSection />
+				</TabsContent>
+			</Tabs>
+		</div>
+	);
 }

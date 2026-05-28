@@ -1,126 +1,127 @@
 // app/api/institutes/route.ts
-import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/prisma/dbConnect";
+
 import { revalidatePath } from "next/cache";
+import { type NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/app/actions/functions";
 import { baseUrl } from "@/lib/metadata";
+import { prisma } from "@/prisma/dbConnect";
 
 // GET handler
 export async function GET(req: NextRequest) {
-  // const authResult = checkAuth(req);
-  // if (authResult) return authResult;
+	// const authResult = checkAuth(req);
+	// if (authResult) return authResult;
 
-  try {
-    const institutes = await prisma.institute.findMany({
-      orderBy: {
-        createdAt: "asc",
-      },
-      // get the latest edition for each institute
-      include: {
-        editions: {
-          take: 1,
-          orderBy: {
-            startDate: "desc",
-          },
-        },
-      },
-    });
-    return NextResponse.json(institutes);
-  } catch (error) {
-    console.error("API Error:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch institutes" },
-      { status: 500 }
-    );
-  }
+	try {
+		const institutes = await prisma.institute.findMany({
+			orderBy: {
+				createdAt: "asc",
+			},
+			// get the latest edition for each institute
+			include: {
+				editions: {
+					take: 1,
+					orderBy: {
+						startDate: "desc",
+					},
+				},
+			},
+		});
+		return NextResponse.json(institutes);
+	} catch (error) {
+		console.error("API Error:", error);
+		return NextResponse.json(
+			{ error: "Failed to fetch institutes" },
+			{ status: 500 },
+		);
+	}
 }
 
 // POST handler
 export async function POST(req: NextRequest) {
-  const user = await getCurrentUser();
-  if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
-  try {
-    const data = await req.json();
-    const institute = await prisma.institute.create({ data });
-    return NextResponse.json(institute);
-  } catch (error) {
-    console.error("API Error:", error);
-    return NextResponse.json(
-      { error: "Failed to create institute" },
-      { status: 500 }
-    );
-  }
+	const user = await getCurrentUser();
+	if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
+		return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+	}
+	try {
+		const data = await req.json();
+		const institute = await prisma.institute.create({ data });
+		return NextResponse.json(institute);
+	} catch (error) {
+		console.error("API Error:", error);
+		return NextResponse.json(
+			{ error: "Failed to create institute" },
+			{ status: 500 },
+		);
+	}
 }
 // PUT update institute (admin only)
 export async function PUT(req: NextRequest) {
-  const user = await getCurrentUser();
-  if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
+	const user = await getCurrentUser();
+	if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
+		return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+	}
 
-  const body = await req.json();
-  const { slug, overview, about } = body;
+	const body = await req.json();
+	const { slug, overview, about } = body;
 
-  if (!slug) {
-    return NextResponse.json(
-      { error: "Missing institute slug" },
-      { status: 400 }
-    );
-  }
+	if (!slug) {
+		return NextResponse.json(
+			{ error: "Missing institute slug" },
+			{ status: 400 },
+		);
+	}
 
-  try {
-    const existing = await prisma.institute.findUnique({ where: { slug } });
-    if (!existing) {
-      return NextResponse.json(
-        { error: "Institute not found" },
-        { status: 404 }
-      );
-    }
+	try {
+		const existing = await prisma.institute.findUnique({ where: { slug } });
+		if (!existing) {
+			return NextResponse.json(
+				{ error: "Institute not found" },
+				{ status: 404 },
+			);
+		}
 
-    const updated = await prisma.institute.update({
-      where: { slug },
-      data: {
-        overview: overview ?? undefined,
-        about: about ?? undefined,
-      },
-      include: {
-        editions: false,
-      },
-    });
+		const updated = await prisma.institute.update({
+			where: { slug },
+			data: {
+				overview: overview ?? undefined,
+				about: about ?? undefined,
+			},
+			include: {
+				editions: false,
+			},
+		});
 
-    // 🔄 Revalidate both public and admin edit pages
-    revalidatePath(`${baseUrl}/institutes/${slug}`);
-    revalidatePath(`${baseUrl}/admin/institutes/${slug}/edit`);
+		// 🔄 Revalidate both public and admin edit pages
+		revalidatePath(`${baseUrl}/institutes/${slug}`);
+		revalidatePath(`${baseUrl}/admin/institutes/${slug}/edit`);
 
-    return NextResponse.json(updated);
-  } catch (error) {
-    console.error("❌ Update failed:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
-  }
+		return NextResponse.json(updated);
+	} catch (error) {
+		console.error("❌ Update failed:", error);
+		return NextResponse.json(
+			{ error: "Internal server error" },
+			{ status: 500 },
+		);
+	}
 }
 
 // DELETE handler
 export async function DELETE(req: NextRequest) {
-  const user = await getCurrentUser();
-  if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
+	const user = await getCurrentUser();
+	if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
+		return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+	}
 
-  try {
-    const { id } = await req.json();
-    if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
-    await prisma.institute.delete({ where: { id } });
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("API Error:", error);
-    return NextResponse.json(
-      { error: "Failed to delete institute" },
-      { status: 500 }
-    );
-  }
+	try {
+		const { id } = await req.json();
+		if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
+		await prisma.institute.delete({ where: { id } });
+		return NextResponse.json({ success: true });
+	} catch (error) {
+		console.error("API Error:", error);
+		return NextResponse.json(
+			{ error: "Failed to delete institute" },
+			{ status: 500 },
+		);
+	}
 }

@@ -1,29 +1,29 @@
 "use client";
-import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { staggerContainer, staggerItem } from "@/components/animations/framerAnimations";
+import Image from "next/image";
+import React from "react";
+import {
+	staggerContainer,
+	staggerItem,
+} from "@/components/animations/framerAnimations";
 
 const AboutSectionThree = () => {
-  return (
-		<div className='py-4'>
-			<section className='max-w-8xl w-full py-4 mx-auto  dark:bg-firefly-900'>
+	return (
+		<div className="py-4">
+			<section className="max-w-8xl w-full py-4 mx-auto  dark:bg-firefly-900">
 				{/* Grid */}
 				<motion.div
 					variants={staggerContainer}
-					initial='hidden'
-					whileInView='visible'
+					initial="hidden"
+					whileInView="visible"
 					viewport={{ once: true, margin: "-50px" }}
-					className='grid md:grid-cols-3  md:gap-8 '
+					className="grid md:grid-cols-3  md:gap-8 "
 				>
-					<motion.div
-						variants={staggerItem}
-						className='md:col-span-2'
-					>
+					<motion.div variants={staggerItem} className="md:col-span-2">
 						<Image
-							className='rounded-2xl h-dvh md:h-[90vh] w-full object-cover'
-							src='/images/quarterglobe.webp'
-							alt='Costrad on leadership'
+							className="rounded-2xl h-dvh md:h-[90vh] w-full object-cover"
+							src="/images/quarterglobe.webp"
+							alt="Costrad on leadership"
 							width={800}
 							height={600}
 							priority
@@ -32,29 +32,23 @@ const AboutSectionThree = () => {
 					{/* End Col */}
 					<motion.div
 						variants={staggerItem}
-						className='mt-5 sm:mt-10 md:mt-0 md:order-1 md:col-span-1 md:flex flex-col justify-center '
+						className="mt-5 sm:mt-10 md:mt-0 md:order-1 md:col-span-1 md:flex flex-col justify-center "
 					>
-						<div className='space-y-6 sm:space-y-8'>
+						<div className="space-y-6 sm:space-y-8">
 							{/* Title */}
-							<div className='space-y-2 md:space-y-4'>
-								<h5 className='text-firefly uppercase'>
-									Discover Our Agenda
-								</h5>
-								<h2 className='uppercase text-foreground text-2xl md:text-4xl '>
-									Developing The Transformational Capacity of
-									Nations
+							<div className="space-y-2 md:space-y-4">
+								<h5 className="text-firefly uppercase">Discover Our Agenda</h5>
+								<h2 className="uppercase text-foreground text-2xl md:text-4xl ">
+									Developing The Transformational Capacity of Nations
 								</h2>
-								<p className='text-lg text-firefly-700 dark:text-white prose dark:prose-invert'>
-									Our agenda touches key areas in governance,
-									building strong institutions, Economy,
-									Education and Skills development, Innovation
-									and Technology as well as social foundations
-									and belief systems. These are just some of
-									the key factors that contribute to a
-									nation's transformational capacity, and the
-									specific mix of factors will vary depending
-									on the context and challenges faced by each
-									individual and nation.
+								<p className="text-lg text-firefly-700 dark:text-white prose dark:prose-invert">
+									Our agenda touches key areas in governance, building strong
+									institutions, Economy, Education and Skills development,
+									Innovation and Technology as well as social foundations and
+									belief systems. These are just some of the key factors that
+									contribute to a nation's transformational capacity, and the
+									specific mix of factors will vary depending on the context and
+									challenges faced by each individual and nation.
 								</p>
 							</div>
 							{/* End Title */}
@@ -65,7 +59,7 @@ const AboutSectionThree = () => {
 				{/* End Grid */}
 			</section>
 		</div>
-  );
+	);
 };
 
 export default AboutSectionThree;

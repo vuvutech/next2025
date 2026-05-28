@@ -1,8 +1,8 @@
 "use client";
 
+import clsx from "clsx";
 import Image from "next/image";
 import { useDevice } from "@/hooks/useDevice";
-import clsx from "clsx";
 import { useHasMounted } from "@/hooks/useHasMounted";
 
 interface JumbotronProps {
@@ -26,16 +26,14 @@ export default function Jumbotron({
 	const shouldAnimate = hasMounted && !isMobile;
 
 	return (
-		<header className='relative w-full'>
-			<div className='md:min-w-[1440px] mx-auto'>
+		<header className="relative w-full">
+			<div className="md:min-w-[1440px] mx-auto">
 				{/* Hero Section */}
-				<div
-					className={`relative w-full h-[470px] ${height} overflow-hidden`}
-				>
+				<div className={`relative w-full h-[470px] ${height} overflow-hidden`}>
 					<Image
-						loading='eager'
+						loading="eager"
 						src={heroImage}
-						alt='Hero image'
+						alt="Hero image"
 						fill
 						className={clsx(
 							"object-cover",
