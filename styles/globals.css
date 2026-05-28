@@ -170,16 +170,16 @@ html {
 	--font-opensans: "Open Sans", sans-serif;
 	--radius: 0.3rem;
 
-/* Balanced Fluid Typography Scale */
---text-xs: clamp(0.65rem, 0.05vw + 0.63rem, 0.7rem);
---text-sm: clamp(0.75rem, 0.08vw + 0.73rem, 0.825rem);
---text-base: clamp(0.875rem, 0.12vw + 0.85rem, 0.95rem);
---text-lg: clamp(0.95rem, 0.2vw + 0.91rem, 1.05rem);
---text-xl: clamp(1.05rem, 0.35vw + 0.99rem, 1.175rem);
---text-2xl: clamp(1.175rem, 0.65vw + 1.08rem, 1.375rem);
---text-3xl: clamp(1.375rem, 1.0vw + 1.25rem, 1.75rem);
---text-4xl: clamp(1.65rem, 1.5vw + 1.5rem, 2.25rem);
---text-5xl: clamp(2.0rem, 2.5vw + 1.75rem, 2.75rem);
+	/* Balanced Fluid Typography Scale */
+	--text-xs: clamp(0.65rem, 0.05vw + 0.63rem, 0.7rem);
+	--text-sm: clamp(0.75rem, 0.08vw + 0.73rem, 0.825rem);
+	--text-base: clamp(0.875rem, 0.12vw + 0.85rem, 0.95rem);
+	--text-lg: clamp(0.95rem, 0.2vw + 0.91rem, 1.05rem);
+	--text-xl: clamp(1.05rem, 0.35vw + 0.99rem, 1.175rem);
+	--text-2xl: clamp(1.175rem, 0.65vw + 1.08rem, 1.375rem);
+	--text-3xl: clamp(1.375rem, 1vw + 1.25rem, 1.75rem);
+	--text-4xl: clamp(1.65rem, 1.5vw + 1.5rem, 2.25rem);
+	--text-5xl: clamp(2rem, 2.5vw + 1.75rem, 2.75rem);
 
 	/* Semantic Colors */
 	--success: oklch(0.627 0.265 149.213);

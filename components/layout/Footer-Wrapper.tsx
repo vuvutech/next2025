@@ -4,16 +4,23 @@ import { usePathname } from "next/navigation";
 import Footer from "@/components/layout/footer";
 
 export default function FooterWrapper() {
-  const pathname = usePathname();
+	const pathname = usePathname();
 
-  // Pages where Footer should be hidden (match by prefix)
-  const hiddenPrefixes = ["/admin", "/www", "/coming-soon", "/auth","/apply","/thank-you"];
+	// Pages where Footer should be hidden (match by prefix)
+	const hiddenPrefixes = [
+		"/admin",
+		"/www",
+		"/coming-soon",
+		"/auth",
+		"/apply",
+		"/thank-you",
+	];
 
-  const shouldHideFooter = hiddenPrefixes.some((prefix) =>
-    pathname.startsWith(prefix)
-  );
+	const shouldHideFooter = hiddenPrefixes.some((prefix) =>
+		pathname.startsWith(prefix),
+	);
 
-  if (shouldHideFooter) return null;
+	if (shouldHideFooter) return null;
 
-  return <Footer />;
+	return <Footer />;
 }

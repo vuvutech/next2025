@@ -1,5 +1,5 @@
-import { siteConfig } from "@/config/site";
 import type { Metadata } from "next/types";
+import { siteConfig } from "@/config/site";
 
 export function createMetadata(override: Metadata): Metadata {
 	return {
@@ -23,10 +23,8 @@ export function createMetadata(override: Metadata): Metadata {
 	};
 }
 
-
-		// lib/metadata.ts
+// lib/metadata.ts
 export const baseUrl =
 	process.env.NODE_ENV === "development"
 		? new URL("http://localhost:3000")
 		: new URL(`https://www.costrad.org`);
-

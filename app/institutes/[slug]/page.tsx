@@ -3,14 +3,14 @@
 // revalidate after 12 hours
 export const revalidate = 43200; // 12 hours in seconds
 
-import { prisma } from "@/prisma/dbConnect";
-import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { Section1 } from "../Section1";
 import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
 import OverviewSection from "@/app/institutes/OverviewSection";
-import Jumbotron from "@/components/sections/Jumbotron";
 import { AppBreadcrumbs } from "@/components/navigation/AppBreadcrumbs";
+import Jumbotron from "@/components/sections/Jumbotron";
+import { prisma } from "@/prisma/dbConnect";
+import { Section1 } from "../Section1";
 
 const WorldMap = dynamic(() => import("@/components/sections/WorldMap"));
 
@@ -41,7 +41,9 @@ export async function generateMetadata(props: {
 }
 
 // Actual SSG Page
-export default async function InstituteViewPage(props: { params: Promise<{ slug: string }> }) {
+export default async function InstituteViewPage(props: {
+	params: Promise<{ slug: string }>;
+}) {
 	const params = await props.params;
 	const institute = await prisma.institute.findUnique({
 		where: { slug: params.slug },
@@ -55,17 +57,15 @@ export default async function InstituteViewPage(props: { params: Promise<{ slug:
 	const edition = institute.editions[0];
 
 	return (
-		<div className='overflow-hidden'>
+		<div className="overflow-hidden">
 			<Jumbotron
-				heroImage={
-					edition?.banner ? edition.banner : "/images/institute.jpg"
-				}
+				heroImage={edition?.banner ? edition.banner : "/images/institute.jpg"}
 			/>
-			<div className='container py-4'>
+			<div className="container py-4">
 				<AppBreadcrumbs />
 			</div>
 
-			<div className='relative overflow-hidden pb-5'>
+			<div className="relative overflow-hidden pb-5">
 				<Section1
 					name={institute.name}
 					overview={institute.overview}

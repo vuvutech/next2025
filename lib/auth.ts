@@ -1,27 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { betterAuth } from "better-auth";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+import { nextCookies } from "better-auth/next-js";
 import {
-	bearer,
 	admin,
+	bearer,
+	emailOTP,
 	multiSession,
+	oAuthProxy,
+	oidcProvider,
+	openAPI,
 	organization,
 	twoFactor,
-	oAuthProxy,
-	openAPI,
-	oidcProvider,
-	emailOTP,
 } from "better-auth/plugins";
-
-import { reactInvitationEmail } from "./email/invitation";
-import { reactResetPasswordEmail } from "./email/rest-password";
-import { resend } from "./email/resend";
-import { nextCookies } from "better-auth/next-js";
-import { baseUrl } from "./metadata";
-import { prismaAdapter } from "better-auth/adapters/prisma";
-import { prisma } from "@/prisma/dbConnect";
 import { generateStudentId } from "@/app/actions/functions";
-import VerifyEmail from "./email/VerifyEmail";
+import { prisma } from "@/prisma/dbConnect";
 import { ac, adminRole, superAdminRole } from "./auth/permissions";
+import { reactInvitationEmail } from "./email/invitation";
+import { resend } from "./email/resend";
+import { reactResetPasswordEmail } from "./email/rest-password";
+import VerifyEmail from "./email/VerifyEmail";
+import { baseUrl } from "./metadata";
 
 const from = process.env.BETTER_AUTH_EMAIL || "notifications@costrad.org";
 
@@ -148,7 +147,7 @@ export const auth = betterAuth({
 		"https://costrad.org",
 		"https://www.costrad.net",
 		"https://costrad.net",
-		"http://localhost:3000"
+		"http://localhost:3000",
 	],
 
 	account: {
@@ -199,8 +198,7 @@ export const auth = betterAuth({
 			defaultBanReason: "Spamming",
 			impersonationSessionDuration: 60 * 60 * 24, // 1 day
 			defaultBanExpiresIn: 60 * 60 * 24 * 365, // 365 days
-			bannedUserMessage:
-				"Account suspended For Violating Our Terms of Service",
+			bannedUserMessage: "Account suspended For Violating Our Terms of Service",
 		}),
 		emailOTP({
 			async sendVerificationOTP({ email, otp, type = "sign-in" }) {

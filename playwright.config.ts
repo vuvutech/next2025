@@ -1,39 +1,39 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
-  testDir: './tests',
-  fullyParallel: true,
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
-  use: {
-    baseURL: 'http://localhost:3000',
-    trace: 'on-first-retry',
-  },
+	testDir: "./tests",
+	fullyParallel: true,
+	forbidOnly: !!process.env.CI,
+	retries: process.env.CI ? 2 : 0,
+	workers: process.env.CI ? 1 : undefined,
+	reporter: "html",
+	use: {
+		baseURL: "http://localhost:3000",
+		trace: "on-first-retry",
+	},
 
-  projects: [
-    {
-      name: 'Mobile Phone',
-      use: { ...devices['iPhone SE'] },
-    },
-    {
-      name: 'Tablet',
-      use: { ...devices['iPad (gen 7)'] },
-    },
-    {
-      name: 'Small Desktop',
-      use: { viewport: { width: 1024, height: 768 } },
-    },
-    {
-      name: 'Large Desktop',
-      use: { ...devices['Desktop Chrome'] },
-    },
-  ],
+	projects: [
+		{
+			name: "Mobile Phone",
+			use: { ...devices["iPhone SE"] },
+		},
+		{
+			name: "Tablet",
+			use: { ...devices["iPad (gen 7)"] },
+		},
+		{
+			name: "Small Desktop",
+			use: { viewport: { width: 1024, height: 768 } },
+		},
+		{
+			name: "Large Desktop",
+			use: { ...devices["Desktop Chrome"] },
+		},
+	],
 
-  webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
-  },
+	webServer: {
+		command: "npm run dev",
+		url: "http://localhost:3000",
+		reuseExistingServer: !process.env.CI,
+	},
 });

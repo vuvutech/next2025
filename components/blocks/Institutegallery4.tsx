@@ -1,22 +1,21 @@
 "use client";
 
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-
-import { Button } from "@/components/ui/button";
-import {
-	Carousel,
-	CarouselApi,
-	CarouselContent,
-	CarouselItem,
-} from "@/components/ui/carousel";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
 	staggerContainer,
 	staggerItem,
 } from "@/components/animations/framerAnimations";
+import { Button } from "@/components/ui/button";
+import {
+	Carousel,
+	type CarouselApi,
+	CarouselContent,
+	CarouselItem,
+} from "@/components/ui/carousel";
 
 export interface InstituteItems {
 	id: string;
@@ -39,7 +38,8 @@ const data = [
 		overview:
 			"Explore how shadcn/ui revolutionized React component libraries by providing a unique approach to component distribution and customization, making it easier for developers to build beautiful, accessible applications.",
 		slug: "https://ui.shadcn.com",
-		banner: "https://images.unsplash.com/photo-1551250928-243dc937c49d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxMjN8fHx8fHwyfHwxNzIzODA2OTM5fA&ixlib=rb-4.0.3&q=80&w=1080",
+		banner:
+			"https://images.unsplash.com/photo-1551250928-243dc937c49d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxMjN8fHx8fHwyfHwxNzIzODA2OTM5fA&ixlib=rb-4.0.3&q=80&w=1080",
 	},
 	{
 		id: "tailwind",
@@ -47,7 +47,8 @@ const data = [
 		overview:
 			"Discover how Tailwind CSS transformed the way developers style their applications, offering a utility-first approach that speeds up development while maintaining complete design flexibility.",
 		slug: "https://tailwindcss.com",
-		banner: "https://images.unsplash.com/photo-1551250928-e4a05afaed1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxMjR8fHx8fHwyfHwxNzIzODA2OTM5fA&ixlib=rb-4.0.3&q=80&w=1080",
+		banner:
+			"https://images.unsplash.com/photo-1551250928-e4a05afaed1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxMjR8fHx8fHwyfHwxNzIzODA2OTM5fA&ixlib=rb-4.0.3&q=80&w=1080",
 	},
 	{
 		id: "astro",
@@ -55,7 +56,8 @@ const data = [
 		overview:
 			"Learn how Astro's innovative 'Islands Architecture' and zero-JS-by-default approach is helping developers build faster websites while maintaining rich interactivity where needed.",
 		slug: "https://astro.build",
-		banner: "https://images.unsplash.com/photo-1536735561749-fc87494598cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxNzd8fHx8fHwyfHwxNzIzNjM0NDc0fA&ixlib=rb-4.0.3&q=80&w=1080",
+		banner:
+			"https://images.unsplash.com/photo-1536735561749-fc87494598cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxNzd8fHx8fHwyfHwxNzIzNjM0NDc0fA&ixlib=rb-4.0.3&q=80&w=1080",
 	},
 	{
 		id: "react",
@@ -63,7 +65,8 @@ const data = [
 		overview:
 			"See how React continues to shape modern web development with its component-based architecture, enabling developers to build complex user interfaces with reusable, maintainable code.",
 		slug: "https://react.dev",
-		banner: "https://images.unsplash.com/photo-1548324215-9133768e4094?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxMzF8fHx8fHwyfHwxNzIzNDM1MzA1fA&ixlib=rb-4.0.3&q=80&w=1080",
+		banner:
+			"https://images.unsplash.com/photo-1548324215-9133768e4094?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NDI3NzN8MHwxfGFsbHwxMzF8fHx8fHwyfHwxNzIzNDM1MzA1fA&ixlib=rb-4.0.3&q=80&w=1080",
 	},
 	{
 		id: "nextjs",
@@ -104,59 +107,59 @@ export const InstituteGallery = ({
 	}, [carouselApi]);
 
 	return (
-		<section className='py-20'>
-			<div className='container mx-auto px-4'>
-				<div className='mb-8 flex items-end justify-between md:mb-14 lg:mb-16'>
+		<section className="py-20">
+			<div className="container mx-auto px-4">
+				<div className="mb-8 flex items-end justify-between md:mb-14 lg:mb-16">
 					<motion.div
 						variants={staggerContainer}
-						initial='hidden'
-						whileInView='visible'
+						initial="hidden"
+						whileInView="visible"
 						viewport={{ once: true, margin: "-50px" }}
-						className='flex flex-col gap-4 md:px-8'
+						className="flex flex-col gap-4 md:px-8"
 					>
 						<motion.h2
 							variants={staggerItem}
-							className='text-3xl sm:text-5xl md:text-4xl'
+							className="text-3xl sm:text-5xl md:text-4xl"
 						>
 							{name}
 						</motion.h2>
 						<motion.p
 							variants={staggerItem}
-							className='max-w-4xl text-foreground text-lg'
+							className="max-w-4xl text-foreground text-lg"
 						>
 							{overview}
 						</motion.p>
 					</motion.div>
-					<div className='flex shrink-0 gap-2'>
+					<div className="flex shrink-0 gap-2">
 						<Button
-							size='icon'
-							variant='default'
+							size="icon"
+							variant="default"
 							onClick={() => {
 								carouselApi?.scrollPrev();
 							}}
-							className='text-muted cursor-pointer'
+							className="text-muted cursor-pointer"
 						>
-							<ArrowLeft className='size-5' />
+							<ArrowLeft className="size-5" />
 						</Button>
 						<Button
-							size='icon'
-							variant='default'
+							size="icon"
+							variant="default"
 							onClick={() => {
 								carouselApi?.scrollNext();
 							}}
-							className='text-muted cursor-pointer'
+							className="text-muted cursor-pointer"
 						>
-							<ArrowRight className='size-5' />
+							<ArrowRight className="size-5" />
 						</Button>
 					</div>
 				</div>
 			</div>
 			<motion.div
 				variants={staggerContainer}
-				initial='hidden'
-				whileInView='visible'
+				initial="hidden"
+				whileInView="visible"
 				viewport={{ once: true, margin: "-50px" }}
-				className='w-full'
+				className="w-full"
 			>
 				<Carousel
 					setApi={setCarouselApi}
@@ -173,35 +176,35 @@ export const InstituteGallery = ({
 						{items.map((item, index) => (
 							<CarouselItem
 								key={item.id}
-								className='max-w-[320px] pl-[20px] lg:max-w-[360px] relative rounded-3xl'
+								className="max-w-[320px] pl-[20px] lg:max-w-[360px] relative rounded-3xl"
 							>
 								<motion.div variants={staggerItem}>
 									<Link
 										href={`/institutes/${item.slug}`}
-										className='group rounded-3xl shadow-xs shadow-indigo-100'
+										className="group rounded-3xl shadow-xs shadow-indigo-100"
 										prefetch={false}
 									>
-										<div className='group relative h-full min-h-[27rem] max-w-full overflow-hidden rounded-3xl md:aspect-[5/4] lg:aspect-[16/9]'>
+										<div className="group relative h-full min-h-[27rem] max-w-full overflow-hidden rounded-3xl md:aspect-[5/4] lg:aspect-[16/9]">
 											<Image
 												src={`/${item.banner}`}
 												alt={item.name}
 												fill
-												className='absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-99'
-												sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px'
+												className="absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-99"
+												sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
 												quality={80}
 												priority={index === 0}
 											/>
-											<div className='absolute inset-0 h-full bg-gradient-to-t from-black/90 via-black/40 to-black/20 rounded-3xl' />
-											<div className='absolute inset-x-0 bottom-0 flex flex-col items-start p-6 md:p-8'>
-												<div className='mb-2 pt-4 md:w-3/4 text-2xl leading-tight font-bebas text-white uppercase md:mb-3 md:pt-4 lg:pt-4'>
+											<div className="absolute inset-0 h-full bg-gradient-to-t from-black/90 via-black/40 to-black/20 rounded-3xl" />
+											<div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-6 md:p-8">
+												<div className="mb-2 pt-4 md:w-3/4 text-2xl leading-tight font-bebas text-white uppercase md:mb-3 md:pt-4 lg:pt-4">
 													{item.name}
 												</div>
-												<div className='mb-8 line-clamp-4 invisible font-bold font-foreground leading-5 md:leading-6 md:mb-12 lg:mb-9'>
+												<div className="mb-8 line-clamp-4 invisible font-bold font-foreground leading-5 md:leading-6 md:mb-12 lg:mb-9">
 													{item.overview}
 												</div>
-												<div className='flex items-center text-firefly font-bold text-sm'>
+												<div className="flex items-center text-firefly font-bold text-sm">
 													Read more{" "}
-													<ArrowRight className='ml-2 size-5 cursor-pointer transition-transform group-hover:translate-x-1' />
+													<ArrowRight className="ml-2 size-5 cursor-pointer transition-transform group-hover:translate-x-1" />
 												</div>
 											</div>
 										</div>
@@ -211,14 +214,12 @@ export const InstituteGallery = ({
 						))}
 					</CarouselContent>
 				</Carousel>
-				<div className='mt-8 flex justify-center gap-2'>
+				<div className="mt-8 flex justify-center gap-2">
 					{items.map((_, index) => (
 						<button
 							key={index}
 							className={`h-2 w-2 rounded-full transition-colors ${
-								currentSlide === index
-									? "bg-primary"
-									: "bg-primary/20"
+								currentSlide === index ? "bg-primary" : "bg-primary/20"
 							}`}
 							onClick={() => carouselApi?.scrollTo(index)}
 							aria-label={`Go to slide ${index + 1}`}
@@ -229,4 +230,3 @@ export const InstituteGallery = ({
 		</section>
 	);
 };
-

@@ -1,5 +1,5 @@
-import { type Institute, type Edition } from "@prisma/client";
+import type { Edition, Institute } from "@prisma/client";
 
 export type InstituteWithEditions = Institute & {
-  editions: Edition[];
+	editions: Edition[];
 };
