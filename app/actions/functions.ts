@@ -152,8 +152,14 @@ export async function isEmailVerified(email: string): Promise<boolean> {
   return user?.emailVerified === true;
 }
 export async function getUserRole() {
+  const headersList = await headers();
+  const userRole = headersList.get("x-user-role");
+  if (userRole) {
+    return userRole;
+  }
+
   const session = await auth.api.getSession({
-    headers: await headers(),
+    headers: headersList,
   });
 
   if (!session || !session.user) {
@@ -171,8 +177,23 @@ export async function getUserRole() {
 
 // app/actions/functions.ts
 export async function getCurrentUser(req?: NextRequest) {
+  const headersList = await headers();
+  const userId = headersList.get("x-user-id");
+
+  if (userId) {
+    return {
+      id: userId,
+      email: headersList.get("x-user-email") || "",
+      name: headersList.get("x-user-name") || "",
+      role: headersList.get("x-user-role") || "USER",
+      banned: false,
+      banReason: null,
+      studentId: headersList.get("x-user-studentid") || "",
+    };
+  }
+
   const session = await auth.api.getSession({
-    headers: await headers(),
+    headers: headersList,
   });
 
   if (!session?.user?.id) return null;

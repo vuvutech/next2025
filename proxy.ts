@@ -1,43 +1,49 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSessionCookie } from "better-auth/cookies";
-import { betterFetch } from "@better-fetch/fetch";
+import { auth } from "@/lib/auth";
 
 export async function proxy(request: NextRequest) {
-  const sessionCookie = getSessionCookie(request);
+  // Prevent client spoofing by sanitizing custom context headers from incoming request
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.delete("x-user-id");
+  requestHeaders.delete("x-user-role");
+  requestHeaders.delete("x-user-name");
+  requestHeaders.delete("x-user-email");
+  requestHeaders.delete("x-user-studentid");
 
-  // Redirect to login if no session
-  if (!sessionCookie) {
-    const url = new URL("/auth/sign-in", request.url);
-    url.searchParams.set("callbackUrl", request.nextUrl.pathname);
-    return NextResponse.redirect(url);
-  }
+  const session = await auth.api.getSession({
+    headers: request.headers,
+  });
 
   const pathname = request.nextUrl.pathname;
 
-  if (pathname.startsWith("/admin")) {
-    try {
-      const { data, error } = await betterFetch<{ role: string }>(
-        "/api/userRole/",
-        {
-          baseURL: `${request.nextUrl.protocol}//${request.headers.get("host")}`,
-          headers: { cookie: request.headers.get("cookie") || "" },
-        }
-      );
-
-      if (
-        error ||
-        !data ||
-        (data.role !== "ADMIN" && data.role !== "SUPERADMIN")
-      ) {
-        return NextResponse.redirect(new URL("/", request.url));
-      }
-    } catch (e) {
-      console.error("Failed to fetch role in proxy:", e);
-      return NextResponse.redirect(new URL("/", request.url));
-    }
+  // Redirect to login if no session is active
+  if (!session) {
+    const url = new URL("/auth/sign-in", request.url);
+    url.searchParams.set("callbackUrl", pathname);
+    return NextResponse.redirect(url);
   }
 
-  return NextResponse.next();
+   // Populate custom context headers with verified session payload
+   const userRole = session.user.role || "USER";
+   requestHeaders.set("x-user-id", session.user.id);
+   requestHeaders.set("x-user-role", userRole);
+   requestHeaders.set("x-user-name", session.user.name || "");
+   requestHeaders.set("x-user-email", session.user.email || "");
+   requestHeaders.set("x-user-studentid", (session.user as any).studentId || "");
+
+    // Restrict admin routes to authorized roles only
+    if (pathname.startsWith("/admin")) {
+      if (userRole !== "ADMIN" && userRole !== "SUPERADMIN") {
+        return NextResponse.redirect(new URL("/", request.url));
+      }
+    }
+
+   // Forward the request to the Next.js router with optimized context headers
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 }
 
 export const config = {

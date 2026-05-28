@@ -94,8 +94,27 @@ export const auth = betterAuth({
 
 	baseURL: baseUrl.toString(),
 
-	session: {
-		freshAge: 60 * 60 * 24, // 24 hours - require re-auth after this time
+	cookies: {
+		// Enable stateless session cookies
+		secure: process.env.NODE_ENV === "production",
+	},
+
+	jwt: {
+		enabled: true,
+		// Add user role to JWT payload for stateless verification
+		extendFields: {
+			user: {
+				role: {
+					type: "string",
+					defaultValue: "USER",
+				},
+				// Add studentId to session payload
+				studentId: {
+					type: "string",
+					defaultValue: "",
+				},
+			},
+		},
 	},
 
 	emailVerification: {
