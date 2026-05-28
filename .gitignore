@@ -73,4 +73,18 @@ react-email-starter/
 *~
 .gitnexus
 .opencode/skills/
+phase2_assessment.md
+.opencode/*
+todo.md
 
+# turborepo
+.turbo/
+
+# agent scratchpad (strictly gitignored per AGENTS.md)
+.memory/
+
+# general cache
+.cache/
+
+# temp files
+tmp/
