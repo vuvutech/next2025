@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/dbConnect";
 import { sendMail } from "@/lib/nodemailer-mail";
 import { render } from "@react-email/render";
-import { IEARegistrationEmail } from "@/react-email-starter/emails/iea-welcome-email";
+import { IEARegistrationEmail } from "@/lib/email/iea-welcome-email";
 
 export async function POST(req: NextRequest) {
   try {
