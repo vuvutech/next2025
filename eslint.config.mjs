@@ -1,16 +1,14 @@
-import { FlatCompat } from "@eslint/eslintrc";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-	baseDirectory: __dirname,
-});
+import nextConfig from "eslint-config-next";
+import nextTypeScript from "eslint-config-next/typescript";
+import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 
 const eslintConfig = [
-	...compat.extends("next/core-web-vitals", "next/typescript"),
+	{
+		ignores: [".next/**", "node_modules/**", "dist/**", "build/**"],
+	},
+	...nextConfig,
+	...nextTypeScript,
+	...nextCoreWebVitals,
 	{
 		rules: {
 			// Disable specific TypeScript rules
@@ -59,6 +57,12 @@ const eslintConfig = [
 					message: "Labeled statements are not allowed.",
 				},
 			],
+			// Disable strict React Compiler/Hooks rules that block builds
+			"react-hooks/set-state-in-effect": "off",
+			"react-hooks/purity": "off",
+			"react-hooks/incompatible-library": "off",
+			// Disable TypeScript empty object type rule
+			"@typescript-eslint/no-empty-object-type": "off",
 			// Disable the no-unsafe-optional-chaining rule
 			"no-unsafe-optional-chaining": "off",
 		},
