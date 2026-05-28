@@ -12,12 +12,13 @@ import { BanToggleForm } from "./BanToggleForm";
 import { AdminRoleToggleForm } from "./AdminRoleToggleForm";
 import { getCountryCode, countryCodeToFlagEmoji } from "@/lib/countries";
 
-export const columns: ColumnDef<any>[] = [
+export function createColumns(onViewUser: (id: string) => void): ColumnDef<any>[] {
+  return [
   {
     header: "User",
     accessorKey: "name",
     cell: ({ row }) => (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 cursor-pointer" onClick={() => onViewUser(row.original.id)}>
         <div className="relative">
           <Avatar className="h-12 w-12">
             <AvatarImage
@@ -28,20 +29,6 @@ export const columns: ColumnDef<any>[] = [
               {row.original.name.charAt(0) || "CN"}
             </AvatarFallback>
           </Avatar>
-          {/* <span className="absolute -bottom-1 right-0">
-            {row.original.profile?.country &&
-              (() => {
-                const code = getCountryCode(row.original.profile.country);
-                return code ? (
-                  <span
-                    className=" translate-x-1/4 translate-y-1/4 text-[12px]  px-[2px]  leading-none "
-                    title={row.original.profile.country}
-                  >
-                    {countryCodeToFlagEmoji(code)}
-                  </span>
-                ) : null;
-              })()}
-          </span> */}
         </div>
         <div>
           <h6 className="text-current gap-2 text-xs">
@@ -191,9 +178,10 @@ export const columns: ColumnDef<any>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center gap-2">
-          <ActionsCellComponent id={row.original.id} />
+          <ActionsCellComponent id={row.original.id} onViewUser={onViewUser} />
         </div>
       );
     },
   },
 ];
+}

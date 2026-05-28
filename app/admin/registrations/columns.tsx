@@ -8,7 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { ApproveButton } from "./ApproveButton";
 import { ActionsCellComponent } from "./ActionsCellComponent";
 
-export const columns: ColumnDef<any>[] = [
+export function createColumns(onViewUser: (id: string) => void): ColumnDef<any>[] {
+  return [
   {
     header: "User",
     accessorFn: (row) => row.user?.name || "Unknown",
@@ -18,7 +19,8 @@ export const columns: ColumnDef<any>[] = [
         alt={row.original.user?.name || "Unknown user"}
         width={50}
         height={50}
-        className="rounded-full"
+        className="rounded-full cursor-pointer"
+        onClick={() => onViewUser(row.original.user?.id)}
       />
     ),
   },
@@ -26,7 +28,7 @@ export const columns: ColumnDef<any>[] = [
     header: "",
     accessorKey: "user.name",
     cell: ({ row }) => (
-      <div>
+      <div className="cursor-pointer" onClick={() => onViewUser(row.original.user?.id)}>
         <h6 className="text-current gap-2 text-sm">
           {row.original.user?.name}
         </h6>
@@ -141,9 +143,10 @@ export const columns: ColumnDef<any>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center gap-2">
-          <ActionsCellComponent id={row.original.user?.id} />
+          <ActionsCellComponent id={row.original.user?.id} onViewUser={onViewUser} />
         </div>
       );
     },
   },
 ];
+}

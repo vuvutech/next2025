@@ -9,7 +9,6 @@ import {
   IconDashboard,
   IconSchool,
   IconDatabase,
-  IconChartBar,
   IconNewSection,
   IconFolder,
   IconPackages,

@@ -1,11 +1,32 @@
 // File: app/admin/registrations/ClientWrapper.tsx
 "use client";
 
+import { useState, useMemo } from "react";
 import { GenericDataTable } from "@/components/ui/data-table/generic-data-table";
-import { columns } from "./columns";
+import { createColumns } from "./columns";
+import { UserProfileSheet } from "@/components/modals/UserProfileSheet";
+
 export const dynamic = "force-dynamic";
 
-
 export default function ClientWrapper({ data }: { data: any[] }) {
-  return <GenericDataTable columns={columns} data={data} addFiltering={true} />;
+  const [viewUserId, setViewUserId] = useState<string | null>(null);
+  const [showSheet, setShowSheet] = useState(false);
+
+  const handleViewUser = (id: string) => {
+    setViewUserId(id);
+    setShowSheet(true);
+  };
+
+  const columns = useMemo(() => createColumns(handleViewUser), []);
+
+  return (
+    <>
+      <GenericDataTable columns={columns} data={data} addFiltering={true} />
+      <UserProfileSheet
+        open={showSheet}
+        onOpenChange={setShowSheet}
+        userId={viewUserId}
+      />
+    </>
+  );
 }
