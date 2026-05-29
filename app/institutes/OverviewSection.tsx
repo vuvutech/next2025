@@ -1,16 +1,9 @@
 "use client";
 import type { Edition } from "@prisma/client";
-import { MoveVerticalIcon } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import SeperatorWithText from "@/components/ui/seperatorWithText";
-import { baseUrl } from "@/lib/metadata";
-import { useDialog } from "@/providers/DialogProvider";
 import type { InstituteWithEditions } from "@/types/institute";
 
 export default function OverviewSection({

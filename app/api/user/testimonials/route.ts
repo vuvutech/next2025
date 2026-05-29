@@ -2,7 +2,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { userTestimonials } from "@/app/actions/userfunctions";
 
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
 	try {
 		const testimonials = await userTestimonials();
 		return NextResponse.json(testimonials);

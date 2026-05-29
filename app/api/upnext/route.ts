@@ -2,7 +2,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/dbConnect";
 
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
 	const now = new Date();
 
 	const nextEdition = await prisma.edition.findFirst({

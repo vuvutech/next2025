@@ -9,7 +9,7 @@ interface FadeInProps {
 	duration?: number;
 	className?: string;
 	id?: string;
-	as?: React.ElementType;
+	as?: string;
 }
 
 export function FadeIn({
@@ -20,7 +20,7 @@ export function FadeIn({
 	id,
 	as = "div",
 }: FadeInProps) {
-	const Component = motion.create(as as keyof React.JSX.IntrinsicElements);
+	const Component = (motion as any)[as] || motion.div;
 
 	return (
 		<Component

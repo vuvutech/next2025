@@ -84,8 +84,8 @@ export const InstituteGallery = ({
 	items = data,
 }: InstituteProps) => {
 	const [carouselApi, setCarouselApi] = useState<CarouselApi>();
-	const [canScrollPrev, setCanScrollPrev] = useState(false);
-	const [canScrollNext, setCanScrollNext] = useState(false);
+	const [_canScrollPrev, setCanScrollPrev] = useState(false);
+	const [_canScrollNext, setCanScrollNext] = useState(false);
 	const [currentSlide, setCurrentSlide] = useState(0);
 
 	useEffect(() => {

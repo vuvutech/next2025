@@ -1,12 +1,12 @@
 {
-	"name": "costrad-2025",
+	"name": "costrad",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev --turbopack",
 		"build": "prisma generate && next build",
 		"start": "next start",
-		"lint": "next lint",
+		"lint": "eslint .",
 		"test": "vitest run",
 		"test:watch": "vitest"
 	},
@@ -105,7 +105,7 @@
 		"@types/nodemailer": "^8.0.0",
 		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.2.3",
-		"eslint": "^10.2.0",
+		"eslint": "^9",
 		"eslint-config-next": "^16.2.3",
 		"eslint-config-prettier": "^10.1.8",
 		"prisma": "^6.19.3",

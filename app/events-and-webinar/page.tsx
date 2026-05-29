@@ -1,8 +1,4 @@
-import React from "react";
-
-type Props = {};
-
-const EventsAndWebinar = (props: Props) => {
+const EventsAndWebinar = (_props: Record<string, never>) => {
 	return (
 		<div>
 			<h1 className="  font-extrabold text-7xl ">Hello World</h1>

@@ -11,7 +11,7 @@ export function useSession() {
 			try {
 				const currentSession = await client.getSession();
 				setSession(currentSession.data?.session);
-			} catch (error) {
+			} catch (_error) {
 				setSession(undefined);
 			} finally {
 				setIsLoading(false);

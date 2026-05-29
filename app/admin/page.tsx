@@ -1,10 +1,8 @@
 import {
-	IconActivity,
 	IconAlertTriangle,
 	IconArrowRight,
 	IconBuildingBank,
 	IconCalendarEvent,
-	IconChartBar,
 	IconChecklist,
 	IconClipboardCheck,
 	IconDashboard,
@@ -13,10 +11,8 @@ import {
 	IconNewSection,
 	IconPackages,
 	IconSchool,
-	IconTrendingUp,
 	IconUserCheck,
 	IconUsers,
-	IconUsersGroup,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
@@ -26,7 +22,6 @@ import { DevicesUsage } from "@/components/analytics/DevicesUsage";
 import { RegisteredUsersCard } from "@/components/analytics/RegisteredUsersCard";
 import { SessionsCard } from "@/components/analytics/SessionsCard";
 import { GaTopPagesChartBar } from "@/components/chart-area-interactive";
-import { Badge } from "@/components/ui/badge";
 import {
 	Card,
 	CardContent,

@@ -1,8 +1,6 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
 import { FadeIn } from "@/components/animations/FadeIn";
 import HeroSection from "@/components/sections/HeroSection";
 import { InstitutesIntro } from "@/components/sections/InstitutesIntro";
@@ -19,21 +17,6 @@ const Testimonials = dynamic(() =>
 );
 
 export default function Home() {
-	const [isLoading, setIsLoading] = useState(true);
-
-	// useEffect(() => {
-	//   (async () => {
-	//     const LocomotiveScroll = (await import("locomotive-scroll")).default;
-	//     const locomotiveScroll = new LocomotiveScroll();
-
-	//     setTimeout(() => {
-	//       setIsLoading(false);
-	//       document.body.style.cursor = "default";
-	//       window.scrollTo(0, 0);
-	//     }, 2000);
-	//   })();
-	// }, []);
-
 	return (
 		<main className=" space-y-2 ">
 			{/* <AnimatePresence mode="wait">

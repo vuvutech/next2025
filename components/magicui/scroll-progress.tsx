@@ -1,7 +1,7 @@
 "use client";
 
 import type { MotionProps } from "framer-motion";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 

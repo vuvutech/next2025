@@ -3,25 +3,17 @@
 import { MobileIcon } from "@radix-ui/react-icons";
 import {
 	Edit,
-	Fingerprint,
 	Laptop,
 	Loader2,
 	LogOut,
-	Plus,
 	QrCode,
 	ShieldCheck,
 	ShieldOff,
-	Trash,
 	X,
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
-	JSXElementConstructor,
-	Key,
-	ReactElement,
-	ReactNode,
-	ReactPortal,
 	type SetStateAction,
 	useEffect,
 	useState,
@@ -52,14 +44,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PasswordInput } from "@/components/ui/password-input";
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table";
 import { client, signOut, useSession } from "@/lib/auth-client";
 import type { Session } from "@/lib/auth-types";
 
@@ -152,7 +136,7 @@ export default function UserCard(props: {
 											email: session?.user.email || "",
 										},
 										{
-											onRequest(context) {
+											onRequest(_context) {
 												setEmailVerificationPending(true);
 											},
 											onError(context) {
@@ -375,7 +359,7 @@ export default function UserCard(props: {
 													}
 													setIsPendingTwoFa(true);
 													if (userData?.twoFactorEnabled) {
-														const res = await client.twoFactor.disable({
+														await client.twoFactor.disable({
 															password: twoFaPassword,
 															fetchOptions: {
 																onError(context) {
@@ -410,7 +394,7 @@ export default function UserCard(props: {
 															});
 															return;
 														}
-														const res = await client.twoFactor.enable({
+														await client.twoFactor.enable({
 															password: twoFaPassword,
 															fetchOptions: {
 																onError(context) {
@@ -600,7 +584,7 @@ function ChangePassword() {
 }
 
 function EditUserDialog() {
-	const { data, isPending, error } = useSession();
+	const { data } = useSession();
 	const [name, setName] = useState<string>();
 	const router = useRouter();
 	const [image, setImage] = useState<File | null>(null);

@@ -1,16 +1,7 @@
 // app/auth/error/page.tsx
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-
 export default function AuthErrorPage() {
-	const searchParams = useSearchParams();
-	const router = useRouter();
-
-	const error = searchParams.get("error");
-	const description = searchParams.get("error_description");
-
 	//   useEffect(() => {
 	//     if (error === "banned") {
 	//       router.replace("/banned");

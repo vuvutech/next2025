@@ -36,7 +36,7 @@ type Institute = {
 
 export function ExtensionComponent() {
 	const [institutes, setInstitutes] = useState<Institute[]>([]);
-	const [selectedInstituteId, setSelectedInstituteId] = useState<string>("");
+	const [, setSelectedInstituteId] = useState<string>("");
 
 	useEffect(() => {
 		fetch("/api/institutes")

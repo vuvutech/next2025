@@ -60,12 +60,12 @@ export default function InstitutesComponent({
 	// Optional: Fetch data client-side for real-time updates
 	useEffect(() => {
 		// Only fetch if you want to refresh data client-side (e.g., for polling)
-		const fetchInstitutes = async () => {
+		const _fetchInstitutes = async () => {
 			try {
 				setLoading(true);
 				const data = await getInstitutes();
 				setInstitutes(data);
-			} catch (err) {
+			} catch (_err) {
 				setError("Failed to fetch institutes");
 			} finally {
 				setLoading(false);

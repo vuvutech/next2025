@@ -46,7 +46,7 @@ export default function TwoFactorOTPViaEmail() {
 			setMessage("OTP sent to your email");
 			setIsError(false);
 			setIsOtpSent(true);
-		} catch (error) {
+		} catch {
 			setMessage("Failed to send OTP. Please try again.");
 			setIsError(true);
 		}

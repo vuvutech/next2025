@@ -17,9 +17,9 @@ interface WhyCostradProps {
 }
 
 export const WhyCostrad: React.FC<WhyCostradProps> = ({
-	backgroundImageUrl = "/images/united-nations.webp",
+	backgroundImageUrl: _backgroundImageUrl = "/images/united-nations.webp",
 }) => {
-	const { isMobile } = useDevice();
+	const { isMobile: _isMobile } = useDevice();
 
 	return (
 		<section className="max-w-auto  mx-auto h-auto  text-lg md:text-3xl  ">

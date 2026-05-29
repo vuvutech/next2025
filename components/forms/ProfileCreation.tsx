@@ -22,14 +22,12 @@ import {
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
 	type CountryData,
 	PhoneInput,
@@ -111,12 +109,10 @@ export const FormSchema = z.object({
 type FormValues = z.infer<typeof FormSchema>;
 
 export const ProfileCreation = () => {
-	const [countryData, setCountryData] = React.useState<CountryData>();
+	const [_countryData, setCountryData] = React.useState<CountryData>();
 	const [selectedCountry, setSelectedCountry] = React.useState<Country | null>(
 		null,
 	);
-	const [selectedNationality, setSelectedNationality] =
-		React.useState<Country | null>(null);
 
 	const form = useForm({
 		resolver: zodResolver(FormSchema),

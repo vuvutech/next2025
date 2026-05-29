@@ -1,7 +1,7 @@
 // app/actions/functions.ts
 "use server";
 
-import crypto from "node:crypto";
+import crypto from "crypto";
 import { headers } from "next/headers";
 import type { NextRequest } from "next/server";
 import { auth } from "@/lib/auth";
@@ -29,7 +29,6 @@ export const getInstitutes = async () => {
 	}
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function _getProfilePercentage() {
 	try {
 		const response = await fetch("/api/profile");
@@ -94,7 +93,7 @@ async function _getProfilePercentage() {
 	}
 }
 
-function isFieldFilled(field: string | unknown[] | null | undefined) {
+function isFieldFilled(field: string | any[] | null | undefined) {
 	if (field === null || field === undefined) {
 		return false;
 	}
@@ -163,7 +162,7 @@ export async function getUserRole() {
 		headers: headersList,
 	});
 
-	if (!session?.user) {
+	if (!session || !session.user) {
 		return null;
 	}
 
@@ -187,8 +186,8 @@ export async function getCurrentUser(_req?: NextRequest) {
 			email: headersList.get("x-user-email") || "",
 			name: headersList.get("x-user-name") || "",
 			role: headersList.get("x-user-role") || "USER",
-			banned: headersList.get("x-user-banned") === "true",
-			banReason: headersList.get("x-user-banReason") || "",
+			banned: false,
+			banReason: null,
 			studentId: headersList.get("x-user-studentid") || "",
 		};
 	}

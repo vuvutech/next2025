@@ -47,7 +47,7 @@ export const testimonialcolumns: ColumnDef<any>[] = [
 	{
 		header: "Actions",
 		cell: ({ row }) => {
-			const { id, approved, featured } = row.original;
+			const { id } = row.original;
 			return <TestiomonialActionsCell id={id} />;
 		},
 	},

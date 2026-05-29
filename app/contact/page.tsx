@@ -5,7 +5,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
 import { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { FaFacebook, FaTiktok, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { toast } from "sonner";
 import { FadeIn } from "@/components/animations/FadeIn";
@@ -19,7 +19,6 @@ import TestimonialForm, {
 // Import the Shadcn-based modal and form
 import GenericShadcnFormModal from "@/components/modals/GenericShadcnFormModal"; // Adjust path
 import BadgeLink from "@/components/sections/BadgeLink";
-import CTA from "@/components/sections/CTA";
 import Jumbotron from "@/components/sections/Jumbotron";
 import { Button } from "@/components/ui/button";
 import { useDialog } from "@/providers/DialogProvider";
@@ -46,8 +45,6 @@ interface UserSession {
 export default function ContactPage() {
 	const { open } = useDialog();
 
-	const [isPrivacyPolicyAccepted, setIsPrivacyPolicyAccepted] =
-		useState<boolean>(false); // Renamed for clarity
 	const [isTestimonialModalOpen, setIsTestimonialModalOpen] =
 		useState<boolean>(false);
 	const [testimonialData, setTestimonialData] = useState<TestimonialFormData>({
@@ -58,7 +55,7 @@ export default function ContactPage() {
 	const [currentUserSession, setCurrentUserSession] =
 		useState<UserSession | null>(null); // State to store the fetched user session
 
-	const { reset } = useForm<ContactFormInputs>();
+	useForm<ContactFormInputs>();
 
 	const handleTestimonialSubmit = async (
 		event: React.MouseEvent<HTMLButtonElement>,
@@ -91,7 +88,7 @@ export default function ContactPage() {
 		};
 
 		try {
-			const response = await fetch("/api/testimonials", {
+			await fetch("/api/testimonials", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

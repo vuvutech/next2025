@@ -1,7 +1,6 @@
 // columns.tsx
 "use client";
 
-import type { Edition } from "@prisma/client";
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import Image from "next/image";
@@ -24,26 +23,9 @@ type Institute = {
 	slug: string;
 	createdAt: Date | null;
 	updatedAt: Date | null;
-	approved?: boolean; // Added
-	featured?: boolean; // Added
-	editions: Edition[] | null;
-};
-
-// Define type for ActionsCellComponent props (for type safety)
-interface ActionsCellProps {
-	id: string;
-	overview: string; // Changed from content to overview
-	featured?: boolean;
 	approved?: boolean;
-	setFormState: (state: {
-		id?: string;
-		overview?: string;
-		featured: boolean;
-		approved: boolean;
-	}) => void;
-	setIsEditing: (editing: boolean) => void;
-	openDialog: () => void;
-}
+	featured?: boolean;
+};
 
 export const columns: ColumnDef<Institute>[] = [
 	{

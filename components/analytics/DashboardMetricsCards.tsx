@@ -1,7 +1,7 @@
 // File: components/analytics/DashboardMetricsCards.tsx
 "use client";
 
-import { IconAward, IconTrendingUp, IconUsers } from "@tabler/icons-react";
+import { IconAward } from "@tabler/icons-react";
 import * as React from "react";
 import { Badge } from "@/components/ui/badge";
 import {

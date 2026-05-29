@@ -1,5 +1,5 @@
 "use client";
-import { easeInOut, motion, useAnimation } from "framer-motion";
+import { easeInOut, motion } from "framer-motion";
 // import styles from './style.module.scss';
 import { useEffect, useState } from "react";
 
@@ -74,17 +74,6 @@ export default function Preloader() {
 		},
 	};
 
-	const line = {
-		initial: {
-			d: initialPath,
-			transition: { duration: 0.7, ease: "linear" },
-		},
-		exit: {
-			d: targetPath,
-			transition: { duration: 0.7, ease: "linear", delay: 0.3 },
-		},
-	};
-
 	return (
 		<motion.div
 			variants={slideUp}
@@ -98,7 +87,8 @@ export default function Preloader() {
 						<span></span>
 						{welcomeWords[index]}
 					</motion.p>
-					<svg>
+					<svg aria-hidden="true">
+						<title>Preloader transition curve</title>
 						<motion.path
 							variants={curve}
 							initial="initial"

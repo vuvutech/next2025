@@ -20,8 +20,6 @@ export async function proxy(request: NextRequest) {
 	requestHeaders.delete("x-user-name");
 	requestHeaders.delete("x-user-email");
 	requestHeaders.delete("x-user-studentid");
-	requestHeaders.delete("x-user-banned");
-	requestHeaders.delete("x-user-banReason");
 
 	const session = await auth.api.getSession({
 		headers: request.headers,
@@ -38,21 +36,14 @@ export async function proxy(request: NextRequest) {
 
 	// Populate custom context headers with verified session payload
 	const userRole = session.user.role || "USER";
-	const user = session.user as SessionUser;
-	const isBanned = user.banned === true;
-	requestHeaders.set("x-user-id", user.id);
+	requestHeaders.set("x-user-id", session.user.id);
 	requestHeaders.set("x-user-role", userRole);
-	requestHeaders.set("x-user-name", user.name || "");
-	requestHeaders.set("x-user-email", user.email || "");
-	requestHeaders.set("x-user-studentid", user.studentId || "");
-	requestHeaders.set("x-user-banned", String(isBanned));
-	requestHeaders.set("x-user-banReason", user.banReason || "");
+	requestHeaders.set("x-user-name", session.user.name || "");
+	requestHeaders.set("x-user-email", session.user.email || "");
+	requestHeaders.set("x-user-studentid", (session.user as any).studentId || "");
 
 	// Restrict admin routes to authorized roles only
 	if (pathname.startsWith("/admin")) {
-		if (isBanned) {
-			return NextResponse.redirect(new URL("/auth/banned", request.url));
-		}
 		if (userRole !== "ADMIN" && userRole !== "SUPERADMIN") {
 			return NextResponse.redirect(new URL("/", request.url));
 		}

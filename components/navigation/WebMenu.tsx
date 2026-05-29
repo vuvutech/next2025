@@ -11,33 +11,6 @@ import {
 } from "@/components/ui/navigation-menu";
 import { ThemeSwitch } from "@/components/ui/theme-switch";
 import { cn } from "@/lib/utils";
-import Apply from "../../app/apply/page";
-
-export const gettingStarted: {
-	title: string;
-	href: string;
-	description: string;
-}[] = [
-	{
-		title: "Why COSTrAD",
-		href: "/docs/primitives/alert-dialog",
-		description:
-			"A modal dialog that interrupts the user with important content and expects a response.",
-	},
-	{
-		title: "Mission & Vision",
-		href: "/docs/primitives/hover-card",
-		description:
-			"For sighted users to preview content available behind a link.",
-	},
-	{
-		title: "Our Story",
-		href: "/our-story",
-		description:
-			"Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-	},
-];
-
 import { usePathname } from "next/navigation";
 
 export function WebMenu() {

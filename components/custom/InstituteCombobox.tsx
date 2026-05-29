@@ -19,11 +19,6 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
-type Institute = {
-	id: string;
-	name: string;
-};
-
 interface ComboboxProps {
 	institutes: { id: string; name: string }[];
 	onSelect: (id: string) => void;

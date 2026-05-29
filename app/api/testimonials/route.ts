@@ -13,7 +13,7 @@ import {
 import { prisma } from "@/prisma/dbConnect";
 
 // GET all testimonials (admin only)
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
 	const user = await getCurrentUser();
 	if (!user || (user.role !== "ADMIN" && user.role !== "SUPERADMIN")) {
 		return NextResponse.json({ error: "Forbidden" }, { status: 403 });

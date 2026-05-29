@@ -22,8 +22,6 @@ export function ProfileSection({
 	session: { user: User; session: Session };
 }) {
 	const [isEditing, setIsEditing] = useState(false);
-	const [name, setName] = useState(session.user.name);
-	const [email, setEmail] = useState(session.user.email);
 	return (
 		<div className="space-y-6">
 			<div>

@@ -150,7 +150,6 @@ export const columns: ColumnDef<any>[] = [
 		id: "edit",
 		enableHiding: false,
 		cell: ({ row }) => {
-			const edition = row.original;
 			return <EditEditionSheet edition={row.original} />;
 		},
 	},
@@ -202,7 +201,7 @@ export const columns: ColumnDef<any>[] = [
 						startDate={edition.startDate}
 						endDate={edition.endDate}
 						active={edition.active}
-						setFormState={(state: {
+						setFormState={(_state: {
 							id?: string;
 							overview?: string;
 							active: boolean;
@@ -211,7 +210,7 @@ export const columns: ColumnDef<any>[] = [
 						}): void => {
 							throw new Error("Function not implemented.");
 						}}
-						setIsEditing={(editing: boolean): void => {
+						setIsEditing={(_editing: boolean): void => {
 							throw new Error("Function not implemented.");
 						}}
 						openDialog={(): void => {

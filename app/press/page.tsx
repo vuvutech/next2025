@@ -1,6 +1,5 @@
 // app/donate/page.tsx
 import PressComponent from "@/components/sections/PressComponent";
-import FaqsComponent from "@/components/ui/Faqs";
 
 export default function Faqspage() {
 	return (

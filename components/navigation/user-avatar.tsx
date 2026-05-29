@@ -7,8 +7,7 @@ import { client } from "@/lib/auth-client";
 export function UserAvatar({ className = "" }: { className?: string }) {
 	const {
 		data: session,
-		isPending, //loading state
-		error, //error object
+		isPending,
 	} = client.useSession();
 
 	if (isPending) {

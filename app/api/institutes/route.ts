@@ -7,7 +7,7 @@ import { baseUrl } from "@/lib/metadata";
 import { prisma } from "@/prisma/dbConnect";
 
 // GET handler
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
 	// const authResult = checkAuth(req);
 	// if (authResult) return authResult;
 

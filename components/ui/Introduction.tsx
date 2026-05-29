@@ -2,9 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { bebas } from "@/config/fonts";
 
-type Props = {};
-
-const Introduction = (props: Props) => {
+const Introduction = () => {
 	return (
 		<div className=" container mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-4 min-h-screen h-auto space-y-3 p-4  md:p-12 ">
 			<div

@@ -1,7 +1,4 @@
 import React from "react";
-import RegisterLogin from "@/components/forms/LoginForRegistration";
-import LoginForRegistration from "@/components/forms/LoginForRegistration";
-import { SignUpForRegistration } from "@/components/forms/SignupForRegistration";
 import SignInComponent from "@/components/forms/sign-in";
 import { SignUpComponent } from "@/components/forms/sign-up";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

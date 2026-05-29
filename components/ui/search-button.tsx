@@ -5,7 +5,6 @@ import {
 	ArrowRight,
 	BookOpen,
 	Building2,
-	Loader2,
 	SearchIcon,
 	X,
 } from "lucide-react";
@@ -190,7 +189,6 @@ export function SearchButton() {
 	};
 
 	const totalResults = results.institutes.length + results.editions.length;
-	const showResults = query.length >= 2 && !loading;
 
 	return (
 		<Dialog open={open} onOpenChange={handleOpenChange}>

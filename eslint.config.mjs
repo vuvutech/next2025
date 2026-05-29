@@ -1,23 +1,25 @@
-import { FlatCompat } from "@eslint/eslintrc";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-	baseDirectory: __dirname,
-});
+import nextConfig from "eslint-config-next";
+import nextTypeScript from "eslint-config-next/typescript";
+import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 
 const eslintConfig = [
-	...compat.extends("next/core-web-vitals", "next/typescript"),
+	{
+		ignores: [".next/**", "node_modules/**", "dist/**", "build/**"],
+	},
+	...nextConfig,
+	...nextTypeScript,
+	...nextCoreWebVitals,
 	{
 		rules: {
 			// Disable specific TypeScript rules
 			"@typescript-eslint/no-explicit-any": "off",
 			"@typescript-eslint/no-unused-vars": [
 				"warn",
-				{ argsIgnorePattern: "^_" },
+				{
+					argsIgnorePattern: "^_",
+					varsIgnorePattern: "^_",
+					caughtErrorsIgnorePattern: "^_",
+				},
 			],
 			// Optional: disable the unescaped entities rule
 			"react/no-unescaped-entities": "off",
@@ -28,8 +30,6 @@ const eslintConfig = [
 			"no-debugger": "off",
 			// Disable the no-undef rule
 			"no-undef": "off",
-			// Disable the no-restricted-syntax rule
-			"no-restricted-syntax": "off",
 			// Disable the no-constant-condition rule
 			"no-constant-condition": "off",
 			// Disable the no-duplicate-imports rule
@@ -46,6 +46,8 @@ const eslintConfig = [
 			"prefer-const": "off",
 			// Disable the prefer-rest-params rule
 			"prefer-rest-params": "off",
+			// Disable the no-restricted-syntax rule
+			
 			// allowObjectTypes
 			"no-restricted-syntax": [
 				"error",
@@ -59,6 +61,12 @@ const eslintConfig = [
 					message: "Labeled statements are not allowed.",
 				},
 			],
+			// Disable strict React Compiler/Hooks rules that block builds
+			"react-hooks/set-state-in-effect": "off",
+			"react-hooks/purity": "off",
+			"react-hooks/incompatible-library": "off",
+			// Disable TypeScript empty object type rule
+			"@typescript-eslint/no-empty-object-type": "off",
 			// Disable the no-unsafe-optional-chaining rule
 			"no-unsafe-optional-chaining": "off",
 		},

@@ -8,7 +8,7 @@ import {
 	Special_Elite,
 } from "next/font/google";
 
-type Props = {
+type _Props = {
 	subset: string | string[];
 	weight: string | string[];
 	style: string | string[];

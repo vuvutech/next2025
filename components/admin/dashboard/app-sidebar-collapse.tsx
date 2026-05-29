@@ -4,9 +4,7 @@ import {
 	IconChartBar,
 	IconDashboard,
 	IconDatabase,
-	IconFolder,
 	IconListDetails,
-	IconMoneybagPlus,
 	IconNewSection,
 	IconPackages,
 	IconReport,
@@ -90,7 +88,7 @@ const navMain = [
 export function AppSidebarCollapse({
 	...props
 }: React.ComponentProps<typeof Sidebar>) {
-	const { data: session, isPending, error } = client.useSession();
+	const { data: session } = client.useSession();
 
 	const user = session?.user;
 

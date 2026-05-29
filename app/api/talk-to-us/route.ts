@@ -55,7 +55,7 @@ export async function POST(request: Request) {
 
 		// Send the email
 		try {
-			const info = await transporter.sendMail(mailOptions);
+			await transporter.sendMail(mailOptions);
 			return NextResponse.json(
 				{ message: "Email sent successfully" },
 				{ status: 200 },

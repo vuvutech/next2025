@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useRef } from "react";
+import React from "react";
 import {
 	affiliateMenu,
 	menuItems,
@@ -19,39 +19,8 @@ export default function Content() {
 }
 
 const Section2 = () => {
-	const firstText = useRef(null);
-	const secondText = useRef(null);
-	const slider = useRef(null);
-	const xPercent = 0;
-	const directionRef = useRef(-1);
-
-	// const animate = useCallback(() => {
-	//   if (xPercent < -100) {
-	//     xPercent = 0;
-	//   } else if (xPercent > 0) {
-	//     xPercent = -97;
-	//   }
-	//   gsap.set(firstText.current, { xPercent: xPercent });
-	//   gsap.set(secondText.current, { xPercent: xPercent });
-	//   requestAnimationFrame(animate);
-	//   xPercent += 0.1 * directionRef.current;
-	// }, []);
-
-	// useLayoutEffect(() => {
-	//   gsap.registerPlugin(ScrollTrigger);
-	//   gsap.to(slider.current, {
-	//     scrollTrigger: {
-	//       trigger: document.documentElement,
-	//       scrub: 0.25,
-	//       start: 0,
-	//       end: window.innerHeight,
-	//       onUpdate: (e) => (directionRef.current = e.direction * -1),
-	//     },
-	//     x: '-500px',
-	//   });
-	//   requestAnimationFrame(animate);
-	// }, [animate]);
-
+	const firstText = React.useRef<HTMLParagraphElement>(null);
+	const secondText = React.useRef<HTMLParagraphElement>(null);
 	return (
 		<div className="flex justify-between md:items-end relative ">
 			<div className="text-[6.5rem] md:text-[12.5rem] md:leading-[0.8] md:mt-10 absolute -left-14 bottom-16 md:bottom-5 ">
