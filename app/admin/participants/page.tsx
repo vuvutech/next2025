@@ -145,7 +145,7 @@ export default async function ParticipantsPage() {
 								<div className="flex items-start justify-between gap-3">
 									<div className="flex items-center gap-3 min-w-0">
 										{inst.logo ? (
-											<div className="relative size-10 shrink-0 overflow-hidden rounded-lg border border-border/30">
+											<div className="relative size-16 shrink-0 overflow-hidden rounded-lg ">
 												<Image
 													src={`/${inst.logo}`}
 													alt={inst.name}
@@ -155,7 +155,7 @@ export default async function ParticipantsPage() {
 												/>
 											</div>
 										) : (
-											<div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+											<div className="flex size-16 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
 												<IconBuildingBank className="size-5" />
 											</div>
 										)}
@@ -164,7 +164,7 @@ export default async function ParticipantsPage() {
 												{inst.name}
 											</CardTitle>
 											{inst.acronym && (
-												<p className="text-[10px] uppercase tracking-widest font-semibold text-muted-foreground/60">
+												<p className="text-[12px] uppercase tracking-widest font-semibold text-muted-foreground/60">
 													{inst.acronym}
 												</p>
 											)}

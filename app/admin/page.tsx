@@ -387,34 +387,35 @@ export default async function AdminDashboardPage() {
 								className="group block cursor-pointer"
 							>
 								<Card
-									className={`h-full border border-border/80 bg-card/60 backdrop-blur-xs transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 ${item.theme.glow}`}
+									className={`h-full border-border/40 shadow-xs transition-all duration-300 hover:shadow-sm hover:border-primary/25 ${item.theme.glow}`}
 								>
-									<CardHeader className="flex flex-row items-start gap-4 p-5">
-										<div
-											className={`flex size-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-300 ${item.theme.bg} ${item.theme.text} ${item.theme.border} group-hover:scale-105`}
-										>
-											<Icon className="size-5" />
-										</div>
-										<div className="flex-1 space-y-1">
-											<div className="flex items-center justify-between">
-												<CardTitle className="text-sm font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary">
-													{item.title}
-												</CardTitle>
-												<IconArrowRight className="size-3.5 opacity-0 -translate-x-2 text-primary transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
+									<CardContent className="p-4">
+										<div className="flex items-start gap-3">
+											<div
+												className={`flex size-10 shrink-0 items-center justify-center rounded-lg border transition-all duration-300 ${item.theme.bg} ${item.theme.text} ${item.theme.border}`}
+											>
+												<Icon className="size-4" />
 											</div>
-											<CardDescription className="text-xs leading-normal">
-												{item.description}
-											</CardDescription>
-											{sub && (
-												<p className="text-[10px] font-medium text-muted-foreground/70 uppercase tracking-wider">
-													{sub}
-												</p>
-											)}
+											<div className="flex-1 min-w-0">
+												<div className="flex items-center justify-between gap-2">
+													<CardTitle className="text-sm font-bold leading-tight truncate transition-colors group-hover:text-primary">
+														{item.title}
+													</CardTitle>
+													<span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-muted text-xs font-bold tabular-nums text-muted-foreground border border-border/30">
+														{counts[item.countKey]}
+													</span>
+												</div>
+												<CardDescription className="text-xs leading-snug mt-0.5">
+													{item.description}
+												</CardDescription>
+												{sub && (
+													<p className="text-[10px] font-semibold text-muted-foreground/50 uppercase tracking-widest mt-1">
+														{sub}
+													</p>
+												)}
+											</div>
 										</div>
-										<div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted text-xs font-bold tabular-nums text-muted-foreground border border-border/30">
-											{counts[item.countKey]}
-										</div>
-									</CardHeader>
+									</CardContent>
 								</Card>
 							</Link>
 						);
