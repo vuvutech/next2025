@@ -199,6 +199,14 @@ export default async function AdminDashboardPage() {
 		institutes,
 		announcements,
 		testimonials,
+		activeInstitutes,
+		activeEditions,
+		approvedRegistrations,
+		approvedAnnouncements,
+		approvedTestimonials,
+		adminUsers,
+		superAdminUsers,
+		featuredTestimonials,
 	] = await Promise.all([
 		prisma.user.count(),
 		prisma.edition.count(),
@@ -207,7 +215,19 @@ export default async function AdminDashboardPage() {
 		prisma.institute.count(),
 		prisma.announcement.count(),
 		prisma.testimonial.count(),
+		prisma.institute.count({ where: { active: true } }),
+		prisma.edition.count({ where: { active: true } }),
+		prisma.registration.count({ where: { approved: true } }),
+		prisma.announcement.count({ where: { approved: true } }),
+		prisma.testimonial.count({ where: { approved: true } }),
+		prisma.user.count({ where: { role: "ADMIN" } }),
+		prisma.user.count({ where: { role: "SUPERADMIN" } }),
+		prisma.testimonial.count({ where: { featured: true } }),
 	]);
+
+	const uniqueParticipants = await prisma.registration
+		.findMany({ select: { userId: true }, distinct: ["userId"] })
+		.then((r) => r.length);
 
 	const counts: Counts = {
 		users,
@@ -218,9 +238,20 @@ export default async function AdminDashboardPage() {
 		cohorts: editions,
 		announcements,
 		testimonials,
-		participants: users,
+		participants: uniqueParticipants,
 		donations: 0,
 		publications: 0,
+	};
+
+	const subStats: Record<string, string> = {
+		institutes: `${activeInstitutes} active`,
+		editions: `${activeEditions} active`,
+		cohorts: `${registrations} registrations`,
+		registrations: `${approvedRegistrations} approved`,
+		participants: `${uniqueParticipants} unique`,
+		users: `${adminUsers + superAdminUsers} admins`,
+		announcements: `${approvedAnnouncements} approved`,
+		testimonials: `${approvedTestimonials} approved, ${featuredTestimonials} featured`,
 	};
 
 	return (
@@ -345,6 +376,7 @@ export default async function AdminDashboardPage() {
 				<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 					{navItems.map((item) => {
 						const Icon = item.icon;
+						const sub = subStats[item.countKey];
 						return (
 							<Link
 								key={item.url}
@@ -370,6 +402,11 @@ export default async function AdminDashboardPage() {
 											<CardDescription className="text-xs leading-normal">
 												{item.description}
 											</CardDescription>
+											{sub && (
+												<p className="text-[10px] font-medium text-muted-foreground/70 uppercase tracking-wider">
+													{sub}
+												</p>
+											)}
 										</div>
 										<div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted text-xs font-bold tabular-nums text-muted-foreground border border-border/30">
 											{counts[item.countKey]}
