@@ -115,17 +115,17 @@ export function AppSidebarCollapse({
 				<NavMain items={navMain} />
 			</SidebarContent>
 			<SidebarFooter>
-				{user ? (
-					<NavUser
-						user={{
-							name: user.name ?? "",
-							email: user.email ?? "",
-							avatar: user.image ?? "/avatars/avatar.webp",
-						}}
-					/>
-				) : (
-					<div className="p-2 text-xs text-muted-foreground">Loading...</div>
-				)}
+				<NavUser
+					user={
+						user
+							? {
+									name: user.name ?? "",
+									email: user.email ?? "",
+									avatar: user.image ?? "/avatars/avatar.webp",
+								}
+							: null
+					}
+				/>
 			</SidebarFooter>
 			<SidebarRail />
 		</Sidebar>

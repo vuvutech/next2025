@@ -61,10 +61,26 @@ export function NavUser({
 		name: string;
 		email: string;
 		avatar: string;
-	};
+	} | null;
 }) {
 	const isMobile = useIsMobile();
 	const router = useRouter();
+	if (!user) {
+		return (
+			<SidebarMenu>
+				<SidebarMenuItem>
+					<div className="flex items-center gap-3 px-2 py-2">
+						<div className="h-8 w-8 animate-pulse rounded-lg bg-sidebar-accent" />
+						<div className="grid flex-1 gap-1.5">
+							<div className="h-3 w-24 animate-pulse rounded bg-sidebar-accent" />
+							<div className="h-2 w-32 animate-pulse rounded bg-sidebar-accent" />
+						</div>
+					</div>
+				</SidebarMenuItem>
+			</SidebarMenu>
+		);
+	}
+
 	return (
 		<SidebarMenu>
 			<SidebarMenuItem>
