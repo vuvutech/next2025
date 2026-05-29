@@ -18,6 +18,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
@@ -63,9 +64,11 @@ export default async function ParticipantsPage() {
 			const countries = new Set(
 				regs.map((r) => r.user.profile?.country).filter(Boolean),
 			);
+			const institute = regs[0]?.edition.institute;
 			return {
 				name,
-				acronym: regs[0]?.edition.institute?.acronym ?? "",
+				acronym: institute?.acronym ?? "",
+				logo: institute?.logo ?? null,
 				total: regs.length,
 				approved: instApproved,
 				pending: regs.length - instApproved,
@@ -135,59 +138,65 @@ export default async function ParticipantsPage() {
 					<IconBuildingBank className="size-6 text-primary" />
 					<h2 className="text-xl font-bold">Per-Institute Breakdown</h2>
 				</div>
-				<div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+				<div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
 					{instituteStats.map((inst) => (
-						<Card key={inst.name} className="border-border/50">
-							<CardHeader className="p-5 pb-3">
+						<Card key={inst.name} className="border-border/40 shadow-xs">
+							<CardContent className="p-4">
 								<div className="flex items-start justify-between gap-3">
-									<div className="space-y-1">
-										<CardTitle className="text-base font-bold leading-snug">
-											{inst.name}
-										</CardTitle>
-										{inst.acronym && (
-											<p className="text-xs uppercase tracking-wider font-medium text-muted-foreground/70">
-												{inst.acronym}
-											</p>
+									<div className="flex items-center gap-3 min-w-0">
+										{inst.logo ? (
+											<div className="relative size-10 shrink-0 overflow-hidden rounded-lg border border-border/30">
+												<Image
+													src={`/${inst.logo}`}
+													alt={inst.name}
+													fill
+													className="object-cover"
+													sizes="40px"
+												/>
+											</div>
+										) : (
+											<div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+												<IconBuildingBank className="size-5" />
+											</div>
 										)}
+										<div className="min-w-0">
+											<CardTitle className="text-sm font-bold leading-tight truncate">
+												{inst.name}
+											</CardTitle>
+											{inst.acronym && (
+												<p className="text-[10px] uppercase tracking-widest font-semibold text-muted-foreground/60">
+													{inst.acronym}
+												</p>
+											)}
+										</div>
 									</div>
-									<span className="text-3xl font-extrabold tabular-nums tracking-tight text-primary">
+									<span className="text-2xl font-extrabold tabular-nums tracking-tight text-primary shrink-0">
 										{inst.total}
 									</span>
 								</div>
-							</CardHeader>
-							<CardContent className="space-y-3 p-5 pt-1">
-								<div className="flex items-center justify-between text-sm">
-									<span className="text-muted-foreground font-medium">Approved</span>
-									<div className="flex items-center gap-2">
-										<span className="font-bold text-success text-base">
-											{inst.approved}
-										</span>
-										<span className="text-muted-foreground/70 text-xs font-medium">
-											({percentage(inst.approved, inst.total)})
-										</span>
+								<div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1.5 border-t border-border/30 pt-3">
+									<div className="flex items-center justify-between text-xs">
+										<span className="text-muted-foreground">Approved</span>
+										<span className="font-semibold text-success">{inst.approved} <span className="text-muted-foreground/60 font-normal">({percentage(inst.approved, inst.total)})</span></span>
 									</div>
-								</div>
-								<div className="flex items-center justify-between text-sm">
-									<span className="text-muted-foreground font-medium">Pending</span>
-									<span className="font-bold text-warning text-base">
-										{inst.pending}
-									</span>
-								</div>
-								<div className="flex items-center justify-between text-sm">
-									<span className="text-muted-foreground font-medium flex items-center gap-1.5">
-										<IconGenderBigender className="size-3.5" />
-										Gender
-									</span>
-									<span className="text-muted-foreground font-semibold">
-										{inst.male}M / {inst.female}F
-									</span>
-								</div>
-								<div className="flex items-center justify-between text-sm">
-									<span className="text-muted-foreground font-medium flex items-center gap-1.5">
-										<IconGlobe className="size-3.5" />
-										Countries
-									</span>
-									<span className="font-bold text-base">{inst.countries}</span>
+									<div className="flex items-center justify-between text-xs">
+										<span className="text-muted-foreground">Pending</span>
+										<span className="font-semibold text-warning">{inst.pending}</span>
+									</div>
+									<div className="flex items-center justify-between text-xs">
+										<span className="text-muted-foreground flex items-center gap-1">
+											<IconGenderBigender className="size-3" />
+											Gender
+										</span>
+										<span className="font-medium text-muted-foreground">{inst.male}M / {inst.female}F</span>
+									</div>
+									<div className="flex items-center justify-between text-xs">
+										<span className="text-muted-foreground flex items-center gap-1">
+											<IconGlobe className="size-3" />
+											Countries
+										</span>
+										<span className="font-semibold">{inst.countries}</span>
+									</div>
 								</div>
 							</CardContent>
 						</Card>
