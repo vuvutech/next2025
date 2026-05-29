@@ -21,7 +21,7 @@ const getCredentials = () => {
 				.replace(/^['"]|['"]$/g, "")
 				.replace(/\n/g, "\\n");
 			return JSON.parse(fixed);
-		} catch (secondErr) {
+		} catch (_secondErr) {
 			console.error("Failed to parse GA_CREDENTIALS_JSON:", err);
 			return undefined;
 		}

@@ -1,6 +1,5 @@
 // app/api/seed/route.ts
 import { type NextRequest, NextResponse } from "next/server";
-import { seedCollection } from "@/lib/seedCollection";
 
 export async function GET(req: NextRequest) {
 	const AUTH_TOKEN = process.env.AUTH_TOKEN;

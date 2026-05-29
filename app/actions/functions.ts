@@ -29,8 +29,7 @@ export const getInstitutes = async () => {
 	}
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function getProfilePercentage() {
+async function _getProfilePercentage() {
 	try {
 		const response = await fetch("/api/profile");
 		if (!response.ok) {
@@ -177,7 +176,7 @@ export async function getUserRole() {
 }
 
 // app/actions/functions.ts
-export async function getCurrentUser(req?: NextRequest) {
+export async function getCurrentUser(_req?: NextRequest) {
 	const headersList = await headers();
 	const userId = headersList.get("x-user-id");
 
@@ -219,7 +218,7 @@ export async function getCurrentUser(req?: NextRequest) {
 	return user;
 }
 
-export async function getCurrentSession(req?: NextRequest) {
+export async function getCurrentSession(_req?: NextRequest) {
 	const session = await auth.api.getSession({
 		headers: await headers(),
 	});

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 import MainLogo from "@/components/layout/MainLogo";
 import MainMenu from "@/components/navigation/Menu";
 import { SignInButton } from "@/components/ui/auth/signin-button";
@@ -24,14 +24,12 @@ import { client } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
 export default function Component() {
-	const [isSignOut, setIsSignOut] = useState<boolean>(false);
 	const pathname = usePathname();
 	const router = useRouter();
 
 	const {
-		data: session,
-		isPending, //loading state
-		error, //error object
+		data: _session,
+		isPending,
 	} = client.useSession();
 
 	if (isPending) {

@@ -22,7 +22,6 @@ import {
 	FormItem,
 	FormLabel,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -73,7 +72,7 @@ export function BanToggleForm({ userId, initialBanned }: Props) {
 			router.refresh();
 			form.setValue("banned", data.banned);
 			setShowDialog(false);
-		} catch (err) {
+		} catch {
 			toast.error("An error occurred. Try again.");
 		} finally {
 			setLoading(false); // stop loading

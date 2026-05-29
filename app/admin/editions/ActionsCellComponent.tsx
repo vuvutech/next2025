@@ -2,7 +2,6 @@
 
 import { MoreHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,13 +33,13 @@ interface ActionsCellProps {
 
 export function ActionsCellComponent({
 	id,
-	overview,
+	overview: _overview,
 	active,
-	startDate,
-	endDate,
-	setFormState,
-	setIsEditing,
-	openDialog,
+	startDate: _startDate,
+	endDate: _endDate,
+	setFormState: _setFormState,
+	setIsEditing: _setIsEditing,
+	openDialog: _openDialog,
 }: ActionsCellProps) {
 	const router = useRouter();
 
@@ -56,12 +55,6 @@ export function ActionsCellComponent({
 			const result = await res.json();
 			throw new Error(result.error || "Failed to update");
 		}
-	};
-
-	const handleEdit = () => {
-		setFormState({ id, overview, active, startDate, endDate });
-		setIsEditing(true);
-		openDialog();
 	};
 
 	return (

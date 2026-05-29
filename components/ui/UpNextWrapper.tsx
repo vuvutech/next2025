@@ -1,17 +1,10 @@
 // components/ui/UpNextWrapper.tsx
 "use client";
 
-import {
-	LucideArrowRight,
-	LucideEllipsisVertical,
-	LucideMoveRight,
-	LucideTally1,
-	SeparatorVertical,
-} from "lucide-react";
+import { LucideMoveRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Separator } from "@/components/ui/separator";
 import { oswald } from "@/config/fonts";
 import { cn } from "@/lib/utils";
 

@@ -3,26 +3,16 @@
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import TestimonialForm, {
 	type TestimonialFormData,
 } from "@/components/forms/TestimonialForm";
 import GenericShadcnFormModal from "@/components/modals/GenericShadcnFormModal";
 import { Button } from "@/components/ui/button";
-import { useSession } from "@/lib/auth-client";
 import type { Session } from "@/lib/auth-types";
 import { getCurrentSession } from "../actions/functions";
 import { DataTable } from "./testimonial-data-table";
 import { testimonialcolumns } from "./testimonialcolumns";
-
-// Define the type for the contact form inputs
-type ContactFormInputs = {
-	firstname: string;
-	lastname: string;
-	email: string;
-	message: string;
-};
 
 interface UserSession {
 	user?: {
@@ -34,13 +24,10 @@ interface UserSession {
 
 export const dynamic = "force-dynamic";
 
-export default function TestimonialCard(props: { session: Session | null }) {
+export default function TestimonialCard(_props: { session: Session | null }) {
 	const router = useRouter();
-	const { data } = useSession();
-	const session = data || props.session;
-
 	const [testimonials, setTestimonials] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [_loading, setLoading] = useState(true);
 
 	const [isTestimonialLoading, setIsTestimonialLoading] =
 		useState<boolean>(false);
@@ -51,13 +38,6 @@ export default function TestimonialCard(props: { session: Session | null }) {
 	const [testimonialData, setTestimonialData] = useState<TestimonialFormData>({
 		content: "",
 	});
-
-	const {
-		register,
-		handleSubmit,
-		reset,
-		formState: { errors },
-	} = useForm<ContactFormInputs>();
 
 	const handleTestimonialSubmit = async (
 		event: React.MouseEvent<HTMLButtonElement>,
@@ -105,7 +85,7 @@ export default function TestimonialCard(props: { session: Session | null }) {
 				);
 			}
 
-			const result = await response.json();
+			await response.json();
 			toast.success(
 				"Testimonial submitted successfully! It will be reviewed before being featured.",
 			);
@@ -217,7 +197,7 @@ export default function TestimonialCard(props: { session: Session | null }) {
 	);
 }
 
-async function convertImageToBase64(file: File): Promise<string> {
+async function _convertImageToBase64(file: File): Promise<string> {
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
 		reader.onloadend = () => resolve(reader.result as string);

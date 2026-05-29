@@ -1,9 +1,7 @@
 // app/api/users/ban/route.ts
 import { type NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/app/actions/functions";
-import { auth } from "@/lib/auth";
 import { prisma } from "@/prisma/dbConnect";
-
 export async function PUT(req: NextRequest) {
 	// Extract id and add a safety check
 

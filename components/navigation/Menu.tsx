@@ -1,9 +1,7 @@
 import { LucideAlignLeft } from "lucide-react";
 import React from "react";
 
-type Props = {};
-
-export default function MainMenu(props: Props) {
+export default function MainMenu() {
 	return (
 		<div className="relative flex items-center gap-x-6  cursor-pointer   ">
 			<div className="bg-black duration-300 shadow flex gap-x-4 group-hover:bg-neutral-900 h-7 items-center p-0 pl-4 transition-all ">

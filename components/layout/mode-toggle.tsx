@@ -1,8 +1,6 @@
 import React from "react";
 
-type Props = {};
-
-const ModeToggle = (props: Props) => {
+const ModeToggle = (_props: Record<string, never>) => {
 	return <div>ModeToggle</div>;
 };
 

@@ -24,7 +24,7 @@ interface ActionsCellProps {
 
 export function ActionsCellComponent({
 	id,
-	content,
+	content: _content,
 	featured,
 	approved,
 }: ActionsCellProps) {

@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { getBaseUrl } from "@/config/site";
-import { baseUrl } from "@/lib/metadata";
 
 export type Institute = {
 	name: string;
@@ -40,7 +39,7 @@ export default function EditInstitutePage() {
 
 		async function fetchInstitute() {
 			try {
-				const response = await fetch(`${baseUrl}/api/institutes/${slug}`);
+				const response = await fetch(`${getBaseUrl()}/api/institutes/${slug}`);
 				if (!response.ok) {
 					setError(true);
 				} else {
@@ -62,11 +61,6 @@ export default function EditInstitutePage() {
 	) => {
 		const { name, value } = e.target;
 		setFormState((prev) => ({ ...prev, [name]: value }));
-	};
-
-	// Handle rich text change
-	const handleAboutChange = (value: string) => {
-		setFormState((prev) => ({ ...prev, about: value }));
 	};
 
 	// Handle form submit

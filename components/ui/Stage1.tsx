@@ -1,9 +1,7 @@
 import React from "react";
 import { specialElite } from "@/config/fonts";
 
-type Props = {};
-
-const Stage1 = (props: Props) => {
+const Stage1 = () => {
 	return (
 		<section
 			className={`${specialElite.className} h-auto md:min-h-dvh p-12 md:py-20 pt-24

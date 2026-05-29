@@ -18,7 +18,7 @@ export default async function DashboardPage() {
 		auth.api.listSessions({
 			headers: await headers(),
 		}),
-	]).catch((e: any) => {
+	]).catch((_e: any) => {
 		throw redirect("/auth/sign-in");
 	});
 

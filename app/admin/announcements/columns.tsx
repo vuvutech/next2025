@@ -119,7 +119,7 @@ export const columns: ColumnDef<any>[] = [
 					content={announcement.content} // Pass content if needed for clipboard
 					featured={announcement.featured}
 					approved={announcement.approved}
-					setFormState={(state: {
+					setFormState={(_state: {
 						id?: string;
 						content?: string;
 						featured: boolean;
@@ -127,7 +127,7 @@ export const columns: ColumnDef<any>[] = [
 					}): void => {
 						throw new Error("Function not implemented.");
 					}}
-					setIsEditing={(editing: boolean): void => {
+					setIsEditing={(_editing: boolean): void => {
 						throw new Error("Function not implemented.");
 					}}
 					openDialog={(): void => {

@@ -30,12 +30,12 @@ export default function Component() {
 
 		try {
 			// @ts-expect-error: better-auth plugin types obscure forgetPassword
-			const res = await client.forgetPassword({
+			await client.forgetPassword({
 				email,
 				redirectTo: "/auth/reset-password",
 			});
 			setIsSubmitted(true);
-		} catch (err) {
+		} catch {
 			setError("An error occurred. Please try again.");
 		} finally {
 			setIsSubmitting(false);

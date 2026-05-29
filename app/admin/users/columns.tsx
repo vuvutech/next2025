@@ -140,7 +140,7 @@ export function createColumns(
 					return (
 						<div className="text-xs">{format(new Date(updatedAt), "PPP")}</div>
 					);
-				} catch (err) {
+				} catch {
 					console.error("Invalid date:", updatedAt);
 					return <div className="text-xs text-destructive">Invalid date</div>;
 				}

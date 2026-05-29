@@ -1,38 +1,9 @@
-import { CalendarDays, CheckCircle, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getCurrentUser } from "@/app/actions/functions";
 import { Badge } from "@/components/ui/badge";
 import { prisma } from "@/prisma/dbConnect";
 import { Card, CardContent } from "../ui/card";
-
-const getBadge = (status: string) => {
-	switch (status) {
-		case "upcoming":
-			return (
-				<Badge className="bg-blue-500 text-white flex items-center gap-1">
-					<Clock className="w-3.5 h-3.5" />
-					Upcoming
-				</Badge>
-			);
-		case "ongoing":
-			return (
-				<Badge className="bg-green-600 text-white flex items-center gap-1">
-					<CalendarDays className="w-3.5 h-3.5" />
-					Ongoing
-				</Badge>
-			);
-		case "completed":
-			return (
-				<Badge className="bg-gray-400 text-white flex items-center gap-1">
-					<CheckCircle className="w-3.5 h-3.5" />
-					Completed
-				</Badge>
-			);
-		default:
-			return null;
-	}
-};
 
 export default async function RegistrationSection() {
 	const user = await getCurrentUser();

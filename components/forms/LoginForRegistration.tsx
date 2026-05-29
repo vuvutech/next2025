@@ -42,7 +42,7 @@ export default function LoginForRegistration({
 	const { close } = useDialog(); // Works because DialogProvider is an ancestor
 
 	const [turnstileStatus, setTurnstileStatus] = useState("required"); // Track Turnstile widget status
-	const [error, setError] = useState<string | null>(null); // Store any error messages to display
+	const [_error, setError] = useState<string | null>(null); // Store any error messages to display
 	const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
 	// Fallback to URL param or "/"
@@ -104,7 +104,7 @@ export default function LoginForRegistration({
 				success: "Signed in successfully!",
 				error: "Login failed. Please check your details.",
 			});
-		} catch (error) {
+		} catch (_error) {
 			toast.error("Error signing in. Please try again later.");
 		} finally {
 			setLoading(false);

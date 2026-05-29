@@ -10,7 +10,6 @@ import {
 	CardDescription,
 	CardFooter,
 	CardHeader,
-	CardTitle,
 } from "@/components/ui/card";
 
 export function RegisteredUsersCard() {

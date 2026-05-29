@@ -1,5 +1,5 @@
 "use client";
-import { easeInOut, motion, useAnimation } from "framer-motion";
+import { easeInOut, motion } from "framer-motion";
 // import styles from './style.module.scss';
 import { useEffect, useState } from "react";
 
@@ -71,17 +71,6 @@ export default function Preloader() {
 		exit: {
 			d: targetPath,
 			transition: { duration: 0.7, ease: easeInOut, delay: 0.3 },
-		},
-	};
-
-	const line = {
-		initial: {
-			d: initialPath,
-			transition: { duration: 0.7, ease: "linear" },
-		},
-		exit: {
-			d: targetPath,
-			transition: { duration: 0.7, ease: "linear", delay: 0.3 },
 		},
 	};
 

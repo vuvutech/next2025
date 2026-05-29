@@ -6,7 +6,6 @@ import {
 	HelpCircle,
 	Mail,
 	MessageCircle,
-	Phone,
 	Search,
 } from "lucide-react";
 import Link from "next/link";

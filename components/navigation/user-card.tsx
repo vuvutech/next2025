@@ -2,14 +2,11 @@
 
 import {
 	Edit,
-	Fingerprint,
 	Loader2,
 	LogOut,
-	Plus,
 	QrCode,
 	ShieldCheck,
 	ShieldOff,
-	Trash,
 	X,
 } from "lucide-react";
 import Image from "next/image";
@@ -41,14 +38,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PasswordInput } from "@/components/ui/password-input";
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table";
 import { client, signOut, useSession } from "@/lib/auth-client";
 import type { Session } from "@/lib/auth-types";
 
@@ -59,7 +48,7 @@ export default function UserCard(props: {
 	const router = useRouter();
 	const { data } = useSession();
 	const session = data || props.session;
-	const [isTerminating, setIsTerminating] = useState<string>();
+	const [_isTerminating, _setIsTerminating] = useState<string>();
 	const [isPendingTwoFa, setIsPendingTwoFa] = useState<boolean>(false);
 	const [twoFaPassword, setTwoFaPassword] = useState<string>("");
 	const [twoFactorDialog, setTwoFactorDialog] = useState<boolean>(false);
@@ -134,7 +123,7 @@ export default function UserCard(props: {
 										email: session?.user.email || "",
 									},
 									{
-										onRequest(context) {
+										onRequest(_context) {
 											setEmailVerificationPending(true);
 										},
 										onError(context) {
@@ -305,7 +294,7 @@ export default function UserCard(props: {
 												}
 												setIsPendingTwoFa(true);
 												if (userData?.twoFactorEnabled) {
-													const res = await client.twoFactor.disable({
+													await client.twoFactor.disable({
 														password: twoFaPassword,
 														fetchOptions: {
 															onError(context) {
@@ -340,7 +329,7 @@ export default function UserCard(props: {
 														});
 														return;
 													}
-													const res = await client.twoFactor.enable({
+													await client.twoFactor.enable({
 														password: twoFaPassword,
 														fetchOptions: {
 															onError(context) {
@@ -529,7 +518,7 @@ function ChangePassword() {
 }
 
 function EditUserDialog() {
-	const { data, isPending, error } = useSession();
+	const { data } = useSession();
 	const [name, setName] = useState<string>();
 	const router = useRouter();
 	const [image, setImage] = useState<File | null>(null);

@@ -2,7 +2,6 @@
 
 import { MoreHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -32,12 +31,12 @@ interface ActionsCellProps {
 
 export function ActionsCellComponent({
 	id,
-	content,
+	content: _content,
 	featured,
 	approved,
-	setFormState,
-	setIsEditing,
-	openDialog,
+	setFormState: _setFormState,
+	setIsEditing: _setIsEditing,
+	openDialog: _openDialog,
 }: ActionsCellProps) {
 	const router = useRouter();
 
@@ -67,12 +66,6 @@ export function ActionsCellComponent({
 			const result = await res.json();
 			throw new Error(result.error || "Failed to delete");
 		}
-	};
-
-	const handleEdit = () => {
-		setFormState({ id, content, featured, approved });
-		setIsEditing(true);
-		openDialog();
 	};
 
 	return (

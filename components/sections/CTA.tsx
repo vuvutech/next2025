@@ -16,11 +16,6 @@ const CTA = () => {
 	const { open } = useDialog();
 
 	const [emailInput, setEmailInput] = useState("");
-	const [name, setName] = useState<string | undefined>();
-
-	const handleClick = () => {
-		setName(emailInput);
-	};
 
 	return (
 		<section className="p-2 md:p-6">
@@ -76,7 +71,6 @@ const CTA = () => {
 							<motion.div variants={staggerItem}>
 								<Button
 									onClick={() => {
-										handleClick();
 										open("newsletter");
 									}}
 									className="bg-primary text-white hover:text-secondary 

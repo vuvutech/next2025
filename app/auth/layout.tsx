@@ -1,7 +1,6 @@
 import { LucideHome } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Toaster } from "sonner";
 import MainLogo from "@/components/layout/MainLogo";
 import { ThemeSwitch } from "@/components/ui/theme-switch";
 

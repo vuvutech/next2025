@@ -7,7 +7,6 @@ import { BadgeCheckIcon, Trash } from "lucide-react";
 import { DeleteConfirmationDialog } from "@/components/modals/delete-confirmation-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox"; // Corrected import for Checkbox
 import { getBaseUrl } from "@/config/site";
 import { ActionsCellComponent } from "./ActionsCellComponent";
 import { EditEditionSheet } from "./EditEditionSheet";
@@ -150,7 +149,6 @@ export const columns: ColumnDef<any>[] = [
 		id: "edit",
 		enableHiding: false,
 		cell: ({ row }) => {
-			const edition = row.original;
 			return <EditEditionSheet edition={row.original} />;
 		},
 	},
@@ -202,7 +200,7 @@ export const columns: ColumnDef<any>[] = [
 						startDate={edition.startDate}
 						endDate={edition.endDate}
 						active={edition.active}
-						setFormState={(state: {
+						setFormState={(_state: {
 							id?: string;
 							overview?: string;
 							active: boolean;
@@ -211,7 +209,7 @@ export const columns: ColumnDef<any>[] = [
 						}): void => {
 							throw new Error("Function not implemented.");
 						}}
-						setIsEditing={(editing: boolean): void => {
+						setIsEditing={(_editing: boolean): void => {
 							throw new Error("Function not implemented.");
 						}}
 						openDialog={(): void => {

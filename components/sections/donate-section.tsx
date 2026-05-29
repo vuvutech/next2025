@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+ 
 
 import Image from "next/image";
 import React from "react";
@@ -24,7 +24,7 @@ interface Hero7Props {
 const Donate = ({
 	heading = "Counting on Your contribution",
 	description = "Each donation made to (COSTrAD) has a significant effect that extends well beyond our walls. Your contribution will make the difference as we raise effective leaders for tomorrow. Thank you for your support.",
-	button = {
+	button: _button = {
 		text: "Discover all components",
 		url: "https://www.shadcnblocks.com",
 	},

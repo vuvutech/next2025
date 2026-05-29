@@ -66,7 +66,7 @@ export function AdminRoleToggleForm({ userId, isAdmin }: Props) {
 			router.refresh();
 			form.setValue("makeAdmin", data.makeAdmin);
 			setShowDialog(false);
-		} catch (err) {
+		} catch {
 			toast.error("An error occurred. Try again.");
 		} finally {
 			setLoading(false); // stop loading

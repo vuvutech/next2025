@@ -43,7 +43,7 @@ type Props = {
 export default function SocialShare({
 	shareUrl = "https://www.costrad.org ",
 	title = "COSTrAD - by Dr. Abu Bako",
-}) {
+}: Props) {
 	return (
 		<div className=" flex items-center gap-3 flex-wrap">
 			<div className="Demo__some-network">

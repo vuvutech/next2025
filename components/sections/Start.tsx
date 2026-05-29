@@ -4,9 +4,7 @@ import React from "react";
 import { bebas } from "@/config/fonts";
 import { Separator } from "../ui/separator";
 
-type Props = {};
-
-const Start = (props: Props) => {
+const Start = () => {
 	return (
 		<section
 			className={`${bebas.className} md:min-h-screen h-auto grid grid-cols-1 md:grid-cols-3 `}
