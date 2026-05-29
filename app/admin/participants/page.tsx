@@ -17,7 +17,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { GenderDistributionChart } from "@/components/analytics/GenderDistributionChart";
 import Image from "next/image";
 
 export const dynamic = "force-dynamic";
@@ -205,50 +205,7 @@ export default async function ParticipantsPage() {
 			</section>
 
 			<div className="grid gap-5 lg:grid-cols-2">
-				<Card>
-					<CardHeader className="p-5 pb-3">
-						<div className="flex items-center gap-2.5">
-							<IconGenderBigender className="size-5 text-primary" />
-							<CardTitle className="text-base font-bold">
-								Gender Distribution
-							</CardTitle>
-						</div>
-					</CardHeader>
-					<CardContent className="p-5 pt-1">
-						<div className="flex items-center gap-6">
-							<div className="flex h-24 w-24 items-center justify-center rounded-full border-[5px] border-primary/20 text-3xl font-extrabold tabular-nums tracking-tight text-primary shrink-0">
-								{percentage(genderMale, registrations.length)}
-							</div>
-							<div className="space-y-3">
-								<div className="flex items-center gap-3">
-									<Badge variant="outline" className="bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300 px-3 py-1 text-sm font-semibold">
-										Male
-									</Badge>
-									<span className="font-bold text-lg tabular-nums">
-										{genderMale}
-									</span>
-									<span className="text-muted-foreground text-sm font-medium">
-										({percentage(genderMale, registrations.length)})
-									</span>
-								</div>
-								<div className="flex items-center gap-3">
-									<Badge variant="outline" className="bg-pink-50 text-pink-700 dark:bg-pink-950 dark:text-pink-300 px-3 py-1 text-sm font-semibold">
-										Female
-									</Badge>
-									<span className="font-bold text-lg tabular-nums">
-										{genderFemale}
-									</span>
-									<span className="text-muted-foreground text-sm font-medium">
-										({percentage(genderFemale, registrations.length)})
-									</span>
-								</div>
-								<div className="text-sm font-medium text-muted-foreground/70">
-									{registrations.length - genderMale - genderFemale} unspecified
-								</div>
-							</div>
-						</div>
-					</CardContent>
-				</Card>
+				<GenderDistributionChart male={genderMale} female={genderFemale} />
 
 				<Card>
 					<CardHeader className="p-5 pb-3">
