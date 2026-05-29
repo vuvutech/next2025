@@ -29,6 +29,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { getCurrentUser } from "@/app/actions/functions";
 import { prisma } from "@/prisma/dbConnect";
 
 export const dynamic = "force-dynamic";
@@ -191,6 +192,8 @@ const navItems: NavItem[] = [
 ];
 
 export default async function AdminDashboardPage() {
+	const currentUser = await getCurrentUser();
+	const adminName = currentUser?.name?.split(" ")[0] ?? "Administrator";
 	const [
 		users,
 		editions,
@@ -275,7 +278,7 @@ export default async function AdminDashboardPage() {
 							System Status: Active & Operational
 						</div>
 						<h1 className="text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
-							Welcome Back, Administrator
+							Welcome back, {adminName}
 						</h1>
 						<p className="max-w-xl text-sm text-muted-foreground leading-relaxed">
 							Here's the latest performance and activity status across the

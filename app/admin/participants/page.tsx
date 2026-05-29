@@ -132,62 +132,62 @@ export default async function ParticipantsPage() {
 
 			<section className="space-y-4">
 				<div className="flex items-center gap-2">
-					<IconBuildingBank className="size-5 text-primary" />
-					<h2 className="text-lg font-semibold">Per-Institute Breakdown</h2>
+					<IconBuildingBank className="size-6 text-primary" />
+					<h2 className="text-xl font-bold">Per-Institute Breakdown</h2>
 				</div>
-				<div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+				<div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
 					{instituteStats.map((inst) => (
 						<Card key={inst.name} className="border-border/50">
-							<CardHeader className="p-4 pb-2">
-								<div className="flex items-start justify-between gap-2">
-									<div className="space-y-0.5">
-										<CardTitle className="text-sm font-semibold leading-tight">
+							<CardHeader className="p-5 pb-3">
+								<div className="flex items-start justify-between gap-3">
+									<div className="space-y-1">
+										<CardTitle className="text-base font-bold leading-snug">
 											{inst.name}
 										</CardTitle>
 										{inst.acronym && (
-											<p className="text-[10px] uppercase tracking-wider text-muted-foreground">
+											<p className="text-xs uppercase tracking-wider font-medium text-muted-foreground/70">
 												{inst.acronym}
 											</p>
 										)}
 									</div>
-									<span className="text-2xl font-bold tabular-nums">
+									<span className="text-3xl font-extrabold tabular-nums tracking-tight text-primary">
 										{inst.total}
 									</span>
 								</div>
 							</CardHeader>
-							<CardContent className="space-y-2 p-4 pt-2">
-								<div className="flex items-center justify-between text-xs">
-									<span className="text-muted-foreground">Approved</span>
-									<div className="flex items-center gap-1.5">
-										<span className="font-semibold text-success">
+							<CardContent className="space-y-3 p-5 pt-1">
+								<div className="flex items-center justify-between text-sm">
+									<span className="text-muted-foreground font-medium">Approved</span>
+									<div className="flex items-center gap-2">
+										<span className="font-bold text-success text-base">
 											{inst.approved}
 										</span>
-										<span className="text-muted-foreground">
+										<span className="text-muted-foreground/70 text-xs font-medium">
 											({percentage(inst.approved, inst.total)})
 										</span>
 									</div>
 								</div>
-								<div className="flex items-center justify-between text-xs">
-									<span className="text-muted-foreground">Pending</span>
-									<span className="font-semibold text-warning">
+								<div className="flex items-center justify-between text-sm">
+									<span className="text-muted-foreground font-medium">Pending</span>
+									<span className="font-bold text-warning text-base">
 										{inst.pending}
 									</span>
 								</div>
-								<div className="flex items-center justify-between text-xs">
-									<span className="text-muted-foreground flex items-center gap-1">
-										<IconGenderBigender className="size-3" />
+								<div className="flex items-center justify-between text-sm">
+									<span className="text-muted-foreground font-medium flex items-center gap-1.5">
+										<IconGenderBigender className="size-3.5" />
 										Gender
 									</span>
-									<span className="text-muted-foreground">
+									<span className="text-muted-foreground font-semibold">
 										{inst.male}M / {inst.female}F
 									</span>
 								</div>
-								<div className="flex items-center justify-between text-xs">
-									<span className="text-muted-foreground flex items-center gap-1">
-										<IconGlobe className="size-3" />
+								<div className="flex items-center justify-between text-sm">
+									<span className="text-muted-foreground font-medium flex items-center gap-1.5">
+										<IconGlobe className="size-3.5" />
 										Countries
 									</span>
-									<span className="font-medium">{inst.countries}</span>
+									<span className="font-bold text-base">{inst.countries}</span>
 								</div>
 							</CardContent>
 						</Card>
@@ -195,45 +195,45 @@ export default async function ParticipantsPage() {
 				</div>
 			</section>
 
-			<div className="grid gap-4 lg:grid-cols-2">
+			<div className="grid gap-5 lg:grid-cols-2">
 				<Card>
-					<CardHeader className="p-4 pb-2">
-						<div className="flex items-center gap-2">
-							<IconGenderBigender className="size-4 text-primary" />
-							<CardTitle className="text-sm font-semibold">
+					<CardHeader className="p-5 pb-3">
+						<div className="flex items-center gap-2.5">
+							<IconGenderBigender className="size-5 text-primary" />
+							<CardTitle className="text-base font-bold">
 								Gender Distribution
 							</CardTitle>
 						</div>
 					</CardHeader>
-					<CardContent className="p-4 pt-2">
-						<div className="flex items-center gap-4">
-							<div className="flex h-20 w-20 items-center justify-center rounded-full border-4 border-primary/20 text-2xl font-bold tabular-nums text-primary">
+					<CardContent className="p-5 pt-1">
+						<div className="flex items-center gap-6">
+							<div className="flex h-24 w-24 items-center justify-center rounded-full border-[5px] border-primary/20 text-3xl font-extrabold tabular-nums tracking-tight text-primary shrink-0">
 								{percentage(genderMale, registrations.length)}
 							</div>
-							<div className="space-y-2 text-sm">
-								<div className="flex items-center gap-2">
-									<Badge variant="outline" className="bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+							<div className="space-y-3">
+								<div className="flex items-center gap-3">
+									<Badge variant="outline" className="bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300 px-3 py-1 text-sm font-semibold">
 										Male
 									</Badge>
-									<span className="font-semibold tabular-nums">
+									<span className="font-bold text-lg tabular-nums">
 										{genderMale}
 									</span>
-									<span className="text-muted-foreground text-xs">
+									<span className="text-muted-foreground text-sm font-medium">
 										({percentage(genderMale, registrations.length)})
 									</span>
 								</div>
-								<div className="flex items-center gap-2">
-									<Badge variant="outline" className="bg-pink-50 text-pink-700 dark:bg-pink-950 dark:text-pink-300">
+								<div className="flex items-center gap-3">
+									<Badge variant="outline" className="bg-pink-50 text-pink-700 dark:bg-pink-950 dark:text-pink-300 px-3 py-1 text-sm font-semibold">
 										Female
 									</Badge>
-									<span className="font-semibold tabular-nums">
+									<span className="font-bold text-lg tabular-nums">
 										{genderFemale}
 									</span>
-									<span className="text-muted-foreground text-xs">
+									<span className="text-muted-foreground text-sm font-medium">
 										({percentage(genderFemale, registrations.length)})
 									</span>
 								</div>
-								<div className="text-xs text-muted-foreground">
+								<div className="text-sm font-medium text-muted-foreground/70">
 									{registrations.length - genderMale - genderFemale} unspecified
 								</div>
 							</div>
@@ -242,30 +242,30 @@ export default async function ParticipantsPage() {
 				</Card>
 
 				<Card>
-					<CardHeader className="p-4 pb-2">
-						<div className="flex items-center gap-2">
-							<IconGlobe className="size-4 text-primary" />
-							<CardTitle className="text-sm font-semibold">
+					<CardHeader className="p-5 pb-3">
+						<div className="flex items-center gap-2.5">
+							<IconGlobe className="size-5 text-primary" />
+							<CardTitle className="text-base font-bold">
 								Top Countries
 							</CardTitle>
 						</div>
 					</CardHeader>
-					<CardContent className="p-4 pt-2">
+					<CardContent className="p-5 pt-1">
 						{topCountries.length > 0 ? (
-							<div className="space-y-2">
+							<div className="space-y-3">
 								{topCountries.map(({ country, count }, i) => (
 									<div
 										key={country}
-										className="flex items-center gap-2 text-sm"
+										className="flex items-center gap-3"
 									>
-										<span className="w-5 text-center text-xs font-bold text-muted-foreground">
+										<span className="w-6 text-center text-sm font-bold text-muted-foreground/50">
 											{i + 1}
 										</span>
-										<div className="flex-1 text-xs font-medium truncate">
+										<div className="flex-1 text-sm font-medium truncate">
 											{country}
 										</div>
-										<div className="flex items-center gap-1.5">
-											<div className="h-1.5 w-16 overflow-hidden rounded-full bg-muted">
+										<div className="flex items-center gap-2.5">
+											<div className="h-2 w-24 overflow-hidden rounded-full bg-muted">
 												<div
 													className="h-full rounded-full bg-primary"
 													style={{
@@ -273,7 +273,7 @@ export default async function ParticipantsPage() {
 													}}
 												/>
 											</div>
-											<span className="text-xs font-semibold tabular-nums min-w-[2ch]">
+											<span className="text-sm font-bold tabular-nums min-w-[2ch]">
 												{count}
 											</span>
 										</div>
