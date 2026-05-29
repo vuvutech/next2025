@@ -121,7 +121,7 @@ export function NavUser({
 						<DropdownMenuItem
 							className="cursor-pointer"
 							onClick={() => {
-								router.push("/admin/admin-dashboard");
+								router.push("/admin");
 							}}
 						>
 							<IconUserCircle />
