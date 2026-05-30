@@ -15,7 +15,7 @@ export default function EditionTabs({ editions }: { editions: any[] }) {
 	return (
 		<div className="space-y-4 pb-20">
 			<Tabs defaultValue={editions[0].id} className="w-full">
-				<TabsList className="max-w-full overflow-x-auto flex flex-nowrap bg-muted/50 p-1 rounded-lg">
+				<TabsList className="max-w-full w-full overflow-x-auto flex flex-nowrap bg-muted/50 p-1 rounded-lg">
 					{editions.map((edition) => (
 						<TabsTrigger
 							key={edition.id}
