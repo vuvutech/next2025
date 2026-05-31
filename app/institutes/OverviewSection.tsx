@@ -1,6 +1,7 @@
 /** biome-ignore-all lint/security/noDangerouslySetInnerHtml: <explanation> */
+/** biome-ignore-all assist/source/organizeImports: <explanation> */
 "use client";
-// import type { Edition } from "@prisma/client";
+import type { Edition } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 // import { Separator } from "@/components/ui/separator";
@@ -8,48 +9,46 @@ import SeperatorWithText from "@/components/ui/seperatorWithText";
 import type { InstituteWithEditions } from "@/types/institute";
 import { Separator } from "@radix-ui/react-separator";
 
-type Edition = {
-  startDate: Date | string;
-  endDate: Date | string;
-  earlyBirdDeadline: Date | string;
-  priceViaZoom: number;
-  earlyBirdPrice: number;
-  onlineDelivery: boolean;
-  title: string;
-};
-
 export default function OverviewSection({
   institute,
   edition,
 }: {
   institute: InstituteWithEditions;
-  edition: Edition | null;
+  edition?: Edition | null;
 }) {
   // dialog provider
   // const { open } = useDialog();
   const router = useRouter();
 
-  const formattedStartDate = edition?.startDate
+  const startDate = edition?.startDate;
+  const endDate = edition?.endDate;
+  const earlyBirdDeadline = edition?.earlyBirdDeadline;
+  const priceViaZoom = edition?.priceViaZoom;
+  const earlyBirdPrice = edition?.earlyBirdPrice;
+  const onlineDelivery = edition?.onlineDelivery;
+
+  const formattedStartDate = startDate
     ? new Intl.DateTimeFormat("en-US", {
         month: "long",
         day: "numeric",
         year: "numeric",
-      }).format(new Date(edition?.startDate))
+      }).format(new Date(startDate))
     : "Coming Soon";
-  const formattedEndDate = edition?.endDate
+
+  const formattedEndDate = endDate
     ? new Intl.DateTimeFormat("en-US", {
         month: "long",
         day: "numeric",
         year: "numeric",
-      }).format(new Date(edition?.endDate))
+      }).format(new Date(endDate))
     : "";
 
-  const formattedEarlyBirdDeadline = edition?.earlyBirdDeadline
+  const formattedEarlyBirdDeadline = earlyBirdDeadline
     ? new Intl.DateTimeFormat("en-US", {
         month: "long",
         day: "numeric",
         year: "numeric",
-      }).format(new Date(edition?.earlyBirdDeadline))
+      }).format(new Date(earlyBirdDeadline))
     : "";
   return (
     <section
@@ -96,18 +95,18 @@ export default function OverviewSection({
               {institute?.editions[0] ? institute?.editions[0].title : " "}
             </div>
             <div className="mx-auto max-w-xs px-8">
-              {edition?.onlineDelivery && edition?.priceViaZoom != null && (
+              {onlineDelivery && priceViaZoom != null && (
                 <div className="mt-6 text-center">
-                  {edition.earlyBirdDeadline &&
-                  new Date(edition.earlyBirdDeadline) > new Date() ? (
+                  {earlyBirdDeadline &&
+                  new Date(earlyBirdDeadline) > new Date() ? (
                     // ── EARLY BIRD STILL ACTIVE ──
                     <div>
                       <p className="flex items-baseline justify-center gap-x-3">
                         <span className="text-xl font-bold tracking-tight text-gray-400 dark:text-gray-500 line-through">
-                          ${edition.priceViaZoom.toFixed(2)}
+                          ${priceViaZoom.toFixed(2)}
                         </span>
                         <span className="text-3xl font-extrabold tracking-tight text-emerald-600 dark:text-emerald-400">
-                          ${edition.earlyBirdPrice?.toFixed(2) ?? "—"}
+                          ${earlyBirdPrice != null ? earlyBirdPrice.toFixed(2) : "—"}
                         </span>
                       </p>
 
@@ -117,7 +116,7 @@ export default function OverviewSection({
 
                       <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
                         Offer ends{" "}
-                        {new Date(edition.earlyBirdDeadline).toLocaleDateString(
+                        {new Date(earlyBirdDeadline).toLocaleDateString(
                           "en-US",
                           {
                             month: "long",
@@ -131,7 +130,7 @@ export default function OverviewSection({
                     // ── EARLY BIRD EXPIRED or never existed ──
                     <div>
                       <p className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100">
-                        ${edition.priceViaZoom.toFixed(2)}
+                        ${priceViaZoom.toFixed(2)}
                       </p>
 
                       <div className="mt-4">
@@ -139,12 +138,12 @@ export default function OverviewSection({
                       </div>
 
                       {/* Optional: subtle note if early bird existed but expired */}
-                      {edition.earlyBirdDeadline &&
-                        edition.earlyBirdPrice != null && (
+                      {earlyBirdDeadline &&
+                        earlyBirdPrice != null && (
                           <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
                             Early bird discount ended on{" "}
                             {new Date(
-                              edition.earlyBirdDeadline,
+                              earlyBirdDeadline,
                             ).toLocaleDateString("en-US", {
                               month: "long",
                               day: "numeric",
@@ -181,7 +180,7 @@ export default function OverviewSection({
                 </span>
               </div>
 
-              {edition?.earlyBirdDeadline && (
+              {earlyBirdDeadline && (
                 <>
                   <Separator className="mt-5" />
 
