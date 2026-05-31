@@ -27,7 +27,7 @@ export default function Jumbotron({
 
 	return (
 		<header className="relative w-full">
-			<div className="md:min-w-[1440px] mx-auto">
+			<div className="md:min-w-[1440px]  mx-auto ">
 				{/* Hero Section */}
 				<div className={`relative w-full h-[470px] ${height} overflow-hidden`}>
 					<Image

@@ -1,3 +1,4 @@
+import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -47,7 +48,6 @@ const nextConfig: NextConfig = {
 		];
 	},
 	serverExternalPackages: ["@prisma/client"],
-	transpilePackages: ["better-auth", "kysely"],
 	experimental: {
 		serverActions: {
 			bodySizeLimit: "10mb",
@@ -88,6 +88,18 @@ const nextConfig: NextConfig = {
 				pathname: "/dbvlk7bkr/**",
 			},
 		],
+	},
+	webpack: (config) => {
+		config.resolve.alias["@better-auth/kysely-adapter"] = path.resolve(
+			__dirname,
+			"./lib/mocks/kysely-adapter-mock.ts",
+		);
+		return config;
+	},
+	turbopack: {
+		resolveAlias: {
+			"@better-auth/kysely-adapter": "./lib/mocks/kysely-adapter-mock.ts",
+		},
 	},
 };
 
