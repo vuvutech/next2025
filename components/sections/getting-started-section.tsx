@@ -20,7 +20,8 @@ interface Hero7Props {
 
 const GettingStarted = ({
 	heading: _heading = "Counting on Your contribution",
-	description: _description = "Each donation made to (COSTrAD) has a significant effect that extends well beyond our walls. Your contribution will make the difference as we raise effective leaders for tomorrow. Thank you for your support.",
+	description:
+		_description = "Each donation made to (COSTrAD) has a significant effect that extends well beyond our walls. Your contribution will make the difference as we raise effective leaders for tomorrow. Thank you for your support.",
 }: Hero7Props) => {
 	const steps = [
 		{

@@ -27,10 +27,7 @@ export default function Component() {
 	const pathname = usePathname();
 	const router = useRouter();
 
-	const {
-		data: _session,
-		isPending,
-	} = client.useSession();
+	const { data: _session, isPending } = client.useSession();
 
 	if (isPending) {
 		return null;

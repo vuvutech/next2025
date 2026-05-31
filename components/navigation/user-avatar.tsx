@@ -5,10 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { client } from "@/lib/auth-client";
 
 export function UserAvatar({ className = "" }: { className?: string }) {
-	const {
-		data: session,
-		isPending,
-	} = client.useSession();
+	const { data: session, isPending } = client.useSession();
 
 	if (isPending) {
 		return (

@@ -11,12 +11,7 @@ import {
 import { prisma } from "@/prisma/dbConnect";
 import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
 import { KpiCard } from "@/components/admin/kpi-card";
-import {
-	Card,
-	CardContent,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GenderDistributionChart } from "@/components/analytics/GenderDistributionChart";
 import Image from "next/image";
 
@@ -55,9 +50,7 @@ export default async function ParticipantsPage() {
 	const instituteStats = [...byInstitute.entries()]
 		.map(([name, regs]) => {
 			const instApproved = regs.filter((r) => r.approved).length;
-			const male = regs.filter(
-				(r) => r.user.profile?.gender === "MALE",
-			).length;
+			const male = regs.filter((r) => r.user.profile?.gender === "MALE").length;
 			const female = regs.filter(
 				(r) => r.user.profile?.gender === "FEMALE",
 			).length;
@@ -177,18 +170,27 @@ export default async function ParticipantsPage() {
 								<div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1.5 border-t border-border/30 pt-3">
 									<div className="flex items-center justify-between text-xs">
 										<span className="text-muted-foreground">Approved</span>
-										<span className="font-semibold text-success">{inst.approved} <span className="text-muted-foreground/60 font-normal">({percentage(inst.approved, inst.total)})</span></span>
+										<span className="font-semibold text-success">
+											{inst.approved}{" "}
+											<span className="text-muted-foreground/60 font-normal">
+												({percentage(inst.approved, inst.total)})
+											</span>
+										</span>
 									</div>
 									<div className="flex items-center justify-between text-xs">
 										<span className="text-muted-foreground">Pending</span>
-										<span className="font-semibold text-warning">{inst.pending}</span>
+										<span className="font-semibold text-warning">
+											{inst.pending}
+										</span>
 									</div>
 									<div className="flex items-center justify-between text-xs">
 										<span className="text-muted-foreground flex items-center gap-1">
 											<IconGenderBigender className="size-3" />
 											Gender
 										</span>
-										<span className="font-medium text-muted-foreground">{inst.male}M / {inst.female}F</span>
+										<span className="font-medium text-muted-foreground">
+											{inst.male}M / {inst.female}F
+										</span>
 									</div>
 									<div className="flex items-center justify-between text-xs">
 										<span className="text-muted-foreground flex items-center gap-1">
@@ -220,10 +222,7 @@ export default async function ParticipantsPage() {
 						{topCountries.length > 0 ? (
 							<div className="space-y-3">
 								{topCountries.map(({ country, count }, i) => (
-									<div
-										key={country}
-										className="flex items-center gap-3"
-									>
+									<div key={country} className="flex items-center gap-3">
 										<span className="w-6 text-center text-sm font-bold text-muted-foreground/50">
 											{i + 1}
 										</span>

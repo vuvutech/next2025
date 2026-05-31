@@ -1,13 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import {
-	ArrowRight,
-	BookOpen,
-	Building2,
-	SearchIcon,
-	X,
-} from "lucide-react";
+import { ArrowRight, BookOpen, Building2, SearchIcon, X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";

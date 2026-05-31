@@ -47,6 +47,7 @@ const nextConfig: NextConfig = {
 		];
 	},
 	serverExternalPackages: ["@prisma/client"],
+	transpilePackages: ["better-auth", "kysely"],
 	experimental: {
 		serverActions: {
 			bodySizeLimit: "10mb",
