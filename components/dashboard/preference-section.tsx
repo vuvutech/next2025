@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { ThemeSwitcher } from "@/components/kibo-ui/theme-switcher";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -157,40 +158,11 @@ export function PreferencesSection() {
 							Customize how the interface looks.
 						</CardDescription>
 					</CardHeader>
-					<CardContent>
-						<RadioGroup
-							value={theme}
-							onValueChange={setTheme}
-							className="space-y-3"
-						>
-							<div className="flex items-center space-x-2">
-								<RadioGroupItem value="light" id="light" />
-								<Label
-									htmlFor="light"
-									className="font-normal text-zinc-900 dark:text-zinc-100"
-								>
-									Light
-								</Label>
-							</div>
-							<div className="flex items-center space-x-2">
-								<RadioGroupItem value="dark" id="dark" />
-								<Label
-									htmlFor="dark"
-									className="font-normal text-zinc-900 dark:text-zinc-100"
-								>
-									Dark
-								</Label>
-							</div>
-							<div className="flex items-center space-x-2">
-								<RadioGroupItem value="system" id="system" />
-								<Label
-									htmlFor="system"
-									className="font-normal text-zinc-900 dark:text-zinc-100"
-								>
-									System
-								</Label>
-							</div>
-						</RadioGroup>
+					<CardContent className="flex items-center justify-between py-6">
+						<span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+							Theme Mode
+						</span>
+						<ThemeSwitcher />
 					</CardContent>
 					<CardFooter className="flex justify-end border-t border-zinc-100 dark:border-zinc-800 px-6 py-4">
 						<Button className="bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200">

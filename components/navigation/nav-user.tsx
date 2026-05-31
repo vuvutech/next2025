@@ -8,8 +8,7 @@ import {
 	IconUserCircle,
 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { ThemeSwitcher } from "@/components/kibo-ui/theme-switcher";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
 	DropdownMenu,
@@ -28,29 +27,11 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { client } from "@/lib/auth-client";
 
 function ThemeToggle() {
-	const { theme, setTheme } = useTheme();
-	const [mounted, setMounted] = useState(false);
-
-	useEffect(() => {
-		setMounted(true);
-	}, []);
-
-	if (!mounted) return null;
-
-	const isLight = theme === "light";
-
 	return (
-		<DropdownMenuItem
-			className="cursor-pointer"
-			onClick={() => setTheme(isLight ? "dark" : "light")}
-		>
-			{isLight ? (
-				<IconMoon className="size-4" />
-			) : (
-				<IconSun className="size-4" />
-			)}
-			<span>{isLight ? "Dark Mode" : "Light Mode"}</span>
-		</DropdownMenuItem>
+		<div className="flex items-center justify-between px-2.5 py-1.5 text-sm select-none">
+			<span className="text-zinc-500 dark:text-zinc-400 mr-3">Theme</span>
+			<ThemeSwitcher />
+		</div>
 	);
 }
 

@@ -76,8 +76,8 @@ export default function RootLayout({
           <ScrollToTop />
           <FooterWrapper />
           <Toaster />
-          <Analytics />
-          <SpeedInsights />
+          {/* <Analytics /> */}
+          {/* <SpeedInsights /> */}
           <GoogleAnalytics gaId="G-1GJ79QESWQ" />
 
           {/* <GlobalDialog /> */}
