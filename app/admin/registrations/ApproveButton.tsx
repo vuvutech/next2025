@@ -1,9 +1,18 @@
 // File: app/admin/registrations/ApproveButton.tsx
 "use client";
 
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface ApproveButtonProps {
 	id: string;
@@ -27,6 +36,7 @@ export function ApproveButton({
 	priceViaZoom,
 }: ApproveButtonProps) {
 	const [isPending, startTransition] = useTransition();
+	const [open, setOpen] = useState(false);
 
 	const isPast = endDate ? new Date(endDate) < new Date() : false;
 
@@ -57,20 +67,52 @@ export function ApproveButton({
 		});
 	};
 
+	if (approved || isPast) {
+		return (
+			<Button
+				className="cursor-pointer px-1 py-0.5 h-auto uppercase text-[10px]"
+				size="sm"
+				disabled={true}
+			>
+				{approved ? "Approved" : "Past Edition"}
+			</Button>
+		);
+	}
+
 	return (
-		<Button
-			className="cursor-pointer px-1 py-0.5 h-auto uppercase text-[10px]"
-			size="sm"
-			disabled={approved || isPending || isPast}
-			onClick={handleApprove}
-		>
-			{approved
-				? "Approved"
-				: isPast
-					? "Past Edition"
-					: isPending
-						? "Approving..."
-						: "Approve"}
-		</Button>
+		<Dialog open={open} onOpenChange={setOpen}>
+			<DialogTrigger asChild>
+				<Button
+					className="cursor-pointer px-1 py-0.5 h-auto uppercase text-[10px]"
+					size="sm"
+					disabled={isPending}
+				>
+					{isPending ? "Approving..." : "Approve"}
+				</Button>
+			</DialogTrigger>
+			<DialogContent className="w-md rounded-2xl">
+				<DialogHeader>
+					<DialogTitle>Confirm Approval</DialogTitle>
+					<DialogDescription>
+						{name} has been vetted and meets the requirements for acceptance to
+						the programme.
+					</DialogDescription>
+				</DialogHeader>
+				<DialogFooter className="grid grid-cols-2 gap-2">
+					<Button variant="outline" onClick={() => setOpen(false)}>
+						Cancel
+					</Button>
+					<Button
+						variant="default"
+						onClick={() => {
+							handleApprove();
+						}}
+						disabled={isPending}
+					>
+						{isPending ? "Approving..." : "Confirm Approval"}
+					</Button>
+				</DialogFooter>
+			</DialogContent>
+		</Dialog>
 	);
 }
