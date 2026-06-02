@@ -45,7 +45,8 @@ export const WelcomeToInstituteEmail = ({
 
 						<Text className="text-sm leading-6">
 							Thank you for registering for The <strong>{instituteName}</strong>{" "}
-							(<strong>{editionTitle}</strong>).
+							(<strong>{editionTitle}</strong>). Please note that the
+							administration will contact you upon approval.
 						</Text>
 
 						<Text className="text-sm leading-6">
