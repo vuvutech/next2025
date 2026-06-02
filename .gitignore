@@ -88,3 +88,5 @@ todo.md
 
 # temp files
 tmp/
+# React Email local development cache
+**/emails/.react-email

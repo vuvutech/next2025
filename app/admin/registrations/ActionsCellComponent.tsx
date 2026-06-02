@@ -1,6 +1,8 @@
 "use client";
 
-import { LucideScanFace, MoreHorizontal } from "lucide-react";
+import { useTransition } from "react";
+import { LucideScanFace, MoreHorizontal, Unlink } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
@@ -14,9 +16,37 @@ import {
 interface ActionsCellProps {
 	id?: string;
 	onViewUser?: (id: string) => void;
+	registrationId?: string;
+	approved?: boolean;
 }
 
-export function ActionsCellComponent({ id, onViewUser }: ActionsCellProps) {
+export function ActionsCellComponent({
+	id,
+	onViewUser,
+	registrationId,
+	approved,
+}: ActionsCellProps) {
+	const [isPending, startTransition] = useTransition();
+
+	const handleUnapprove = () => {
+		if (!registrationId) return;
+		startTransition(async () => {
+			const res = await fetch("/api/unapprove-registration", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ id: registrationId }),
+			});
+
+			if (!res.ok) {
+				toast.error("Failed to unapprove registration");
+				return;
+			}
+
+			toast.success("Registration unapproved successfully");
+			window.location.reload();
+		});
+	};
+
 	return (
 		<>
 			<DropdownMenu>
@@ -38,6 +68,18 @@ export function ActionsCellComponent({ id, onViewUser }: ActionsCellProps) {
 							<LucideScanFace /> View User
 						</span>
 					</DropdownMenuItem>
+
+					{approved && (
+						<DropdownMenuItem
+							className="text-destructive cursor-pointer"
+							onClick={handleUnapprove}
+							disabled={isPending}
+						>
+							<span className="flex items-center gap-1">
+								<Unlink /> {isPending ? "Unapproving..." : "Unapprove"}
+							</span>
+						</DropdownMenuItem>
+					)}
 				</DropdownMenuContent>
 			</DropdownMenu>
 		</>

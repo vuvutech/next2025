@@ -166,6 +166,8 @@ export function createColumns(
 						<ActionsCellComponent
 							id={row.original.user?.id}
 							onViewUser={onViewUser}
+							registrationId={row.original.id}
+							approved={row.original.approved}
 						/>
 					</div>
 				);

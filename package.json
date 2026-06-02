@@ -9,7 +9,9 @@
 		"lint": "biome check",
 		"format": "biome format --write",
 		"test": "bun test",
-		"test:watch": "bun test --watch"
+		"test:watch": "bun test --watch",
+		"email:dev": "bunx email dev",
+		"email:export": "bunx email export"
 	},
 	"prisma": {
 		"seed": "bun prisma/seed.ts"
@@ -100,6 +102,7 @@
 		"@biomejs/biome": "^2.4.16",
 		"@faker-js/faker": "^10.4.0",
 		"@playwright/test": "^1.59.1",
+		"@react-email/ui": "6.5.0",
 		"@tailwindcss/postcss": "^4.2.2",
 		"@types/locomotive-scroll": "^4.1.4",
 		"@types/node": "^25.6.0",
