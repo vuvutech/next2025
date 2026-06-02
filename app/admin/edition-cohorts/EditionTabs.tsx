@@ -1,9 +1,31 @@
 "use client";
 
+import { useMemo } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import EditionRegistrationsTable from "./EditionRegistrationsTable";
 
+function getDefaultTabId(editions: any[]) {
+	const now = new Date();
+
+	const activeEdition = editions.find(
+		(e) => new Date(e.startDate) <= now && new Date(e.endDate) >= now,
+	);
+	if (activeEdition) return activeEdition.id;
+
+	const upcoming = editions
+		.filter((e) => new Date(e.startDate) > now)
+		.sort(
+			(a, b) =>
+				new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
+		);
+	if (upcoming.length > 0) return upcoming[0].id;
+
+	return editions[0].id;
+}
+
 export default function EditionTabs({ editions }: { editions: any[] }) {
+	const defaultTabId = useMemo(() => getDefaultTabId(editions), [editions]);
+
 	if (!editions || editions.length === 0) {
 		return (
 			<div className="text-center text-muted-foreground py-8">
@@ -14,7 +36,7 @@ export default function EditionTabs({ editions }: { editions: any[] }) {
 
 	return (
 		<div className="space-y-4 pb-20">
-			<Tabs defaultValue={editions[0].id} className="w-full">
+			<Tabs defaultValue={defaultTabId} className="w-full">
 				<TabsList className="max-w-full w-full overflow-x-auto flex flex-nowrap bg-muted/50 p-1 rounded-lg">
 					{editions.map((edition) => (
 						<TabsTrigger
