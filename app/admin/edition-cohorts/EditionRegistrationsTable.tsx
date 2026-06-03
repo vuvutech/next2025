@@ -4,11 +4,14 @@ import { useEffect, useMemo, useState } from "react";
 import { createColumns } from "@/app/admin/registrations/columns";
 import { UserProfileSheet } from "@/components/modals/UserProfileSheet";
 import { GenericDataTable } from "@/components/ui/data-table/generic-data-table";
+import { ExportButton } from "./ExportButton";
 
 export default function EditionRegistrationsTable({
 	editionId,
+	editionTitle,
 }: {
 	editionId: string;
+	editionTitle: string;
 }) {
 	const [registrations, setRegistrations] = useState<any[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
@@ -67,6 +70,13 @@ export default function EditionRegistrationsTable({
 
 	return (
 		<>
+			<div className="flex items-center justify-between">
+				<div />
+				<ExportButton
+					registrations={registrations}
+					editionTitle={editionTitle}
+				/>
+			</div>
 			<GenericDataTable
 				columns={columns}
 				data={registrations}

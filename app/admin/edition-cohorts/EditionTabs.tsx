@@ -61,7 +61,10 @@ export default function EditionTabs({ editions }: { editions: any[] }) {
 								{edition.institute?.acronym || "N/A"})
 							</p>
 						</div>
-						<EditionRegistrationsTable editionId={edition.id} />
+						<EditionRegistrationsTable
+							editionId={edition.id}
+							editionTitle={edition.title}
+						/>
 					</TabsContent>
 				))}
 			</Tabs>
