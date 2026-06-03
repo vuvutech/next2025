@@ -24,7 +24,7 @@ export const IEAAcceptanceEmail = ({
   name = "Participant",
   startDate = "June 8, 2026",
   endDate = "June 13, 2026",
-  theme = "Sustainable Transformation and Development",
+  theme = "Back to the Future of Economy",
 }: IEAAcceptanceEmailProps) => {
   const currentYear = new Date().getFullYear();
 

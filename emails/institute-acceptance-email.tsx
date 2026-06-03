@@ -11,22 +11,42 @@ import {
   Text,
 } from "@react-email/components";
 
-interface IEAAcceptanceEmailProps {
+interface InstituteAcceptanceEmailProps {
   previewText?: string;
   name?: string;
+  instituteName: string; // e.g., "Institute of Economic Affairs"
+  instituteShortName: string; // e.g., "IEA"
   startDate?: string;
   endDate?: string;
   theme?: string;
+  zoomLink: string;
+  zoomMeetingId: string;
+  zoomPasscode: string;
+  instituteEmail?: string; // Dynamic office email (fallback to default if omitted)
 }
 
-export const IEAAcceptanceEmail = ({
-  previewText = `Your Acceptance & Zoom Access Pass: IEA ${new Date().getFullYear()}`,
+export const InstituteAcceptanceEmail = ({
+  previewText,
   name = "Participant",
+  instituteName,
+  instituteShortName,
   startDate = "June 8, 2026",
   endDate = "June 13, 2026",
-  theme = "Back to the Future of Economy",
-}: IEAAcceptanceEmailProps) => {
+  theme,
+  zoomLink,
+  zoomMeetingId,
+  zoomPasscode,
+  instituteEmail,
+}: InstituteAcceptanceEmailProps) => {
   const currentYear = new Date().getFullYear();
+
+  // Fallback defaults if optional props aren't provided
+  const resolvedPreviewText =
+    previewText ||
+    `Your Acceptance & Zoom Access Pass: ${instituteShortName} ${currentYear}`;
+  const resolvedTheme = theme || "Global Transformation and Development";
+  const resolvedInstituteEmail =
+    instituteEmail || `${instituteShortName.toLowerCase()}office@costrad.org`;
 
   return (
     <Tailwind>
@@ -39,17 +59,18 @@ export const IEAAcceptanceEmail = ({
             }
           `}</style>
         </Head>
-        <Preview>{previewText}</Preview>
+        <Preview>{resolvedPreviewText}</Preview>
         <Body className="mx-auto my-auto bg-[#fdfdfd] px-2 font-sans text-[#333333]">
           <Container className="mx-auto my-[40px] max-w-[700px] bg-white p-[20px] border border-solid border-[#eaeaea] rounded">
             <Text className="text-[16px] font-bold mt-0">Shalom {name}!</Text>
 
             <Text className="text-[14px] leading-[24px]">
-              Welcome to the Future of Economic Transformation! Your payment has
-              been successfully received, and we are pleased to formally issue
-              your acceptance pass for the{" "}
+              Welcome to the Future of Transformation! Your payment has been
+              successfully received, and we are pleased to formally issue your
+              acceptance pass for the{" "}
               <strong>
-                {currentYear} Edition of the Institute of Economic Affairs (IEA)
+                {currentYear} Edition of the {instituteName} (
+                {instituteShortName})
               </strong>
               .
             </Text>
@@ -67,7 +88,7 @@ export const IEAAcceptanceEmail = ({
             {/* Event Highlights Box */}
             <Section className="bg-[#f9f9f9] border-l-4 border-solid border-[#cc0099] p-[15px] my-[20px]">
               <Text className="m-0 mb-[8px] text-[14px] leading-[24px]">
-                <strong>Theme:</strong> {theme}
+                <strong>Theme:</strong> {resolvedTheme}
               </Text>
               <Text className="m-0 mb-[8px] text-[14px] leading-[24px]">
                 <strong>Dates:</strong> {startDate} – {endDate}
@@ -97,13 +118,13 @@ export const IEAAcceptanceEmail = ({
 
             {/* --- ZOOM ACCESS PASS CREDENTIALS --- */}
             <Section className="bg-[#f1f7fe] border border-solid border-[#b3d7ff] rounded p-[20px] my-[25px]">
-              <Text className="m-0 mb-[12px] text-[16px] font-bold text-[#cc0099] text-center">
-                INSTITUTE OF ECONOMIC AFFAIRS (IEA) ZOOM MEETING LINK
+              <Text className="m-0 mb-[12px] text-[16px] font-bold text-[#cc0099] text-center uppercase">
+                {instituteName} ({instituteShortName}) ZOOM MEETING LINK
               </Text>
 
               <div className="text-center my-[15px]">
                 <Link
-                  href="https://us02web.zoom.us/j/81431256100?pwd=pWt3MpkvaiQF1cpPHKI4Ja0R8YsdUS.1"
+                  href={zoomLink}
                   className="bg-[#cc0099] text-white px-[20px] py-[10px] rounded font-bold text-[14px] inline-block no-underline"
                 >
                   Click Here to Join Zoom Meeting
@@ -121,7 +142,7 @@ export const IEAAcceptanceEmail = ({
                     Meeting ID
                   </Text>
                   <Text className="m-0 font-mono text-[16px] font-semibold text-[#1e293b] tracking-wide select-all">
-                    814 3125 6100
+                    {zoomMeetingId}
                   </Text>
                 </div>
 
@@ -131,16 +152,17 @@ export const IEAAcceptanceEmail = ({
                     Passcode
                   </Text>
                   <Text className="m-0 font-mono text-[16px] font-bold text-[#cc0099] select-all">
-                    IEA&lt;/&gt;26
+                    {zoomPasscode}
                   </Text>
                 </div>
               </div>
             </Section>
 
             <Text className="mt-[25px] text-[14px] leading-[24px]">
-              At IEA {currentYear}, you will gain insightful discussions,
-              powerful networking opportunities, transformational learning
-              experiences, and fresh ideas that inspire action and impact.
+              At {instituteShortName} {currentYear}, you will gain insightful
+              discussions, powerful networking opportunities, transformational
+              learning experiences, and fresh ideas that inspire action and
+              impact.
             </Text>
 
             <Text className="mt-[25px] text-[14px] leading-[24px]">
@@ -157,10 +179,13 @@ export const IEAAcceptanceEmail = ({
               If you have any questions or need further clarification about your
               registration, please don't hesitate to contact us. Our support
               team ({" "}
-              <a className="text-primary" href="mailto:ieaoffice@costrad.org">
-                ieaoffice@costrad.org
+              <a
+                className="text-primary"
+                href={`mailto:${resolvedInstituteEmail}`}
+              >
+                {resolvedInstituteEmail}
               </a>{" "}
-              ,
+              ,{" "}
               <a
                 className="text-primary"
                 href="mailto:correspondence@costrad.org"
@@ -181,8 +206,13 @@ export const IEAAcceptanceEmail = ({
   );
 };
 
-IEAAcceptanceEmail.PreviewProps = {
-  previewText: `Your Acceptance & Zoom Access Pass: IEA ${new Date().getFullYear()}`,
-} as IEAAcceptanceEmailProps;
+InstituteAcceptanceEmail.PreviewProps = {
+  name: "Participant",
+  instituteName: "Institute of Economic Affairs",
+  instituteShortName: "IEA",
+  zoomLink: "https://zoom.us",
+  zoomMeetingId: "814 3125 6100",
+  zoomPasscode: "IEA</>26",
+} as InstituteAcceptanceEmailProps;
 
-export default IEAAcceptanceEmail;
+export default InstituteAcceptanceEmail;
