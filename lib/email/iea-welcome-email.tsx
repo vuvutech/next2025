@@ -206,11 +206,7 @@ export const IEARegistrationEmail = ({
 
             <Text className="mt-[30px] text-[14px] leading-[24px]">
               <strong>
-                TO COMPLETE YOUR REGISTRATION PAY NOW USING THIS LINK:
-                <br />
-                <a href="https://selar.com/iea2026">
-                  https://selar.com/iea2026
-                </a>
+                Payment details would be communicated to you shortly.
               </strong>
             </Text>
 
