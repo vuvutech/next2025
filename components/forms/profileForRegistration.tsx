@@ -111,6 +111,7 @@ export function ProfileForRegistration({
 		control,
 	} = useForm<ProfileForm>({ defaultValues: { disabilityAssistance: false } });
 
+	const [datePickerOpen, setDatePickerOpen] = useState(false);
 	const dateOfBirth = watch("dateOfBirth");
 	const disabilityAssistance = watch("disabilityAssistance");
 
@@ -188,8 +189,8 @@ export function ProfileForRegistration({
 								rules={{ required: "Gender is required" }}
 								render={({ field }) => (
 									<Select onValueChange={field.onChange} value={field.value}>
-										<SelectTrigger className="w-full">
-											<SelectValue placeholder="Select gender" />
+									<SelectTrigger className="w-full h-10">
+										<SelectValue placeholder="Select gender" />
 										</SelectTrigger>
 										<SelectContent className="w-full bg-background text-foreground">
 											<SelectItem value="MALE">Male</SelectItem>
@@ -209,12 +210,12 @@ export function ProfileForRegistration({
 								Date of Birth{" "}
 								<span className="text-destructive text-[8px]">Required</span>
 							</Label>
-							<Popover>
+							<Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
 								<PopoverTrigger asChild>
 									<Button
 										variant="outline"
 										className={cn(
-											"w-full justify-start text-left font-normal",
+											"w-full justify-start text-left font-normal h-10",
 											!dateOfBirth && "text-muted-foreground",
 										)}
 									>
@@ -228,13 +229,14 @@ export function ProfileForRegistration({
 									<Calendar
 										mode="single"
 										selected={dateOfBirth ? new Date(dateOfBirth) : undefined}
-										onSelect={(date) =>
+										onSelect={(date) => {
 											setValue(
 												"dateOfBirth",
 												date?.toISOString().split("T")[0] || "",
 												{ shouldValidate: true },
-											)
-										}
+											);
+											setDatePickerOpen(false);
+										}}
 										className="rounded-lg bg-background text-foreground border shadow-sm"
 										initialFocus
 										captionLayout="dropdown"
@@ -263,7 +265,7 @@ export function ProfileForRegistration({
 								<span className="text-destructive text-[8px]">Required</span>
 							</Label>
 							<Select {...register("maritalStatus")}>
-								<SelectTrigger className="w-full">
+								<SelectTrigger className="w-full h-10">
 									<SelectValue placeholder="Marital status" />
 								</SelectTrigger>
 								<SelectContent className="w-full bg-background text-foreground">
@@ -281,7 +283,7 @@ export function ProfileForRegistration({
 								<span className="text-destructive text-[8px]">Required</span>
 							</Label>
 							<Select {...register("religion")}>
-								<SelectTrigger className="w-full">
+								<SelectTrigger className="w-full h-10">
 									<SelectValue placeholder="Religion" />
 								</SelectTrigger>
 								<SelectContent className="w-full bg-background text-foreground">
@@ -466,7 +468,7 @@ export function ProfileForRegistration({
 						<div>
 							<Label>Highest Qualification</Label>
 							<Select {...register("highestQualification")}>
-								<SelectTrigger className="w-full">
+								<SelectTrigger className="w-full h-10">
 									<SelectValue placeholder="Qualification" />
 								</SelectTrigger>
 								<SelectContent className="w-full bg-background text-foreground">
@@ -481,7 +483,7 @@ export function ProfileForRegistration({
 						<div>
 							<Label>Language Preference</Label>
 							<Select {...register("languagePreference")}>
-								<SelectTrigger className="w-full">
+								<SelectTrigger className="w-full h-10">
 									<SelectValue placeholder="Language" />
 								</SelectTrigger>
 								<SelectContent className="w-full bg-background text-foreground">

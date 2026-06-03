@@ -35,7 +35,7 @@ export default function Apply() {
 	const [loading, setLoading] = useState(false);
 
 	// Move checkProfile outside useEffect so it can be called anytime
-	const checkProfile = async () => {
+	const checkProfile = React.useCallback(async () => {
 		setProfileLoading(true);
 		try {
 			const res = await fetch("/api/checkProfile");
@@ -55,7 +55,7 @@ export default function Apply() {
 			setProfileLoading(false);
 			console.debug("[DEBUG] Profile loading finished");
 		}
-	};
+	}, []);
 
 	useEffect(() => {
 		if (session?.user) {
@@ -78,7 +78,7 @@ export default function Apply() {
 				setEditionsLoading(false);
 				console.debug("[DEBUG] Editions loading finished");
 			});
-	}, [session?.user]);
+	}, [session?.user, checkProfile]);
 
 	const onRegister = async (): Promise<void> => {
 		if (!selectedEdition) return;

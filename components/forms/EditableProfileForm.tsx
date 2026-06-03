@@ -97,6 +97,7 @@ export default function EditableProfileForm() {
 	} = useForm<ProfileForm>();
 
 	const [loading, setLoading] = useState(true);
+	const [datePickerOpen, setDatePickerOpen] = useState(false);
 	const dateOfBirth = watch("dateOfBirth");
 	const disabilityAssistance = watch("disabilityAssistance");
 
@@ -149,7 +150,7 @@ export default function EditableProfileForm() {
 								control={control}
 								render={({ field }) => (
 									<Select value={field.value} onValueChange={field.onChange}>
-										<SelectTrigger id="gender" className="w-full">
+										<SelectTrigger id="gender" className="w-full h-10">
 											<SelectValue placeholder="Gender" />
 										</SelectTrigger>
 										<SelectContent>
@@ -164,12 +165,12 @@ export default function EditableProfileForm() {
 						{/* Date of Birth */}
 						<div>
 							<Label>Date of Birth</Label>
-							<Popover>
-								<PopoverTrigger asChild>
+						<Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
+							<PopoverTrigger asChild>
 									<Button
 										variant="outline"
 										className={cn(
-											"w-full justify-start text-left font-normal py-2",
+											"w-full justify-start text-left font-normal h-10",
 											!dateOfBirth && "text-muted-foreground",
 										)}
 									>
@@ -183,13 +184,14 @@ export default function EditableProfileForm() {
 									<Calendar
 										mode="single"
 										selected={dateOfBirth ? new Date(dateOfBirth) : undefined}
-										onSelect={(date) =>
+										onSelect={(date) => {
 											setValue(
 												"dateOfBirth",
 												date?.toISOString().split("T")[0] || "",
 												{ shouldValidate: true },
-											)
-										}
+											);
+											setDatePickerOpen(false);
+										}}
 										className="rounded-lg bg-background text-foreground border shadow-sm"
 										initialFocus
 										captionLayout="dropdown"
@@ -216,7 +218,7 @@ export default function EditableProfileForm() {
 								control={control}
 								render={({ field }) => (
 									<Select value={field.value} onValueChange={field.onChange}>
-										<SelectTrigger id="maritalStatus" className="w-full">
+										<SelectTrigger id="maritalStatus" className="w-full h-10">
 											<SelectValue placeholder="Marital Status" />
 										</SelectTrigger>
 										<SelectContent>
@@ -244,7 +246,7 @@ export default function EditableProfileForm() {
 								control={control}
 								render={({ field }) => (
 									<Select value={field.value} onValueChange={field.onChange}>
-										<SelectTrigger id="religion" className="w-full">
+										<SelectTrigger id="religion" className="w-full h-10">
 											<SelectValue placeholder="Religion" />
 										</SelectTrigger>
 										<SelectContent>
