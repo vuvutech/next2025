@@ -180,7 +180,6 @@ export function createColumns(
 				);
 			},
 		},
-    },
     {
       id: "details",
       header: "Approve",
