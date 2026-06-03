@@ -73,11 +73,20 @@ export function ActionsCellComponent({
 				return;
 			}
 
-			toast.success(
-				paid
-					? "Payment status marked as unpaid"
-					: "Payment status marked as paid",
-			);
+			const data = await res.json();
+
+			if (data.paid) {
+				if (data.emailSent) {
+					toast.success("Payment marked as paid. Acceptance email sent.");
+				} else {
+					toast.warning(
+						"Payment marked as paid, but acceptance email could not be sent.",
+					);
+				}
+			} else {
+				toast.success("Payment status marked as unpaid");
+			}
+
 			window.location.reload();
 		});
 	};
