@@ -1,9 +1,17 @@
 "use client";
 
-import { useTransition } from "react";
-import { LucideScanFace, MoreHorizontal, Unlink } from "lucide-react";
+import { useState, useTransition } from "react";
+import { DollarSign, LucideScanFace, MoreHorizontal, Unlink } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+} from "@/components/ui/dialog";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -18,6 +26,7 @@ interface ActionsCellProps {
 	onViewUser?: (id: string) => void;
 	registrationId?: string;
 	approved?: boolean;
+	paid?: boolean;
 }
 
 export function ActionsCellComponent({
@@ -25,8 +34,10 @@ export function ActionsCellComponent({
 	onViewUser,
 	registrationId,
 	approved,
+	paid,
 }: ActionsCellProps) {
 	const [isPending, startTransition] = useTransition();
+	const [showPaidDialog, setShowPaidDialog] = useState(false);
 
 	const handleUnapprove = () => {
 		if (!registrationId) return;
@@ -43,6 +54,30 @@ export function ActionsCellComponent({
 			}
 
 			toast.success("Registration unapproved successfully");
+			window.location.reload();
+		});
+	};
+
+	const handleTogglePaid = () => {
+		if (!registrationId) return;
+		setShowPaidDialog(false);
+		startTransition(async () => {
+			const res = await fetch("/api/toggle-paid", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ id: registrationId }),
+			});
+
+			if (!res.ok) {
+				toast.error("Failed to toggle payment status");
+				return;
+			}
+
+			toast.success(
+				paid
+					? "Payment status marked as unpaid"
+					: "Payment status marked as paid",
+			);
 			window.location.reload();
 		});
 	};
@@ -80,8 +115,54 @@ export function ActionsCellComponent({
 							</span>
 						</DropdownMenuItem>
 					)}
+
+					<DropdownMenuSeparator />
+
+					<DropdownMenuItem
+						className="text-foreground cursor-pointer"
+						onClick={() => setShowPaidDialog(true)}
+						disabled={isPending}
+					>
+						<span className="flex items-center gap-1">
+							<DollarSign /> {paid ? "Mark as Unpaid" : "Mark as Paid"}
+						</span>
+					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
+
+			<Dialog open={showPaidDialog} onOpenChange={setShowPaidDialog}>
+				<DialogContent className="w-md rounded-2xl">
+					<DialogHeader>
+						<DialogTitle>
+							{paid ? "Confirm Unpaid Status" : "Confirm Payment"}
+						</DialogTitle>
+						<DialogDescription>
+							{paid
+								? "This will mark the participant's payment as unpaid."
+								: "I confirm that the participant has made payment and meets the financial requirements for the programme."}
+						</DialogDescription>
+					</DialogHeader>
+					<DialogFooter className="grid grid-cols-2 gap-2">
+						<Button
+							variant="outline"
+							onClick={() => setShowPaidDialog(false)}
+						>
+							Cancel
+						</Button>
+						<Button
+							variant={paid ? "destructive" : "default"}
+							onClick={handleTogglePaid}
+							disabled={isPending}
+						>
+							{isPending
+								? "Processing..."
+								: paid
+									? "Confirm Unpaid"
+									: "Confirm Payment"}
+						</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
 		</>
 	);
 }

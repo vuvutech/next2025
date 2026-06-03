@@ -139,6 +139,23 @@ export function createColumns(
 			},
 		},
 		{
+			header: "Payment",
+			cell: ({ row }) => {
+				const paid = row.original.paid;
+				return (
+					<Badge
+						className={
+							paid
+								? "bg-green-500 text-background uppercase"
+								: "bg-yellow-500 text-background uppercase"
+						}
+					>
+						{paid ? "Paid" : "Unpaid"}
+					</Badge>
+				);
+			},
+		},
+		{
 			id: "details",
 			header: "Approve",
 			cell: ({ row }) => (
@@ -168,6 +185,7 @@ export function createColumns(
 							onViewUser={onViewUser}
 							registrationId={row.original.id}
 							approved={row.original.approved}
+							paid={row.original.paid}
 						/>
 					</div>
 				);

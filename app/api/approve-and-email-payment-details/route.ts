@@ -2,12 +2,18 @@
 
 import { render } from "@react-email/render";
 import { type NextRequest, NextResponse } from "next/server";
+import { getCurrentUser } from "@/app/actions/functions";
 import { IEARegistrationEmail } from "@/lib/email/iea-welcome-email";
 import { sendMail } from "@/lib/nodemailer-mail";
 import { prisma } from "@/prisma/dbConnect";
 
 export async function POST(req: NextRequest) {
 	try {
+		const admin = await getCurrentUser();
+		if (!admin || (admin.role !== "ADMIN" && admin.role !== "SUPERADMIN")) {
+			return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+		}
+
 		const { id, name, email, startDate, endDate, price, priceViaZoom } =
 			await req.json();
 
@@ -77,10 +83,14 @@ export async function POST(req: NextRequest) {
 			html: htmlContent,
 		});
 
-		// ✅ Update registration as approved
+		// ✅ Update registration as approved with audit trail
 		await prisma.registration.update({
 			where: { id },
-			data: { approved: true },
+			data: {
+				approved: true,
+				approvedBy: admin.name || admin.email,
+				approvedAt: new Date(),
+			},
 		});
 
 		return NextResponse.json({ success: true });

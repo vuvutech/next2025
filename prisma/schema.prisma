@@ -368,16 +368,21 @@ model StudentIdCounter {
 }
 
 model Registration {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String
-  approved  Boolean  @default(false)
-  editionId String   @db.ObjectId
-  createdAt DateTime @default(now())
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String
+  approved   Boolean  @default(false)
+  approvedBy String?
+  approvedAt DateTime?
+  paid       Boolean  @default(false)
+  paidBy     String?
+  paidAt     DateTime?
+  editionId  String   @db.ObjectId
+  createdAt  DateTime @default(now())
 
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   edition Edition @relation(fields: [editionId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, editionId]) // A user can register for an edition only once
+  @@unique([userId, editionId])
   @@map("registration")
 }
 

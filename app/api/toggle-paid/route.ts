@@ -11,16 +11,33 @@ export async function POST(req: NextRequest) {
 
 		const { id } = await req.json();
 
-		await prisma.registration.update({
+		const registration = await prisma.registration.findUnique({
 			where: { id },
-			data: { approved: false, approvedBy: null, approvedAt: null },
 		});
 
-		return NextResponse.json({ success: true });
+		if (!registration) {
+			return NextResponse.json(
+				{ error: "Registration not found" },
+				{ status: 404 },
+			);
+		}
+
+		const nowPaid = !registration.paid;
+
+		await prisma.registration.update({
+			where: { id },
+			data: {
+				paid: nowPaid,
+				paidBy: nowPaid ? admin.name || admin.email : null,
+				paidAt: nowPaid ? new Date() : null,
+			},
+		});
+
+		return NextResponse.json({ success: true, paid: nowPaid });
 	} catch (error) {
-		console.error("[ERROR] Unapprove failed:", error);
+		console.error("[ERROR] Toggle paid failed:", error);
 		return NextResponse.json(
-			{ error: "Failed to unapprove registration" },
+			{ error: "Failed to toggle paid status" },
 			{ status: 500 },
 		);
 	}
