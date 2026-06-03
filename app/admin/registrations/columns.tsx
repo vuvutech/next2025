@@ -137,7 +137,7 @@ export function createColumns(
             </Badge>
             {row.original.approvedBy && (
               <span className="text-[9px] text-muted-foreground whitespace-nowrap">
-                by: {row.original.approvedBy}
+                Approved by: {row.original.approvedBy}
               </span>
             )}
           </div>
@@ -152,34 +152,38 @@ export function createColumns(
         );
       },
     },
-		{
-			header: "Payment",
-			cell: ({ row }) => {
-				const paid = row.original.paid;
-				return (
-					<div className="flex flex-col gap-0.5">
-						<Badge
-							className={
-								paid
-									? "bg-green-500 text-background uppercase flex items-center gap-1 w-fit"
-									: "bg-yellow-500 text-background uppercase flex items-center gap-1 w-fit"
-							}
-						>
-							{paid ? (
-								<><DollarSign className="size-3" /> Paid</>
-							) : (
-								<><Ban className="size-3" /> Unpaid</>
-							)}
-						</Badge>
-						{paid && row.original.paidBy && (
-							<span className="text-[10px] text-muted-foreground whitespace-nowrap">
-								by {row.original.paidBy}
-							</span>
-						)}
-					</div>
-				);
-			},
-		},
+    {
+      header: "Payment",
+      cell: ({ row }) => {
+        const paid = row.original.paid;
+        return (
+          <div className="flex flex-col gap-0.5">
+            <Badge
+              className={
+                paid
+                  ? "bg-green-500 text-background uppercase flex items-center gap-1 w-fit"
+                  : "bg-yellow-500 text-background uppercase flex items-center gap-1 w-fit"
+              }
+            >
+              {paid ? (
+                <>
+                  <DollarSign className="size-3" /> Paid
+                </>
+              ) : (
+                <>
+                  <Ban className="size-3" /> Unpaid
+                </>
+              )}
+            </Badge>
+            {paid && row.original.paidBy && (
+              <span className="text-[10px] text-muted-foreground whitespace-nowrap">
+                Supervised by: {row.original.paidBy}
+              </span>
+            )}
+          </div>
+        );
+      },
+    },
     {
       id: "details",
       header: "Approve",
