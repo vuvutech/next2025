@@ -19,7 +19,9 @@ export async function GET(req: NextRequest) {
 		const registrations = await prisma.registration.findMany({
 			where: { editionId },
 			include: {
-				user: true,
+				user: {
+					include: { profile: true },
+				},
 				edition: {
 					include: { institute: true },
 				},

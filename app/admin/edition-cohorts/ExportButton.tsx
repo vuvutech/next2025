@@ -17,7 +17,10 @@ export function ExportButton({
 }: ExportButtonProps) {
 	const rows = registrations.map((r) => ({
 		Name: r.user?.name || "Unknown",
+		Email: r.user?.email || "",
 		"Student ID": r.user?.studentId || "Not specified",
+		Telephone: r.user?.profile?.telephone || "",
+		Mobile: r.user?.profile?.mobile || "",
 		"Institute Edition": editionTitle,
 		Approved: r.approved ? "Yes" : "No",
 		Paid: r.paid ? "Yes" : "No",
@@ -39,17 +42,29 @@ export function ExportButton({
 
 		const tableData = rows.map((r) => [
 			r.Name,
+			r.Email,
 			r["Student ID"],
+			r.Telephone,
+			r.Mobile,
 			r["Institute Edition"],
 			r.Approved,
 			r.Paid,
 		]);
 
 		autoTable(doc, {
-			head: [["Name", "Student ID", "Institute Edition", "Approved", "Paid"]],
+			head: [[
+				"Name",
+				"Email",
+				"Student ID",
+				"Telephone",
+				"Mobile",
+				"Institute Edition",
+				"Approved",
+				"Paid",
+			]],
 			body: tableData,
 			startY: 25,
-			styles: { fontSize: 8 },
+			styles: { fontSize: 7 },
 		});
 
 		doc.save(
