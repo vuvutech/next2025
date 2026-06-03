@@ -1,16 +1,10 @@
 "use client";
 
-import { Download } from "lucide-react";
+import { FileSpreadsheet, FileText } from "lucide-react";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { Button } from "@/components/ui/button";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 interface ExportButtonProps {
 	registrations: any[];
@@ -64,31 +58,25 @@ export function ExportButton({
 	};
 
 	return (
-		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button
-					variant="outline"
-					size="sm"
-					className="flex items-center gap-1 text-xs"
-				>
-					<Download className="size-3.5" />
-					Export
-				</Button>
-			</DropdownMenuTrigger>
-			<DropdownMenuContent align="end">
-				<DropdownMenuItem
-					className="cursor-pointer"
-					onClick={exportExcel}
-				>
-					Export to Excel
-				</DropdownMenuItem>
-				<DropdownMenuItem
-					className="cursor-pointer"
-					onClick={exportPDF}
-				>
-					Export to PDF
-				</DropdownMenuItem>
-			</DropdownMenuContent>
-		</DropdownMenu>
+		<div className="flex items-center gap-2">
+			<Button
+				variant="outline"
+				size="sm"
+				className="flex items-center gap-1.5 text-xs"
+				onClick={exportExcel}
+			>
+				<FileSpreadsheet className="size-4 text-green-600" />
+				Export to Excel
+			</Button>
+			<Button
+				variant="outline"
+				size="sm"
+				className="flex items-center gap-1.5 text-xs"
+				onClick={exportPDF}
+			>
+				<FileText className="size-4 text-destructive" />
+				Export to PDF
+			</Button>
+		</div>
 	);
 }

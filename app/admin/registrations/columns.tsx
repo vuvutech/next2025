@@ -3,6 +3,7 @@
 
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
+import { CheckCircle, Clock, XCircle, DollarSign, Ban } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { ActionsCellComponent } from "./ActionsCellComponent";
@@ -124,16 +125,16 @@ export function createColumns(
 					row.original.edition?.endDate &&
 					new Date(row.original.edition.endDate) < new Date();
 				return row.original.approved ? (
-					<Badge className="bg-green-500 text-background uppercase">
-						Approved
+					<Badge className="bg-green-500 text-background uppercase flex items-center gap-1 w-fit">
+						<CheckCircle className="size-3" /> Approved
 					</Badge>
 				) : isPast ? (
-					<Badge className="bg-muted text-muted-foreground uppercase">
-						Expired
+					<Badge className="bg-muted text-muted-foreground uppercase flex items-center gap-1 w-fit">
+						<XCircle className="size-3" /> Expired
 					</Badge>
 				) : (
-					<Badge className="bg-yellow-500 text-background uppercase">
-						Pending
+					<Badge className="bg-yellow-500 text-background uppercase flex items-center gap-1 w-fit">
+						<Clock className="size-3" /> Pending
 					</Badge>
 				);
 			},
@@ -146,11 +147,15 @@ export function createColumns(
 					<Badge
 						className={
 							paid
-								? "bg-green-500 text-background uppercase"
-								: "bg-yellow-500 text-background uppercase"
+								? "bg-green-500 text-background uppercase flex items-center gap-1 w-fit"
+								: "bg-yellow-500 text-background uppercase flex items-center gap-1 w-fit"
 						}
 					>
-						{paid ? "Paid" : "Unpaid"}
+						{paid ? (
+							<><DollarSign className="size-3" /> Paid</>
+						) : (
+							<><Ban className="size-3" /> Unpaid</>
+						)}
 					</Badge>
 				);
 			},
