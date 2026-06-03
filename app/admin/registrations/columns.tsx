@@ -125,9 +125,16 @@ export function createColumns(
 					row.original.edition?.endDate &&
 					new Date(row.original.edition.endDate) < new Date();
 				return row.original.approved ? (
-					<Badge className="bg-green-500 text-background uppercase flex items-center gap-1 w-fit">
-						<CheckCircle className="size-3" /> Approved
-					</Badge>
+					<div className="flex flex-col gap-0.5">
+						<Badge className="bg-green-500 text-background uppercase flex items-center gap-1 w-fit">
+							<CheckCircle className="size-3" /> Approved
+						</Badge>
+						{row.original.approvedBy && (
+							<span className="text-[10px] text-muted-foreground whitespace-nowrap">
+								by {row.original.approvedBy}
+							</span>
+						)}
+					</div>
 				) : isPast ? (
 					<Badge className="bg-muted text-muted-foreground uppercase flex items-center gap-1 w-fit">
 						<XCircle className="size-3" /> Expired
