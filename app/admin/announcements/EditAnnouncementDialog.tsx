@@ -74,8 +74,8 @@ export default function EditAnnouncementDialog({
 				featured: false,
 				approved: false,
 			});
-		} catch (err: any) {
-			toast.error(err.message || "Something went wrong");
+		} catch (err: unknown) {
+			toast.error(err instanceof Error ? err.message : "Something went wrong");
 		} finally {
 			setLoading(false);
 		}

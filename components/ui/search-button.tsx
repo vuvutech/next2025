@@ -216,6 +216,7 @@ export function SearchButton() {
 					<div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
 						{query && (
 							<button
+								type="button"
 								onClick={handleClear}
 								className="p-1 hover:bg-muted rounded-full transition-colors cursor-pointer"
 								aria-label="Clear search"

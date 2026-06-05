@@ -30,7 +30,7 @@ export function ActionsCellComponent({
 }: ActionsCellProps) {
 	const router = useRouter(); // ⭐️ This is now a valid place to call useRouter
 
-	const updateTestimonial = async (data: any) => {
+	const updateTestimonial = async (data: Record<string, unknown>) => {
 		const res = await fetch("/api/testimonials", {
 			method: "PUT",
 			headers: {
@@ -66,8 +66,10 @@ export function ActionsCellComponent({
 								featured ? "Testimonial Unfeatured!" : "Testimonial Featured!",
 							);
 							router.refresh(); // Refresh the page after successful update
-						} catch (error: any) {
-							toast.error(`Failed to toggle featured status: ${error.message}`);
+						} catch (error: unknown) {
+							toast.error(
+								`Failed to toggle featured status: ${error instanceof Error ? error.message : String(error)}`,
+							);
 						}
 					}}
 				>
@@ -84,8 +86,10 @@ export function ActionsCellComponent({
 								approved ? "Testimonial Unapproved!" : "Testimonial Approved!",
 							);
 							router.refresh(); // Refresh the page after successful update
-						} catch (error: any) {
-							toast.error(`Failed to toggle approval status: ${error.message}`);
+						} catch (error: unknown) {
+							toast.error(
+								`Failed to toggle approval status: ${error instanceof Error ? error.message : String(error)}`,
+							);
 						}
 					}}
 				>

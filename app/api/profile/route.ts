@@ -36,13 +36,13 @@ export async function POST(req: NextRequest) {
 		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
 	try {
-		const body = await req.json();
+		const body = (await req.json()) as Record<string, unknown>;
 		const existing = await prisma.profile.findUnique({
 			where: { userId: user.id },
 		});
 
 		// Prepare payload
-		const payload: any = {
+		const payload: Record<string, unknown> = {
 			...body,
 			userId: user.id,
 			updatedAt: new Date(),
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
 
 		// Convert the string into a JS Date (if provided)
 		if (body.dateOfBirth) {
-			payload.dateOfBirth = new Date(body.dateOfBirth);
+			payload.dateOfBirth = new Date(body.dateOfBirth as string);
 		} else {
 			delete payload.dateOfBirth;
 		}
@@ -140,8 +140,9 @@ export async function DELETE(_req: NextRequest) {
 		});
 
 		return NextResponse.json({ success: true });
-	} catch (error: any) {
-		if (error.code === "P2025") {
+	} catch (error: unknown) {
+		const prismaErr = error as { code?: string; message?: string };
+		if (prismaErr.code === "P2025") {
 			return NextResponse.json({ error: "Profile not found" }, { status: 404 });
 		}
 

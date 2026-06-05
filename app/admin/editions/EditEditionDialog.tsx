@@ -116,8 +116,8 @@ export default function EditEditionDialog({ edition }: EditEditionDialogProps) {
 			toast.success("Edition updated!");
 			closeRef.current?.click();
 			router.refresh();
-		} catch (err: any) {
-			toast.error(err.message || "Something went wrong");
+		} catch (err: unknown) {
+			toast.error(err instanceof Error ? err.message : "Something went wrong");
 		} finally {
 			setLoading(false);
 		}

@@ -2,9 +2,10 @@
 
 import { useMemo } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import type { EditionTab } from "@/types/registration";
 import EditionRegistrationsTable from "./EditionRegistrationsTable";
 
-function getDefaultTabId(editions: any[]) {
+function getDefaultTabId(editions: EditionTab[]) {
 	const now = new Date();
 
 	const activeEdition = editions.find(
@@ -23,7 +24,7 @@ function getDefaultTabId(editions: any[]) {
 	return editions[0].id;
 }
 
-export default function EditionTabs({ editions }: { editions: any[] }) {
+export default function EditionTabs({ editions }: { editions: EditionTab[] }) {
 	const defaultTabId = useMemo(() => getDefaultTabId(editions), [editions]);
 
 	if (!editions || editions.length === 0) {

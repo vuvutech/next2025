@@ -72,9 +72,9 @@ export default function AccountSwitcher({ sessions }: { sessions: Session[] }) {
 						<CommandGroup heading="Switch Account">
 							{sessions
 								.filter((s) => s.user.id !== currentUser?.user.id)
-								.map((u, i) => (
+								.map((u) => (
 									<CommandItem
-										key={i}
+										key={u.user.id}
 										onSelect={async () => {
 											await client.multiSession.setActive({
 												sessionToken: u.session.token,

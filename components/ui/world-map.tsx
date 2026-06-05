@@ -1,69 +1,71 @@
 "use client";
+import { motion } from "motion/react";
+import React from "react";
 
-import DottedMap from "dotted-map";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { useTheme } from "next-themes";
-import { useRef } from "react";
-
-interface MapProps {
-	dots?: Array<{
+interface WorldMapProps {
+	dots: Array<{
 		start: { lat: number; lng: number; label?: string };
 		end: { lat: number; lng: number; label?: string };
 	}>;
 	lineColor?: string;
 }
 
-export default function WorldMap({
-	dots = [],
-	lineColor = "#0ea5e9",
-}: MapProps) {
-	const svgRef = useRef<SVGSVGElement>(null);
-	const map = new DottedMap({ height: 100, grid: "diagonal" });
+function projectPoint(lat: number, lng: number) {
+	const x = (lng + 180) * (800 / 360);
+	const y = (90 - lat) * (400 / 180);
+	return { x, y };
+}
 
-	const { theme } = useTheme();
+function createCurvedPath(
+	start: { x: number; y: number },
+	end: { x: number; y: number },
+) {
+	const midX = (start.x + end.x) / 2;
+	const midY = (start.y + end.y) / 2;
+	const dx = end.x - start.x;
+	const dy = end.y - start.y;
 
-	const svgMap = map.getSVG({
-		radius: 0.22,
-		color: theme === "dark" ? "#FFFFFF40" : "#00000040",
-		shape: "circle",
-		backgroundColor: theme === "dark" ? "black" : "white",
-	});
+	const offset = Math.sqrt(dx * dx + dy * dy) * 0.25;
+	const perpendicularX = -dy;
+	const perpendicularY = dx;
+	const length = Math.sqrt(
+		perpendicularX * perpendicularX + perpendicularY * perpendicularY,
+	);
+	const normalX = (perpendicularX / length) * offset;
+	const normalY = (perpendicularY / length) * offset;
 
-	const projectPoint = (lat: number, lng: number) => {
-		const x = (lng + 180) * (800 / 360);
-		const y = (90 - lat) * (400 / 180);
-		return { x, y };
-	};
+	return `M ${start.x} ${start.y} Q ${midX + normalX} ${midY + normalY} ${end.x} ${end.y}`;
+}
 
-	const createCurvedPath = (
-		start: { x: number; y: number },
-		end: { x: number; y: number },
-	) => {
-		const midX = (start.x + end.x) / 2;
-		const midY = Math.min(start.y, end.y) - 50;
-		return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
-	};
+export function WorldMap({ dots, lineColor = "#ffffff" }: WorldMapProps) {
+	const svgRef = React.useRef<SVGSVGElement>(null);
 
 	return (
-		<div className="w-full aspect-[2/1] dark:bg-black bg-white rounded-lg  relative font-sans">
-			<Image
-				src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
-				className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
-				alt="world map"
-				height="495"
-				width="1056"
-				draggable={false}
-			/>
+		<div className="relative w-full aspect-[2/1]">
+			<svg
+				viewBox="0 0 800 400"
+				className="w-full h-full"
+				preserveAspectRatio="xMidYMid meet"
+			>
+				<title>World map background</title>
+				<image
+					href="https://cffinedndwvfblwbglnn.supabase.co/storage/v1/object/public/school%20website/world.svg"
+					height="400"
+					width="800"
+					draggable={false}
+				/>
+			</svg>
 			<svg
 				ref={svgRef}
 				viewBox="0 0 800 400"
 				className="w-full h-full absolute inset-0 pointer-events-none select-none"
 			>
+				<title>World map connections</title>
 				{dots.map((dot, i) => {
 					const startPoint = projectPoint(dot.start.lat, dot.start.lng);
 					const endPoint = projectPoint(dot.end.lat, dot.end.lng);
 					return (
+						// biome-ignore lint/suspicious/noArrayIndexKey: static world map SVG elements
 						<g key={`path-group-${i}`}>
 							<motion.path
 								d={createCurvedPath(startPoint, endPoint)}
@@ -81,6 +83,7 @@ export default function WorldMap({
 									delay: 0.5 * i,
 									ease: "easeOut",
 								}}
+								// biome-ignore lint/suspicious/noArrayIndexKey: static world map SVG elements
 								key={`start-upper-${i}`}
 							></motion.path>
 						</g>
@@ -97,7 +100,9 @@ export default function WorldMap({
 				</defs>
 
 				{dots.map((dot, i) => (
+					// biome-ignore lint/suspicious/noArrayIndexKey: static world map SVG elements
 					<g key={`points-group-${i}`}>
+						{/* biome-ignore lint/suspicious/noArrayIndexKey: static world map SVG elements */}
 						<g key={`start-${i}`}>
 							<circle
 								cx={projectPoint(dot.start.lat, dot.start.lng).x}
@@ -130,6 +135,7 @@ export default function WorldMap({
 								/>
 							</circle>
 						</g>
+						{/* biome-ignore lint/suspicious/noArrayIndexKey: static world map SVG elements */}
 						<g key={`end-${i}`}>
 							<circle
 								cx={projectPoint(dot.end.lat, dot.end.lng).x}

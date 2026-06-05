@@ -1,10 +1,6 @@
 "use client";
 
 import {
-	IconSquareRoundedChevronDown,
-	IconSquareRoundedChevronUp,
-} from "@tabler/icons-react";
-import {
 	type ColumnDef,
 	type ColumnFiltersState,
 	flexRender,
@@ -16,7 +12,7 @@ import {
 	useReactTable,
 	type VisibilityState,
 } from "@tanstack/react-table";
-import { ChevronDown } from "lucide-react";
+import { ArrowDownIcon, ArrowUpIcon, ChevronDown } from "lucide-react";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -136,8 +132,9 @@ export function GenericDataTable<TData, TValue>({
 										key={header.id}
 										className="cursor-pointer select-none"
 									>
-										<div
-											className="flex items-center gap-1"
+										<button
+											type="button"
+											className="flex items-center gap-1 cursor-pointer"
 											onClick={header.column.getToggleSortingHandler()}
 											title={
 												header.column.getCanSort()
@@ -149,15 +146,17 @@ export function GenericDataTable<TData, TValue>({
 													: undefined
 											}
 										>
-											{flexRender(
-												header.column.columnDef.header,
-												header.getContext(),
-											)}
+											{header.isPlaceholder
+												? null
+												: flexRender(
+														header.column.columnDef.header,
+														header.getContext(),
+													)}
 											{{
-												asc: <IconSquareRoundedChevronUp size={24} />,
-												desc: <IconSquareRoundedChevronDown size={24} />,
+												asc: <ArrowUpIcon className="ml-1 h-3 w-3" />,
+												desc: <ArrowDownIcon className="ml-1 h-3 w-3" />,
 											}[header.column.getIsSorted() as string] ?? null}
-										</div>
+										</button>
 									</TableHead>
 								))}
 							</TableRow>

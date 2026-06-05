@@ -40,7 +40,7 @@ export function ActionsCellComponent({
 }: ActionsCellProps) {
 	const router = useRouter();
 
-	const updateAnnouncement = async (data: any) => {
+	const updateAnnouncement = async (data: Record<string, unknown>) => {
 		const res = await fetch(`${getBaseUrl()}/api/announcements`, {
 			method: "PUT",
 			headers: {
@@ -93,8 +93,10 @@ export function ActionsCellComponent({
 									: "Announcement Featured!",
 							);
 							router.refresh();
-						} catch (error: any) {
-							toast.error(`Failed to toggle featured status: ${error.message}`);
+						} catch (error: unknown) {
+							toast.error(
+								`Failed to toggle featured status: ${error instanceof Error ? error.message : String(error)}`,
+							);
 						}
 					}}
 				>
@@ -115,8 +117,10 @@ export function ActionsCellComponent({
 									: "Announcement Approved!",
 							);
 							router.refresh();
-						} catch (error: any) {
-							toast.error(`Failed to toggle approval status: ${error.message}`);
+						} catch (error: unknown) {
+							toast.error(
+								`Failed to toggle approval status: ${error instanceof Error ? error.message : String(error)}`,
+							);
 						}
 					}}
 				>
@@ -133,8 +137,10 @@ export function ActionsCellComponent({
 							await deleteAnnouncement();
 							toast.success("Announcement deleted successfully!");
 							router.refresh();
-						} catch (error: any) {
-							toast.error(`Failed to delete announcement: ${error.message}`);
+						} catch (error: unknown) {
+							toast.error(
+								`Failed to delete announcement: ${error instanceof Error ? error.message : String(error)}`,
+							);
 						}
 					}}
 				>

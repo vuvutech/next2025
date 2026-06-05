@@ -2,25 +2,30 @@
 import type React from "react";
 import { useEffect, useRef } from "react";
 import "locomotive-scroll/dist/locomotive-scroll.css";
+import type LocomotiveScroll from "locomotive-scroll";
 import { usePathname } from "next/navigation";
 
-const SmoothScroll: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+const SmoothScroll: React.FC<React.PropsWithChildren<object>> = ({
+	children,
+}) => {
 	const containerRef = useRef<HTMLDivElement | null>(null);
-	const locomotiveRef = useRef<any>(null);
+	const locomotiveRef = useRef<LocomotiveScroll | null>(null);
 	const _pathname = usePathname();
 
 	useEffect(() => {
 		if (!containerRef.current) return;
 
-		let scrollInstance: any = null;
+		let scrollInstance: LocomotiveScroll | null = null;
 
 		import("locomotive-scroll").then((LocomotiveModule) => {
-			const LocomotiveScroll = LocomotiveModule.default;
+			const LocomotiveScrollConstructor = LocomotiveModule.default;
 
-			scrollInstance = new LocomotiveScroll({
-				el: containerRef.current!,
+			if (!containerRef.current) return;
+
+			scrollInstance = new LocomotiveScrollConstructor({
+				el: containerRef.current,
 				smooth: true,
-			} as any);
+			});
 
 			locomotiveRef.current = scrollInstance;
 

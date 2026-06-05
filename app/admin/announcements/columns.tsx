@@ -7,10 +7,11 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { formatAccraDate } from "@/lib/date";
+import type { AnnouncementRow } from "@/types/registration";
 import { ActionsCellComponent } from "./ActionsCellComponent";
 import EditAnnouncementDialog from "./EditAnnouncementDialog";
 
-export const columns: ColumnDef<any>[] = [
+export const columns: ColumnDef<AnnouncementRow>[] = [
 	{
 		id: "select",
 		header: ({ table }) => (

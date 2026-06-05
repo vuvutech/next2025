@@ -23,7 +23,10 @@ export function UserProfileSheet({
 	onOpenChange,
 	userId,
 }: UserProfileSheetProps) {
-	const [userDetails, setUserDetails] = useState<any>(null);
+	const [userDetails, setUserDetails] = useState<Record<
+		string,
+		unknown
+	> | null>(null);
 	const [loadingUser, setLoadingUser] = useState(false);
 
 	useEffect(() => {

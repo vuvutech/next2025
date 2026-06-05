@@ -81,7 +81,7 @@ export default async function ParticipantsPage() {
 
 	const countryCounts = Map.groupBy(
 		registrations.filter((r) => r.user.profile?.country),
-		(r) => r.user.profile?.country!,
+		(r) => (r.user.profile as NonNullable<typeof r.user.profile>).country,
 	);
 	const topCountries = [...countryCounts.entries()]
 		.map(([country, regs]) => ({ country, count: regs.length }))

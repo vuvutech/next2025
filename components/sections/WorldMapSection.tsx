@@ -11,6 +11,7 @@ export function WorldMapSection() {
 					<span className="text-neutral-400">
 						{"Connectivity".split("").map((word, idx) => (
 							<motion.span
+								// biome-ignore lint/suspicious/noArrayIndexKey: static character map
 								key={idx}
 								className="inline-block"
 								initial={{ x: -10, opacity: 0 }}

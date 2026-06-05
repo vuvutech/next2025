@@ -7,6 +7,7 @@ export function CloseButton({
 }) {
 	return (
 		<button
+			type="button"
 			className={`sm:absolute top-4 right-4 z-20 rounded-full bg-white p-2 shadow-md hover:bg-gray-100 focus:outline-none ${className}`}
 			aria-label="Close"
 			onClick={onClick}
@@ -18,6 +19,7 @@ export function CloseButton({
 				viewBox="0 0 24 24"
 				stroke="currentColor"
 			>
+				<title>Close</title>
 				<path
 					strokeLinecap="round"
 					strokeLinejoin="round"

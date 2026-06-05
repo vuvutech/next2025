@@ -10,7 +10,7 @@ const RANGE_MAP: Record<string, string> = {
 };
 
 export async function GET(req: NextRequest) {
-	const propertyId = process.env.GA4_PROPERTY_ID!;
+	const propertyId = process.env.GA4_PROPERTY_ID ?? "";
 	// ?range=7d | 30d | 90d  → default to 7d
 	const range = req.nextUrl.searchParams.get("range") ?? "7d";
 	const startDate = RANGE_MAP[range] ?? "7daysAgo";
@@ -26,10 +26,15 @@ export async function GET(req: NextRequest) {
 		});
 
 		const topPages =
-			response.rows?.map((row: any) => ({
-				path: row.dimensionValues?.[0].value ?? "/",
-				views: Number(row.metricValues?.[0].value ?? 0),
-			})) ?? [];
+			response.rows?.map(
+				(row: {
+					dimensionValues: { value: string }[];
+					metricValues: { value: string }[];
+				}) => ({
+					path: row.dimensionValues?.[0].value ?? "/",
+					views: Number(row.metricValues?.[0].value ?? 0),
+				}),
+			) ?? [];
 
 		return NextResponse.json({ topPages });
 	} catch (err) {

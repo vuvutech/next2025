@@ -1,3 +1,4 @@
+// biome-ignore-all lint/suspicious/noArrayIndexKey: third-party component
 import type { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/lib/utils";
 

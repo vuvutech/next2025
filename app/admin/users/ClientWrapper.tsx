@@ -8,7 +8,11 @@ import { createColumns } from "./columns";
 
 export const dynamic = "force-dynamic";
 
-export default function ClientWrapper({ data }: { data: any[] }) {
+export default function ClientWrapper({
+	data,
+}: {
+	data: Record<string, unknown>[];
+}) {
 	const [viewUserId, setViewUserId] = useState<string | null>(null);
 	const [showSheet, setShowSheet] = useState(false);
 
@@ -17,7 +21,7 @@ export default function ClientWrapper({ data }: { data: any[] }) {
 		setShowSheet(true);
 	};
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	// biome-ignore lint/correctness/useExhaustiveDependencies: handleViewUser is stable across renders
 	const columns = useMemo(() => createColumns(handleViewUser), []);
 
 	return (

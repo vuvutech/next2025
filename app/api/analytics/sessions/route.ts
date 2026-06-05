@@ -5,7 +5,7 @@ import { analyticsDataClient } from "@/lib/googleAnalytics";
 export const dynamic = "force-dynamic";
 
 export async function GET(_req: NextRequest) {
-	const propertyId = process.env.GA4_PROPERTY_ID!;
+	const propertyId = process.env.GA4_PROPERTY_ID ?? "";
 
 	try {
 		const [response] = await analyticsDataClient.runReport({

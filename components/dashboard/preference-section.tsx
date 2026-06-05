@@ -22,7 +22,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 
 export function PreferencesSection() {
-	const { theme, setTheme } = useTheme();
+	useTheme();
 
 	return (
 		<div className="space-y-6">

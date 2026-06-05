@@ -43,7 +43,7 @@ export function ActionsCellComponent({
 }: ActionsCellProps) {
 	const router = useRouter();
 
-	const updateEdition = async (data: any) => {
+	const updateEdition = async (data: Record<string, unknown>) => {
 		const res = await fetch(`${getBaseUrl()}/api/editions`, {
 			method: "PUT",
 			headers: {
@@ -79,8 +79,10 @@ export function ActionsCellComponent({
 							await updateEdition({ active: !active });
 							toast.success(active ? "Edition InActive!" : "Edition Active!");
 							router.refresh();
-						} catch (error: any) {
-							toast.error(`Failed to toggle featured status: ${error.message}`);
+						} catch (error: unknown) {
+							toast.error(
+								`Failed to toggle featured status: ${error instanceof Error ? error.message : String(error)}`,
+							);
 						}
 					}}
 				>

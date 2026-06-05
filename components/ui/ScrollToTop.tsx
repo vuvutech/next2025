@@ -62,6 +62,7 @@ export default function ScrollToTop() {
 						strokeLinejoin="round"
 						className="h-5 w-5"
 					>
+						<title>Scroll to top</title>
 						<path d="M17 11l-5-5-5 5" />
 						<path d="M17 18l-5-5-5 5" />
 					</svg>

@@ -40,7 +40,10 @@ export async function proxy(request: NextRequest) {
 	requestHeaders.set("x-user-role", userRole);
 	requestHeaders.set("x-user-name", session.user.name || "");
 	requestHeaders.set("x-user-email", session.user.email || "");
-	requestHeaders.set("x-user-studentid", (session.user as any).studentId || "");
+	requestHeaders.set(
+		"x-user-studentid",
+		(session.user as SessionUser).studentId || "",
+	);
 
 	// Restrict admin routes to authorized roles only
 	if (pathname.startsWith("/admin")) {

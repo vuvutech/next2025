@@ -11,7 +11,19 @@ import { Checkbox } from "@/components/ui/checkbox"; // Corrected import for Che
 import { formatAccraDate } from "@/lib/date";
 import { ActionsCellComponent } from "./ActionsCellComponent";
 
-export const columns: ColumnDef<any>[] = [
+interface TestimonialRow {
+	id: string;
+	content: string;
+	featured: boolean;
+	approved: boolean;
+	createdAt?: string;
+	user?: {
+		name: string;
+		image: string;
+	};
+}
+
+export const columns: ColumnDef<TestimonialRow>[] = [
 	{
 		id: "select",
 		header: ({ table }) => (

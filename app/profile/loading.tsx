@@ -13,6 +13,7 @@ export default function ProfileLoading() {
 
 			<div className="grid gap-8 md:grid-cols-2">
 				{Array.from({ length: 6 }).map((_, i) => (
+					// biome-ignore lint/suspicious/noArrayIndexKey: static list
 					<div key={i} className="space-y-3">
 						<Skeleton className="h-4 w-1/4" />
 						<Skeleton className="h-11 w-full" />

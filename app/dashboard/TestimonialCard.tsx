@@ -91,11 +91,13 @@ export default function TestimonialCard(_props: { session: Session | null }) {
 			);
 			setIsTestimonialModalOpen(false); // Close modal on success
 			setTestimonialData({ content: "" }); // Reset form data
-		} catch (error: any) {
+		} catch (error: unknown) {
 			console.error("Error submitting testimonial:", error);
-			toast.error(
-				`Failed to submit testimonial: ${error.message || "An unexpected error occurred."}`,
-			);
+			const errorMessage =
+				error instanceof Error
+					? error.message
+					: "An unexpected error occurred.";
+			toast.error(`Failed to submit testimonial: ${errorMessage}`);
 		} finally {
 			setIsTestimonialLoading(false);
 			//   refresh page

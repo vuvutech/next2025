@@ -57,8 +57,10 @@ export function TestimonialDialog() {
 			toast.success("Testimonial submitted!");
 			reset(); // clear form
 			close();
-		} catch (error: any) {
-			toast.error(error.message);
+		} catch (error: unknown) {
+			const errorMessage =
+				error instanceof Error ? error.message : "An unexpected error occurred";
+			toast.error(errorMessage);
 			console.error(error);
 		}
 	};

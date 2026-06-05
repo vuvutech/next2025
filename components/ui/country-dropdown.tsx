@@ -146,10 +146,10 @@ const CountryDropdownComponent = (
 						<CommandGroup>
 							{options
 								.filter((x) => x.name)
-								.map((option, key: number) => (
+								.map((option) => (
 									<CommandItem
 										className="flex items-center w-full gap-2"
-										key={key}
+										key={option.name}
 										onSelect={() => handleSelect(option)}
 									>
 										<div className="flex flex-grow w-0 space-x-2 overflow-hidden">

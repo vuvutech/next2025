@@ -11,16 +11,37 @@ import { ActionsCellComponent } from "./ActionsCellComponent";
 import { AdminRoleToggleForm } from "./AdminRoleToggleForm";
 import { BanToggleForm } from "./BanToggleForm";
 
+interface UserRow {
+	id: string;
+	image?: string;
+	name: string;
+	email: string;
+	studentId?: string;
+	role: string;
+	banned: boolean;
+	createdAt?: string;
+	profile?: {
+		gender?: string;
+		country?: string;
+		telephone?: string;
+		updatedAt?: string;
+	};
+}
+
 export function createColumns(
 	onViewUser: (id: string) => void,
-): ColumnDef<any>[] {
+): ColumnDef<UserRow>[] {
 	return [
 		{
 			header: "User",
 			accessorKey: "name",
 			cell: ({ row }) => (
-				<div
+				<button
+					type="button"
 					className="flex items-center gap-2 cursor-pointer"
+					onKeyDown={(e) => {
+						if (e.key === "Enter" || e.key === " ") onViewUser(row.original.id);
+					}}
 					onClick={() => onViewUser(row.original.id)}
 				>
 					<div className="relative">
@@ -66,7 +87,7 @@ export function createColumns(
 							{row.original.email}
 						</div>
 					</div>
-				</div>
+				</button>
 			),
 		},
 		{

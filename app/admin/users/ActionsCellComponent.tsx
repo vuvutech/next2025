@@ -49,7 +49,7 @@ export function ActionsCellComponent({ id, onViewUser }: ActionsCellProps) {
 
 			toast.success("User deleted successfully");
 			router.refresh();
-		} catch (error) {
+		} catch (error: unknown) {
 			toast.error("Failed to delete user");
 			console.error(error);
 		} finally {

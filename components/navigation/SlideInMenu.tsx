@@ -108,6 +108,7 @@ export default function Component() {
 												</span>
 												<SheetClose asChild>
 													<button
+														type="button"
 														onClick={() => handleLinkClick(item.href)}
 														className={cn(
 															"group relative text-lg font-bold sm:text-2xl transition-all duration-300 cursor-pointer uppercase tracking-tight",

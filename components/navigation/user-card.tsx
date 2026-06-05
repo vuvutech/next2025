@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { type SetStateAction, useEffect, useState } from "react";
+import { type SetStateAction, useCallback, useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 import { toast } from "sonner";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -62,7 +62,7 @@ export default function UserCard(props: {
 		banned?: boolean;
 	} | null>(null);
 
-	const fetchUserData = async () => {
+	const fetchUserData = useCallback(async () => {
 		try {
 			const response = await fetch("/api/user");
 			if (response.ok) {
@@ -72,7 +72,7 @@ export default function UserCard(props: {
 		} catch (error) {
 			console.error("Failed to fetch user data:", error);
 		}
-	};
+	}, []);
 
 	useEffect(() => {
 		if (session?.user?.id) {
@@ -422,6 +422,7 @@ function ChangePassword() {
 						height="1em"
 						viewBox="0 0 24 24"
 					>
+						<title>Change password</title>
 						<path
 							fill="currentColor"
 							d="M2.5 18.5v-1h19v1zm.535-5.973l-.762-.442l.965-1.693h-1.93v-.884h1.93l-.965-1.642l.762-.443L4 9.066l.966-1.643l.761.443l-.965 1.642h1.93v.884h-1.93l.965 1.693l-.762.442L4 10.835zm8 0l-.762-.442l.966-1.693H9.308v-.884h1.93l-.965-1.642l.762-.443L12 9.066l.966-1.643l.761.443l-.965 1.642h1.93v.884h-1.93l.965 1.693l-.762.442L12 10.835zm8 0l-.762-.442l.966-1.693h-1.931v-.884h1.93l-.965-1.642l.762-.443L20 9.066l.966-1.643l.761.443l-.965 1.642h1.93v.884h-1.93l.965 1.693l-.762.442L20 10.835z"

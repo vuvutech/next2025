@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 		select: { slug: true },
 	});
 
-	return institutes.map((institute: any) => ({
+	return institutes.map((institute) => ({
 		slug: institute.slug,
 	}));
 }

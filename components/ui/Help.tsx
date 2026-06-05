@@ -121,8 +121,8 @@ export default function HelpComponent() {
 							},
 							{ label: "Accessing learning materials", href: "/faqs" },
 							{ label: "Institute-specific information", href: "/institutes" },
-						].map((item, index) => (
-							<li key={index}>
+						].map((item) => (
+							<li key={item.label}>
 								<Link
 									href={item.href}
 									className="flex items-center text-muted-foreground hover:text-primary transition-colors"

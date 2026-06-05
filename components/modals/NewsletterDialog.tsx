@@ -88,8 +88,10 @@ export function NewsletterDialog() {
 			toast.success("You are subscribed to COSTrAD!");
 			reset();
 			close();
-		} catch (error: any) {
-			toast.error(error.message || "Subscription failed");
+		} catch (error: unknown) {
+			const errorMessage =
+				error instanceof Error ? error.message : "Subscription failed";
+			toast.error(errorMessage);
 			console.error(error);
 		}
 	};

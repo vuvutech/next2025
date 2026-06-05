@@ -1,4 +1,4 @@
-/** biome-ignore-all lint/a11y/noSvgWithoutTitle: <explanation> */
+/** biome-ignore-all lint/a11y/noSvgWithoutTitle: third-party svg icons */
 import Image from "next/image";
 import BadgeLink from "@/components/sections/BadgeLink";
 

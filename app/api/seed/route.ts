@@ -29,12 +29,13 @@ export async function GET(req: NextRequest) {
 		return NextResponse.json({
 			message: `✅ Seeding ${collectionName} complete.`,
 		});
-	} catch (err: any) {
+	} catch (err: unknown) {
 		console.error(`❌ Seeding error for ${collectionName}:`, err);
+		const e = err instanceof Error ? err : new Error(String(err));
 		return NextResponse.json(
 			{
 				error: `Failed to seed ${collectionName}`,
-				details: err.message || "Unknown error",
+				details: e.message || "Unknown error",
 			},
 			{ status: 500 },
 		);

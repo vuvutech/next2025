@@ -217,6 +217,8 @@ export const InstituteGallery = ({
 				<div className="mt-8 flex justify-center gap-2">
 					{items.map((_, index) => (
 						<button
+							type="button"
+							// biome-ignore lint/suspicious/noArrayIndexKey: static list, order never changes
 							key={index}
 							className={`h-2 w-2 rounded-full transition-colors ${
 								currentSlide === index ? "bg-primary" : "bg-primary/20"

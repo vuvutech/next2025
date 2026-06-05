@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 
+// biome-ignore lint/suspicious/noShadowRestrictedNames: Next.js convention requires Error component
 export default function Error({
 	error,
 	reset,
@@ -19,6 +20,7 @@ export default function Error({
 		<div>
 			<h2>Something went wrong!</h2>
 			<button
+				type="button"
 				onClick={
 					// Attempt to recover by trying to re-render the segment
 					() => reset()

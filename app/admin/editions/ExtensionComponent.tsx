@@ -66,7 +66,9 @@ export function ExtensionComponent() {
 		verticalBanner: "",
 	});
 
-	const handleChange = (e: { target: { name: any; value: any } }) => {
+	const handleChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
 		const { name, value } = e.target;
 		setForm((prev) => ({ ...prev, [name]: value }));
 	};
@@ -121,10 +123,8 @@ export function ExtensionComponent() {
 				verticalBanner: "",
 			});
 			router.refresh();
-		} catch (err) {
-			toast.error(
-				(err as { message?: string })?.message || "Something went wrong.",
-			);
+		} catch (err: unknown) {
+			toast.error(err instanceof Error ? err.message : "Something went wrong.");
 		} finally {
 			setLoading(false);
 		}

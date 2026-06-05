@@ -5,7 +5,7 @@ import { analyticsDataClient } from "@/lib/googleAnalytics";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-	const propertyId = process.env.GA4_PROPERTY_ID!;
+	const propertyId = process.env.GA4_PROPERTY_ID ?? "";
 
 	try {
 		const [response] = await analyticsDataClient.runReport({
@@ -35,15 +35,12 @@ export async function GET() {
 		}
 
 		const chartData = Object.entries(dailyStats)
-			.map(([date, counts]: [string, any]) => ({
+			.map(([date, counts]) => ({
 				date: formatGA4Date(date),
 				desktop: counts.desktop,
 				mobile: counts.mobile + counts.tablet, // group tablets with mobile
 			}))
-			.sort(
-				(a: any, b: any) =>
-					new Date(a.date).getTime() - new Date(b.date).getTime(),
-			);
+			.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
 		return NextResponse.json({ data: chartData });
 	} catch (err) {

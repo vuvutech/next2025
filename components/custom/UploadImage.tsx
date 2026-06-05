@@ -22,7 +22,7 @@ export function UploadImage({
 		formData.append("file", file);
 		formData.append(
 			"upload_preset",
-			process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!,
+			process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET ?? "",
 		);
 
 		const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;

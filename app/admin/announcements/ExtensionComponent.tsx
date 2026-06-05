@@ -46,8 +46,8 @@ export function ExtensionComponent() {
 			setContent(""); // reset form
 			document.getElementById("dialog-close-btn")?.click();
 			router.refresh();
-		} catch (err: any) {
-			toast.error(err.message || "Something went wrong.");
+		} catch (err: unknown) {
+			toast.error(err instanceof Error ? err.message : "Something went wrong.");
 		} finally {
 			setLoading(false);
 		}

@@ -131,6 +131,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
 			)}
 			viewBox={`0 0 ${svgDimensions.width} ${svgDimensions.height}`}
 		>
+			<title>Animated beam</title>
 			<path
 				d={pathD}
 				stroke={pathColor}

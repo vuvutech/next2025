@@ -12,7 +12,20 @@ import { ActionsCellComponent } from "./ActionsCellComponent";
 import { EditEditionSheet } from "./EditEditionSheet";
 import { InstituteInfo } from "./InstituteEditionImage";
 
-export const columns: ColumnDef<any>[] = [
+interface EditionRow {
+	id: string;
+	instituteId?: string;
+	overview: string;
+	inPersonDelivery: boolean;
+	onlineDelivery: boolean;
+	startDate?: string;
+	endDate?: string;
+	price?: number;
+	priceViaZoom?: number;
+	active: boolean;
+}
+
+export const columns: ColumnDef<EditionRow>[] = [
 	// {
 	//   id: "select",
 	//   header: ({ table }) => (

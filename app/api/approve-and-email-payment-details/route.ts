@@ -21,8 +21,6 @@ export async function POST(req: NextRequest) {
 
 		const formattedStartDate = formatAccraDate(startDate, "long");
 		const formattedEndDate = formatAccraDate(endDate, "long");
-		const formattedStartTime = formatTime(registration?.edition?.startTime);
-		const formattedEndTime = formatTime(registration?.edition?.endTime);
 
 		// ✅ Fetch the registration and its institute information to check if it's IEA
 		const registration = await prisma.registration.findUnique({
@@ -35,6 +33,9 @@ export async function POST(req: NextRequest) {
 				},
 			},
 		});
+
+		const formattedStartTime = formatTime(registration?.edition?.startTime);
+		const formattedEndTime = formatTime(registration?.edition?.endTime);
 
 		const isIEA =
 			registration?.edition?.institute?.acronym?.toLowerCase() === "iea";

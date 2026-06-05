@@ -71,6 +71,7 @@ function Sparkline({ data }: { data: SparklinePoint[] }) {
 			className="h-8 w-full"
 			preserveAspectRatio="none"
 		>
+			<title>Sparkline</title>
 			<defs>
 				<linearGradient
 					id={`sparkline-grad-${crypto.randomUUID?.() ?? Date.now()}`}

@@ -30,7 +30,28 @@ import { getBaseUrl } from "@/config/site";
 import { formatAccraDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 
-export function EditEditionSheet({ edition }: { edition: any }) {
+interface EditionSheetData {
+	id: string;
+	instituteId?: string;
+	title?: string;
+	theme?: string;
+	overview?: string;
+	seo?: string;
+	price?: number;
+	priceViaZoom?: number;
+	earlyBirdPrice?: number;
+	inPersonDelivery?: boolean;
+	onlineDelivery?: boolean;
+	startDate?: string;
+	endDate?: string;
+	earlyBirdDeadline?: string;
+	startTime?: string;
+	endTime?: string;
+	banner?: string;
+	verticalBanner?: string;
+}
+
+export function EditEditionSheet({ edition }: { edition: EditionSheetData }) {
 	const router = useRouter();
 	const [institutes, setInstitutes] = useState<{ id: string; name: string }[]>(
 		[],
@@ -71,7 +92,9 @@ export function EditEditionSheet({ edition }: { edition: any }) {
 			.then((data) => setInstitutes(data));
 	}, []);
 
-	const handleChange = (e: any) => {
+	const handleChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
 		const { name, value } = e.target;
 		setForm((prev) => ({ ...prev, [name]: value }));
 	};
@@ -105,8 +128,8 @@ export function EditEditionSheet({ edition }: { edition: any }) {
 
 			toast.success("Edition updated!");
 			router.refresh();
-		} catch (err) {
-			toast.error((err as any)?.message || "Something went wrong.");
+		} catch (err: unknown) {
+			toast.error(err instanceof Error ? err.message : "Something went wrong.");
 		} finally {
 			setLoading(false);
 		}

@@ -20,7 +20,8 @@ export function FadeIn({
 	id,
 	as = "div",
 }: FadeInProps) {
-	const Component = (motion as any)[as] || motion.div;
+	type MotionTag = typeof motion.div;
+	const Component = (motion as Record<string, MotionTag>)[as] || motion.div;
 
 	return (
 		<Component

@@ -56,7 +56,7 @@ export async function PUT(
 		"logo",
 		"icon",
 	];
-	const data: Record<string, any> = {};
+	const data: Record<string, unknown> = {};
 
 	for (const field of fields) {
 		const value = json[field];
@@ -87,10 +87,11 @@ export async function PUT(
 		revalidatePath(`${baseUrl}/admin/institutes/${existing.slug}/edit`);
 
 		return NextResponse.json(updatedInstitute);
-	} catch (error: any) {
+	} catch (error: unknown) {
 		console.error("❌ Error during update:", error);
+		const errMessage = error instanceof Error ? error.message : String(error);
 		return NextResponse.json(
-			{ error: error?.message || "Internal server error" },
+			{ error: errMessage || "Internal server error" },
 			{ status: 500 },
 		);
 	}

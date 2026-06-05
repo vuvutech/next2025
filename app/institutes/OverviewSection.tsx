@@ -1,5 +1,5 @@
-/** biome-ignore-all lint/security/noDangerouslySetInnerHtml: <explanation> */
-/** biome-ignore-all assist/source/organizeImports: <explanation> */
+/** biome-ignore-all lint/security/noDangerouslySetInnerHtml: CMS content with sanitized HTML */
+/** biome-ignore-all assist/source/organizeImports: imports are organized by project convention */
 "use client";
 import type { Edition } from "@prisma/client";
 import Image from "next/image";

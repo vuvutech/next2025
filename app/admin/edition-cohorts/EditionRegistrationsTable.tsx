@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { createColumns } from "@/app/admin/registrations/columns";
 import { UserProfileSheet } from "@/components/modals/UserProfileSheet";
 import { GenericDataTable } from "@/components/ui/data-table/generic-data-table";
+import type { RegistrationWithUser } from "@/types/registration";
 import { ExportButton } from "./ExportButton";
 
 export default function EditionRegistrationsTable({
@@ -13,7 +14,9 @@ export default function EditionRegistrationsTable({
 	editionId: string;
 	editionTitle: string;
 }) {
-	const [registrations, setRegistrations] = useState<any[]>([]);
+	const [registrations, setRegistrations] = useState<RegistrationWithUser[]>(
+		[],
+	);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
 	const [viewUserId, setViewUserId] = useState<string | null>(null);
@@ -32,9 +35,13 @@ export default function EditionRegistrationsTable({
 				}
 				const data = await res.json();
 				setRegistrations(data);
-			} catch (err: any) {
+			} catch (err: unknown) {
 				console.error("Error in EditionRegistrationsTable:", err);
-				setError(err?.message || "Something went wrong while fetching data");
+				setError(
+					err instanceof Error
+						? err.message
+						: "Something went wrong while fetching data",
+				);
 			} finally {
 				setLoading(false);
 			}
@@ -45,10 +52,10 @@ export default function EditionRegistrationsTable({
 		}
 	}, [editionId]);
 
-	const handleViewUser = (id: string) => {
+	const handleViewUser = useCallback((id: string) => {
 		setViewUserId(id);
 		setShowSheet(true);
-	};
+	}, []);
 
 	const columns = useMemo(
 		() => createColumns(handleViewUser),

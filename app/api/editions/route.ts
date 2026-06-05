@@ -117,16 +117,18 @@ export async function POST(req: Request) {
 		}
 
 		return NextResponse.json(edition);
-	} catch (error: any) {
+	} catch (error: unknown) {
 		console.error("❌ Edition creation failed:", error);
 
-		if (error.code === "P2002") {
+		const err = error as { code?: string; message?: string };
+
+		if (err.code === "P2002") {
 			return NextResponse.json(
 				{ error: "Edition slug already exists. Use a different title." },
 				{ status: 409 },
 			);
 		}
-		if (error.code === "P2003") {
+		if (err.code === "P2003") {
 			return NextResponse.json(
 				{ error: "Invalid institute reference" },
 				{ status: 400 },
@@ -145,7 +147,7 @@ export async function POST(req: Request) {
 		}
 
 		return NextResponse.json(
-			{ error: "Failed to create edition", details: error?.message },
+			{ error: "Failed to create edition", details: err?.message },
 			{ status: 500 },
 		);
 	}
@@ -234,13 +236,15 @@ export async function PUT(req: NextRequest) {
 		}
 
 		return NextResponse.json(updated);
-	} catch (error: any) {
+	} catch (error: unknown) {
 		console.error("❌ Failed to update edition:", error);
 
-		if (error.code === "P2025") {
+		const err = error as { code?: string; message?: string };
+
+		if (err.code === "P2025") {
 			return NextResponse.json({ error: "Edition not found" }, { status: 404 });
 		}
-		if (error.code === "P2003") {
+		if (err.code === "P2003") {
 			return NextResponse.json(
 				{ error: "Invalid institute reference" },
 				{ status: 400 },
@@ -248,7 +252,7 @@ export async function PUT(req: NextRequest) {
 		}
 
 		return NextResponse.json(
-			{ error: "Failed to update edition", details: error?.message },
+			{ error: "Failed to update edition", details: err?.message },
 			{ status: 500 },
 		);
 	}

@@ -9,9 +9,35 @@ import { formatAccraDate } from "@/lib/date";
 import { ActionsCellComponent } from "./ActionsCellComponent";
 import { ApproveButton } from "./ApproveButton";
 
+interface RegistrationRow {
+	id: string;
+	createdAt?: string;
+	approved: boolean;
+	approvedBy?: string;
+	paid: boolean;
+	paidBy?: string;
+	user?: {
+		id: string;
+		name: string;
+		email: string;
+		image: string;
+		studentId?: string;
+	};
+	edition?: {
+		startDate?: string;
+		endDate?: string;
+		price?: number;
+		priceViaZoom?: number;
+		institute?: {
+			name: string;
+			logo?: string;
+		};
+	};
+}
+
 export function createColumns(
 	onViewUser: (id: string) => void,
-): ColumnDef<any>[] {
+): ColumnDef<RegistrationRow>[] {
 	return [
 		{
 			header: "User",

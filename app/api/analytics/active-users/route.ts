@@ -29,12 +29,11 @@ export async function GET(_req: NextRequest) {
 		const count = rawValue ? Number(rawValue) : 0;
 
 		return NextResponse.json({ activeUsers: count });
-	} catch (err: any) {
-		// Log structured data instead of raw err (avoids multiline surprises)
+	} catch (err: unknown) {
+		const error = err instanceof Error ? err : new Error(String(err));
 		console.error("GA4 active users error:", {
-			message: err.message,
-			stack: err.stack?.split("\n")[0], // first line only
-			code: err.code,
+			message: error.message,
+			stack: error.stack?.split("\n")[0],
 		});
 		return NextResponse.json(
 			{ error: "Unable to fetch active users" },

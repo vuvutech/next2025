@@ -42,8 +42,12 @@ export const ThemeSwitcher = ({
 
 	const [theme, setTheme] = useControllableState({
 		defaultProp: defaultValue,
-		prop: value !== undefined ? value : (nextTheme as any),
-		onChange: onChange !== undefined ? onChange : (setNextTheme as any),
+		prop:
+			value !== undefined ? value : (nextTheme as "light" | "dark" | "system"),
+		onChange:
+			onChange !== undefined
+				? onChange
+				: (setNextTheme as (theme: "light" | "dark" | "system") => void),
 	});
 	const [mounted, setMounted] = useState(false);
 

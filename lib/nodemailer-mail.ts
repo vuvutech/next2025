@@ -15,12 +15,12 @@ export async function sendMail({
 	cc?: string;
 }) {
 	const transporter = nodemailer.createTransport({
-		host: process.env.SMTP_HOST!,
+		host: process.env.SMTP_HOST ?? "",
 		secure: false, // use false for STARTTLS; true for SSL on port 465
 		port: Number(process.env.SMTP_PORT),
 		auth: {
-			user: process.env.SMTP_USER!,
-			pass: process.env.SMTP_PASS!,
+			user: process.env.SMTP_USER ?? "",
+			pass: process.env.SMTP_PASS ?? "",
 		},
 	});
 

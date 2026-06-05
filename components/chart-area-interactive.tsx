@@ -66,7 +66,7 @@ export function GaTopPagesChartBar() {
 					<CardAction>
 						<Select
 							value={timeRange}
-							onValueChange={(v) => setTimeRange(v as any)}
+							onValueChange={(v) => setTimeRange(v as typeof timeRange)}
 						>
 							<SelectTrigger className="w-40" size="sm">
 								<SelectValue placeholder="Last 7 days" />

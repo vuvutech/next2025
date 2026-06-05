@@ -111,6 +111,7 @@ export function GlobalDialog() {
 		fetch("/api/getCurrentEditions")
 			.then((res) => res.json())
 			.then((data) =>
+				// biome-ignore lint/suspicious/noExplicitAny: API response type unknown
 				setEditions(data.map((e: any) => ({ id: e.id, title: e.title }))),
 			);
 	}, [session]);

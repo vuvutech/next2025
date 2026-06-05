@@ -99,10 +99,10 @@ const AboutSectionFour = () => {
 										alt: "Institute of Arts, Sports and Cultural Development",
 										label: "ioasc",
 									},
-								].map((item, index) => (
+								].map((item) => (
 									<motion.div
 										variants={staggerItem}
-										key={index}
+										key={item.label}
 										className="flex md:flex-col justify-start items-center gap-2 text-center text-xs md:text-lg"
 									>
 										{/* Using Link for client-side navigation */}
@@ -126,6 +126,7 @@ const AboutSectionFour = () => {
 							</motion.div>
 							<div className="flex items-center sm:justify-center py-8 px-4">
 								<button
+									type="button"
 									onClick={() => router.push("/institutes")}
 									className="px-6 sm:px-8 py-3 sm:py-4 bg-white text-black font-semibold rounded-full text-base sm:text-lg hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg w-full sm:w-auto min-w-[200px]"
 								>

@@ -93,7 +93,7 @@ async function _getProfilePercentage() {
 	}
 }
 
-function isFieldFilled(field: string | any[] | null | undefined) {
+function isFieldFilled(field: string | unknown[] | null | undefined) {
 	if (field === null || field === undefined) {
 		return false;
 	}

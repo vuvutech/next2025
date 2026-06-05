@@ -39,7 +39,7 @@ export async function DELETE(req: NextRequest) {
 		]);
 
 		return NextResponse.json({ success: true });
-	} catch (error: any) {
+	} catch (error: unknown) {
 		console.error("Failed to delete user:", error);
 		return NextResponse.json(
 			{ error: "Failed to delete user" },

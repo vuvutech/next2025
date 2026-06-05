@@ -18,7 +18,7 @@ export async function seedCollection(collectionName: string) {
 
 	const dateFields = ["startDate", "endDate", "createdAt", "updatedAt"];
 
-	const documentsToInsert = (data as Array<{ [key: string]: any }>).map(
+	const documentsToInsert = (data as Array<Record<string, unknown>>).map(
 		(doc) => {
 			// Convert _id to ObjectId
 			if (doc._id?.$oid) {
@@ -36,7 +36,7 @@ export async function seedCollection(collectionName: string) {
 		},
 	);
 
-	const client = new MongoClient(process.env.MONGODB_URI!);
+	const client = new MongoClient(process.env.MONGODB_URI ?? "");
 	try {
 		await client.connect();
 		const db = client.db();

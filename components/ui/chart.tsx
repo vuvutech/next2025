@@ -80,6 +80,7 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
 
 	return (
 		<style
+			// biome-ignore lint/security/noDangerouslySetInnerHtml: shadcn chart CSS injection
 			dangerouslySetInnerHTML={{
 				__html: Object.entries(THEMES)
 					.map(
@@ -120,21 +121,21 @@ function ChartTooltipContent({
 	labelKey,
 }: React.ComponentProps<"div"> & {
 	active?: boolean;
-	payload?: any[];
-	label?: any;
+	payload?: unknown[];
+	label?: unknown;
 	hideLabel?: boolean;
 	hideIndicator?: boolean;
 	indicator?: "line" | "dot" | "dashed";
 	nameKey?: string;
 	labelKey?: string;
-	labelFormatter?: (value: any, payload: any[]) => React.ReactNode;
+	labelFormatter?: (value: unknown, payload: unknown[]) => React.ReactNode;
 	labelClassName?: string;
 	formatter?: (
-		data: any,
-		name: any,
-		item: any,
+		data: unknown,
+		name: unknown,
+		item: unknown,
 		index: number,
-		payload: any,
+		payload: unknown,
 	) => React.ReactNode;
 	color?: string;
 }) {
@@ -269,7 +270,7 @@ function ChartLegendContent({
 	verticalAlign = "bottom",
 	nameKey,
 }: React.ComponentProps<"div"> & {
-	payload?: any[];
+	payload?: unknown[];
 	verticalAlign?: "top" | "bottom" | "middle";
 	hideIcon?: boolean;
 	nameKey?: string;

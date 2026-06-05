@@ -91,6 +91,7 @@ function ParallaxText({
 		>
 			<motion.div className="inline-block" style={{ x }}>
 				{Array.from({ length: repetitions }).map((_, i) => (
+					// biome-ignore lint/suspicious/noArrayIndexKey: third-party magicui component, static list
 					<span key={i} ref={i === 0 ? textRef : null}>
 						{children}{" "}
 					</span>
@@ -117,6 +118,7 @@ export function VelocityScroll({
 		>
 			{Array.from({ length: numRows }).map((_, i) => (
 				<ParallaxText
+					// biome-ignore lint/suspicious/noArrayIndexKey: third-party magicui component, static list
 					key={i}
 					baseVelocity={defaultVelocity * (i % 2 === 0 ? 1 : -1)}
 				>

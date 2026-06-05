@@ -128,12 +128,13 @@ export default function Footer() {
 										return (
 											<motion.li variants={staggerItem} key={label}>
 												{onClick ? (
-													<div
+													<button
+														type="button"
 														onClick={onClick}
-														className="hover:text-primary transition cursor-pointer "
+														className="hover:text-primary transition cursor-pointer"
 													>
 														{label}
-													</div>
+													</button>
 												) : (
 													<Link
 														href={`/${href}`}

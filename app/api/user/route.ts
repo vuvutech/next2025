@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
 			}
 
 			return NextResponse.json(user);
-		} catch (error: any) {
+		} catch (error: unknown) {
 			console.error("Failed to fetch current user:", error);
 			return NextResponse.json(
 				{ error: "Failed to fetch user" },
@@ -73,7 +73,7 @@ export async function GET(req: NextRequest) {
 		}
 
 		return NextResponse.json(user);
-	} catch (error: any) {
+	} catch (error: unknown) {
 		console.error("Failed to fetch user:", error);
 		return NextResponse.json(
 			{ error: "Failed to fetch user" },

@@ -34,7 +34,7 @@ export const client = createAuthClient({
 		}),
 		multiSessionClient(),
 		oneTapClient({
-			clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
+			clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? "",
 		}),
 		// oidcClient(),
 		genericOAuthClient(),

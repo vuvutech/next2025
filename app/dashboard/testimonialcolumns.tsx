@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { formatAccraDate } from "@/lib/date";
 import { TestiomonialActionsCell } from "./TestimonialActionsCell";
 
-export const testimonialcolumns: ColumnDef<any>[] = [
+export const testimonialcolumns: ColumnDef<Record<string, unknown>>[] = [
 	{
 		header: "User",
 		accessorFn: (row) => row.user?.name || "Unknown",

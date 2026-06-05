@@ -64,7 +64,7 @@ export async function PUT(
 		"icon",
 	];
 
-	const data: Record<string, any> = {};
+	const data: Record<string, unknown> = {};
 	for (const field of fields) {
 		const value = json[field];
 		if (value !== undefined && value !== null && value !== "") {
@@ -92,10 +92,11 @@ export async function PUT(
 		revalidatePath(`${baseUrl}/admin/institutes/${existing.slug}/edit`);
 
 		return NextResponse.json(updated);
-	} catch (error: any) {
+	} catch (error: unknown) {
 		console.error("❌ Error updating institute:", error);
+		const errMessage = error instanceof Error ? error.message : String(error);
 		return NextResponse.json(
-			{ error: error?.message || "Internal server error" },
+			{ error: errMessage || "Internal server error" },
 			{ status: 500 },
 		);
 	}

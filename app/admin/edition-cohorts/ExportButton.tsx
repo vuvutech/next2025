@@ -5,9 +5,10 @@ import autoTable from "jspdf-autotable";
 import { FileSpreadsheet, FileText } from "lucide-react";
 import * as XLSX from "xlsx";
 import { Button } from "@/components/ui/button";
+import type { RegistrationWithUser } from "@/types/registration";
 
 interface ExportButtonProps {
-	registrations: any[];
+	registrations: RegistrationWithUser[];
 	editionTitle: string;
 }
 

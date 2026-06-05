@@ -85,7 +85,7 @@ const CTA = () => {
 							className="mt-2 text-left text-xs text-muted-foreground"
 						>
 							View our{" "}
-							<a href="#" className="underline hover:text-foreground">
+							<a href="/privacy" className="underline hover:text-foreground">
 								privacy policy
 							</a>
 							.

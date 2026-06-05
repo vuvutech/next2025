@@ -13,7 +13,7 @@ export async function GET() {
 
 		// Tally counts per editionId
 		const countMap = registrations.reduce(
-			(acc: Record<string, number>, reg: any) => {
+			(acc: Record<string, number>, reg: { editionId: string }) => {
 				const id = reg.editionId;
 				acc[id] = (acc[id] || 0) + 1;
 				return acc;
@@ -33,7 +33,7 @@ export async function GET() {
 		});
 
 		const editionMap = Object.fromEntries(
-			editions.map((e: any) => [e.id, e.title]),
+			editions.map((e: { id: string; title: string }) => [e.id, e.title]),
 		);
 
 		const top = topEditions.map(([editionId, count]: [string, number]) => ({

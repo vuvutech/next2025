@@ -16,7 +16,7 @@ const RANGE_MAP: Record<string, string> = {
 export async function GET(req: NextRequest) {
 	const type = req.nextUrl.searchParams.get("type") || "top-pages";
 	const range = req.nextUrl.searchParams.get("range") ?? "7d";
-	const propertyId = process.env.GA4_PROPERTY_ID!;
+	const propertyId = process.env.GA4_PROPERTY_ID ?? "";
 
 	try {
 		switch (type) {
@@ -60,14 +60,13 @@ export async function GET(req: NextRequest) {
 				}
 
 				const chartData = Object.entries(dailyStats)
-					.map(([date, counts]: [string, any]) => ({
+					.map(([date, counts]) => ({
 						date: formatGA4Date(date),
 						desktop: counts.desktop,
 						mobile: counts.mobile + counts.tablet,
 					}))
 					.sort(
-						(a: any, b: any) =>
-							new Date(a.date).getTime() - new Date(b.date).getTime(),
+						(a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
 					);
 
 				return NextResponse.json({ data: chartData });
@@ -98,7 +97,7 @@ export async function GET(req: NextRequest) {
 					select: { editionId: true },
 				});
 				const countMap = registrations.reduce(
-					(acc: Record<string, number>, reg: any) => {
+					(acc: Record<string, number>, reg: { editionId: string }) => {
 						const id = reg.editionId;
 						acc[id] = (acc[id] || 0) + 1;
 						return acc;
@@ -115,7 +114,7 @@ export async function GET(req: NextRequest) {
 				});
 
 				const editionMap = Object.fromEntries(
-					editions.map((e: any) => [e.id, e.title]),
+					editions.map((e: { id: string; title: string }) => [e.id, e.title]),
 				);
 				const top = topEditions.map(([editionId, count]: [string, number]) => ({
 					edition: editionMap[editionId] ?? `Edition ${editionId}`,
@@ -186,10 +185,15 @@ export async function GET(req: NextRequest) {
 				});
 
 				const viewsByDate =
-					response.rows?.map((row: any) => ({
-						date: row.dimensionValues?.[0].value,
-						views: Number(row.metricValues?.[0].value ?? 0),
-					})) ?? [];
+					response.rows?.map(
+						(row: {
+							dimensionValues: { value: string }[];
+							metricValues: { value: string }[];
+						}) => ({
+							date: row.dimensionValues?.[0].value,
+							views: Number(row.metricValues?.[0].value ?? 0),
+						}),
+					) ?? [];
 
 				return NextResponse.json({ viewsByDate });
 			}
@@ -215,10 +219,15 @@ export async function GET(req: NextRequest) {
 				});
 
 				const topPages =
-					response.rows?.map((row: any) => ({
-						path: row.dimensionValues?.[0].value ?? "/",
-						views: Number(row.metricValues?.[0].value ?? 0),
-					})) || [];
+					response.rows?.map(
+						(row: {
+							dimensionValues: { value: string }[];
+							metricValues: { value: string }[];
+						}) => ({
+							path: row.dimensionValues?.[0].value ?? "/",
+							views: Number(row.metricValues?.[0].value ?? 0),
+						}),
+					) || [];
 
 				return NextResponse.json({ topPages });
 			}

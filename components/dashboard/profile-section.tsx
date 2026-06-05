@@ -44,7 +44,7 @@ export function ProfileSection({
 				</CardHeader>
 				<CardContent className="flex flex-col items-center space-y-4 sm:flex-row sm:items-start sm:space-x-4 sm:space-y-0">
 					<Avatar className="h-24 w-24 border border-zinc-200 dark:border-zinc-800">
-						<AvatarImage src={session.user.image!} alt="User" />
+						<AvatarImage src={session.user.image ?? ""} alt="User" />
 
 						<AvatarFallback className="bg-zinc-100 dark:bg-zinc-800 text-xl text-zinc-800 dark:text-zinc-200">
 							{session.user.name
