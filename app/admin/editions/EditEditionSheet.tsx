@@ -194,7 +194,7 @@ export function EditEditionSheet({ edition }: { edition: any }) {
 											<Button
 												variant="outline"
 												className={cn(
-													"w-full justify-start text-left font-normal",
+													"w-full justify-start text-left font-normal cursor-pointer",
 													!form[key] && "text-muted-foreground",
 												)}
 											>

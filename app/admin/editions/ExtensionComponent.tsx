@@ -219,7 +219,7 @@ export function ExtensionComponent() {
 									<Button
 										variant="outline"
 										className={cn(
-											"w-full justify-start text-left font-normal",
+											"w-full justify-start text-left font-normal cursor-pointer",
 											!form.startDate && "text-muted-foreground",
 										)}
 									>
@@ -257,7 +257,7 @@ export function ExtensionComponent() {
 									<Button
 										variant="outline"
 										className={cn(
-											"w-full justify-start text-left font-normal",
+											"w-full justify-start text-left font-normal cursor-pointer",
 											!form.endDate && "text-muted-foreground",
 										)}
 									>
@@ -292,7 +292,7 @@ export function ExtensionComponent() {
 									<Button
 										variant="outline"
 										className={cn(
-											"w-full justify-start text-left font-normal",
+											"w-full justify-start text-left font-normal cursor-pointer",
 											!form.earlyBirdDeadline && "text-muted-foreground",
 										)}
 									>

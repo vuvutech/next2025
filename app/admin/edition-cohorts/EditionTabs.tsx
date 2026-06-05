@@ -42,7 +42,7 @@ export default function EditionTabs({ editions }: { editions: any[] }) {
 						<TabsTrigger
 							key={edition.id}
 							value={edition.id}
-							className="px-2 py-2 font-medium text-xs rounded-md transition-all data-[state=active]:bg-background data-[state=active]:text-foreground"
+							className="px-2 py-2 font-medium text-xs rounded-md transition-all cursor-pointer data-[state=active]:bg-background data-[state=active]:text-foreground"
 						>
 							{edition.title}
 						</TabsTrigger>

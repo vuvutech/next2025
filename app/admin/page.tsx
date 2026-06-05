@@ -291,7 +291,7 @@ export default async function AdminDashboardPage() {
 						<div className="shrink-0">
 							<Link
 								href="/admin/registrations"
-								className="group flex items-center gap-3 rounded-xl border border-amber-500/25 bg-amber-500/5 p-4 backdrop-blur-sm hover:bg-amber-500/10 transition-all duration-300"
+								className="group flex items-center gap-3 rounded-xl border border-amber-500/25 bg-amber-500/5 p-4 backdrop-blur-sm hover:bg-amber-500/10 transition-all duration-300 cursor-pointer"
 							>
 								<div className="flex size-10 items-center justify-center rounded-lg bg-amber-500/20 text-amber-600 dark:text-amber-400">
 									<IconAlertTriangle className="size-5" />
@@ -357,7 +357,7 @@ export default async function AdminDashboardPage() {
 							<div className="pt-4 border-t border-border/50">
 								<Link
 									href="/admin/registrations"
-									className="group inline-flex items-center gap-1.5 text-xs font-semibold text-primary transition-colors hover:text-primary/80"
+									className="group inline-flex items-center gap-1.5 text-xs font-semibold text-primary transition-colors hover:text-primary/80 cursor-pointer"
 								>
 									View all registrations
 									<IconArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
