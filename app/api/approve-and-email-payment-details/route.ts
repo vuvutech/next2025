@@ -4,6 +4,7 @@ import { render } from "@react-email/render";
 import { type NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/app/actions/functions";
 import { IEARegistrationEmail } from "@/lib/email/iea-welcome-email";
+import { INSTITUTEWelcomeEmail } from "@/lib/email/institute-welcome-email";
 import { sendMail } from "@/lib/nodemailer-mail";
 import { prisma } from "@/prisma/dbConnect";
 
@@ -59,22 +60,22 @@ export async function POST(req: NextRequest) {
 				}),
 			);
 		} else {
-			htmlContent = `
-        <h2>Hello ${name},</h2>
-        <p>Thank you for registering. Here are your payment details:</p>
-        <ul>
-          <li><strong>Start Date:</strong> ${formattedStartDate}</li>
-          <li><strong>End Date:</strong> ${formattedEndDate}</li>
-          <li><strong>Price (In Person):</strong> $${price}</li>
-          <li><strong>Price (Via Zoom):</strong> $${priceViaZoom}</li>
-        </ul>
-        <p>Kind regards,<br />COSTrAD Team</p>
-      `;
+			htmlContent = await render(
+				INSTITUTEWelcomeEmail({
+					name,
+					startDate: formattedStartDate,
+					endDate: formattedEndDate,
+					price,
+					priceViaZoom,
+					theme: registration?.edition?.theme ?? undefined,
+				}),
+			);
 		}
 
+		const instituteName = registration?.edition?.institute?.name ?? "Institute";
 		const subject = isIEA
 			? `Welcome to the ${new Date().getFullYear()} Institute of Economic Affairs (IEA) - Payment Details`
-			: `Payment Details for Institute Edition`;
+			: `Welcome to the ${new Date().getFullYear()} ${instituteName} - Payment Details`;
 
 		// Send email with payment info
 		await sendMail({
