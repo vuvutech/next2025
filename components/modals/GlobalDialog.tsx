@@ -1,7 +1,7 @@
 "use client";
 
 import { Calendar } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import RegistrationSteps from "@/components/forms/RegistrationSteps";
 import { Button } from "@/components/ui/button";

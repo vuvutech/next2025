@@ -6,7 +6,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 		<div className="block p-2">
 			<Toaster />
 			<Jumbotron heroImage="/images/economy4.jpg" />
-			<div className="md:p-4 pt-4 max-w-8xl container mx-auto space-y-4">{children}</div>
+			<div className="md:p-4 pt-4 max-w-8xl container mx-auto space-y-4">
+				{children}
+			</div>
 		</div>
 	);
 }

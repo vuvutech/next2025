@@ -112,7 +112,7 @@ export const AdminApprovalRequestEmail = ({
 							<a className="text-primary" href="tel:+233200201334">
 								+233200201334
 							</a>{" "}
-							(Mon–Fri, 9AM–4PM GMT).
+							(Mon–Fri, 9AM–4PM GMT (UTC+0 / Accra Time)).
 						</Text>
 					</Container>
 				</Body>

@@ -1,5 +1,4 @@
 import { headers } from "next/headers";
-import React from "react";
 import { ProfileSection } from "@/components/dashboard/profile-section";
 import { auth } from "@/lib/auth";
 

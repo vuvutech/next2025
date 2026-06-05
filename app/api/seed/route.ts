@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
 	const authHeader = req.headers.get("authorization");
 
 	// Authorization check
-	if (!authHeader || !authHeader.startsWith("Bearer ")) {
+	if (!authHeader?.startsWith("Bearer ")) {
 		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 	}
 

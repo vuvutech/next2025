@@ -1,5 +1,3 @@
-import React from "react";
-
 type SeperatorTextProps = {
 	seperatorText: string;
 };

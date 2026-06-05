@@ -2,7 +2,7 @@
 
 import { Label } from "@radix-ui/react-label";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
 	staggerContainer,
 	staggerItem,

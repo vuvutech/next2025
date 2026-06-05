@@ -3,8 +3,6 @@
 import {
 	IconDotsVertical,
 	IconLogout,
-	IconMoon,
-	IconSun,
 	IconUserCircle,
 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";

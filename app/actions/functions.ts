@@ -1,7 +1,7 @@
 // app/actions/functions.ts
 "use server";
 
-import crypto from "crypto";
+import crypto from "node:crypto";
 import { headers } from "next/headers";
 import type { NextRequest } from "next/server";
 import { auth } from "@/lib/auth";
@@ -162,7 +162,7 @@ export async function getUserRole() {
 		headers: headersList,
 	});
 
-	if (!session || !session.user) {
+	if (!session?.user) {
 		return null;
 	}
 

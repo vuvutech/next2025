@@ -1,6 +1,7 @@
 import { render } from "@react-email/render";
 import { type NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/app/actions/functions";
+import { formatTime } from "@/lib/date";
 import { AdminApprovalRequestEmail } from "@/lib/email/admin-registration-approval";
 import { WelcomeToInstituteEmail } from "@/lib/email/welcome-to-institute";
 import { sendMail } from "@/lib/nodemailer-mail";
@@ -74,6 +75,8 @@ export async function POST(req: NextRequest) {
 
 		const formattedStartDate = formatDate(edition.startDate);
 		const formattedEndDate = formatDate(edition.endDate);
+		const formattedStartTime = formatTime(edition.startTime);
+		const formattedEndTime = formatTime(edition.endTime);
 
 		const registration = await prisma.registration.create({
 			data: {
@@ -94,6 +97,8 @@ export async function POST(req: NextRequest) {
 				instituteName,
 				startDate: formattedStartDate,
 				endDate: formattedEndDate,
+				startTime: formattedStartTime,
+				endTime: formattedEndTime,
 				dashboardLink: `https://www.costrad.org/dashboard`,
 			}),
 		);
@@ -106,6 +111,8 @@ export async function POST(req: NextRequest) {
 				instituteName,
 				startDate: formattedStartDate,
 				endDate: formattedEndDate,
+				startTime: formattedStartTime,
+				endTime: formattedEndTime,
 				applicantEmail: user.email,
 				applicantPhone: applicantProfile?.telephone ?? undefined,
 				applicantAddress: applicantProfile?.address ?? undefined,

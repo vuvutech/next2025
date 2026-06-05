@@ -17,6 +17,8 @@ interface WelcomeToInstituteEmailProps {
 	instituteName: string;
 	startDate: string; // should be formatted as "Month Day, Year"
 	endDate: string;
+	startTime?: string;
+	endTime?: string;
 	dashboardLink: string;
 }
 
@@ -26,6 +28,8 @@ export const WelcomeToInstituteEmail = ({
 	instituteName,
 	startDate,
 	endDate,
+	startTime,
+	endTime,
 	dashboardLink,
 }: WelcomeToInstituteEmailProps) => {
 	const previewText = `Welcome to ${editionTitle} at ${instituteName}`;
@@ -51,8 +55,12 @@ export const WelcomeToInstituteEmail = ({
 
 						<Text className="text-sm leading-6">
 							The program begins on <strong>{startDate}</strong> and will end on{" "}
-							<strong>{endDate}</strong>. We're excited to have you onboard and
-							look forward to a transformative experience together.
+							<strong>{endDate}</strong>
+							{startTime && endTime
+								? `, running daily from ${startTime} to ${endTime} GMT (UTC+0 / Accra Time)`
+								: ""}
+							. We're excited to have you onboard and look forward to a
+							transformative experience together.
 						</Text>
 
 						<Section className="text-center my-6">
@@ -78,8 +86,8 @@ export const WelcomeToInstituteEmail = ({
 							<a className="text-primary" href="tel:+233200201334">
 								+233 20 020 1334
 							</a>{" "}
-							— Office Hours: Mon–Fri, 9AM–4PM GMT) is always available to
-							assist you.
+							— Office Hours: Mon–Fri, 9AM–4PM GMT (UTC+0 / Accra Time)) is
+							always available to assist you.
 						</Text>
 					</Container>
 				</Body>

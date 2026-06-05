@@ -62,7 +62,10 @@ export function ActionsCellComponent({ id, onViewUser }: ActionsCellProps) {
 		<>
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
-					<Button variant="outline" className="h-8 w-8 p-0 rounded-full cursor-pointer">
+					<Button
+						variant="outline"
+						className="h-8 w-8 p-0 rounded-full cursor-pointer"
+					>
 						<span className="sr-only">Open menu</span>
 						<MoreHorizontal />
 					</Button>

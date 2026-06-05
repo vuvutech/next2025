@@ -178,7 +178,7 @@ export default function HelpComponent() {
 							<p className="font-medium">Phone</p>
 							<p className="text-muted-foreground">+233200201334</p>
 							<p className="text-sm text-muted-foreground">
-								Mon–Fri, 9AM–4PM GMT
+								Mon–Fri, 9AM–4PM GMT (UTC+0 / Accra Time)
 							</p>
 						</div>
 					</div>

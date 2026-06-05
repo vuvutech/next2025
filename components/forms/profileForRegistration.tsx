@@ -6,10 +6,9 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@radix-ui/react-popover";
-import { format } from "date-fns";
 import { CalendarIcon, Loader2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -33,6 +32,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { formatAccraDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 
 export type RegisterLoginProps = {
@@ -94,14 +94,14 @@ export function ProfileForRegistration({
 	costradCallbackUrl,
 	onProfileSaved,
 }: RegisterLoginProps & { onProfileSaved?: () => void }) {
-	const router = useRouter();
+	const _router = useRouter();
 	const searchParams = useSearchParams();
-	const callbackUrl =
+	const _callbackUrl =
 		costradCallbackUrl || searchParams.get("callbackUrl") || "/apply";
 
 	const [loading, setLoading] = useState(false);
-	const [image, setImage] = useState<File | null>(null);
-	const [imagePreview, setImagePreview] = useState<string | null>(null);
+	const [_image, _setImage] = useState<File | null>(null);
+	const [_imagePreview, _setImagePreview] = useState<string | null>(null);
 	const {
 		register,
 		handleSubmit,
@@ -189,8 +189,8 @@ export function ProfileForRegistration({
 								rules={{ required: "Gender is required" }}
 								render={({ field }) => (
 									<Select onValueChange={field.onChange} value={field.value}>
-									<SelectTrigger className="w-full h-10">
-										<SelectValue placeholder="Select gender" />
+										<SelectTrigger className="w-full !h-10">
+											<SelectValue placeholder="Select gender" />
 										</SelectTrigger>
 										<SelectContent className="w-full bg-background text-foreground">
 											<SelectItem value="MALE">Male</SelectItem>
@@ -221,7 +221,7 @@ export function ProfileForRegistration({
 									>
 										<CalendarIcon className="mr-2 h-4 w-4 " />
 										{dateOfBirth
-											? format(new Date(dateOfBirth), "PPP")
+											? formatAccraDate(dateOfBirth, "PPP")
 											: "Select a date"}
 									</Button>
 								</PopoverTrigger>
@@ -265,7 +265,7 @@ export function ProfileForRegistration({
 								<span className="text-destructive text-[8px]">Required</span>
 							</Label>
 							<Select {...register("maritalStatus")}>
-								<SelectTrigger className="w-full h-10">
+								<SelectTrigger className="w-full !h-10">
 									<SelectValue placeholder="Marital status" />
 								</SelectTrigger>
 								<SelectContent className="w-full bg-background text-foreground">
@@ -283,7 +283,7 @@ export function ProfileForRegistration({
 								<span className="text-destructive text-[8px]">Required</span>
 							</Label>
 							<Select {...register("religion")}>
-								<SelectTrigger className="w-full h-10">
+								<SelectTrigger className="w-full !h-10">
 									<SelectValue placeholder="Religion" />
 								</SelectTrigger>
 								<SelectContent className="w-full bg-background text-foreground">
@@ -468,7 +468,7 @@ export function ProfileForRegistration({
 						<div>
 							<Label>Highest Qualification</Label>
 							<Select {...register("highestQualification")}>
-								<SelectTrigger className="w-full h-10">
+								<SelectTrigger className="w-full !h-10">
 									<SelectValue placeholder="Qualification" />
 								</SelectTrigger>
 								<SelectContent className="w-full bg-background text-foreground">
@@ -483,7 +483,7 @@ export function ProfileForRegistration({
 						<div>
 							<Label>Language Preference</Label>
 							<Select {...register("languagePreference")}>
-								<SelectTrigger className="w-full h-10">
+								<SelectTrigger className="w-full !h-10">
 									<SelectValue placeholder="Language" />
 								</SelectTrigger>
 								<SelectContent className="w-full bg-background text-foreground">

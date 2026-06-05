@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import Image from "next/image"; // Import Image component
 import Link from "next/link"; // Optional: Import Link if using Next.js routing
 import { useRouter } from "next/navigation";
-import React from "react";
 import {
 	staggerContainer,
 	staggerItem,

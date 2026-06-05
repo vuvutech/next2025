@@ -1,6 +1,6 @@
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import { MongoClient, ObjectId } from "mongodb";
-import path from "path";
 
 export async function seedCollection(collectionName: string) {
 	const dataPath = path.join(

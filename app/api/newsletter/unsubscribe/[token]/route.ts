@@ -4,7 +4,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { baseUrl } from "@/lib/metadata";
 import { prisma } from "@/prisma/dbConnect";
 export async function GET(
-	req: NextRequest,
+	_req: NextRequest,
 	context: { params: Promise<{ token: string }> },
 ) {
 	const { token } = await context.params;

@@ -2,13 +2,13 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { format } from "date-fns";
 import { BadgeCheckIcon, Trash } from "lucide-react";
 import Image from "next/image";
 import { DeleteConfirmationDialog } from "@/components/modals/delete-confirmation-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox"; // Corrected import for Checkbox
+import { formatAccraDate } from "@/lib/date";
 import { ActionsCellComponent } from "./ActionsCellComponent";
 
 export const columns: ColumnDef<any>[] = [
@@ -68,8 +68,8 @@ export const columns: ColumnDef<any>[] = [
 			const dateValue = row.original.createdAt;
 			if (dateValue) {
 				const date = new Date(dateValue);
-				if (!isNaN(date.getTime())) {
-					return format(date, "PPP");
+				if (!Number.isNaN(date.getTime())) {
+					return formatAccraDate(date, "PPP");
 				}
 			}
 			return "N/A";

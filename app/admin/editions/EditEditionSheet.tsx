@@ -1,7 +1,6 @@
 "use client";
 
 import { IconEdit } from "@tabler/icons-react";
-import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -28,6 +27,7 @@ import {
 } from "@/components/ui/sheet";
 import { Textarea } from "@/components/ui/textarea";
 import { getBaseUrl } from "@/config/site";
+import { formatAccraDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 
 export function EditEditionSheet({ edition }: { edition: any }) {
@@ -59,6 +59,8 @@ export function EditEditionSheet({ edition }: { edition: any }) {
 		endDate: edition?.endDate
 			? new Date(edition.endDate).toISOString().split("T")[0]
 			: "",
+		startTime: edition?.startTime ?? "",
+		endTime: edition?.endTime ?? "",
 		banner: edition?.banner ?? "",
 		verticalBanner: edition?.verticalBanner ?? "",
 	}));
@@ -200,7 +202,7 @@ export function EditEditionSheet({ edition }: { edition: any }) {
 											>
 												<CalendarIcon className="mr-2 h-4 w-4" />
 												{form[key]
-													? format(new Date(form[key]), "PPP")
+													? formatAccraDate(form[key], "PPP")
 													: "Select date"}
 											</Button>
 										</PopoverTrigger>
@@ -223,6 +225,26 @@ export function EditEditionSheet({ edition }: { edition: any }) {
 								</div>
 							),
 						)}
+					</div>
+					<div className="grid grid-cols-2 gap-4">
+						<div className="grid gap-2">
+							<Label>Start Time</Label>
+							<Input
+								name="startTime"
+								type="time"
+								value={form.startTime}
+								onChange={handleChange}
+							/>
+						</div>
+						<div className="grid gap-2">
+							<Label>End Time</Label>
+							<Input
+								name="endTime"
+								type="time"
+								value={form.endTime}
+								onChange={handleChange}
+							/>
+						</div>
 					</div>
 					<div className="grid grid-cols-3 gap-4">
 						<div className="grid gap-2">

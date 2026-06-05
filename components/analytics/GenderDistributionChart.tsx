@@ -1,6 +1,7 @@
 "use client";
 
-import { PieChart, Pie, Label } from "recharts";
+import { IconGenderBigender } from "@tabler/icons-react";
+import { Label, Pie, PieChart } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
 	type ChartConfig,
@@ -8,7 +9,6 @@ import {
 	ChartTooltip,
 	ChartTooltipContent,
 } from "@/components/ui/chart";
-import { IconGenderBigender } from "@tabler/icons-react";
 
 const chartConfig = {
 	male: {

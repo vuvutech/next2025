@@ -1,7 +1,6 @@
-import { format } from "date-fns";
 import Image from "next/image";
-import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatAccraDate } from "@/lib/date";
 
 interface Institute {
 	name: string;
@@ -64,11 +63,11 @@ export function RegistrationDetails({ edition }: RegistrationDetailsProps) {
 				<div className="grid grid-cols-2 gap-4">
 					<div>
 						<h3 className="text-sm font-medium">Start Date</h3>
-						<p>{startDate ? format(new Date(startDate), "PP") : "TBA"}</p>
+						<p>{startDate ? formatAccraDate(startDate, "short") : "TBA"}</p>
 					</div>
 					<div>
 						<h3 className="text-sm font-medium">End Date</h3>
-						<p>{endDate ? format(new Date(endDate), "PP") : "TBA"}</p>
+						<p>{endDate ? formatAccraDate(endDate, "short") : "TBA"}</p>
 					</div>
 				</div>
 

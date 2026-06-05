@@ -1,7 +1,12 @@
 "use client";
 
+import {
+	DollarSign,
+	LucideScanFace,
+	MoreHorizontal,
+	Unlink,
+} from "lucide-react";
 import { useState, useTransition } from "react";
-import { DollarSign, LucideScanFace, MoreHorizontal, Unlink } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -95,7 +100,10 @@ export function ActionsCellComponent({
 		<>
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
-					<Button variant="outline" className="h-8 w-8 p-0 rounded-full cursor-pointer">
+					<Button
+						variant="outline"
+						className="h-8 w-8 p-0 rounded-full cursor-pointer"
+					>
 						<span className="sr-only">Open menu</span>
 						<MoreHorizontal />
 					</Button>
@@ -152,10 +160,7 @@ export function ActionsCellComponent({
 						</DialogDescription>
 					</DialogHeader>
 					<DialogFooter className="grid grid-cols-2 gap-2">
-						<Button
-							variant="outline"
-							onClick={() => setShowPaidDialog(false)}
-						>
+						<Button variant="outline" onClick={() => setShowPaidDialog(false)}>
 							Cancel
 						</Button>
 						<Button

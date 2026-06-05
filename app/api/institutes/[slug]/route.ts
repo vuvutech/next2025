@@ -4,7 +4,7 @@ import { baseUrl } from "@/lib/metadata";
 import { prisma } from "@/prisma/dbConnect";
 
 export async function GET(
-	request: NextRequest,
+	_request: NextRequest,
 	props: { params: Promise<{ slug: string }> },
 ) {
 	const params = await props.params;

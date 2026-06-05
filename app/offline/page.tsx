@@ -1,7 +1,6 @@
 import { WifiOff } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import React from "react";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {

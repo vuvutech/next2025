@@ -3,10 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/app/actions/functions";
-import { baseUrl } from "@/lib/metadata";
 import { prisma } from "@/prisma/dbConnect";
 
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
 	const user = await getCurrentUser();
 	if (!user) {
 		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -129,7 +128,7 @@ export async function PUT(req: NextRequest) {
 	}
 }
 
-export async function DELETE(req: NextRequest) {
+export async function DELETE(_req: NextRequest) {
 	const user = await getCurrentUser();
 	if (!user) {
 		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

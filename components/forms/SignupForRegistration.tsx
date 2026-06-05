@@ -3,7 +3,6 @@
 
 import { Loader2, X } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -40,7 +39,7 @@ export function SignUpForRegistration({
 	const [imagePreview, setImagePreview] = useState<string | null>(null);
 
 	const router = useRouter();
-	const [signUpResponse, setSignUpResponse] = useState<string | null>(null);
+	const [_signUpResponse, setSignUpResponse] = useState<string | null>(null);
 	const searchParams = useSearchParams();
 
 	// Fallback to URL param or "/"
@@ -297,7 +296,7 @@ export function SignUpForRegistration({
 									setLoading(false);
 									return successMessage;
 								},
-								error: (error) => {
+								error: (_error) => {
 									setLoading(false);
 									const errorMessage = "Sign-up failed!";
 									setSignUpResponse(errorMessage);

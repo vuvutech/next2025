@@ -1,6 +1,8 @@
 import path from "node:path";
 import type { NextConfig } from "next";
 
+process.env.TZ = "Africa/Accra";
+
 const nextConfig: NextConfig = {
 	allowedDevOrigins: ["192.168.10.20"],
 	headers: async () => {

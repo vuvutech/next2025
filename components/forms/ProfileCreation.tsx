@@ -1,6 +1,5 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -46,12 +45,13 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { formatAccraDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 
 // Zod schema
 export const FormSchema = z.object({
 	gender: z.enum(["MALE", "FEMALE"]),
-	dateOfBirth: z.string().refine((val) => !isNaN(Date.parse(val)), {
+	dateOfBirth: z.string().refine((val) => !Number.isNaN(Date.parse(val)), {
 		message: "Invalid date",
 	}),
 	maritalStatus: z
@@ -173,7 +173,7 @@ export const ProfileCreation = () => {
 										<FormLabel>Gender</FormLabel>
 										<Select onValueChange={field.onChange} value={field.value}>
 											<FormControl className="w-full">
-												<SelectTrigger>
+												<SelectTrigger className="!h-10">
 													<SelectValue placeholder="Select gender" />
 												</SelectTrigger>
 											</FormControl>
@@ -208,7 +208,7 @@ export const ProfileCreation = () => {
 														>
 															<CalendarIcon className="mr-2 h-4 w-4" />
 															{field.value
-																? format(new Date(field.value), "PPP")
+																? formatAccraDate(field.value, "PPP")
 																: "Select a date"}
 														</Button>
 													</FormControl>
@@ -584,7 +584,7 @@ export const ProfileCreation = () => {
 										<FormLabel>Language</FormLabel>
 										<Select onValueChange={field.onChange} value={field.value}>
 											<FormControl>
-												<SelectTrigger>
+												<SelectTrigger className="!h-10">
 													<SelectValue placeholder="Preferred language" />
 												</SelectTrigger>
 											</FormControl>
@@ -611,7 +611,7 @@ export const ProfileCreation = () => {
 										<FormLabel>Qualification</FormLabel>
 										<Select onValueChange={field.onChange} value={field.value}>
 											<FormControl>
-												<SelectTrigger>
+												<SelectTrigger className="!h-10">
 													<SelectValue placeholder="Select qualification" />
 												</SelectTrigger>
 											</FormControl>

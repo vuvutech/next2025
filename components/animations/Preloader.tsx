@@ -45,12 +45,12 @@ export default function Preloader() {
 	}, []);
 
 	useEffect(() => {
-		if (index == words.length - 1) return;
+		if (index === words.length - 1) return;
 		setTimeout(
 			() => {
 				setIndex(index + 1);
 			},
-			index == 0 ? 1000 : 150,
+			index === 0 ? 1000 : 150,
 		);
 	}, [index]);
 

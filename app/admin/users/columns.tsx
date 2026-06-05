@@ -2,11 +2,11 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { format } from "date-fns";
 import { LucideBadgeCheck, LucideShieldUser } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { countryCodeToFlagEmoji, getCountryCode } from "@/lib/countries";
+import { formatAccraDate } from "@/lib/date";
 import { ActionsCellComponent } from "./ActionsCellComponent";
 import { AdminRoleToggleForm } from "./AdminRoleToggleForm";
 import { BanToggleForm } from "./BanToggleForm";
@@ -100,7 +100,7 @@ export function createColumns(
 			accessorKey: "Role",
 			cell: ({ row }) => (
 				<div className="text-[9px] uppercase">
-					{row.original.role == "ADMIN" ? (
+					{row.original.role === "ADMIN" ? (
 						<Badge variant={"destructive"} className="flex items-center gap-1">
 							{" "}
 							<LucideShieldUser />
@@ -123,7 +123,7 @@ export function createColumns(
 			accessorFn: (row) => (row.createdAt ? new Date(row.createdAt) : null),
 			cell: ({ row }) => (
 				<div className="text-xs">
-					{format(new Date(row.original.createdAt).toLocaleDateString(), "PPP")}
+					{formatAccraDate(row.original.createdAt, "PPP")}
 				</div>
 			),
 		},
@@ -138,7 +138,7 @@ export function createColumns(
 
 				try {
 					return (
-						<div className="text-xs">{format(new Date(updatedAt), "PPP")}</div>
+						<div className="text-xs">{formatAccraDate(updatedAt, "PPP")}</div>
 					);
 				} catch {
 					console.error("Invalid date:", updatedAt);

@@ -8,12 +8,12 @@ import {
 	IconUserPlus,
 	IconUsers,
 } from "@tabler/icons-react";
-import { prisma } from "@/prisma/dbConnect";
+import Image from "next/image";
 import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
 import { KpiCard } from "@/components/admin/kpi-card";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GenderDistributionChart } from "@/components/analytics/GenderDistributionChart";
-import Image from "next/image";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { prisma } from "@/prisma/dbConnect";
 
 export const dynamic = "force-dynamic";
 
@@ -81,7 +81,7 @@ export default async function ParticipantsPage() {
 
 	const countryCounts = Map.groupBy(
 		registrations.filter((r) => r.user.profile?.country),
-		(r) => r.user.profile!.country!,
+		(r) => r.user.profile?.country!,
 	);
 	const topCountries = [...countryCounts.entries()]
 		.map(([country, regs]) => ({ country, count: regs.length }))

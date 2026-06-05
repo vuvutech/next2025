@@ -1,8 +1,9 @@
 import { render } from "@react-email/render";
 import { type NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/app/actions/functions";
-import { InstituteAcceptanceEmail } from "@/lib/email/institute-acceptance-email";
+import { formatAccraDate, formatTime } from "@/lib/date";
 import { IEAAcceptanceEmail } from "@/lib/email/iea-acceptance-email";
+import { InstituteAcceptanceEmail } from "@/lib/email/institute-acceptance-email";
 import { sendMail } from "@/lib/nodemailer-mail";
 import { prisma } from "@/prisma/dbConnect";
 
@@ -67,19 +68,16 @@ export async function POST(req: NextRequest) {
 					registration.edition?.institute?.acronym?.toLowerCase() === "iea";
 				console.log("[toggle-paid] Is IEA edition:", isIEA);
 
-				const formatter = new Intl.DateTimeFormat("en-US", {
-					year: "numeric",
-					month: "long",
-					day: "numeric",
-				});
-
-				const formattedStartDate = registration.edition?.startDate
-					? formatter.format(new Date(registration.edition.startDate))
-					: "TBD";
-
-				const formattedEndDate = registration.edition?.endDate
-					? formatter.format(new Date(registration.edition.endDate))
-					: "TBD";
+				const formattedStartDate = formatAccraDate(
+					registration.edition?.startDate,
+					"long",
+				);
+				const formattedEndDate = formatAccraDate(
+					registration.edition?.endDate,
+					"long",
+				);
+				const formattedStartTime = formatTime(registration.edition?.startTime);
+				const formattedEndTime = formatTime(registration.edition?.endTime);
 
 				const userEmail = registration.user?.email;
 				const userName = registration.user?.name || "Participant";
@@ -106,6 +104,8 @@ export async function POST(req: NextRequest) {
 								name: userName,
 								startDate: formattedStartDate,
 								endDate: formattedEndDate,
+								startTime: formattedStartTime,
+								endTime: formattedEndTime,
 								theme: registration.edition?.theme ?? undefined,
 							}),
 						);
@@ -123,8 +123,11 @@ export async function POST(req: NextRequest) {
 								instituteShortName,
 								startDate: formattedStartDate,
 								endDate: formattedEndDate,
+								startTime: formattedStartTime,
+								endTime: formattedEndTime,
 								theme: registration.edition?.theme ?? undefined,
-								zoomLink: "https://us02web.zoom.us/j/81431256100?pwd=pWt3MpkvaiQF1cpPHKI4Ja0R8YsdUS.1",
+								zoomLink:
+									"https://us02web.zoom.us/j/81431256100?pwd=pWt3MpkvaiQF1cpPHKI4Ja0R8YsdUS.1",
 								zoomMeetingId: "814 3125 6100",
 								zoomPasscode: "IEA</>26",
 								instituteEmail: `${instituteShortName.toLowerCase()}office@costrad.org`,

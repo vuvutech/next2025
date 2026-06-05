@@ -78,8 +78,8 @@ export const WelcomeToInstituteEmail = ({
 							<a className="text-primary" href="tel:+233200201334">
 								+233 20 020 1334
 							</a>{" "}
-							— Office Hours: Mon–Fri, 9AM–4PM GMT) is always available to
-							assist you.
+							— Office Hours: Mon–Fri, 9AM–4PM GMT (UTC+0 / Accra Time)) is
+							always available to assist you.
 						</Text>
 					</Container>
 				</Body>

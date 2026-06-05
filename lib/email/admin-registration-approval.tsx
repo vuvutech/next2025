@@ -18,6 +18,8 @@ interface AdminApprovalRequestEmailProps {
 	instituteName: string;
 	startDate: string;
 	endDate: string;
+	startTime?: string;
+	endTime?: string;
 	applicantEmail: string;
 	applicantPhone?: string;
 	applicantAddress?: string;
@@ -32,6 +34,8 @@ export const AdminApprovalRequestEmail = ({
 	instituteName,
 	startDate,
 	endDate,
+	startTime,
+	endTime,
 	applicantEmail,
 	applicantPhone,
 	applicantAddress,
@@ -65,6 +69,9 @@ export const AdminApprovalRequestEmail = ({
 							<strong>Start Date:</strong> {startDate}
 							<br />
 							<strong>End Date:</strong> {endDate}
+							<br />
+							<strong>Daily Schedule:</strong> {startTime || "9:00 AM"} –{" "}
+							{endTime || "4:00 PM"} GMT (UTC+0 / Accra Time)
 						</Text>
 
 						<Text className="text-sm leading-6 mt-4">
@@ -112,7 +119,7 @@ export const AdminApprovalRequestEmail = ({
 							<a className="text-primary" href="tel:+233200201334">
 								+233200201334
 							</a>{" "}
-							(Mon–Fri, 9AM–4PM GMT).
+							(Mon–Fri, 9AM–4PM GMT (UTC+0 / Accra Time)).
 						</Text>
 					</Container>
 				</Body>

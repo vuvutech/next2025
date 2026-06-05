@@ -78,7 +78,7 @@ export default function UserCard(props: {
 		if (session?.user?.id) {
 			fetchUserData();
 		}
-	}, [session?.user?.id]);
+	}, [session?.user?.id, fetchUserData]);
 	return (
 		<Card>
 			<CardHeader>

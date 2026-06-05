@@ -2,9 +2,9 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { format } from "date-fns";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import { formatAccraDate } from "@/lib/date";
 import { TestiomonialActionsCell } from "./TestimonialActionsCell";
 
 export const testimonialcolumns: ColumnDef<any>[] = [
@@ -42,7 +42,7 @@ export const testimonialcolumns: ColumnDef<any>[] = [
 	{
 		header: "Date",
 		accessorKey: "createdAt",
-		cell: ({ row }) => format(new Date(row.original.createdAt), "PPP"),
+		cell: ({ row }) => formatAccraDate(row.original.createdAt, "PPP"),
 	},
 	{
 		header: "Actions",

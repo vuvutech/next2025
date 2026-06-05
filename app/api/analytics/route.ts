@@ -203,8 +203,6 @@ export async function GET(req: NextRequest) {
 				const count = Number(response.rows?.[0].metricValues?.[0].value ?? 0);
 				return NextResponse.json({ sessions: count, count });
 			}
-
-			case "top-pages":
 			default: {
 				const startDate = RANGE_MAP[range] ?? "7daysAgo";
 				const [response] = await analyticsDataClient.runReport({

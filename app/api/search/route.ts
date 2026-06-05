@@ -17,7 +17,7 @@ function truncateDescription(
 ): string {
 	if (!text) return "";
 	if (text.length <= maxLength) return text;
-	return text.slice(0, maxLength).trim() + "...";
+	return `${text.slice(0, maxLength).trim()}...`;
 }
 
 export async function GET(request: NextRequest) {

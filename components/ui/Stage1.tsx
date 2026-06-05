@@ -1,4 +1,3 @@
-import React from "react";
 import { specialElite } from "@/config/fonts";
 
 const Stage1 = () => {

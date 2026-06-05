@@ -23,7 +23,7 @@ export default function EmailVerification() {
 
 	// Redirect to home if already signed in
 	useEffect(() => {
-		if (session && session.userId) {
+		if (session?.userId) {
 			router.push("/");
 		}
 	}, [session, router]);

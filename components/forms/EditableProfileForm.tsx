@@ -1,6 +1,5 @@
 "use client";
 
-import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -32,6 +31,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { formatAccraDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 
 interface ProfileForm {
@@ -143,14 +143,14 @@ export default function EditableProfileForm() {
 			<CardContent className="p-2">
 				<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 					<div className="grid sm:grid-cols-4 gap-4">
-						<div className="space-y-1">
+						<div>
 							<Label htmlFor="gender">Gender</Label>
 							<Controller
 								name="gender"
 								control={control}
 								render={({ field }) => (
 									<Select value={field.value} onValueChange={field.onChange}>
-										<SelectTrigger id="gender" className="w-full h-10">
+										<SelectTrigger id="gender" className="w-full !h-10">
 											<SelectValue placeholder="Gender" />
 										</SelectTrigger>
 										<SelectContent>
@@ -165,8 +165,8 @@ export default function EditableProfileForm() {
 						{/* Date of Birth */}
 						<div>
 							<Label>Date of Birth</Label>
-						<Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
-							<PopoverTrigger asChild>
+							<Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
+								<PopoverTrigger asChild>
 									<Button
 										variant="outline"
 										className={cn(
@@ -176,7 +176,7 @@ export default function EditableProfileForm() {
 									>
 										<CalendarIcon className="mr-2 h-4 w-4 " />
 										{dateOfBirth
-											? format(new Date(dateOfBirth), "PPP")
+											? formatAccraDate(dateOfBirth, "PPP")
 											: "Select a date"}
 									</Button>
 								</PopoverTrigger>
@@ -211,14 +211,14 @@ export default function EditableProfileForm() {
 							)}
 						</div>
 
-						<div className="space-y-1">
+						<div className="">
 							<Label htmlFor="maritalStatus">Marital Status</Label>
 							<Controller
 								name="maritalStatus"
 								control={control}
 								render={({ field }) => (
 									<Select value={field.value} onValueChange={field.onChange}>
-										<SelectTrigger id="maritalStatus" className="w-full h-10">
+										<SelectTrigger id="maritalStatus" className="w-full !h-10">
 											<SelectValue placeholder="Marital Status" />
 										</SelectTrigger>
 										<SelectContent>
@@ -239,14 +239,14 @@ export default function EditableProfileForm() {
 							/>
 						</div>
 
-						<div className="space-y-1">
+						<div className="">
 							<Label htmlFor="religion">Belief System</Label>
 							<Controller
 								name="religion"
 								control={control}
 								render={({ field }) => (
 									<Select value={field.value} onValueChange={field.onChange}>
-										<SelectTrigger id="religion" className="w-full h-10">
+										<SelectTrigger id="religion" className="w-full !h-10">
 											<SelectValue placeholder="Religion" />
 										</SelectTrigger>
 										<SelectContent>
@@ -270,7 +270,7 @@ export default function EditableProfileForm() {
 						</div>
 					</div>
 
-					<div className=" grid sm:grid-cols-3 gap-2">
+					<div className=" grid sm:grid-cols-3 gap-2 space-y-4">
 						{[
 							["nationality", "Nationality"],
 							["telephone", "Telephone"],
@@ -293,7 +293,7 @@ export default function EditableProfileForm() {
 							["github", "GitHub"],
 							["tiktok", "TikTok"],
 						].map(([name, label]) => (
-							<div className="space-y-3" key={name}>
+							<div key={name}>
 								<Label htmlFor={name}>{label}</Label>
 								<Input
 									id={name}
@@ -310,7 +310,7 @@ export default function EditableProfileForm() {
 					</div>
 
 					<div className="grid grid-cols-2 gap-2">
-						<div className="space-y-1">
+						<div className="">
 							<Label htmlFor="highestQualification">
 								Highest Qualification
 							</Label>
@@ -340,7 +340,7 @@ export default function EditableProfileForm() {
 							/>
 						</div>
 
-						<div className="space-y-1">
+						<div className="">
 							<Label htmlFor="languagePreference">Language Preference</Label>
 							<Controller
 								name="languagePreference"

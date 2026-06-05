@@ -53,7 +53,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
 		ref,
 	) => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const [countryData, setCountryData] = useState<CountryData | undefined>();
+		const [_countryData, setCountryData] = useState<CountryData | undefined>();
 		const [displayFlag, setDisplayFlag] = useState<string>("");
 		const [hasInitialized, setHasInitialized] = useState(false);
 
@@ -88,10 +88,10 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
 			if (!newValue.startsWith("+")) {
 				// Replace "00" at the start with "+" if present
 				if (newValue.startsWith("00")) {
-					newValue = "+" + newValue.slice(2);
+					newValue = `+${newValue.slice(2)}`;
 				} else {
 					// Otherwise just add "+" at the start
-					newValue = "+" + newValue;
+					newValue = `+${newValue}`;
 				}
 			}
 
@@ -110,7 +110,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
 					parsed: parsed,
 				});
 
-				if (parsed && parsed.country) {
+				if (parsed?.country) {
 					// Update flag first
 					const countryCode = parsed.country;
 					console.log("Setting flag to:", countryCode.toLowerCase());

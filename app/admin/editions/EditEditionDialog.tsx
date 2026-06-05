@@ -1,7 +1,6 @@
 "use client";
 
 import { IconPencilCog } from "@tabler/icons-react";
-import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -29,6 +28,7 @@ import {
 } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
 import { getBaseUrl } from "@/config/site";
+import { formatAccraDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 
 export type EditionForm = {
@@ -68,6 +68,8 @@ export default function EditEditionDialog({ edition }: EditEditionDialogProps) {
 		priceViaZoom: "",
 		startDate: "",
 		endDate: "",
+		startTime: "",
+		endTime: "",
 		earlyBirdDeadline: "",
 		banner: "",
 		verticalBanner: "",
@@ -223,7 +225,7 @@ export default function EditEditionDialog({ edition }: EditEditionDialogProps) {
 									>
 										<CalendarIcon className="mr-2 h-4 w-4" />
 										{form.startDate
-											? format(new Date(form.startDate), "PPP")
+											? formatAccraDate(form.startDate, "PPP")
 											: "Select a date"}
 									</Button>
 								</PopoverTrigger>
@@ -258,7 +260,7 @@ export default function EditEditionDialog({ edition }: EditEditionDialogProps) {
 									>
 										<CalendarIcon className="mr-2 h-4 w-4" />
 										{form.endDate
-											? format(new Date(form.endDate), "PPP")
+											? formatAccraDate(form.endDate, "PPP")
 											: "Select a date"}
 									</Button>
 								</PopoverTrigger>
@@ -290,7 +292,7 @@ export default function EditEditionDialog({ edition }: EditEditionDialogProps) {
 									>
 										<CalendarIcon className="mr-2 h-4 w-4" />
 										{form.earlyBirdDeadline
-											? format(new Date(form.earlyBirdDeadline), "PPP")
+											? formatAccraDate(form.earlyBirdDeadline, "PPP")
 											: "Select a date"}
 									</Button>
 								</PopoverTrigger>
@@ -313,6 +315,31 @@ export default function EditEditionDialog({ edition }: EditEditionDialogProps) {
 									/>
 								</PopoverContent>
 							</Popover>
+						</div>
+					</div>
+
+					<div className="grid grid-cols-2 gap-4">
+						<div className="grid gap-2">
+							<Label>Start Time</Label>
+							<Input
+								name="startTime"
+								type="time"
+								value={form.startTime}
+								onChange={(e) =>
+									setForm((prev) => ({ ...prev, startTime: e.target.value }))
+								}
+							/>
+						</div>
+						<div className="grid gap-2">
+							<Label>End Time</Label>
+							<Input
+								name="endTime"
+								type="time"
+								value={form.endTime}
+								onChange={(e) =>
+									setForm((prev) => ({ ...prev, endTime: e.target.value }))
+								}
+							/>
 						</div>
 					</div>
 

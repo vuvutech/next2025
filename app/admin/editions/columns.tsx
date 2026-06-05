@@ -2,13 +2,12 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { format } from "date-fns";
 import { BadgeCheckIcon, Trash } from "lucide-react";
 import { DeleteConfirmationDialog } from "@/components/modals/delete-confirmation-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox"; // Corrected import for Checkbox
 import { getBaseUrl } from "@/config/site";
+import { formatAccraDate } from "@/lib/date";
 import { ActionsCellComponent } from "./ActionsCellComponent";
 import { EditEditionSheet } from "./EditEditionSheet";
 import { InstituteInfo } from "./InstituteEditionImage";
@@ -98,7 +97,7 @@ export const columns: ColumnDef<any>[] = [
 						<div className="font-medium">Start Date</div>
 						<div className="text-muted-foreground text-xs">
 							{row.original.startDate
-								? format(new Date(row.original.startDate), "PPP")
+								? formatAccraDate(row.original.startDate, "PPP")
 								: "N/A"}
 						</div>
 					</div>
@@ -106,7 +105,7 @@ export const columns: ColumnDef<any>[] = [
 						<div className="font-medium">End Date</div>
 						<div className="text-muted-foreground text-xs">
 							{row.original.endDate
-								? format(new Date(row.original.endDate), "PPP")
+								? formatAccraDate(row.original.endDate, "PPP")
 								: "N/A"}
 						</div>
 					</div>

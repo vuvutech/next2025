@@ -2,9 +2,9 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { format } from "date-fns";
 import Image from "next/image";
 import { Checkbox } from "@/components/ui/checkbox";
+import { formatAccraDate } from "@/lib/date";
 import EditInstituteDialog from "./EditInstituteDialogue";
 
 // Updated Institute type with missing fields
@@ -87,8 +87,8 @@ export const columns: ColumnDef<Institute>[] = [
 		accessorKey: "created_at",
 		cell: ({ row }) => {
 			const dateValue = row.original.createdAt;
-			if (dateValue && !isNaN(new Date(dateValue).getTime())) {
-				return format(new Date(dateValue), "PPP");
+			if (dateValue && !Number.isNaN(new Date(dateValue).getTime())) {
+				return formatAccraDate(dateValue, "PPP");
 			}
 			return "N/A";
 		},

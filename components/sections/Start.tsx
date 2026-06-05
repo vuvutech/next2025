@@ -1,6 +1,5 @@
 import { LucideMoveDown } from "lucide-react";
 import Image from "next/image";
-import React from "react";
 import { bebas } from "@/config/fonts";
 import { Separator } from "../ui/separator";
 

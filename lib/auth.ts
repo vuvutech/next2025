@@ -8,7 +8,6 @@ import {
 	emailOTP,
 	multiSession,
 	oAuthProxy,
-	oidcProvider,
 	openAPI,
 	organization,
 	twoFactor,

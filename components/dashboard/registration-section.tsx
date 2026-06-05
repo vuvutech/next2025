@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getCurrentUser } from "@/app/actions/functions";
 import { Badge } from "@/components/ui/badge";
+import { formatAccraDate } from "@/lib/date";
 import { prisma } from "@/prisma/dbConnect";
 import { Card, CardContent } from "../ui/card";
 
@@ -118,21 +119,8 @@ export default async function RegistrationSection() {
 							<p className="text-sm font-bold">{institute.name}</p>
 							<p className="text-sm text-bold text-firefly">
 								Dates:{" "}
-								{edition.startDate
-									? new Date(edition.startDate).toLocaleDateString("en-US", {
-											year: "numeric",
-											month: "long",
-											day: "numeric",
-										})
-									: ""}{" "}
-								-{" "}
-								{edition.endDate
-									? new Date(edition.endDate).toLocaleDateString("en-US", {
-											year: "numeric",
-											month: "long",
-											day: "numeric",
-										})
-									: ""}
+								{edition.startDate ? formatAccraDate(edition.startDate) : ""} -{" "}
+								{edition.endDate ? formatAccraDate(edition.endDate) : ""}
 							</p>
 
 							{countdown && (

@@ -3,6 +3,7 @@
 import { render } from "@react-email/render";
 import { type NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/app/actions/functions";
+import { formatAccraDate, formatTime } from "@/lib/date";
 import { IEARegistrationEmail } from "@/lib/email/iea-welcome-email";
 import { INSTITUTEWelcomeEmail } from "@/lib/email/institute-welcome-email";
 import { sendMail } from "@/lib/nodemailer-mail";
@@ -18,19 +19,10 @@ export async function POST(req: NextRequest) {
 		const { id, name, email, startDate, endDate, price, priceViaZoom } =
 			await req.json();
 
-		const formatter = new Intl.DateTimeFormat("en-US", {
-			year: "numeric",
-			month: "long",
-			day: "numeric",
-		});
-
-		const formattedStartDate = startDate
-			? formatter.format(new Date(startDate))
-			: "TBD";
-
-		const formattedEndDate = endDate
-			? formatter.format(new Date(endDate))
-			: "TBD";
+		const formattedStartDate = formatAccraDate(startDate, "long");
+		const formattedEndDate = formatAccraDate(endDate, "long");
+		const formattedStartTime = formatTime(registration?.edition?.startTime);
+		const formattedEndTime = formatTime(registration?.edition?.endTime);
 
 		// ✅ Fetch the registration and its institute information to check if it's IEA
 		const registration = await prisma.registration.findUnique({
@@ -54,6 +46,8 @@ export async function POST(req: NextRequest) {
 					name,
 					startDate: formattedStartDate,
 					endDate: formattedEndDate,
+					startTime: formattedStartTime,
+					endTime: formattedEndTime,
 					price,
 					priceViaZoom,
 					theme: registration?.edition?.theme ?? undefined,
@@ -65,6 +59,8 @@ export async function POST(req: NextRequest) {
 					name,
 					startDate: formattedStartDate,
 					endDate: formattedEndDate,
+					startTime: formattedStartTime,
+					endTime: formattedEndTime,
 					price,
 					priceViaZoom,
 					theme: registration?.edition?.theme ?? undefined,

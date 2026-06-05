@@ -1,4 +1,3 @@
-import React from "react";
 import SignInComponent from "@/components/forms/sign-in";
 import { SignUpComponent } from "@/components/forms/sign-up";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

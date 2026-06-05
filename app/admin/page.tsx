@@ -15,6 +15,7 @@ import {
 	IconUsers,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { getCurrentUser } from "@/app/actions/functions";
 import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
 import { ActiveUsersCard } from "@/components/analytics/ActiveUsersCard";
 import { MostPopularEditionCard } from "@/components/analytics/DashboardMetricsCards";
@@ -29,7 +30,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { getCurrentUser } from "@/app/actions/functions";
 import { prisma } from "@/prisma/dbConnect";
 
 export const dynamic = "force-dynamic";

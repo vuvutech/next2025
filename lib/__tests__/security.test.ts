@@ -36,7 +36,7 @@ describe("emailSchema", () => {
 	});
 
 	it("rejects an email longer than 254 characters", () => {
-		const longEmail = "a".repeat(243) + "@example.com"; // 255 chars
+		const longEmail = `${"a".repeat(243)}@example.com`; // 255 chars
 		expect(longEmail.length).toBeGreaterThan(254);
 		expect(() => emailSchema.parse(longEmail)).toThrow();
 	});
@@ -138,7 +138,7 @@ describe("urlSchema", () => {
 	});
 
 	it("rejects a URL longer than 2048 characters", () => {
-		const longUrl = "https://example.com/" + "a".repeat(2030);
+		const longUrl = `https://example.com/${"a".repeat(2030)}`;
 		expect(longUrl.length).toBeGreaterThan(2048);
 		expect(() => urlSchema.parse(longUrl)).toThrow();
 	});

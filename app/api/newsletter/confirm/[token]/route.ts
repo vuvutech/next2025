@@ -7,7 +7,7 @@ import { sendMail } from "@/lib/nodemailer-mail";
 import { prisma } from "@/prisma/dbConnect";
 
 export async function GET(
-	req: NextRequest,
+	_req: NextRequest,
 	context: { params: Promise<{ token: string }> },
 ) {
 	const token = (await context.params).token;

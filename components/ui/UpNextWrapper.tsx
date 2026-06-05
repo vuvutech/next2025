@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { oswald } from "@/config/fonts";
+import { formatAccraDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 
 type NextEdition = {
@@ -82,17 +83,11 @@ export default function UpNextWrapper() {
 						)}
 					>
 						{nextEdition.startDate
-							? new Date(nextEdition.startDate).toLocaleDateString("en-US", {
-									month: "short",
-									day: "numeric",
-								})
+							? formatAccraDate(nextEdition.startDate, "monthDay")
 							: ""}{" "}
 						&mdash;{" "}
 						{nextEdition.endDate
-							? new Date(nextEdition.endDate).toLocaleDateString("en-US", {
-									month: "short",
-									day: "numeric",
-								})
+							? formatAccraDate(nextEdition.endDate, "monthDay")
 							: ""}{" "}
 					</span>
 

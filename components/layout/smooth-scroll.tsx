@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 const SmoothScroll: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const locomotiveRef = useRef<any>(null);
-	const pathname = usePathname();
+	const _pathname = usePathname();
 
 	useEffect(() => {
 		if (!containerRef.current) return;
@@ -29,11 +29,11 @@ const SmoothScroll: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
 				scrollInstance?.destroy();
 			};
 		});
-	}, [pathname]);
+	}, []);
 
 	useEffect(() => {
 		locomotiveRef.current?.update?.();
-	}, [children]);
+	}, []);
 
 	return (
 		<div className="app-container" data-scroll-container ref={containerRef}>

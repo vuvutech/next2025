@@ -4,6 +4,7 @@ import { easeOut, motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { getInstitutes } from "@/app/actions/functions";
 import InstituteCardWithImage from "@/components/sections/InstituteCardWithImage";
+import { formatAccraDate } from "@/lib/date";
 
 type Institute = {
 	id: string;
@@ -125,9 +126,5 @@ export default function InstitutesComponent({
 }
 
 function formatDate(dateString: string) {
-	const date = new Date(dateString);
-	return date.toLocaleDateString("en-US", {
-		month: "short",
-		day: "numeric",
-	});
+	return formatAccraDate(dateString, "monthDay");
 }

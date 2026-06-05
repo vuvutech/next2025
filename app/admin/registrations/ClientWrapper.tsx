@@ -17,7 +17,10 @@ export default function ClientWrapper({ data }: { data: any[] }) {
 		setShowSheet(true);
 	};
 
-	const columns = useMemo(() => createColumns(handleViewUser), []);
+	const columns = useMemo(
+		() => createColumns(handleViewUser),
+		[handleViewUser],
+	);
 
 	return (
 		<>

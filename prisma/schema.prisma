@@ -319,6 +319,8 @@ model Edition {
   verticalBanner    String?
   startDate         DateTime?
   endDate           DateTime?
+  startTime         String?
+  endTime           String?
   seo               String?
   active            Boolean        @default(true)
   inPersonDelivery  Boolean?       @default(false)

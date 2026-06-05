@@ -183,7 +183,7 @@ cite {
 }
 
 .ng-deep ngx-turnstile iframe {
-	width: 90% !important;
-	height: 65px !important;
-	display: block !important;
+	width: 90%;
+	height: 65px;
+	display: block;
 }

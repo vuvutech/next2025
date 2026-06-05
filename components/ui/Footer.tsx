@@ -1,4 +1,3 @@
-import React from "react";
 import { bebas } from "@/config/fonts";
 import Content from "./Content";
 

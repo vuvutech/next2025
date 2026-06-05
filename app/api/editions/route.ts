@@ -15,7 +15,7 @@ export async function GET() {
 			},
 		});
 		return NextResponse.json(editions);
-	} catch (error) {
+	} catch (_error) {
 		return NextResponse.json(
 			{ error: "Failed to fetch editions" },
 			{ status: 500 },
@@ -285,7 +285,7 @@ export async function DELETE(req: NextRequest) {
 		}
 
 		return NextResponse.json({ success: true });
-	} catch (error) {
+	} catch (_error) {
 		return NextResponse.json(
 			{ error: "Failed to delete edition" },
 			{ status: 500 },

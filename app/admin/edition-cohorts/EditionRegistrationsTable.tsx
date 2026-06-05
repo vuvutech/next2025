@@ -50,7 +50,10 @@ export default function EditionRegistrationsTable({
 		setShowSheet(true);
 	};
 
-	const columns = useMemo(() => createColumns(handleViewUser), []);
+	const columns = useMemo(
+		() => createColumns(handleViewUser),
+		[handleViewUser],
+	);
 
 	if (loading) {
 		return <div className="text-center py-8">Loading registrations...</div>;
