@@ -11,7 +11,6 @@
 - **Single Test**: `bun test <filename>.test.ts`
 - **Prisma generate**: `bunx prisma generate`
 - **Prisma db push**: `bunx prisma db push`
-- **Prisma seed**: `bunx prisma db seed`
 
 ## 🏗️ Architecture & Key Files
 

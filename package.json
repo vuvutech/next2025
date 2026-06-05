@@ -13,9 +13,7 @@
 		"email:dev": "bunx email dev",
 		"email:export": "bunx email export"
 	},
-	"prisma": {
-		"seed": "bun prisma/seed.ts"
-	},
+
 	"dependencies": {
 		"@better-fetch/fetch": "^1.1.21",
 		"@dnd-kit/core": "^6.3.1",
