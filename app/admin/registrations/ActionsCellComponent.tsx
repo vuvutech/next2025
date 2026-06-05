@@ -43,9 +43,11 @@ export function ActionsCellComponent({
 }: ActionsCellProps) {
 	const [isPending, startTransition] = useTransition();
 	const [showPaidDialog, setShowPaidDialog] = useState(false);
+	const [showUnapproveDialog, setShowUnapproveDialog] = useState(false);
 
 	const handleUnapprove = () => {
 		if (!registrationId) return;
+		setShowUnapproveDialog(false);
 		startTransition(async () => {
 			const res = await fetch("/api/unapprove-registration", {
 				method: "POST",
@@ -124,7 +126,7 @@ export function ActionsCellComponent({
 					{approved && (
 						<DropdownMenuItem
 							className="text-destructive cursor-pointer"
-							onClick={handleUnapprove}
+							onClick={() => setShowUnapproveDialog(true)}
 							disabled={isPending}
 						>
 							<span className="flex items-center gap-1">
@@ -173,6 +175,33 @@ export function ActionsCellComponent({
 								: paid
 									? "Confirm Unpaid"
 									: "Confirm Payment"}
+						</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+
+			<Dialog open={showUnapproveDialog} onOpenChange={setShowUnapproveDialog}>
+				<DialogContent className="w-md rounded-2xl">
+					<DialogHeader>
+						<DialogTitle>Confirm Un-approval</DialogTitle>
+						<DialogDescription>
+							This will revoke the participant's approval and clear the approval
+							audit trail. No email will be sent.
+						</DialogDescription>
+					</DialogHeader>
+					<DialogFooter className="grid grid-cols-2 gap-2">
+						<Button
+							variant="outline"
+							onClick={() => setShowUnapproveDialog(false)}
+						>
+							Cancel
+						</Button>
+						<Button
+							variant="destructive"
+							onClick={handleUnapprove}
+							disabled={isPending}
+						>
+							{isPending ? "Unapproving..." : "Confirm Un-approval"}
 						</Button>
 					</DialogFooter>
 				</DialogContent>
