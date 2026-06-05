@@ -65,7 +65,7 @@ export const IEAAcceptanceEmail = ({
             </Text>
 
             {/* Event Highlights Box */}
-            <Section className="bg-[#f9f9f9] border-l-4 border-solid border-[#cc0099] p-[15px] my-[20px]">
+            <Section className="bg-[#f9f9f9] border-l-4 border-solid border-[#59168b] p-[15px] my-[20px]">
               <Text className="m-0 mb-[8px] text-[14px] leading-[24px]">
                 <strong>Theme:</strong> {theme}
               </Text>
@@ -97,14 +97,14 @@ export const IEAAcceptanceEmail = ({
 
             {/* --- ZOOM ACCESS PASS CREDENTIALS --- */}
             <Section className="bg-[#f1f7fe] border border-solid border-[#b3d7ff] rounded p-[20px] my-[25px]">
-              <Text className="m-0 mb-[12px] text-[16px] font-bold text-[#cc0099] text-center">
+              <Text className="m-0 mb-[12px] text-[16px] font-bold text-[#59168b] text-center">
                 INSTITUTE OF ECONOMIC AFFAIRS (IEA) ZOOM MEETING LINK
               </Text>
 
               <div className="text-center my-[15px]">
                 <Link
                   href="https://us02web.zoom.us/j/81431256100?pwd=pWt3MpkvaiQF1cpPHKI4Ja0R8YsdUS.1"
-                  className="bg-[#cc0099] text-white px-[20px] py-[10px] rounded font-bold text-[14px] inline-block no-underline"
+                  className="bg-[#59168b] text-white px-[20px] py-[10px] rounded font-bold text-[14px] inline-block no-underline"
                 >
                   Click Here to Join Zoom Meeting
                 </Link>
@@ -130,7 +130,7 @@ export const IEAAcceptanceEmail = ({
                   <Text className="m-0 text-[11px] font-bold uppercase tracking-wider text-[#94a3b8] mb-[4px]">
                     Passcode
                   </Text>
-                  <Text className="m-0 font-mono text-[16px] font-bold text-[#cc0099] select-all">
+                  <Text className="m-0 font-mono text-[16px] font-bold text-[#59168b] select-all">
                     IEA&lt;/&gt;26
                   </Text>
                 </div>
