@@ -12,6 +12,17 @@ export default async function AdminAnnouncementsPage() {
 		include: { user: true },
 	});
 
+	const serializedAnnouncements = announcements.map((a) => ({
+		id: a.id,
+		content: a.content,
+		featured: a.featured,
+		approved: a.approved,
+		createdAt: a.createdAt.toISOString(),
+		user: a.user
+			? { name: a.user.name ?? undefined, image: a.user.image }
+			: undefined,
+	}));
+
 	const approved = announcements.filter((a) => a.approved).length;
 	const featured = announcements.filter((a) => a.featured).length;
 
@@ -30,7 +41,7 @@ export default async function AdminAnnouncementsPage() {
 				extention={<ExtensionComponent />}
 				addFiltering={true}
 				columns={columns}
-				data={announcements}
+				data={serializedAnnouncements}
 			/>
 		</AdminPageWrapper>
 	);

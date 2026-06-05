@@ -9,7 +9,8 @@ const SmoothScroll: React.FC<React.PropsWithChildren<object>> = ({
 	children,
 }) => {
 	const containerRef = useRef<HTMLDivElement | null>(null);
-	const locomotiveRef = useRef<LocomotiveScroll | null>(null);
+	// biome-ignore lint/suspicious/noExplicitAny: LocomotiveScroll's bundled types don't match runtime API (missing update method)
+	const locomotiveRef = useRef<any>(null);
 	const _pathname = usePathname();
 
 	useEffect(() => {
@@ -23,9 +24,9 @@ const SmoothScroll: React.FC<React.PropsWithChildren<object>> = ({
 			if (!containerRef.current) return;
 
 			scrollInstance = new LocomotiveScrollConstructor({
-				el: containerRef.current,
+				el: containerRef.current as never,
 				smooth: true,
-			});
+			} as never);
 
 			locomotiveRef.current = scrollInstance;
 

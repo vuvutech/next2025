@@ -1,4 +1,3 @@
-// columns.tsx
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
@@ -7,7 +6,19 @@ import { Badge } from "@/components/ui/badge";
 import { formatAccraDate } from "@/lib/date";
 import { TestiomonialActionsCell } from "./TestimonialActionsCell";
 
-export const testimonialcolumns: ColumnDef<Record<string, unknown>>[] = [
+export interface TestimonialRow {
+	id: string;
+	content: string;
+	featured: boolean;
+	approved: boolean;
+	createdAt?: string;
+	user?: {
+		name?: string;
+		image?: string;
+	};
+}
+
+export const testimonialcolumns: ColumnDef<TestimonialRow>[] = [
 	{
 		header: "User",
 		accessorFn: (row) => row.user?.name || "Unknown",

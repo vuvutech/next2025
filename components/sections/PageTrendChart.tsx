@@ -48,7 +48,9 @@ export function PageTrendChart({ path, range }: PageTrendChartProps) {
 								content={
 									<ChartTooltipContent
 										indicator="dot"
-										labelFormatter={(d) => new Date(d).toLocaleDateString()}
+										labelFormatter={(d) =>
+											new Date(d as string | number).toLocaleDateString()
+										}
 									/>
 								}
 							/>

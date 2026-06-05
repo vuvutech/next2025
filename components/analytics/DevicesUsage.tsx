@@ -86,11 +86,14 @@ export function DevicesUsage() {
 								<ChartTooltipContent
 									indicator="dashed"
 									labelFormatter={(value) =>
-										new Date(value).toLocaleDateString("en-US", {
-											month: "short",
-											day: "numeric",
-											year: "numeric",
-										})
+										new Date(value as string | number).toLocaleDateString(
+											"en-US",
+											{
+												month: "short",
+												day: "numeric",
+												year: "numeric",
+											},
+										)
 									}
 								/>
 							}

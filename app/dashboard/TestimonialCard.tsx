@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import type { Session } from "@/lib/auth-types";
 import { getCurrentSession } from "../actions/functions";
 import { DataTable } from "./testimonial-data-table";
+import type { TestimonialRow } from "./testimonialcolumns";
 import { testimonialcolumns } from "./testimonialcolumns";
 
 interface UserSession {
@@ -26,7 +27,7 @@ export const dynamic = "force-dynamic";
 
 export default function TestimonialCard(_props: { session: Session | null }) {
 	const router = useRouter();
-	const [testimonials, setTestimonials] = useState([]);
+	const [testimonials, setTestimonials] = useState<TestimonialRow[]>([]);
 	const [_loading, setLoading] = useState(true);
 
 	const [isTestimonialLoading, setIsTestimonialLoading] =

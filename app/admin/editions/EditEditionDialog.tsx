@@ -42,6 +42,8 @@ export type EditionForm = {
 	priceViaZoom: string;
 	startDate: string;
 	endDate: string;
+	startTime: string;
+	endTime: string;
 	earlyBirdDeadline: string;
 	banner: string;
 	verticalBanner: string;

@@ -52,7 +52,6 @@ export function WorldMap({ dots, lineColor = "#ffffff" }: WorldMapProps) {
 					href="https://cffinedndwvfblwbglnn.supabase.co/storage/v1/object/public/school%20website/world.svg"
 					height="400"
 					width="800"
-					draggable={false}
 				/>
 			</svg>
 			<svg

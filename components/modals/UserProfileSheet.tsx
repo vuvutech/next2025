@@ -18,15 +18,45 @@ interface UserProfileSheetProps {
 	userId: string | null;
 }
 
+interface Profile {
+	country?: string | null;
+	telephone?: string | null;
+	mobile?: string | null;
+	biography?: string | null;
+	religion?: string | null;
+	profession?: string | null;
+	highestQualification?: string | null;
+	disabilityAssistance?: boolean | null;
+	disabilityDescription?: string | null;
+	emergencyContactName?: string | null;
+	emergencyContactTelephone?: string | null;
+	address?: string | null;
+	addressLine2?: string | null;
+	city?: string | null;
+	state?: string | null;
+	postalCode?: string | null;
+	facebook?: string | null;
+	twitter?: string | null;
+	youtube?: string | null;
+	linkedin?: string | null;
+	instagram?: string | null;
+	tiktok?: string | null;
+}
+
+interface UserDetails {
+	id: string;
+	name?: string | null;
+	email?: string | null;
+	image?: string | null;
+	profile?: Profile | null;
+}
+
 export function UserProfileSheet({
 	open,
 	onOpenChange,
 	userId,
 }: UserProfileSheetProps) {
-	const [userDetails, setUserDetails] = useState<Record<
-		string,
-		unknown
-	> | null>(null);
+	const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
 	const [loadingUser, setLoadingUser] = useState(false);
 
 	useEffect(() => {
@@ -81,8 +111,8 @@ export function UserProfileSheet({
 									<div className="relative">
 										<Avatar className="h-16 w-16">
 											<AvatarImage
-												src={userDetails.image || null}
-												alt={userDetails.name || null}
+												src={userDetails.image ?? undefined}
+												alt={userDetails.name ?? ""}
 											/>
 											<AvatarFallback>
 												{userDetails.name?.charAt(0) || "CN"}
@@ -92,12 +122,12 @@ export function UserProfileSheet({
 											{userDetails.profile?.country &&
 												(() => {
 													const code = getCountryCode(
-														userDetails.profile.country,
+														userDetails.profile?.country || "",
 													);
 													return code ? (
 														<span
 															className="translate-x-1/4 translate-y-1/4 text-base px-[2px] leading-none"
-															title={userDetails.profile.country}
+															title={userDetails.profile?.country || ""}
 														>
 															{countryCodeToFlagEmoji(code)}
 														</span>

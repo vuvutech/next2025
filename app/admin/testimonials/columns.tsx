@@ -11,7 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox"; // Corrected import for Che
 import { formatAccraDate } from "@/lib/date";
 import { ActionsCellComponent } from "./ActionsCellComponent";
 
-interface TestimonialRow {
+export interface TestimonialRow {
 	id: string;
 	content: string;
 	featured: boolean;

@@ -19,10 +19,10 @@ interface ApproveButtonProps {
 	name: string;
 	email: string;
 	approved: boolean;
-	startDate: Date | null;
-	endDate: Date | null;
-	price: number;
-	priceViaZoom: number;
+	startDate?: string | null;
+	endDate?: string | null;
+	price?: number | null;
+	priceViaZoom?: number | null;
 }
 
 export function ApproveButton({

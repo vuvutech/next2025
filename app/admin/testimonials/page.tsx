@@ -2,7 +2,7 @@ import { IconPackages } from "@tabler/icons-react";
 import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
 import { GenericDataTable } from "@/components/ui/data-table/generic-data-table";
 import { prisma } from "@/prisma/dbConnect";
-import { columns } from "./columns";
+import { columns, type TestimonialRow } from "./columns";
 import { ExtensionComponent } from "./ExtensionComponent";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +11,20 @@ export default async function AdminTestimonialsPage() {
 	const testimonials = await prisma.testimonial.findMany({
 		include: { user: true },
 	});
+
+	const serializedTestimonials: TestimonialRow[] = testimonials.map((t) => ({
+		id: t.id,
+		content: t.content,
+		featured: t.featured,
+		approved: t.approved,
+		createdAt: t.createdAt.toISOString(),
+		user: t.user
+			? {
+					name: t.user.name ?? "",
+					image: t.user.image ?? "",
+				}
+			: undefined,
+	}));
 
 	const approved = testimonials.filter((t) => t.approved).length;
 	const featured = testimonials.filter((t) => t.featured).length;
@@ -30,7 +44,7 @@ export default async function AdminTestimonialsPage() {
 				extention={<ExtensionComponent />}
 				addFiltering={true}
 				columns={columns}
-				data={testimonials}
+				data={serializedTestimonials}
 			/>
 		</AdminPageWrapper>
 	);

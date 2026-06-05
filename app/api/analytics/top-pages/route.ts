@@ -26,15 +26,10 @@ export async function GET(req: NextRequest) {
 		});
 
 		const topPages =
-			response.rows?.map(
-				(row: {
-					dimensionValues: { value: string }[];
-					metricValues: { value: string }[];
-				}) => ({
-					path: row.dimensionValues?.[0].value ?? "/",
-					views: Number(row.metricValues?.[0].value ?? 0),
-				}),
-			) ?? [];
+			response.rows?.map((row) => ({
+				path: row.dimensionValues?.[0].value ?? "/",
+				views: Number(row.metricValues?.[0].value ?? 0),
+			})) ?? [];
 
 		return NextResponse.json({ topPages });
 	} catch (err) {

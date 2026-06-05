@@ -119,6 +119,8 @@ export function ExtensionComponent() {
 				priceViaZoom: "",
 				startDate: "",
 				endDate: "",
+				startTime: "",
+				endTime: "",
 				banner: "",
 				verticalBanner: "",
 			});

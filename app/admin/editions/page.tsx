@@ -2,13 +2,26 @@ import { IconCalendarEvent } from "@tabler/icons-react";
 import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
 import { GenericDataTable } from "@/components/ui/data-table/generic-data-table";
 import { prisma } from "@/prisma/dbConnect";
-import { columns } from "./columns";
+import { columns, type EditionRow } from "./columns";
 import { ExtensionComponent } from "./ExtensionComponent";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminEditionsPage() {
 	const editions = await prisma.edition.findMany();
+
+	const serializedEditions: EditionRow[] = editions.map((e) => ({
+		id: e.id,
+		instituteId: e.instituteId,
+		overview: e.overview,
+		inPersonDelivery: e.inPersonDelivery,
+		onlineDelivery: e.onlineDelivery,
+		active: e.active,
+		price: e.price ?? undefined,
+		priceViaZoom: e.priceViaZoom ?? undefined,
+		startDate: e.startDate?.toISOString(),
+		endDate: e.endDate?.toISOString(),
+	}));
 
 	return (
 		<AdminPageWrapper
@@ -33,7 +46,7 @@ export default async function AdminEditionsPage() {
 				extention={<ExtensionComponent />}
 				addFiltering={true}
 				columns={columns}
-				data={editions}
+				data={serializedEditions}
 			/>
 		</AdminPageWrapper>
 	);

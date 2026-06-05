@@ -34,21 +34,21 @@ interface EditionSheetData {
 	id: string;
 	instituteId?: string;
 	title?: string;
-	theme?: string;
-	overview?: string;
-	seo?: string;
-	price?: number;
-	priceViaZoom?: number;
-	earlyBirdPrice?: number;
-	inPersonDelivery?: boolean;
-	onlineDelivery?: boolean;
+	theme?: string | null;
+	overview?: string | null;
+	seo?: string | null;
+	price?: number | null;
+	priceViaZoom?: number | null;
+	earlyBirdPrice?: number | null;
+	inPersonDelivery?: boolean | null;
+	onlineDelivery?: boolean | null;
 	startDate?: string;
 	endDate?: string;
 	earlyBirdDeadline?: string;
-	startTime?: string;
-	endTime?: string;
-	banner?: string;
-	verticalBanner?: string;
+	startTime?: string | null;
+	endTime?: string | null;
+	banner?: string | null;
+	verticalBanner?: string | null;
 }
 
 export function EditEditionSheet({ edition }: { edition: EditionSheetData }) {

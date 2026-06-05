@@ -12,12 +12,12 @@ import { ActionsCellComponent } from "./ActionsCellComponent";
 import { EditEditionSheet } from "./EditEditionSheet";
 import { InstituteInfo } from "./InstituteEditionImage";
 
-interface EditionRow {
+export interface EditionRow {
 	id: string;
-	instituteId?: string;
-	overview: string;
-	inPersonDelivery: boolean;
-	onlineDelivery: boolean;
+	instituteId: string;
+	overview: string | null;
+	inPersonDelivery: boolean | null;
+	onlineDelivery: boolean | null;
 	startDate?: string;
 	endDate?: string;
 	price?: number;
@@ -131,7 +131,7 @@ export const columns: ColumnDef<EditionRow>[] = [
 									: "N/A"}
 							</div>
 							<div className="text-primary">
-								{row.original.price
+								{row.original.priceViaZoom
 									? USDollar.format(row.original.priceViaZoom)
 									: "N/A"}
 							</div>
@@ -215,10 +215,10 @@ export const columns: ColumnDef<EditionRow>[] = [
 						active={edition.active}
 						setFormState={(_state: {
 							id?: string;
-							overview?: string;
+							overview?: string | null;
 							active: boolean;
-							startDate?: Date;
-							endDate?: Date;
+							startDate?: string;
+							endDate?: string;
 						}): void => {
 							throw new Error("Function not implemented.");
 						}}

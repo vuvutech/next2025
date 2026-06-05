@@ -9,18 +9,18 @@ import { formatAccraDate } from "@/lib/date";
 import { ActionsCellComponent } from "./ActionsCellComponent";
 import { ApproveButton } from "./ApproveButton";
 
-interface RegistrationRow {
+export interface RegistrationRow {
 	id: string;
 	createdAt?: string;
 	approved: boolean;
-	approvedBy?: string;
+	approvedBy?: string | null;
 	paid: boolean;
-	paidBy?: string;
+	paidBy?: string | null;
 	user?: {
 		id: string;
-		name: string;
-		email: string;
-		image: string;
+		name?: string;
+		email?: string;
+		image?: string;
 		studentId?: string;
 	};
 	edition?: {
@@ -29,7 +29,7 @@ interface RegistrationRow {
 		price?: number;
 		priceViaZoom?: number;
 		institute?: {
-			name: string;
+			name?: string;
 			logo?: string;
 		};
 	};
@@ -46,7 +46,9 @@ export function createColumns(
 				<button
 					type="button"
 					className="rounded-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-					onClick={() => onViewUser(row.original.user?.id)}
+					onClick={() =>
+						row.original.user?.id && onViewUser(row.original.user.id)
+					}
 				>
 					<Image
 						src={row.original.user?.image || "/images/avatar.webp"}
@@ -65,7 +67,9 @@ export function createColumns(
 				<button
 					type="button"
 					className="cursor-pointer text-left bg-transparent border-0 p-0 block w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-					onClick={() => onViewUser(row.original.user?.id)}
+					onClick={() =>
+						row.original.user?.id && onViewUser(row.original.user.id)
+					}
 				>
 					<h6 className="text-current gap-2 text-sm">
 						{row.original.user?.name}

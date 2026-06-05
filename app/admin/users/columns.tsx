@@ -11,7 +11,7 @@ import { ActionsCellComponent } from "./ActionsCellComponent";
 import { AdminRoleToggleForm } from "./AdminRoleToggleForm";
 import { BanToggleForm } from "./BanToggleForm";
 
-interface UserRow {
+export interface UserRow {
 	id: string;
 	image?: string;
 	name: string;
@@ -47,8 +47,8 @@ export function createColumns(
 					<div className="relative">
 						<Avatar className="h-12 w-12">
 							<AvatarImage
-								src={row.original.image || null}
-								alt={row.original.name || null}
+								src={row.original.image ?? undefined}
+								alt={row.original.name}
 							/>
 							<AvatarFallback>
 								{row.original.name.charAt(0) || "CN"}

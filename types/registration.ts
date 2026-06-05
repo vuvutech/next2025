@@ -48,6 +48,6 @@ export interface AnnouncementRow {
 	createdAt: string;
 	user?: {
 		name?: string;
-		image?: string;
+		image?: string | null;
 	};
 }

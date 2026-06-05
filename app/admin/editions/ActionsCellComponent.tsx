@@ -16,16 +16,16 @@ import { getBaseUrl } from "@/config/site";
 
 interface ActionsCellProps {
 	id: string;
-	overview: string;
-	startDate?: Date;
-	endDate?: Date;
+	overview: string | null;
+	startDate?: string;
+	endDate?: string;
 	active: boolean;
 	setFormState: (state: {
 		id?: string;
-		overview?: string;
+		overview?: string | null;
 		active: boolean;
-		startDate?: Date;
-		endDate?: Date;
+		startDate?: string;
+		endDate?: string;
 	}) => void;
 	setIsEditing: (editing: boolean) => void;
 	openDialog: () => void;

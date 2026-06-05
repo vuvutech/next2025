@@ -4,15 +4,11 @@
 import { useMemo, useState } from "react";
 import { UserProfileSheet } from "@/components/modals/UserProfileSheet";
 import { GenericDataTable } from "@/components/ui/data-table/generic-data-table";
-import { createColumns } from "./columns";
+import { createColumns, type UserRow } from "./columns";
 
 export const dynamic = "force-dynamic";
 
-export default function ClientWrapper({
-	data,
-}: {
-	data: Record<string, unknown>[];
-}) {
+export default function ClientWrapper({ data }: { data: UserRow[] }) {
 	const [viewUserId, setViewUserId] = useState<string | null>(null);
 	const [showSheet, setShowSheet] = useState(false);
 

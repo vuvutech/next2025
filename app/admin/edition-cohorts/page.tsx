@@ -15,6 +15,16 @@ export default async function EditionCohortsPage() {
 		},
 	});
 
+	const serializedEditions = editions.map((e) => ({
+		id: e.id,
+		title: e.title,
+		startDate: e.startDate?.toISOString() ?? "",
+		endDate: e.endDate?.toISOString() ?? "",
+		institute: e.institute
+			? { name: e.institute.name, acronym: e.institute.acronym }
+			: undefined,
+	}));
+
 	return (
 		<AdminPageWrapper
 			icon={IconSchool}
@@ -24,7 +34,7 @@ export default async function EditionCohortsPage() {
 				{ label: "Total Cohorts", value: editions.length, variant: "default" },
 			]}
 		>
-			<EditionTabs editions={editions} />
+			<EditionTabs editions={serializedEditions} />
 		</AdminPageWrapper>
 	);
 }

@@ -60,9 +60,9 @@ export async function POST(req: NextRequest) {
 		const profile = existing
 			? await prisma.profile.update({
 					where: { userId: user.id },
-					data: payload,
+					data: payload as never,
 				})
-			: await prisma.profile.create({ data: payload });
+			: await prisma.profile.create({ data: payload as never });
 		revalidatePath(`/apply`);
 		return NextResponse.json(profile);
 	} catch (err) {

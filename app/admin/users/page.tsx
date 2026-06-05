@@ -2,6 +2,7 @@ import { IconUsers } from "@tabler/icons-react";
 import { AdminPageWrapper } from "@/components/admin/admin-page-wrapper";
 import { prisma } from "@/prisma/dbConnect";
 import ClientWrapper from "./ClientWrapper";
+import type { UserRow } from "./columns";
 
 export const dynamic = "force-dynamic";
 
@@ -25,8 +26,13 @@ export default async function AdminUsersPage() {
 		},
 	});
 
-	const serializedUsers = users.map((user) => ({
-		...user,
+	const serializedUsers: UserRow[] = users.map((user) => ({
+		id: user.id,
+		name: user.name,
+		email: user.email,
+		role: user.role,
+		banned: user.banned ?? false,
+		studentId: user.studentId ?? undefined,
 		createdAt: user.createdAt.toISOString(),
 	}));
 
