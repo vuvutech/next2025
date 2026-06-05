@@ -70,17 +70,16 @@ export default function EditionRegistrationsTable({
 
 	return (
 		<>
-			<div className="flex items-center justify-between">
-				<div />
-				<ExportButton
-					registrations={registrations}
-					editionTitle={editionTitle}
-				/>
-			</div>
 			<GenericDataTable
 				columns={columns}
 				data={registrations}
 				addFiltering={true}
+				extention={
+					<ExportButton
+						registrations={registrations}
+						editionTitle={editionTitle}
+					/>
+				}
 			/>
 			<UserProfileSheet
 				open={showSheet}

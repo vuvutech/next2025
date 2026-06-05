@@ -76,7 +76,7 @@ export function ExportButton({
 		<div className="flex items-center gap-2">
 			<Button
 				variant="outline"
-				size="sm"
+				size="default"
 				className="flex items-center gap-1.5 text-xs"
 				onClick={exportExcel}
 			>
@@ -85,7 +85,7 @@ export function ExportButton({
 			</Button>
 			<Button
 				variant="outline"
-				size="sm"
+				size="default"
 				className="flex items-center gap-1.5 text-xs"
 				onClick={exportPDF}
 			>
