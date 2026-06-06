@@ -90,3 +90,6 @@ todo.md
 tmp/
 # React Email local development cache
 **/emails/.react-email
+
+# React Email generated exports (from `bunx email export`)
+emails/
