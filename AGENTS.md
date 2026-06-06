@@ -63,6 +63,13 @@ Required in `.env.local`:
 - **TypeScript**: Strict mode enforced (`"strict": true`). Use the `satisfies` operator for complex configurations to retain literal type inferences.
 - **Tailwind CSS**: v4+ configured with class-variance-authority for component variant management.
 
+## 🗄️ Database Backups
+
+- **Take a snapshot**: `bun run backup` (script: `scripts/backup-mongo.ts`)
+- **Output**: `./backups/<UTC-ISO-date>/<collection>.json` — one file per collection, gitignored
+- **Behaviour**: Read-only. Connects with `readPreference: secondary` and uses only `listCollections()` + `find()` cursors. Never writes, updates, deletes, drops, or runs aggregations with write stages.
+- **Database is in production**: Never run anything from a script that mutates state. The backup script is the only one safe to invoke against the live DB. If you need to restore, do it manually via the Atlas dashboard or a one-off ad-hoc script — do not add a restore command to this codebase.
+
 ## 📝 Code Conventions
 
 - **Imports**: Group external libraries first, then internal modules. Use explicit file extensions (`.js` / `.ts`) for internal modules if required by the target ES Module config.

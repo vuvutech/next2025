@@ -93,3 +93,6 @@ tmp/
 
 # React Email generated exports (from `bunx email export`)
 emails/
+
+# Local MongoDB backup dumps (from `bun run backup`)
+/backups/
