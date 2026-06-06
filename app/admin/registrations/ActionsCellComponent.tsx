@@ -28,6 +28,7 @@ import {
 
 interface ActionsCellProps {
 	id?: string;
+	name?: string;
 	onViewUser?: (id: string) => void;
 	registrationId?: string;
 	approved?: boolean;
@@ -36,6 +37,7 @@ interface ActionsCellProps {
 
 export function ActionsCellComponent({
 	id,
+	name,
 	onViewUser,
 	registrationId,
 	approved,
@@ -156,9 +158,24 @@ export function ActionsCellComponent({
 							{paid ? "Confirm Unpaid Status" : "Confirm Payment"}
 						</DialogTitle>
 						<DialogDescription>
-							{paid
-								? "This will mark the participant's payment as unpaid."
-								: "I confirm that the participant has made payment and meets the financial requirements for the programme."}
+							{paid ? (
+								<>
+									This will mark{" "}
+									<span className="font-bold">
+										{name ?? "this participant"}
+									</span>
+									's payment as unpaid.
+								</>
+							) : (
+								<>
+									I confirm that{" "}
+									<span className="font-bold">
+										{name ?? "this participant"}
+									</span>{" "}
+									has made payment and meets the financial requirements for the
+									programme.
+								</>
+							)}
 						</DialogDescription>
 					</DialogHeader>
 					<DialogFooter className="grid grid-cols-2 gap-2">

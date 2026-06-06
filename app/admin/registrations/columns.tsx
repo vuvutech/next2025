@@ -235,6 +235,7 @@ export function createColumns(
 					<div className="flex items-center gap-2">
 						<ActionsCellComponent
 							id={row.original.user?.id}
+							name={row.original.user?.name}
 							onViewUser={onViewUser}
 							registrationId={row.original.id}
 							approved={row.original.approved}
