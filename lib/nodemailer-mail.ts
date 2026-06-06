@@ -26,7 +26,7 @@ export async function sendMail({
 
 	await transporter.sendMail({
 		from: `"COSTrAD Institute" <${process.env.SMTP_FROM}>`,
-		replyTo: `no-reply@costrad.org`,
+		replyTo: `correspondence@costrad.org`,
 		to,
 		subject,
 		html,

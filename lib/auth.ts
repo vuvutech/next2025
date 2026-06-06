@@ -21,7 +21,7 @@ import { reactResetPasswordEmail } from "./email/rest-password";
 import VerifyEmail from "./email/VerifyEmail";
 import { baseUrl } from "./metadata";
 
-const from = process.env.BETTER_AUTH_EMAIL || "notifications@costrad.org";
+const from = process.env.BETTER_AUTH_EMAIL || "correspondence@costrad.org";
 
 export const auth = betterAuth({
 	appName: "College of Sustainable Transformation and Development",
@@ -161,7 +161,7 @@ export const auth = betterAuth({
 		minPasswordLength: 8,
 		async sendResetPassword({ user, url }) {
 			await resend.emails.send({
-				from: "no-reply@costrad.org",
+				from: "correspondence@costrad.org",
 				to: user.email,
 				subject: "Reset your COSTrAD password",
 				react: reactResetPasswordEmail({
