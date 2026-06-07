@@ -57,6 +57,7 @@ export function EditEditionSheet({ edition }: { edition: EditionSheetData }) {
 		[],
 	);
 	const [loading, setLoading] = useState(false);
+	const [open, setOpen] = useState(false);
 
 	const [form, setForm] = useState(() => ({
 		instituteId: edition?.instituteId ?? "",
@@ -127,6 +128,7 @@ export function EditEditionSheet({ edition }: { edition: EditionSheetData }) {
 			}
 
 			toast.success("Edition updated!");
+			setOpen(false);
 			router.refresh();
 		} catch (err: unknown) {
 			toast.error(err instanceof Error ? err.message : "Something went wrong.");
@@ -136,7 +138,7 @@ export function EditEditionSheet({ edition }: { edition: EditionSheetData }) {
 	};
 
 	return (
-		<Sheet>
+		<Sheet open={open} onOpenChange={setOpen}>
 			<SheetTrigger className="cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-9 px-4 py-2">
 				<IconEdit />
 			</SheetTrigger>

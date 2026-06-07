@@ -73,7 +73,9 @@ export const columns: ColumnDef<Institute>[] = [
 		cell: ({ row }) => (
 			<div className="space-y-2">
 				<p className="whitespace-normal line-clamp-3 break-words text-sm max-w-[450px]">
-					{row.original.overview}
+					{row.original.overview || (
+						<span className="italic text-muted-foreground">No overview</span>
+					)}
 				</p>
 				<h5 className="font-bebas">— {row.original.name || "Unknown"}</h5>
 			</div>

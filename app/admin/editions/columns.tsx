@@ -7,7 +7,7 @@ import { DeleteConfirmationDialog } from "@/components/modals/delete-confirmatio
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getBaseUrl } from "@/config/site";
-import { formatAccraDate } from "@/lib/date";
+import { formatAccraDate, formatTime } from "@/lib/date";
 import { ActionsCellComponent } from "./ActionsCellComponent";
 import { EditEditionSheet } from "./EditEditionSheet";
 import { InstituteInfo } from "./InstituteEditionImage";
@@ -68,7 +68,9 @@ export const columns: ColumnDef<EditionRow>[] = [
 		cell: ({ row }) => (
 			<div className="space-y-2">
 				<p className="whitespace-normal line-clamp-3  text-sm max-w-[450px]">
-					{row.original.overview}
+					{row.original.overview || (
+						<span className="italic text-muted-foreground">No overview</span>
+					)}
 				</p>
 				<h5 className="font-bebas flex items-center ">
 					&mdash;&nbsp;{" "}
@@ -129,6 +131,20 @@ export const columns: ColumnDef<EditionRow>[] = [
 							{row.original.endDate
 								? formatAccraDate(row.original.endDate, "PPP")
 								: "N/A"}
+						</div>
+					</div>
+					<div className="bg-muted after:bg-primary/70 relative rounded-md p-2 pl-6 text-sm after:absolute after:inset-y-2 after:left-2 after:w-1 after:rounded-full">
+						<div className="font-medium">Start Time</div>
+						<div className="text-muted-foreground text-xs">
+							{row.original.startTime
+								? formatTime(row.original.startTime)
+								: "N/A"}
+						</div>
+					</div>
+					<div className="bg-muted after:bg-primary/70 relative rounded-md p-2 pl-6 text-sm after:absolute after:inset-y-2 after:left-2 after:w-1 after:rounded-full">
+						<div className="font-medium">End Time</div>
+						<div className="text-muted-foreground text-xs">
+							{row.original.endTime ? formatTime(row.original.endTime) : "N/A"}
 						</div>
 					</div>
 					<div className="bg-muted after:bg-primary/70 relative rounded-md p-2 pl-6 text-sm after:absolute after:inset-y-2 after:left-2 after:w-1 after:rounded-full">
