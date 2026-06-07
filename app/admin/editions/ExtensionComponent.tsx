@@ -34,6 +34,15 @@ type Institute = {
 	logo?: string;
 };
 
+const COSTRAD_DEFAULT_START = "09:00";
+const COSTRAD_DEFAULT_END = "16:00";
+const INSTITUTE_DEFAULT_START = "16:00";
+const INSTITUTE_DEFAULT_END = "19:00";
+
+function isInstituteCOSTrAD(name: string): boolean {
+	return name.toLowerCase().includes("costrad");
+}
+
 export function ExtensionComponent() {
 	const [institutes, setInstitutes] = useState<Institute[]>([]);
 	const [, setSelectedInstituteId] = useState<string>("");
@@ -60,8 +69,8 @@ export function ExtensionComponent() {
 		priceViaZoom: "",
 		startDate: "",
 		endDate: "",
-		startTime: "",
-		endTime: "",
+		startTime: COSTRAD_DEFAULT_START,
+		endTime: COSTRAD_DEFAULT_END,
 		banner: "",
 		verticalBanner: "",
 	});
@@ -181,7 +190,20 @@ export function ExtensionComponent() {
 							institutes={institutes}
 							onSelect={(id) => {
 								setSelectedInstituteId(id);
-								setForm((prev) => ({ ...prev, instituteId: id }));
+								const institute = institutes.find((i) => i.id === id);
+								const isCOSTrAD = institute
+									? isInstituteCOSTrAD(institute.name)
+									: false;
+								setForm((prev) => ({
+									...prev,
+									instituteId: id,
+									startTime: isCOSTrAD
+										? COSTRAD_DEFAULT_START
+										: INSTITUTE_DEFAULT_START,
+									endTime: isCOSTrAD
+										? COSTRAD_DEFAULT_END
+										: INSTITUTE_DEFAULT_END,
+								}));
 							}}
 						/>
 					</div>

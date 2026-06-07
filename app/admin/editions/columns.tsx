@@ -15,13 +15,22 @@ import { InstituteInfo } from "./InstituteEditionImage";
 export interface EditionRow {
 	id: string;
 	instituteId: string;
+	title: string;
+	theme: string | null;
 	overview: string | null;
+	seo: string | null;
 	inPersonDelivery: boolean | null;
 	onlineDelivery: boolean | null;
 	startDate?: string;
 	endDate?: string;
+	startTime?: string | null;
+	endTime?: string | null;
 	price?: number;
 	priceViaZoom?: number;
+	earlyBirdPrice?: number;
+	earlyBirdDeadline?: string;
+	banner?: string | null;
+	verticalBanner?: string | null;
 	active: boolean;
 }
 

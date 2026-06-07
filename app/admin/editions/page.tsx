@@ -13,14 +13,23 @@ export default async function AdminEditionsPage() {
 	const serializedEditions: EditionRow[] = editions.map((e) => ({
 		id: e.id,
 		instituteId: e.instituteId,
+		title: e.title,
+		theme: e.theme,
 		overview: e.overview,
+		seo: e.seo,
 		inPersonDelivery: e.inPersonDelivery,
 		onlineDelivery: e.onlineDelivery,
 		active: e.active,
 		price: e.price ?? undefined,
 		priceViaZoom: e.priceViaZoom ?? undefined,
+		earlyBirdPrice: e.earlyBirdPrice ?? undefined,
+		earlyBirdDeadline: e.earlyBirdDeadline?.toISOString(),
 		startDate: e.startDate?.toISOString(),
 		endDate: e.endDate?.toISOString(),
+		startTime: e.startTime,
+		endTime: e.endTime,
+		banner: e.banner,
+		verticalBanner: e.verticalBanner,
 	}));
 
 	return (
