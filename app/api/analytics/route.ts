@@ -202,6 +202,26 @@ export async function GET(req: NextRequest) {
 				const count = Number(response.rows?.[0].metricValues?.[0].value ?? 0);
 				return NextResponse.json({ sessions: count, count });
 			}
+
+			case "top-countries": {
+				const [response] = await analyticsDataClient.runReport({
+					property: `properties/${propertyId}`,
+					dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
+					dimensions: [{ name: "country" }, { name: "countryId" }],
+					metrics: [{ name: "sessions" }],
+					orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
+					limit: 20,
+				});
+
+				const countries =
+					response.rows?.map((row) => ({
+						name: row.dimensionValues?.[0].value ?? "Unknown",
+						code: (row.dimensionValues?.[1].value ?? "").toLowerCase(),
+						sessions: Number(row.metricValues?.[0].value ?? 0),
+					})) ?? [];
+
+				return NextResponse.json({ countries });
+			}
 			default: {
 				const startDate = RANGE_MAP[range] ?? "7daysAgo";
 				const [response] = await analyticsDataClient.runReport({

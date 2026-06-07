@@ -22,6 +22,7 @@ import { MostPopularEditionCard } from "@/components/analytics/DashboardMetricsC
 import { DevicesUsage } from "@/components/analytics/DevicesUsage";
 import { RegisteredUsersCard } from "@/components/analytics/RegisteredUsersCard";
 import { SessionsCard } from "@/components/analytics/SessionsCard";
+import { TopCountriesCard } from "@/components/analytics/TopCountriesCard";
 import { GaTopPagesChartBar } from "@/components/chart-area-interactive";
 import {
 	Card,
@@ -366,6 +367,11 @@ export default async function AdminDashboardPage() {
 						</CardContent>
 					</Card>
 				</div>
+			</section>
+
+			{/* Top Visitor Countries — full-width bar chart */}
+			<section className="w-full">
+				<TopCountriesCard />
 			</section>
 
 			{/* Quick Navigation Area */}

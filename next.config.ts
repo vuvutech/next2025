@@ -4,7 +4,7 @@ import type { NextConfig } from "next";
 process.env.TZ = "Africa/Accra";
 
 const nextConfig: NextConfig = {
-	allowedDevOrigins: ["192.168.10.20"],
+	allowedDevOrigins: ["192.168.100.*"],
 	headers: async () => {
 		const securityHeaders = [
 			{ key: "X-Frame-Options", value: "DENY" },
