@@ -39,7 +39,7 @@ export const AdminApprovalRequestEmail = ({
   applicantEmail,
   applicantPhone,
   applicantAddress,
-  dashboardLink = "https://www.costrad.org/admin/registrations",
+  dashboardLink = "https://www.costrad.org/admin/edition-cohorts",
 }: AdminApprovalRequestEmailProps) => {
   const previewText = `Approval needed: ${applicantName} applied for ${editionTitle}`;
 
