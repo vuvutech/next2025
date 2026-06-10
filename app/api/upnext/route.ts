@@ -7,7 +7,7 @@ export async function GET(_req: NextRequest) {
 
 	const nextEdition = await prisma.edition.findFirst({
 		where: {
-			startDate: { gt: now },
+			endDate: { gte: now },
 		},
 		orderBy: { startDate: "asc" },
 		select: {

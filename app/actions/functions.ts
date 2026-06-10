@@ -236,11 +236,11 @@ export async function getCurrentEditions() {
 			orderBy: {
 				startDate: "asc",
 			},
-			where: {
-				startDate: {
-					gte: new Date(new Date().setHours(0, 0, 0, 0)), // Midnight today
-				},
+		where: {
+			endDate: {
+				gte: new Date(new Date().setHours(0, 0, 0, 0)), // Show editions until their end date
 			},
+		},
 		});
 		return editions;
 	} catch (error) {
