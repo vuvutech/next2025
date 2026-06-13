@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { ProfileSection } from "@/components/dashboard/profile-section";
 import { auth } from "@/lib/auth";
+
+export const metadata: Metadata = {
+	title: "Profile",
+	description: "Manage your personal information and profile settings.",
+};
 
 export default async function ProfilePage() {
 	const session = await auth.api.getSession({
@@ -12,9 +18,5 @@ export default async function ProfilePage() {
 		redirect("/auth/sign-in");
 	}
 
-	return (
-		<div className="p-4">
-			<ProfileSection session={session} />
-		</div>
-	);
+	return <ProfileSection session={session} />;
 }

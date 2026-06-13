@@ -1,8 +1,11 @@
 "use client";
 
 import type { Session, User } from "better-auth";
-import { Upload } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { updateUserName } from "@/app/actions/userfunctions";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,15 +16,52 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export function ProfileSection({
-	session,
-}: {
+interface ProfileSectionProps {
 	session: { user: User; session: Session };
-}) {
+}
+
+function getInitials(name: string | null | undefined): string {
+	if (!name) return "?";
+	return name
+		.split(" ")
+		.map((n) => n[0])
+		.join("")
+		.toUpperCase()
+		.slice(0, 2);
+}
+
+export function ProfileSection({ session }: ProfileSectionProps) {
 	const [isEditing, setIsEditing] = useState(false);
+
+	const form = useForm<{ name: string }>({
+		defaultValues: { name: session.user.name || "" },
+	});
+
+	const {
+		formState: { isSubmitting },
+	} = form;
+
+	const handleSave = async (data: { name: string }) => {
+		const result = await updateUserName(data);
+		if (result.error) {
+			toast.error(result.error);
+			return;
+		}
+		toast.success("Name updated successfully");
+		setIsEditing(false);
+	};
+
 	return (
 		<div className="space-y-6">
 			<div>
@@ -44,35 +84,21 @@ export function ProfileSection({
 				</CardHeader>
 				<CardContent className="flex flex-col items-center space-y-4 sm:flex-row sm:items-start sm:space-x-4 sm:space-y-0">
 					<Avatar className="h-24 w-24 border border-zinc-200 dark:border-zinc-800">
-						<AvatarImage src={session.user.image ?? ""} alt="User" />
-
+						<AvatarImage
+							src={session.user.image ?? ""}
+							alt={session.user.name || "User"}
+						/>
 						<AvatarFallback className="bg-zinc-100 dark:bg-zinc-800 text-xl text-zinc-800 dark:text-zinc-200">
-							{session.user.name
-								?.split(" ")
-								.map((n) => n[0])
-								.join("")
-								.toUpperCase()}
+							{getInitials(session.user.name)}
 						</AvatarFallback>
 					</Avatar>
-					<div className="flex flex-col space-y-2">
-						<Button
-							variant="outline"
-							className="border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 dark:hover:text-zinc-100"
-						>
-							<Upload className="mr-2 h-4 w-4" />
-							Upload new image
-						</Button>
-						<Button
-							variant="ghost"
-							className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
-						>
-							Remove
-						</Button>
+					<div className="flex flex-col space-y-2 text-sm text-zinc-500 dark:text-zinc-400">
+						<p>Upload and manage your profile picture from account settings.</p>
 					</div>
 				</CardContent>
 			</Card>
 
-			<Card className="border-zinc-200 dark:border-zinc-800 border dark:bg-transparent">
+			<Card className="border-zinc-200 dark:border-zinc-800 dark:bg-transparent">
 				<CardHeader>
 					<CardTitle className="text-zinc-900 dark:text-zinc-100">
 						Personal Information
@@ -82,75 +108,118 @@ export function ProfileSection({
 					</CardDescription>
 				</CardHeader>
 				<CardContent className="space-y-4">
-					<div className="grid grid-cols-1">
-						<div className="space-y-2">
-							<Label
-								htmlFor="name"
-								className="text-zinc-900 dark:text-zinc-100"
-							>
-								Name
-							</Label>
-							<Input
-								id="name"
-								value={session.user.name}
-								defaultValue="John"
-								disabled={!isEditing}
-								className="border-zinc-200 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 focus-visible:ring-zinc-950 dark:focus-visible:ring-zinc-300"
-							/>
-						</div>
-					</div>
-					<div className="space-y-2">
-						<Label htmlFor="email" className="text-zinc-900 dark:text-zinc-100">
-							Email address
-						</Label>
-						<Input
-							id="email"
-							type="email"
-							value={session.user.email}
-							defaultValue="john.doe@example.com"
-							disabled={!isEditing}
-							className="border-zinc-200 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 focus-visible:ring-zinc-950 dark:focus-visible:ring-zinc-300"
-						/>
-					</div>
-					<div className="space-y-2">
-						<Label htmlFor="phone" className="text-zinc-900 dark:text-zinc-100">
-							Phone number
-						</Label>
-						<Input
-							id="phone"
-							type="tel"
-							defaultValue="+1 (555) 123-4567"
-							disabled={!isEditing}
-							className="border-zinc-200 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 focus-visible:ring-zinc-950 dark:focus-visible:ring-zinc-300"
-						/>
-					</div>
-				</CardContent>
-				<CardFooter className="flex justify-end space-x-2 border-t border-zinc-100 dark:border-zinc-800 px-6 py-4">
 					{isEditing ? (
-						<>
-							<Button
-								variant="outline"
-								onClick={() => setIsEditing(false)}
-								className="border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
+						<Form {...form}>
+							<form
+								onSubmit={form.handleSubmit(handleSave)}
+								className="space-y-4"
 							>
-								Cancel
-							</Button>
-							<Button
-								onClick={() => setIsEditing(false)}
-								className="bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200"
-							>
-								Save changes
-							</Button>
-						</>
+								<FormField
+									control={form.control}
+									name="name"
+									rules={{ required: "Name is required" }}
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel className="text-zinc-900 dark:text-zinc-100">
+												Name
+											</FormLabel>
+											<FormControl>
+												<Input
+													{...field}
+													className="border-zinc-200 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 focus-visible:ring-zinc-950 dark:focus-visible:ring-zinc-300"
+												/>
+											</FormControl>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+								<div className="space-y-2">
+									<Label
+										htmlFor="email-readonly"
+										className="text-zinc-900 dark:text-zinc-100"
+									>
+										Email address
+									</Label>
+									<Input
+										id="email-readonly"
+										type="email"
+										value={session.user.email}
+										disabled
+										className="border-zinc-200 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100"
+									/>
+									<p className="text-xs text-zinc-500 dark:text-zinc-400">
+										Email cannot be changed here.
+									</p>
+								</div>
+								<div className="flex justify-end space-x-2">
+									<Button
+										type="button"
+										variant="outline"
+										onClick={() => {
+											setIsEditing(false);
+											form.reset({ name: session.user.name || "" });
+										}}
+										className="border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
+									>
+										Cancel
+									</Button>
+									<Button
+										type="submit"
+										disabled={isSubmitting}
+										className="bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200"
+									>
+										{isSubmitting ? (
+											<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+										) : null}
+										{isSubmitting ? "Saving..." : "Save changes"}
+									</Button>
+								</div>
+							</form>
+						</Form>
 					) : (
+						<>
+							<div className="space-y-2">
+								<Label
+									htmlFor="name-display"
+									className="text-zinc-900 dark:text-zinc-100"
+								>
+									Name
+								</Label>
+								<Input
+									id="name-display"
+									value={session.user.name}
+									disabled
+									className="border-zinc-200 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100"
+								/>
+							</div>
+							<div className="space-y-2">
+								<Label
+									htmlFor="email-display"
+									className="text-zinc-900 dark:text-zinc-100"
+								>
+									Email address
+								</Label>
+								<Input
+									id="email-display"
+									type="email"
+									value={session.user.email}
+									disabled
+									className="border-zinc-200 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100"
+								/>
+							</div>
+						</>
+					)}
+				</CardContent>
+				{!isEditing && (
+					<CardFooter className="flex justify-end border-t border-zinc-100 dark:border-zinc-800 px-6 py-4">
 						<Button
 							onClick={() => setIsEditing(true)}
 							className="bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200"
 						>
 							Edit profile
 						</Button>
-					)}
-				</CardFooter>
+					</CardFooter>
+				)}
 			</Card>
 		</div>
 	);

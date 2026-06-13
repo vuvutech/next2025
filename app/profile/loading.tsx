@@ -2,27 +2,37 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProfileLoading() {
 	return (
-		<div className="container max-w-4xl py-12 space-y-12">
-			<div className="flex flex-col md:flex-row items-center gap-8 border-b pb-12">
-				<Skeleton className="size-32 rounded-full shrink-0" />
-				<div className="flex-1 space-y-4 w-full">
-					<Skeleton className="h-10 w-2/3" />
-					<Skeleton className="h-4 w-1/2" />
+		<div className="space-y-6">
+			<div>
+				<Skeleton className="h-8 w-24 mb-2" />
+				<Skeleton className="h-4 w-64" />
+			</div>
+
+			<div className="rounded-lg border border-zinc-200 dark:border-zinc-800 p-6">
+				<Skeleton className="h-6 w-32 mb-2" />
+				<Skeleton className="h-4 w-48 mb-6" />
+				<div className="flex items-center space-x-4">
+					<Skeleton className="h-24 w-24 rounded-full" />
+					<Skeleton className="h-4 w-64" />
 				</div>
 			</div>
 
-			<div className="grid gap-8 md:grid-cols-2">
-				{Array.from({ length: 6 }).map((_, i) => (
-					// biome-ignore lint/suspicious/noArrayIndexKey: static list
-					<div key={i} className="space-y-3">
-						<Skeleton className="h-4 w-1/4" />
-						<Skeleton className="h-11 w-full" />
+			<div className="rounded-lg border border-zinc-200 dark:border-zinc-800 p-6">
+				<Skeleton className="h-6 w-40 mb-2" />
+				<Skeleton className="h-4 w-56 mb-6" />
+				<div className="space-y-4">
+					<div className="space-y-2">
+						<Skeleton className="h-4 w-12" />
+						<Skeleton className="h-10 w-full" />
 					</div>
-				))}
-			</div>
-
-			<div className="flex justify-end pt-6">
-				<Skeleton className="h-11 w-40" />
+					<div className="space-y-2">
+						<Skeleton className="h-4 w-12" />
+						<Skeleton className="h-10 w-full" />
+					</div>
+				</div>
+				<div className="flex justify-end mt-6">
+					<Skeleton className="h-10 w-28" />
+				</div>
 			</div>
 		</div>
 	);

@@ -1,12 +1,12 @@
 import { Toaster } from "sonner";
-import Jumbotron from "@/components/sections/Jumbotron";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="block p-2">
+		<div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
 			<Toaster />
-			<Jumbotron />
-			<div className="md:p-4 pt-4 max-w-8xl mx-auto space-y-4">{children}</div>
+			<div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+				{children}
+			</div>
 		</div>
 	);
 }
