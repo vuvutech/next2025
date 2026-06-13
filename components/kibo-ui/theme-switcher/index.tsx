@@ -2,26 +2,25 @@
 
 import { useControllableState } from "@radix-ui/react-use-controllable-state";
 import { Monitor, Moon, Sun } from "lucide-react";
-import { motion } from "motion/react";
 import { useTheme } from "next-themes";
 import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const themes = [
 	{
+		key: "light",
+		icon: Sun,
+		label: "Light mode",
+	},
+	{
 		key: "system",
 		icon: Monitor,
 		label: "System theme",
 	},
 	{
-		key: "light",
-		icon: Sun,
-		label: "Light theme",
-	},
-	{
 		key: "dark",
 		icon: Moon,
-		label: "Dark theme",
+		label: "Dark mode",
 	},
 ];
 
@@ -58,7 +57,6 @@ export const ThemeSwitcher = ({
 		[setTheme],
 	);
 
-	// Prevent hydration mismatch
 	useEffect(() => {
 		setMounted(true);
 	}, []);
@@ -67,37 +65,36 @@ export const ThemeSwitcher = ({
 		return null;
 	}
 
+	const activeIndex = themes.findIndex((t) => t.key === theme);
+
 	return (
 		<div
 			className={cn(
-				"flex h-8 isolate p-1 pl-2 relative ring-1 ring-border rounded-full bg-background",
+				"relative h-6 w-auto bg-neutral-50 dark:bg-neutral-900 px-0.5 py-1 rounded-full border border-neutral-200/50 dark:border-neutral-800 hover:border-neutral-200 dark:hover:border-neutral-700 hidden xl:flex items-center",
 				className,
 			)}
 		>
+			<div
+				className="absolute h-[20px] w-6 top-[1px] bg-white dark:bg-neutral-700 rounded-full transition-all duration-200 ease-in-out shadow-md"
+				style={{ transform: `translateX(${activeIndex * 24}px)` }}
+			/>
 			{themes.map(({ key, icon: Icon, label }) => {
 				const isActive = theme === key;
 
 				return (
 					<button
 						aria-label={label}
-						className="relative h-6 w-6 rounded-full"
+						className={cn(
+							"relative z-10 flex items-center justify-center h-4 w-6 rounded-full transition-colors",
+							isActive
+								? "text-neutral-900 dark:text-white"
+								: "text-neutral-500 hover:text-neutral-900 dark:hover:text-white",
+						)}
 						key={key}
 						onClick={() => handleThemeClick(key as "light" | "dark" | "system")}
 						type="button"
 					>
-						{isActive && (
-							<motion.div
-								className="absolute inset-0 rounded-full bg-secondary"
-								layoutId="activeTheme"
-								transition={{ type: "spring", duration: 0.5 }}
-							/>
-						)}
-						<Icon
-							className={cn(
-								"relative z-10 m-auto h-4 w-4",
-								isActive ? "text-foreground" : "text-muted-foreground",
-							)}
-						/>
+						<Icon className="size-3" />
 					</button>
 				);
 			})}

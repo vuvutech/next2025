@@ -4,6 +4,7 @@ import {
 	IconDotsVertical,
 	IconLogout,
 	IconUserCircle,
+	IconWorld,
 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import { ThemeSwitcher } from "@/components/kibo-ui/theme-switcher";
@@ -124,6 +125,14 @@ export function NavUser({
 						</DropdownMenuItem>
 						<DropdownMenuSeparator />
 						<ThemeToggle />
+						<DropdownMenuSeparator />
+						<DropdownMenuItem
+							className="cursor-pointer"
+							onClick={() => window.open("/", "_blank")}
+						>
+							<IconWorld />
+							Visit Website
+						</DropdownMenuItem>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem
 							className="cursor-pointer"
