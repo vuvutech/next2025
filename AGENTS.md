@@ -77,3 +77,17 @@ Required in `.env.local`:
 - **Forms**: React Hook Form + Zod for runtime schema validation.
 - **Server Actions**: Defined inside `app/actions/` or as explicitly marked async functions (`'use server'`).
 - **Error Handling**: Auth errors redirect to `/auth/error`. Log errors explicitly using a `[ERROR]` prefix with full context.
+
+## 🪙 Token Optimization Guardrails
+
+To preserve tokens and keep context clean across all agent sessions:
+- **Use Subagents for Research**: Outsource heavy search, grep, read, and web research tasks to subagents (`invoke_subagent`). This keeps the parent session's history lightweight.
+- **Targeted File Viewing**: Never read a full file if it is large. Always request specific line ranges (e.g. `lines X to Y` using the view_file tool).
+- **Avoid Long Repetitive Output**: Write large code blocks, logs, and config files to an artifact file rather than outputting them directly in the chat responses.
+- **Limit CLI Output**: Always limit command outputs (e.g., use `head`, `grep`, or limit parameters like `git log -n 5`) to prevent flooding the context window with command stdout.
+- **Exit Early & Be Concise**: Provide short, direct responses and avoid re-summarizing generated artifacts in the chat message.
+- **No Conversational Fluff**: Avoid explanations, pleasantries, or wrapping code blocks in generic text when simple diffs or direct answers are requested.
+- **Selective Tool Loading**: Load/enable only the necessary toolsets for the current task to minimize system prompt bloat.
+- **Clean Git Context**: Keep the working directory clean and commit changes incrementally so that git diff context remains small.
+- **Structured Outputs**: Prefer structured schema outputs (JSON/Pydantic) when communicating programmatically or building components.
+

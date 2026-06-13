@@ -128,22 +128,25 @@ export function GenericDataTable<TData, TValue>({
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
 								{headerGroup.headers.map((header) => (
-									<TableHead
-										key={header.id}
-										className="cursor-pointer select-none"
-									>
+								<TableHead
+									key={header.id}
+									className={
+										header.column.getCanSort()
+											? "cursor-pointer select-none"
+											: undefined
+									}
+								>
+									{header.column.getCanSort() ? (
 										<button
 											type="button"
 											className="flex items-center gap-1 cursor-pointer"
 											onClick={header.column.getToggleSortingHandler()}
 											title={
-												header.column.getCanSort()
-													? header.column.getNextSortingOrder() === "asc"
-														? "Sort ascending"
-														: header.column.getNextSortingOrder() === "desc"
-															? "Sort descending"
-															: "Clear sort"
-													: undefined
+												header.column.getNextSortingOrder() === "asc"
+													? "Sort ascending"
+													: header.column.getNextSortingOrder() === "desc"
+														? "Sort descending"
+														: "Clear sort"
 											}
 										>
 											{header.isPlaceholder
@@ -157,7 +160,13 @@ export function GenericDataTable<TData, TValue>({
 												desc: <ArrowDownIcon className="ml-1 h-3 w-3" />,
 											}[header.column.getIsSorted() as string] ?? null}
 										</button>
-									</TableHead>
+									) : header.isPlaceholder
+										? null
+										: flexRender(
+												header.column.columnDef.header,
+												header.getContext(),
+											)}
+								</TableHead>
 								))}
 							</TableRow>
 						))}
