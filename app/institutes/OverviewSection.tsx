@@ -27,6 +27,14 @@ export default function OverviewSection({
 	const priceViaZoom = edition?.priceViaZoom;
 	const earlyBirdPrice = edition?.earlyBirdPrice;
 	const onlineDelivery = edition?.onlineDelivery;
+	const inPersonDelivery = edition?.inPersonDelivery;
+
+	const deliveryMode =
+		onlineDelivery && inPersonDelivery
+			? "Online & In-Person"
+			: inPersonDelivery
+				? "In-Person"
+				: "Online via Zoom";
 
 	const formattedStartDate = startDate
 		? formatAccraDate(startDate)
@@ -82,7 +90,7 @@ export default function OverviewSection({
 							{institute?.editions[0] ? institute?.editions[0].title : " "}
 						</div>
 						<div className="mx-auto max-w-xs px-8">
-							{onlineDelivery && priceViaZoom != null && (
+							{(onlineDelivery || inPersonDelivery) && priceViaZoom != null && (
 								<div className="mt-6 text-center">
 									{earlyBirdDeadline &&
 									new Date(earlyBirdDeadline) > new Date() ? (
@@ -116,7 +124,7 @@ export default function OverviewSection({
 											</p>
 
 											<div className="mt-4">
-												<SeperatorWithText seperatorText="Online via Zoom" />
+												<SeperatorWithText seperatorText={deliveryMode} />
 											</div>
 
 											{/* Optional: subtle note if early bird existed but expired */}
