@@ -97,3 +97,7 @@ emails/
 
 # Local MongoDB backup dumps (from `bun run backup`)
 /backups/
+backups/
+@backups/
+**/backups/
+**/@backups/
