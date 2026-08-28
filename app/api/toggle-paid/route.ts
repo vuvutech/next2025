@@ -2,6 +2,7 @@ import { render } from "@react-email/render";
 import { type NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/app/actions/functions";
 import { formatAccraDate, formatTime } from "@/lib/date";
+import { FIRSTAcceptanceEmail } from "@/lib/email/first-acceptance-email";
 import { IEAAcceptanceEmail } from "@/lib/email/iea-acceptance-email";
 import { InstituteAcceptanceEmail } from "@/lib/email/institute-acceptance-email";
 import { sendMail } from "@/lib/nodemailer-mail";
@@ -64,8 +65,11 @@ export async function POST(req: NextRequest) {
 
 		if (nowPaid) {
 			try {
-				const isIEA =
-					registration.edition?.institute?.acronym?.toLowerCase() === "iea";
+				const acronymLower =
+					registration.edition?.institute?.acronym?.toLowerCase();
+				const isFIRST = acronymLower === "first";
+				const isIEA = acronymLower === "iea";
+				console.log("[toggle-paid] Is FIRST edition:", isFIRST);
 				console.log("[toggle-paid] Is IEA edition:", isIEA);
 
 				const formattedStartDate = formatAccraDate(
@@ -97,7 +101,15 @@ export async function POST(req: NextRequest) {
 					let htmlContent: string;
 					let subject: string;
 
-					if (isIEA) {
+					if (isFIRST) {
+						console.log("[toggle-paid] Rendering FIRSTAcceptanceEmail");
+						htmlContent = await render(
+							FIRSTAcceptanceEmail({
+								name: userName,
+							}),
+						);
+						subject = `Your Acceptance & Zoom Access Pass: FIRST ${new Date().getFullYear()}`;
+					} else if (isIEA) {
 						console.log("[toggle-paid] Rendering IEAAcceptanceEmail");
 						htmlContent = await render(
 							IEAAcceptanceEmail({
